@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "nLUF+xSqwOk=",
+  "dgSpecHash": "/7xHl0E3EtE=",
   "success": true,
   "projectFilePath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/emmakrause-kjaer/.nuget/packages/docopt.net/0.8.1/docopt.net.0.8.1.nupkg.sha512",
+    "/Users/emmakrause-kjaer/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512"
+  ],
   "logs": []
 }
