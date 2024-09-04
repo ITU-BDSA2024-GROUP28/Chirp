@@ -12,3 +12,8 @@ Options:
 ";
 
 var arguments = new Docopt().Apply(usage, args, version: "1.0", exit: true)!;
+
+if (arguments == "read")
+{
+  
+}
