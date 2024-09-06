@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj": {}
+    "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj": {}
   },
   "projects": {
-    "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj": {
+    "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj",
+        "projectUniqueName": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
         "projectName": "Chirp.CLI",
-        "projectPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj",
-        "packagesPath": "/Users/emmakrause-kjaer/.nuget/packages/",
-        "outputPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/obj/",
+        "projectPath": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
+        "packagesPath": "C:\\Users\\amira\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/emmakrause-kjaer/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\amira\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,6 +45,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[33.0.1, )"
+            },
             "docopt.net": {
               "target": "Package",
               "version": "[0.8.1, )"
@@ -64,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
