@@ -1,33 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj": {}
+    "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj": {
+    "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
+        "projectUniqueName": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
         "projectName": "Chirp.CLI",
-        "projectPath": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
-        "packagesPath": "C:\\Users\\amira\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\obj\\",
+        "projectPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
+        "packagesPath": "C:\\Users\\stine\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\amira\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\stine\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\SimpleDB.csproj": {
+                "projectPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\SimpleDB.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -70,7 +72,71 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\SimpleDB.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\SimpleDB.csproj",
+        "projectName": "SimpleDB",
+        "projectPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\SimpleDB.csproj",
+        "packagesPath": "C:\\Users\\stine\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\stine\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[33.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

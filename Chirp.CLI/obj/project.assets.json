@@ -38,6 +38,19 @@
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
         }
+      },
+      "SimpleDB/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "CsvHelper": "33.0.1"
+        },
+        "compile": {
+          "bin/placeholder/SimpleDB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SimpleDB.dll": {}
+        }
       }
     }
   },
@@ -130,41 +143,49 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "SimpleDB/1.0.0": {
+      "type": "project",
+      "path": "../SimpleDB/SimpleDB.csproj",
+      "msbuildProject": "../SimpleDB/SimpleDB.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "CsvHelper >= 33.0.1",
+      "SimpleDB >= 1.0.0",
       "docopt.net >= 0.8.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\amira\\.nuget\\packages\\": {}
+    "C:\\Users\\stine\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
+      "projectUniqueName": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
       "projectName": "Chirp.CLI",
-      "projectPath": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
-      "packagesPath": "C:\\Users\\amira\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\obj\\",
+      "projectPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
+      "packagesPath": "C:\\Users\\stine\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\amira\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\stine\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\SimpleDB.csproj": {
+              "projectPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\SimpleDB.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -207,7 +228,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

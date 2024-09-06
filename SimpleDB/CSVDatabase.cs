@@ -1,5 +1,7 @@
-sealed class CSVDatabase : IDatabaseRepository {
-    public IEnumerable<Cheep> Read(int? limit = null, string filePath)
+using Cheep;
+
+sealed class CSVDatabase{
+    public IEnumerable<Cheep> Read(string filePath, int? limit = null)
     {
         var records;
         
