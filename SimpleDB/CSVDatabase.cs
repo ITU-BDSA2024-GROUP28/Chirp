@@ -1,4 +1,4 @@
-CSVDatabase {
+sealed class CSVDatabase {
 
     
 }
