@@ -1,5 +1,18 @@
 sealed class CSVDatabase : IDatabaseRepository {
-    public IEnumerable<Cheep> Read(int? limit = null)
+    public IEnumerable<Cheep> Read(int? limit = null, string filePath)
+    {
+        var records;
+        
+        //Need the path to the CVS file in the paranthesis
+        using (var reader = new StreamReader(filePath))
+        using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+        {
+            records = csv.GetRecords<Cheep>();
+            
+        }
+
+        return records;
+    }
 }
 
 
