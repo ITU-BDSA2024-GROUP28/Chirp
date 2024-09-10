@@ -16,13 +16,16 @@ public sealed class CSVDatabase<T>:IDatabaseRepository<T> {
         {
             information = csv.GetRecords<T>();
         }
-
+        
         return information;
+        
     }
 
     public void Store(T record)
     {
-
+        
+        
+        
     }
     
 }
