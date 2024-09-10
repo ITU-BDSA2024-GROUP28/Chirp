@@ -3,21 +3,28 @@ using CsvHelper;
 
 namespace SimpleDB;
 
-sealed class CSVDatabase{
-    public IEnumerable<Cheep> Read(string filePath, int? limit = null)
+public sealed class CSVDatabase<T>:IDatabaseRepository<T> {
+    public IEnumerable<T> Read(int? limit = null)
     {
-        var records;
+
+        IEnumerable<T> information;
         
         //Need the path to the CVS file in the paranthesis
-        using (var reader = new StreamReader(filePath))
+        using (var reader = new StreamReader(""))
+            
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
         {
-            records = csv.GetRecords<Cheep>();
-            
+            information = csv.GetRecords<T>();
         }
 
-        return records;
+        return information;
     }
+
+    public void Store(T record)
+    {
+
+    }
+    
 }
 
 

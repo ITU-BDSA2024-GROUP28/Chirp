@@ -1,35 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj": {}
+    "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj": {
+    "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
+        "projectUniqueName": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj",
         "projectName": "Chirp.CLI",
-        "projectPath": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
-        "packagesPath": "C:\\Users\\amira\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\Chirp.CLI\\obj\\",
+        "projectPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj",
+        "packagesPath": "/Users/emmakrause-kjaer/.nuget/packages/",
+        "outputPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\amira\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/emmakrause-kjaer/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\SimpleDB\\SimpleDB.csproj": {
-                "projectPath": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\SimpleDB\\SimpleDB.csproj"
+              "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/SimpleDB.csproj": {
+                "projectPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/SimpleDB.csproj"
               }
             }
           }
@@ -74,28 +72,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\SimpleDB\\SimpleDB.csproj": {
+    "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/SimpleDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\SimpleDB\\SimpleDB.csproj",
+        "projectUniqueName": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/SimpleDB.csproj",
         "projectName": "SimpleDB",
-        "projectPath": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\SimpleDB\\SimpleDB.csproj",
-        "packagesPath": "C:\\Users\\amira\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amira\\OneDrive - ITU\\BDSA\\Chirp\\SimpleDB\\obj\\",
+        "projectPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/SimpleDB.csproj",
+        "packagesPath": "/Users/emmakrause-kjaer/.nuget/packages/",
+        "outputPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\amira\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/emmakrause-kjaer/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -140,7 +136,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

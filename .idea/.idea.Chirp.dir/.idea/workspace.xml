@@ -9,10 +9,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a97d529f-de3e-42e9-a045-11a05c1b288f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chirp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chirp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chirp.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chirp.CLI/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chirp.CLI/UserInterface.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chirp.CLI/UserInterface.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chirp.CLI/obj/Chirp.CLI.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Chirp.CLI/obj/Chirp.CLI.csproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chirp.CLI/obj/Chirp.CLI.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Chirp.CLI/obj/Chirp.CLI.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chirp.CLI/obj/Chirp.CLI.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/Chirp.CLI/obj/Chirp.CLI.csproj.nuget.g.targets" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chirp.CLI/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Chirp.CLI/obj/project.assets.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chirp.CLI/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Chirp.CLI/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimpleDB/CSVDatabase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleDB/CSVDatabase.cs" afterDir="false" />
@@ -35,7 +35,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ITU-BDSA2024-GROUP28/Chirp.git&quot;,
-    &quot;accountId&quot;: &quot;8635d909-14f0-4792-ba39-5e5af1d654d6&quot;
+    &quot;accountId&quot;: &quot;e11f0329-bbcb-47f3-9f6c-64615c938f1b&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -46,18 +46,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Amira-errorsFromUI",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;User-interface&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Chirp.CLI" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -89,6 +89,11 @@
       <workItem from="1725450118457" duration="15000" />
       <workItem from="1725450165874" duration="58000" />
       <workItem from="1725964894715" duration="1663000" />
+      <workItem from="1725971954608" duration="281000" />
+      <workItem from="1725972247732" duration="1167000" />
+      <workItem from="1725973439161" duration="146000" />
+      <workItem from="1725973600439" duration="421000" />
+      <workItem from="1725974024474" duration="13000" />
     </task>
     <servers />
   </component>

@@ -4,7 +4,7 @@ namespace Chirp.CLI;
 
 public static class UserInterface
 {
-    const string usage = @"Chirp CLI version.
+    const string Usage = @"Chirp CLI version.
 
     Usage:
       chirp read <limit>
@@ -17,11 +17,18 @@ public static class UserInterface
       --version     Show version.
     ";
 
-    var arguments = new Docopt().Apply(usage, args, version: "1.0", exit: true)!;
-        
-        if (arguments.["read"].isTrue)
+    public static void Run(string[] args)
     {
         
-    }
+        var arguments = new Docopt().Apply(Usage, args, version: "1.0", exit: true)!;
+        
+        if (arguments["read"].IsTrue)
+        {
+            
+        }
+
+    } 
+        
+       
 
 }
