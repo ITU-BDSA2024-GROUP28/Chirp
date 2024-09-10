@@ -1,4 +1,7 @@
-using Cheep;
+using System.Globalization;
+using CsvHelper;
+
+namespace SimpleDB;
 
 sealed class CSVDatabase{
     public IEnumerable<Cheep> Read(string filePath, int? limit = null)

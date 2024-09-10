@@ -1,3 +1,5 @@
+using DocoptNet;
+
 namespace Chirp.CLI;
 
 public static class UserInterface
