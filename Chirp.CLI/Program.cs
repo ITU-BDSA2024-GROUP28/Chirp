@@ -21,7 +21,6 @@ public static class Program
 	
 	static void Main(String[] args)
 	{
-		//Hello we are testing our workflow
 		var arguments = new Docopt().Apply(Usage, args, version: "1.0", exit: true)!;
         
 		if (arguments["read"].IsTrue)
@@ -33,8 +32,6 @@ public static class Program
 			csvDatabase.Store(cheep1);
 			
 			// Store as a cheep record
-			
-			// Emma is now testing workflow
 			
 		}
 	}
