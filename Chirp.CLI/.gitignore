@@ -3,6 +3,11 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+# Manual add
+.json
+.cache
+.nuget
+
 # dotenv files
 .env
 
