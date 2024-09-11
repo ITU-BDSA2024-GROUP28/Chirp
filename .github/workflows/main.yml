@@ -4,8 +4,13 @@
 name: .NET
 
 on:
-  [push, pull_request]
-    
+  push:
+    tags: 
+      - *
+  pull_request:
+    tags:
+      - *
+  
 
 jobs:
   build:
