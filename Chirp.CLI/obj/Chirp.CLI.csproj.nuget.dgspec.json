@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj": {}
+    "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj": {
+    "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
+        "projectUniqueName": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj",
         "projectName": "Chirp.CLI",
-        "projectPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\Chirp.CLI.csproj",
-        "packagesPath": "C:\\Users\\stine\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\Chirp.CLI\\obj\\",
+        "projectPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj",
+        "packagesPath": "/Users/emmakrause-kjaer/.nuget/packages/",
+        "outputPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\stine\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/emmakrause-kjaer/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\SimpleDB.csproj": {
-                "projectPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\SimpleDB.csproj"
+              "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/SimpleDB.csproj": {
+                "projectPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/SimpleDB.csproj"
               }
             }
           }
@@ -72,21 +72,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\SimpleDB.csproj": {
+    "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/SimpleDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\SimpleDB.csproj",
+        "projectUniqueName": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/SimpleDB.csproj",
         "projectName": "SimpleDB",
-        "projectPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\SimpleDB.csproj",
-        "packagesPath": "C:\\Users\\stine\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\SimpleDB\\obj\\",
+        "projectPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/SimpleDB.csproj",
+        "packagesPath": "/Users/emmakrause-kjaer/.nuget/packages/",
+        "outputPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\stine\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/emmakrause-kjaer/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -136,7 +136,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
