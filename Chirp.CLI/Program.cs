@@ -19,7 +19,7 @@ public static class Program
       --version     Show version.
     ";
 	
-	static void main(String[] args)
+	static void Main(String[] args)
 	{
 		var arguments = new Docopt().Apply(Usage, args, version: "1.0", exit: true)!;
         
