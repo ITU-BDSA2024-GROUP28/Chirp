@@ -1,0 +1,15 @@
+C:\Uni\First Year Project\Chirp\Chirp.CLI\obj\Debug\net8.0\Chirp.CLI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Uni\First Year Project\Chirp\Chirp.CLI\obj\Debug\net8.0\Chirp.CLI.AssemblyInfoInputs.cache
+C:\Uni\First Year Project\Chirp\Chirp.CLI\obj\Debug\net8.0\Chirp.CLI.AssemblyInfo.cs
+C:\Uni\First Year Project\Chirp\Chirp.CLI\obj\Debug\net8.0\Chirp.CLI.csproj.CoreCompileInputs.cache
+C:\Uni\First Year Project\Chirp\Chirp.CLI\obj\Debug\net8.0\Chirp.CLI.sourcelink.json
+C:\Uni\First Year Project\Chirp\Chirp.CLI\bin\Debug\net8.0\Chirp.CLI.exe
+C:\Uni\First Year Project\Chirp\Chirp.CLI\bin\Debug\net8.0\Chirp.CLI.deps.json
+C:\Uni\First Year Project\Chirp\Chirp.CLI\bin\Debug\net8.0\Chirp.CLI.runtimeconfig.json
+C:\Uni\First Year Project\Chirp\Chirp.CLI\bin\Debug\net8.0\Chirp.CLI.dll
+C:\Uni\First Year Project\Chirp\Chirp.CLI\bin\Debug\net8.0\Chirp.CLI.pdb
+C:\Uni\First Year Project\Chirp\Chirp.CLI\obj\Debug\net8.0\Chirp.CLI.dll
+C:\Uni\First Year Project\Chirp\Chirp.CLI\obj\Debug\net8.0\refint\Chirp.CLI.dll
+C:\Uni\First Year Project\Chirp\Chirp.CLI\obj\Debug\net8.0\Chirp.CLI.pdb
+C:\Uni\First Year Project\Chirp\Chirp.CLI\obj\Debug\net8.0\Chirp.CLI.genruntimeconfig.cache
+C:\Uni\First Year Project\Chirp\Chirp.CLI\obj\Debug\net8.0\ref\Chirp.CLI.dll
