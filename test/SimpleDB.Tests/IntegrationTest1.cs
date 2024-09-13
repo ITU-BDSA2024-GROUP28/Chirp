@@ -1,6 +1,6 @@
 namespace SimpleDB.Tests;
 
-public class UnitTest1
+public class IntegrationTest1
 {
     [Fact]
     public void GetCheepTest()
@@ -10,5 +10,11 @@ public class UnitTest1
         //Get the cheep
         
         //Assert if the gotten cheep equals the created one
+    }
+
+    public void WriteCheepTest()
+    {
+        //Cheep cheep = new Cheep("kajn", "Hej!", 0);
+        //Assert if the cheep is being written correctly according to output
     }
 }

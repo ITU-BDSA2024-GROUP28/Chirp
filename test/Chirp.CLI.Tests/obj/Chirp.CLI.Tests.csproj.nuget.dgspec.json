@@ -25,7 +25,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\src\\Chirp.CLI\\Chirp.CLI.csproj": {
+                "projectPath": "C:\\Users\\stine\\Documents\\ITU\\3 semester\\Analysis, design and software\\Chirp\\src\\Chirp.CLI\\Chirp.CLI.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

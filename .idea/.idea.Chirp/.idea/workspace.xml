@@ -19,7 +19,7 @@
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/ITU-BDSA2024-GROUP28/Chirp.git",
-    "accountId": "e5e008b5-bec9-42c0-837d-fbc87ba30ea2"
+    "accountId": "8635d909-14f0-4792-ba39-5e5af1d654d6"
   }
 }]]></component>
   <component name="ProblemsViewState">
@@ -51,6 +51,7 @@
       <updated>1726131964532</updated>
       <workItem from="1726131966057" duration="53000" />
       <workItem from="1726135240926" duration="35000" />
+      <workItem from="1726218468649" duration="58000" />
     </task>
     <servers />
   </component>
