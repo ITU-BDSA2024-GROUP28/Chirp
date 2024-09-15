@@ -4,12 +4,7 @@
 name: .NET
 
 on:
-  push:
-    tags: 
-      - '*'
-  pull_request:
-    tags:
-      - '*'
+  [push, pull_request]
   
 
 jobs:
