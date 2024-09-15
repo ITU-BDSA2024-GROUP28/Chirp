@@ -15,4 +15,4 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.issue.number }}
-          LABELS: enhancements, add-ons, bugs, help-wanted, documentation, refactoring
+          LABELS: enhancement, Add ons, bug, help wanted, documentation, refactoring
