@@ -6,11 +6,11 @@ namespace SimpleDB;
 public sealed class CSVDatabase<T>:IDatabaseRepository<T> {
     public IEnumerable<T> Read(int? limit = null)
     {
-        // Testing the release workflow
+        // Testing the release workflow again
 
         IEnumerable<T> information;
         
-        //Need the path to the CVS file in the paranthesis
+        //Need the path to the CVS file in the parenthesis
         using (var reader = new StreamReader(""))
             
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
