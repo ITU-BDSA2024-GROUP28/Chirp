@@ -29,6 +29,7 @@ jobs:
       uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/') 
       with: 
-        files: SimpleDB.dil, Chirp.CIL.dil
+        files: Chirp/src/Chirp.CLI/bin/Debug/net8.0/SimpleDB.dil, Chirp/src/Chirp.CLI/bin/Debug/net8.0/Chirp.CLI.dll
+
         
           
