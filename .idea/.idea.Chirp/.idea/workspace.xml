@@ -10,7 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8b2110eb-ecae-4474-aa86-294fa403555d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.github/workflows/executable.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/executable.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chirp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chirp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Chirp.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Chirp.CLI/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +69,7 @@
       <workItem from="1726135240926" duration="35000" />
       <workItem from="1726218468649" duration="58000" />
       <workItem from="1726479878268" duration="95000" />
-      <workItem from="1726663117697" duration="800000" />
+      <workItem from="1726663117697" duration="2264000" />
     </task>
     <servers />
   </component>
