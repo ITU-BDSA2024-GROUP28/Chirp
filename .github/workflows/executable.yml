@@ -35,7 +35,7 @@ jobs:
         
         pwd 
         
-        dotnet publish Chirp/src/Chirp.CLI/Chirp.CLI.csproj --runtime "osx-x64" -c Release -o "$macos_release_name"
+        dotnet publish src/Chirp.CLI/Chirp.CLI.csproj --runtime "osx-x64" -c Release -o "$macos_release_name"
         
         tar czvf "$macos_release_name.tar.gz" "$macos_release_name"
 
@@ -46,9 +46,9 @@ jobs:
         
         linux_release_name=Chirp-$tag-linux-x64
         
-        echo pwd 
+        pwd 
         
-        dotnet publish Chirp/Chirp/src/Chirp.CLI/Chirp.CLI.csproj --runtime "linux-x64" -c Release -o "$linux_release_name"
+        dotnet publish src/Chirp.CLI/Chirp.CLI.csproj --runtime "linux-x64" -c Release -o "$linux_release_name"
         
         tar czvf "$linux_release_name.tar.gz" "$linux_release_name"
         
@@ -59,7 +59,9 @@ jobs:
         
         windows_release_name=Chirp-$tag-win-x64
         
-        dotnet publish Chirp/Chirp/src/Chirp.CLI/Chirp.CLI.csproj --runtime "win-x64" -c Release -o "$windows_release_name"
+        pwd 
+        
+        dotnet publish src/Chirp.CLI/Chirp.CLI.csproj --runtime "win-x64" -c Release -o "$windows_release_name"
         
         7z a -tzip "$windows_release_name.zip" "./$windows_release_name/*"
       
