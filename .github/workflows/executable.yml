@@ -33,7 +33,9 @@ jobs:
         
         linux_release_name=Chirp-$tag-linux-x64
         
-        dotnet publish Chirp/Chirp.CLI/Chirp.CLI.csproj --framework netcoreapp3.1 --runtime "linux-x64" -c Release -o "$linux_release_name"
+        echo pwd 
+        
+        dotnet publish src/Chirp.CLI/Chirp.CLI.csproj --framework netcoreapp3.1 --runtime "linux-x64" -c Release -o "$linux_release_name"
         
         tar czvf "$linux_release_name.tar.gz" "$linux_release_name"
       
