@@ -163,11 +163,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj",
+      "projectUniqueName": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/NewChirp/Chirp/src/Chirp.CLI/Chirp.CLI.csproj",
       "projectName": "Chirp.CLI",
-      "projectPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/Chirp.CLI.csproj",
+      "projectPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/NewChirp/Chirp/src/Chirp.CLI/Chirp.CLI.csproj",
       "packagesPath": "/Users/emmakrause-kjaer/.nuget/packages/",
-      "outputPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/Chirp.CLI/obj/",
+      "outputPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/NewChirp/Chirp/src/Chirp.CLI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/emmakrause-kjaer/.nuget/NuGet/NuGet.Config"
@@ -182,8 +182,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/SimpleDB.csproj": {
-              "projectPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/Chirp/SimpleDB/SimpleDB.csproj"
+            "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/NewChirp/Chirp/src/SimpleDB/SimpleDB.csproj": {
+              "projectPath": "/Users/emmakrause-kjaer/Documents/ITU/3.semester/Analysis/NewChirp/Chirp/src/SimpleDB/SimpleDB.csproj"
             }
           }
         }
