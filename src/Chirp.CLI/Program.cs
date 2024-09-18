@@ -33,6 +33,7 @@ public static class Program
 			
 			// Store as a cheep record
 			
+			// Note: first auto release attempt
 		}
 	}
 
