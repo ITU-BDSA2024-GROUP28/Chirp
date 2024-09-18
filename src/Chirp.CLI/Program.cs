@@ -31,6 +31,16 @@ public static class Program
 			
 			// Store as a cheep record
 			
+		} else if (arguments["-h"].IsTrue || arguments["--help"].IsTrue)
+		{
+			Console.WriteLine(Usage);
+		} else if (arguments["cheep"].IsTrue)
+		{
+			//Get the message from the line, so it can be stored
+			//Find en måde at få cheepen man har skrevet på
+			CSVDatabase<Cheep> csvDatabase = new CSVDatabase<Cheep>();
+			var timestamp = DateTime.Now;
+			//csvDatabase.Store(cheep.Author, timestamp, message);
 		}
 	}
 
