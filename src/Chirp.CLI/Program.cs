@@ -5,19 +5,17 @@ namespace Chirp.CLI;
 
 public static class Program
 {
-
 	const string Usage = @"Chirp CLI version.
-
-    Usage:
-      chirp read <limit>
-      chirp cheep <message>
-      chirp (-h | --help)
-      chirp --version
-
-    Options:
-      -h --help     Show this screen.
-      --version     Show version.
-    ";
+        
+            Usage:
+              chirp read <limit>
+              chirp cheep <message>
+              chirp (-h | --help)
+              chirp --version
+        
+            Options:
+              -h --help     Show this screen.
+              --version     Show version. ";
 	
 	static void Main(String[] args)
 	{

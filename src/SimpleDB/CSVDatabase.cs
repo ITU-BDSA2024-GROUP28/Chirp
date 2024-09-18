@@ -20,13 +20,22 @@ public sealed class CSVDatabase<T>:IDatabaseRepository<T> {
         
         return information;
         
+        
     }
 
     public void Store(T record)
     {
+        //Here we need to put in the path to the csv file
+        using StreamWriter writer = new StreamWriter("");
         
+        //See if the string is correct
+        writer.WriteLine(record.ToString());
         
-        
+    }
+    
+    public String writeCheep(Cheep cheep)
+    {
+        return cheep.Author + "," + '"' + cheep.Message + '"' + "," + cheep.Timestamp;
     }
     
 }
