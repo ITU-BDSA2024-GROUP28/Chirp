@@ -33,6 +33,8 @@ jobs:
         
         macos_release_name=Chirp-$tag-osx-x64
         
+        echo pwd 
+        
         dotnet publish Chirp/src/Chirp.CLI/Chirp.CLI.csproj --runtime "osx-x64" -c Release -o "$macos_release_name"
         
         tar czvf "$macos_release_name.tar.gz" "$macos_release_name"
