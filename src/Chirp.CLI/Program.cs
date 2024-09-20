@@ -25,7 +25,7 @@ public static class Program
 		{
 			Cheep cheep1 = new Cheep("Cheeper", "Hello", 1045);
 			// read using database from docopt
-			CSVDatabase<Cheep> csvDatabase = new CSVDatabase<Cheep>();
+			CSVDatabase<Cheep> csvDatabase =  CSVDatabase<Cheep>.GetInstance(); 
 				
 			csvDatabase.Store(cheep1);
 			
@@ -38,7 +38,7 @@ public static class Program
 		{
 			//Get the message from the line, so it can be stored
 			//Find en måde at få cheepen man har skrevet på
-			CSVDatabase<Cheep> csvDatabase = new CSVDatabase<Cheep>();
+			CSVDatabase<Cheep> csvDatabase =  CSVDatabase<Cheep>.GetInstance(); 
 			var timestamp = DateTime.Now;
 			//csvDatabase.Store(cheep.Author, timestamp, message);
 			// Note: third auto release attempt

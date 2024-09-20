@@ -4,6 +4,26 @@ using CsvHelper;
 namespace SimpleDB;
 
 public sealed class CSVDatabase<T>:IDatabaseRepository<T> {
+    
+    private static CSVDatabase<T> instance;  //private static instance field
+
+    private CSVDatabase(){ } //private constructor to hide from client code
+    
+    public static CSVDatabase<T> GetInstance() 
+    {
+        if (instance == null)
+        {
+            instance = new CSVDatabase<T>();      //if no instance exists creates one
+        }
+        return instance;    //returns already created instance
+    }
+    /*
+    The getInstance method makes sure that no other instances of CSVDatabase are created if there already exists one - singleton pattern
+    Method inspired by:
+    https://csharpindepth.com/articles/Singleton#unsafe
+    https://dev.to/kalkwst/singleton-pattern-in-c-1dh0
+    */
+    
     public IEnumerable<T> Read(int? limit = null)
     {
         // Testing the release workflow again
