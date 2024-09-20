@@ -41,6 +41,7 @@ public static class Program
 			CSVDatabase<Cheep> csvDatabase = new CSVDatabase<Cheep>();
 			var timestamp = DateTime.Now;
 			//csvDatabase.Store(cheep.Author, timestamp, message);
+			// Note: third auto release attempt
 		}
 	}
 
