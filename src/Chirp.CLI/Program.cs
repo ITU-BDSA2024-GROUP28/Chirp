@@ -15,34 +15,43 @@ public static class Program
         
             Options:
               -h --help     Show this screen.
-              --version     Show version. ";
+              --version     Show version.
+	";
 	
 	static void Main(String[] args)
 	{
 		var arguments = new Docopt().Apply(Usage, args, version: "1.0", exit: true)!;
-        
+		
+		CSVDatabase<Cheep> csvDatabase =  CSVDatabase<Cheep>.GetInstance(); 
+		
+		
 		if (arguments["read"].IsTrue)
 		{
-			Cheep cheep1 = new Cheep("Cheeper", "Hello", 1045);
 			// read using database from docopt
-			CSVDatabase<Cheep> csvDatabase =  CSVDatabase<Cheep>.GetInstance(); 
-				
-			csvDatabase.Store(cheep1);
+			UserInterface.printCheeps(csvDatabase.Read());
 			
-			// Store as a cheep record
-			
-		} else if (arguments["-h"].IsTrue || arguments["--help"].IsTrue)
-		{
-			Console.WriteLine(Usage);
-		} else if (arguments["cheep"].IsTrue)
+		} 
+		else if (arguments["cheep"].IsTrue)
 		{
 			//Get the message from the line, so it can be stored
 			//Find en måde at få cheepen man har skrevet på
-			CSVDatabase<Cheep> csvDatabase =  CSVDatabase<Cheep>.GetInstance(); 
-			var timestamp = DateTime.Now;
-			//csvDatabase.Store(cheep.Author, timestamp, message);
+			long timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+			var message = arguments["<message>"].ToString();
+			var author = Environment.UserDomainName;
+			
+			Cheep cheep = new Cheep(author, message, timestamp);
+			
+			csvDatabase.Store(cheep);
+			
+			Console.WriteLine($"Reading cheep message: {message} and timestamp: {timestamp}");
+			
+			//csvDatabase.Store();
 			// Note: third auto release attempt
-		}
+		} 
+		else if (arguments["-h"].IsTrue || arguments["--help"].IsTrue)
+		{
+			Console.WriteLine(Usage);
+		} 
 	}
 
 }
