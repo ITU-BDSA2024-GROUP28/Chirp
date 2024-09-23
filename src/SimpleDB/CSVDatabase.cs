@@ -57,20 +57,8 @@ public sealed class CSVDatabase<T>:IDatabaseRepository<T> {
             csv.NextRecord();
             
             csv.WriteRecord(record);
-
         }
 
-    }
-
-    
-    public Cheep writeCheep(T record)
-    {
-        string[] recordSplit = record.ToString().Split(',');
-        string author = recordSplit[0] + ",";
-        string message = '"' + recordSplit[1] + '"' + ",";
-        long time = long.Parse(recordSplit[2]);
-        
-        return new Cheep(author, message, time);
     }
 }
 
