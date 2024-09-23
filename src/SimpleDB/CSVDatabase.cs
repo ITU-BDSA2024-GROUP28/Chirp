@@ -6,6 +6,8 @@ namespace SimpleDB;
 public sealed class CSVDatabase<T>:IDatabaseRepository<T> {
     
     private static CSVDatabase<T> instance;  //private static instance field
+    
+    string databasePath = "../SimpleDB/Database.csv";
 
     private CSVDatabase(){ } //private constructor to hide from client code
     
@@ -31,11 +33,11 @@ public sealed class CSVDatabase<T>:IDatabaseRepository<T> {
         IEnumerable<T> information;
         
         //Need the path to the CVS file in the parenthesis
-        using (var reader = new StreamReader(""))
+        using (var reader = new StreamReader(databasePath))
             
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
         {
-            information = csv.GetRecords<T>();
+            information = csv.GetRecords<T>().ToList();
         }
         
         return information;
@@ -44,20 +46,32 @@ public sealed class CSVDatabase<T>:IDatabaseRepository<T> {
     }
 
     public void Store(T record)
+
     {
-        //Here we need to put in the path to the csv file
-        using StreamWriter writer = new StreamWriter("");
-        
-        //See if the string is correct
-        writer.WriteLine(record.ToString());
-        
+        using (var writer = File.AppendText(databasePath))
+
+        using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+
+        {
+
+            csv.NextRecord();
+            
+            csv.WriteRecord(record);
+
+        }
+
     }
+
     
-    public String writeCheep(Cheep cheep)
+    public Cheep writeCheep(T record)
     {
-        return cheep.Author + "," + '"' + cheep.Message + '"' + "," + cheep.Timestamp;
+        string[] recordSplit = record.ToString().Split(',');
+        string author = recordSplit[0] + ",";
+        string message = '"' + recordSplit[1] + '"' + ",";
+        long time = long.Parse(recordSplit[2]);
+        
+        return new Cheep(author, message, time);
     }
-    
 }
 
 
