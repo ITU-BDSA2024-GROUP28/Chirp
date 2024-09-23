@@ -28,8 +28,8 @@ public static class Program
 		if (arguments["read"].IsTrue)
 		{
 			// read using database from docopt
-			UserInterface.printCheeps(csvDatabase.Read());
-			
+			//UserInterface.printCheeps(csvDatabase.Read());
+			csvDatabase.Read();
 		} 
 		else if (arguments["cheep"].IsTrue)
 		{

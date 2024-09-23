@@ -42,7 +42,6 @@ public sealed class CSVDatabase<T>:IDatabaseRepository<T> {
         
         return information;
         
-        
     }
 
     public void Store(T record)
