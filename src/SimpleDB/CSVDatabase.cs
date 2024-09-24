@@ -6,12 +6,14 @@ namespace SimpleDB;
 public sealed class CSVDatabase<T>:IDatabaseRepository<T> {
     
     private static CSVDatabase<T> instance;  //private static instance field
-    
     string databasePath = "../SimpleDB/Database.csv";
 
-    private CSVDatabase(){ } //private constructor to hide from client code
+    private CSVDatabase()
+    {
+       databasePath = databasePath ??
+                            throw new ArgumentNullException(nameof(databasePath), "Path to csv file can not be found");} //private constructor to hide from client code
     
-    public static CSVDatabase<T> GetInstance() 
+    public static CSVDatabase<T> GetInstance()
     {
         if (instance == null)
         {
@@ -25,6 +27,7 @@ public sealed class CSVDatabase<T>:IDatabaseRepository<T> {
     https://csharpindepth.com/articles/Singleton#unsafe
     https://dev.to/kalkwst/singleton-pattern-in-c-1dh0
     */
+
     
     public IEnumerable<T> Read(int? limit = null)
     {

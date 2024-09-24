@@ -17,7 +17,10 @@ public static class UserInterface
     
     public static String getPrint(Cheep cheep)
     {
-        return cheep.Author + " @ " + cheep.Timestamp + ": " + cheep.Message;
+        var time = DateTimeOffset.FromUnixTimeSeconds(cheep.Timestamp).DateTime;
+        string formattedTime = time.ToString("MM/dd/yy HH:mm:ss");
+        
+        return $"{cheep.Author} @ {formattedTime}: {cheep.Message}";
     }
 
 }
