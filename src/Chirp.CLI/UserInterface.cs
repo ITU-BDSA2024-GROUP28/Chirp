@@ -6,11 +6,17 @@ namespace Chirp.CLI;
 public static class UserInterface
 {
     
-    public static void printCheeps(IEnumerable<Cheep> cheeps)
+    public static void printCheeps(IEnumerable<Cheep> cheeps, int limit)
     {
-        foreach(var cheep in cheeps)
-        {
+        //foreach(var cheep in cheeps)
+        //{
             //Need to check if the cheeps are printed out right
+            //Console.WriteLine(getPrint(cheep));
+        //}
+
+        for (int i = 0; i < limit; i++)
+        {   
+            var cheep = cheeps.ElementAt(i);
             Console.WriteLine(getPrint(cheep));
         }
     }
