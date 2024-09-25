@@ -1,6 +1,6 @@
 namespace SimpleDB.Tests;
 
-using CsvDatabase = SimpleDB.CSVDatabase<Cheep>;
+using Xunit;
 
 public class IntegrationTest1
 {
@@ -15,7 +15,6 @@ public class IntegrationTest1
         //Assert.Equal(expected, CsvDatabase.Store(cheep));
         //Assert if the gotten cheep equals the created one
     }
-    
     
     public void WriteCheepTest()
     {

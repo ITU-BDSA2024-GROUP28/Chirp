@@ -1,12 +1,14 @@
 using System.Reflection;
 using System.Text.Json;
+using Cheep = SimpleDB.Cheep;
 
 namespace Chirp.CLI.Tests;
 
 using Xunit;
 using Cheep = SimpleDB.Cheep;
+using SimpleDB;
 using UserInterface = Chirp.CLI.UserInterface;
-using Program = Chirp.CLI.Program;
+using CsvDatabase = SimpleDB.CSVDatabase<Cheep>;
 
 public class UnitTest1
 {
@@ -46,5 +48,13 @@ public class UnitTest1
 	";
         
         
+    }
+    
+    [Fact]
+    public void CSVDatabase_should_return_same()
+    {
+        var dbInstance1 = CSVDatabase<Cheep>.GetInstance();
+        var dbInstance2 = CSVDatabase<Cheep>.GetInstance(); // Assert
+        Assert.Equal(dbInstance1, dbInstance2);    //uses method AreEqual to check if they are the same
     }
 }
