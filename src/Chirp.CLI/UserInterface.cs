@@ -8,12 +8,6 @@ public static class UserInterface
     
     public static void printCheeps(IEnumerable<Cheep> cheeps, int limit)
     {
-        //foreach(var cheep in cheeps)
-        //{
-            //Need to check if the cheeps are printed out right
-            //Console.WriteLine(getPrint(cheep));
-        //}
-
         for (int i = 0; i < limit; i++)
         {   
             var cheep = cheeps.ElementAt(i);
@@ -24,7 +18,7 @@ public static class UserInterface
     public static String getPrint(Cheep cheep)
     {
         var time = DateTimeOffset.FromUnixTimeSeconds(cheep.Timestamp).DateTime;
-        string formattedTime = time.ToString("MM/dd/yy HH:mm:ss");
+        string formattedTime = time.ToString("dd/MM/yy HH:mm:ss");
         
         return $"{cheep.Author} @ {formattedTime}: {cheep.Message}";
     }
