@@ -1,6 +1,8 @@
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace Chirp.Razor.Tests;
-public class IntagrationTest : IClassFixture<WebApplicationFactory<Program>>
+
+public class  IntagrationTest : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _fixture;
     private readonly HttpClient _client;
