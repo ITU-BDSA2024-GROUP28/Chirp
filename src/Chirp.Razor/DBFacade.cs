@@ -1,17 +1,25 @@
+using Microsoft.Data.Sqlite;
 
-var sqlDBFilePath = "/tmp/chirp.db";
-var sqlQuery = @"SELECT * FROM message ORDER by message.pub_date desc";
-
-using (var connection = new SqliteConnection($"Data Source={sqlDBFilePath}"))
+public class DBFacade
 {
-    connection.Open();
+    string sqlDBFilePath = "/tmp/chirp.db";
 
-    var command = connection.CreateCommand();
-    command.CommandText = sqlQuery;
+    string sqlQuery = @"SELECT * FROM message ORDER by message.pub_date desc";
 
-    using var reader = command.ExecuteReader();
-    while (reader.Read())
-    {
-        //...
-    }
+      public void GetCheeps(){
+          
+          using (var connection = new SqliteConnection($"Data Source={sqlDBFilePath}"))
+          {
+              connection.Open();
+
+              var command = connection.CreateCommand();
+              command.CommandText = sqlQuery;
+
+              using var reader = command.ExecuteReader();
+              while (reader.Read())
+              {
+                  //...
+              }
+          }
+      }
 }
