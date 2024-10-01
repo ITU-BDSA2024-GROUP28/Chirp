@@ -2,7 +2,7 @@ using Microsoft.Data.Sqlite;
 
 public class DBFacade
 {
-    string sqlDBFilePath = "/tmp/chirp.db";
+    string sqlDBFilePath = "../../chirp.db";
 
     string sqlQuery = @"SELECT * FROM message ORDER by message.pub_date desc";
 
