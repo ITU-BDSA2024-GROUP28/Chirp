@@ -16,12 +16,14 @@ public class CheepService : ICheepService
     };
     public List<CheepViewModel> GetCheeps()
     {
+        // add pagisation here
         return _cheeps;
     }
 
     public List<CheepViewModel> GetCheepsFromAuthor(string author)
     {
         // filter by the provided author name
+        // add pagisation here
         return _cheeps.Where(x => x.Author == author).ToList();
     }
 
