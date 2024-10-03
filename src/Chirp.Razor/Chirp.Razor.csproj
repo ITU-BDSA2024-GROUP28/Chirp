@@ -16,8 +16,4 @@
     <PackageReference Include="Xunit" Version="2.9.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ChatRepository\" />
-  </ItemGroup>
-
 </Project>

@@ -1,6 +1,6 @@
 namespace Chirp.Razor.AuthorRepository;
 
-public class AuthorRepository
+public class AuthorRepository : IAuthorRepository
 {
     
 }

@@ -5,8 +5,8 @@ namespace MyChat.Razor;
 
 public class ChatDbContext : DbContext
 {
-    private DbSet<Cheep> cheeps { get; set; }
-    private DbSet<Author> authors { get; set; }
+    public DbSet<Cheep> cheeps { get; set; }
+    public DbSet<Author> authors { get; set; }
 
     public ChatDbContext(DbContextOptions<ChatDbContext> options) : base(options) {}
 }
