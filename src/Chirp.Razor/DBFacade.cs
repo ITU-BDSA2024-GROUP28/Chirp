@@ -41,9 +41,9 @@ public class DBFacade
           List<CheepViewModel> cheeps = new List<CheepViewModel>();
           string sqlQuery =
               @"SELECT user.username, message.text, message.pub_date
-              FROM message
-              WHERE user.username = authorName;
-              JOIN user on user.user_id = message.author_id
+              FROM user
+              JOIN message on user.user_id = message.author_id
+              WHERE user.username = @AuthorName;
               ORDER by message.pub_date desc";   
           
           using (var connection = new SqliteConnection($"Data Source={sqlDBFilePath}"))
@@ -52,6 +52,8 @@ public class DBFacade
 
               var command = connection.CreateCommand();
               command.CommandText = sqlQuery;
+              
+              command.Parameters.AddWithValue("@AuthorName", authorName);
 
               using var reader = command.ExecuteReader();
               while (reader.Read())
