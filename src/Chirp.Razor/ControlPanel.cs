@@ -11,9 +11,24 @@ public class ControlPanel
     }
 
     // Function that returns the cheeps based on the current page
-    public static int[] determineCheeps(int page)
+    public static int[] determineCheeps(int pageNr)
     {
-        // Sort the cheeps by recent posts
+        // Array of cheepId from the DB, sorted by recently posted
+        int[] allCheeps;
+        int cheepCounter = 0;
+        int pages = Math.Cieling(allCheeps.Length / 20); // Get's the needed amount of pages
+        int[pages][20] pagedCheeps;
+
+        for (int i = 0; i < pages; i++) // Loop to go through the pages
+        {
+            int tempList[] = pagedCheeps[i];
+            
+            for (int j = 0; j < 20; j++) // Loop to insert the cheepId into the list
+            {
+                tempList[j] = allCheeps[cheepCounter];
+                cheepCounter++;
+            }
+        }
         // Group them by 20 (maybe add possebility to customise amount of cheeps shown)
     }
 }
