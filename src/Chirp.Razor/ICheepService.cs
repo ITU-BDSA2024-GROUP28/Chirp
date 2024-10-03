@@ -2,7 +2,7 @@ namespace Chirp.Razor;
 
 public interface ICheepService
 {
-    public List<Cheep> GetCheeps();
+    public List<CheepDTO> GetCheeps();
 
-    public List<Cheep> GetCheepsFromAuthor(Author author);
+    public List<CheepDTO> GetCheepsFromAuthor(string author);
 }

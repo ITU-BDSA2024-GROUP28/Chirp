@@ -1,12 +1,12 @@
 using Microsoft.Data.Sqlite;
 
 namespace Chirp.Razor;
-public class DBFacade
+public class SQLiteDB
 {
     static string sqlDBFilePath = "../../chirp.db";
     
-      public static List<CheepViewModel> GetCheeps(){
-          List<CheepViewModel> cheeps = new List<CheepViewModel>();
+      public static List<CheepDTO> GetCheeps(){
+          List<CheepDTO> cheeps = new List<CheepDTO>();
           string sqlQuery =
               @"SELECT user.username, message.text, message.pub_date
               FROM message
@@ -28,7 +28,8 @@ public class DBFacade
                   var author = reader.GetString(0);
                   var message = reader.GetString(1);
                   var timestamp = reader.GetString(2);
-                  var cheep = new CheepViewModel(author, message, timestamp);
+                  var realtimestamp = long.Parse(timestamp);
+                  var cheep = new CheepDTO(author, message, realtimestamp);
                   cheeps.Add(cheep);
               }
           }
@@ -36,9 +37,9 @@ public class DBFacade
           return cheeps;
       }
 
-      public static List<CheepViewModel> GetCheepsFromAuthor(string authorName)
+      public static List<CheepDTO> GetCheepsFromAuthor(string authorName)
       {
-          List<CheepViewModel> cheeps = new List<CheepViewModel>();
+          List<CheepDTO> cheeps = new List<CheepDTO>();
           string sqlQuery =
               @"SELECT user.username, message.text, message.pub_date
               FROM user
@@ -61,7 +62,8 @@ public class DBFacade
                   var author = reader.GetString(0);
                   var message = reader.GetString(1);
                   var timestamp = reader.GetString(2);
-                  var cheep = new CheepViewModel(author, message, timestamp);
+                  var realtimestamp = long.Parse(timestamp);
+                  var cheep = new CheepDTO(author, message, realtimestamp);
                   cheeps.Add(cheep);
               }
           }

@@ -1,24 +1,16 @@
 using Chirp.Razor;
 
-public record CheepViewModel(string Author, string Message, string Timestamp);
-
-public interface ICheepService
-{
-    public List<CheepViewModel> GetCheeps();
-    public List<CheepViewModel> GetCheepsFromAuthor(string author);
-}
-
 public class CheepService : ICheepService
 {
-    public List<CheepViewModel> GetCheeps()
+    public List<CheepDTO> GetCheeps()
     {
-        return DBFacade.GetCheeps();
+        return SQLiteDB.GetCheeps();
   }
 
-    public List<CheepViewModel> GetCheepsFromAuthor(string author)
+    public List<CheepDTO> GetCheepsFromAuthor(string author)
     {
 
-        return DBFacade.GetCheepsFromAuthor(author);
+        return SQLiteDB.GetCheepsFromAuthor(author);
         // filter by the provided author name
     }
     }
