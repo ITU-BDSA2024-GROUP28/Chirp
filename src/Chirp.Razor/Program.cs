@@ -1,10 +1,15 @@
 using Chirp.Razor;
+using Microsoft.EntityFrameworkCore;
+using MyChat.Razor;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<ICheepService, CheepService>();
+string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ChatDbContext>(options => options.UseSqlite(connectionString));
+
 
 
 var app = builder.Build();
