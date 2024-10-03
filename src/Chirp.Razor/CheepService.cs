@@ -1,15 +1,13 @@
 using Chirp.Razor;
-using Chirp.Razor.CheepRepository;
 using Microsoft.EntityFrameworkCore;
 using MyChat.Razor;
+using static Chirp.Razor.CheepRepository;
 
-public class ChatService : IChatService
+public class CheepService : ICheepService
 {
     // These would normally be loaded from a database for example
     
     ICheepRepository _cheepRepository;
-    
-    
     
     public List<Cheep> GetCheeps()
     {
@@ -17,7 +15,7 @@ public class ChatService : IChatService
         return cheeps;
     }
 
-    public List<Cheep> GetCheepsFromAuthor(string author)
+    public List<Cheep> GetCheepsFromAuthor(Author author)
     {
         // filter by the provided author name
         //return _cheeps.Where(x => x.Author == author).ToList();

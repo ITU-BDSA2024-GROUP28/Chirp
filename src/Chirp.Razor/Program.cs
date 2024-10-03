@@ -1,5 +1,4 @@
 using Chirp.Razor;
-using Chirp.Razor.CheepRepository;
 using Microsoft.EntityFrameworkCore;
 using MyChat.Razor;
 

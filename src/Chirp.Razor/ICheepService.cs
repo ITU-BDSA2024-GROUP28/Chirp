@@ -1,6 +1,6 @@
 namespace Chirp.Razor;
 
-public interface IChatService
+public interface ICheepService
 {
     public List<Cheep> GetCheeps();
 
