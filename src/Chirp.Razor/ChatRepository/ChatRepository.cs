@@ -10,10 +10,26 @@ public class ChatRepository : IChatRepository
     {
         _dbContext = dbContext;
     }
-    public async Task<List<Cheep>> ReadMessages(string userName)
+    public async Task<List<Cheep>> ReadCheeps()
     {
         // Formulate the query - will be translated to SQL by EF Core
         var query = _dbContext.cheeps.Select(cheep => new { cheep.Author, cheep.Text });
+        // Execute the query
+        var result = await query.ToListAsync();
+
+        List<Cheep> cheeps = new List<Cheep>();
+
+        foreach (var cheep in query)
+        {
+            cheeps.Add( new Cheep() {Author = cheep.Author, Text = cheep.Text });
+        }
+
+        return cheeps;
+    }
+    public async Task<List<Cheep>> ReadCheeps(string userName)
+    {
+        // Formulate the query - will be translated to SQL by EF Core
+        var query = _dbContext.cheeps.Select(cheep => new { cheep.Author, cheep.Text }).Where(cheep => cheep.Author.Equals(userName));
         // Execute the query
         var result = await query.ToListAsync();
 
