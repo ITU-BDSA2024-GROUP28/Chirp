@@ -1,3 +1,8 @@
+using SQLitePCL;  // Add this to import the SQLite namespace
+
+
+Batteries.Init(); // Initialize SQLitePCL
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

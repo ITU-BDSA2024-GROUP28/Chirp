@@ -10,7 +10,7 @@ public class DBFacade
           string sqlQuery =
               @"SELECT user.username, message.text, message.pub_date
               FROM message
-              JOIN user on user.id = message.author_id
+              JOIN user on user.user_id = message.author_id
               ORDER by message.pub_date desc";
           //include pagination
 
@@ -43,7 +43,7 @@ public class DBFacade
               @"SELECT user.username, message.text, message.pub_date
               FROM message
               WHERE user.username = authorName;
-              JOIN user on user.id = message.author_id
+              JOIN user on user.user_id = message.author_id
               ORDER by message.pub_date desc";   
           
           using (var connection = new SqliteConnection($"Data Source={sqlDBFilePath}"))
