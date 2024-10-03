@@ -11,7 +11,7 @@ namespace Chirp.Razor.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "users",
+                name: "authors",
                 columns: table => new
                 {
                     AuthorId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -21,7 +21,7 @@ namespace Chirp.Razor.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_users", x => x.AuthorId);
+                    table.PrimaryKey("PK_authors", x => x.AuthorId);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,9 +38,9 @@ namespace Chirp.Razor.Migrations
                 {
                     table.PrimaryKey("PK_cheeps", x => x.CheepId);
                     table.ForeignKey(
-                        name: "FK_cheeps_users_AuthorID",
+                        name: "FK_cheeps_authors_AuthorID",
                         column: x => x.AuthorID,
-                        principalTable: "users",
+                        principalTable: "authors",
                         principalColumn: "AuthorId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -58,7 +58,7 @@ namespace Chirp.Razor.Migrations
                 name: "cheeps");
 
             migrationBuilder.DropTable(
-                name: "users");
+                name: "authors");
         }
     }
 }

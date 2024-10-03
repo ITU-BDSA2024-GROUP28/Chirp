@@ -32,7 +32,7 @@ namespace Chirp.Razor.Migrations
 
                     b.HasKey("AuthorId");
 
-                    b.ToTable("users");
+                    b.ToTable("authors");
                 });
 
             modelBuilder.Entity("Chirp.Razor.Cheep", b =>
