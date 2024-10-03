@@ -1,7 +1,7 @@
 namespace SimpleDB.Tests;
-
+// ignore the red errors in tests
 using Xunit;
-
+using SimpleDB;
 public class IntegrationTest1
 {
     
@@ -18,7 +18,6 @@ public class IntegrationTest1
     
     public void WriteCheepTest()
     {
-        
         //Cheep cheep = new Cheep("kajn", "Hej!", 0);
         //Assert if the cheep is being written correctly according to output
     }
