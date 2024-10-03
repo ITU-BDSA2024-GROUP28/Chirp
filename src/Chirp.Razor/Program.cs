@@ -1,6 +1,4 @@
 using Chirp.Razor;
-using Chirp.Razor.AuthorRepository;
-using Chirp.Razor.ChatRepository;
 using Chirp.Razor.CheepRepository;
 using Microsoft.EntityFrameworkCore;
 using MyChat.Razor;
@@ -11,12 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<ICheepService, CheepService>();
 builder.Services.AddScoped<ICheepRepository, CheepRepository>();
-builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
-builder.Services.AddScoped<IChatRepository, ChatRepository>();
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ChatDbContext>(options => options.UseSqlite(connectionString));
-
-
+builder.Services.AddDbContext<ChirpDBContext>(options => options.UseSqlite(connectionString));
 
 var app = builder.Build();
 

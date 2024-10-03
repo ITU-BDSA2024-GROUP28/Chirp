@@ -1,23 +1,28 @@
 using Chirp.Razor;
+using Chirp.Razor.CheepRepository;
+using Microsoft.EntityFrameworkCore;
+using MyChat.Razor;
 
-public class ChatService : ICheepService
+public class ChatService : IChatService
 {
     // These would normally be loaded from a database for example
-    private static readonly List<CheepViewModel> _cheeps = new()
+    
+    ICheepRepository _cheepRepository;
+    
+    
+    
+    public List<Cheep> GetCheeps()
     {
-        new CheepViewModel("Helge", "Hello, BDSA students!", UnixTimeStampToDateTimeString(1690892208)),
-        new CheepViewModel("Adrian", "Hej, velkommen til kurset.", UnixTimeStampToDateTimeString(1690895308)),
-    };
-
-    public List<CheepViewModel> GetCheeps()
-    {
-        return _cheeps;
+        List<Cheep> cheeps = new List<Cheep>();
+        return cheeps;
     }
 
-    public List<CheepViewModel> GetCheepsFromAuthor(string author)
+    public List<Cheep> GetCheepsFromAuthor(string author)
     {
         // filter by the provided author name
-        return _cheeps.Where(x => x.Author == author).ToList();
+        //return _cheeps.Where(x => x.Author == author).ToList();
+        List<Cheep> cheeps = new List<Cheep>();
+        return cheeps;
     }
 
     private static string UnixTimeStampToDateTimeString(double unixTimeStamp)

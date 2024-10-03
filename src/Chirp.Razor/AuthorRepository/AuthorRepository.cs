@@ -4,7 +4,12 @@ namespace Chirp.Razor.AuthorRepository;
 
 public class AuthorRepository : IAuthorRepository
 {
-    private readonly ChatDbContext _dbContext;
+    private readonly ChirpDBContext _dbContext;
+    public AuthorRepository(ChirpDBContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+    
     public async Task<int> CreateAuthor(Author author)
     {
         Author newAuthor = new() { Email = author.Email, Name = author.Name };

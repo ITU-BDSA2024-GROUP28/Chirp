@@ -8,7 +8,7 @@ using MyChat.Razor;
 
 namespace Chirp.Razor.Migrations
 {
-    [DbContext(typeof(ChatDbContext))]
+    [DbContext(typeof(ChirpDBContext))]
     partial class ChatDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
