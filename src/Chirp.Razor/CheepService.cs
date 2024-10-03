@@ -1,29 +1,29 @@
 using Chirp.Razor;
-using Microsoft.EntityFrameworkCore;
-using MyChat.Razor;
-using static Chirp.Razor.CheepRepository;
+
+public record CheepViewModel(string Author, string Message, string Timestamp);
+
+public interface ICheepService
+{
+    public List<CheepViewModel> GetCheeps();
+    public List<CheepViewModel> GetCheepsFromAuthor(string author);
+}
 
 public class CheepService : ICheepService
 {
-    // These would normally be loaded from a database for example
-    
-    ICheepRepository _cheepRepository;
-    
-    public List<Cheep> GetCheeps()
+    public List<CheepViewModel> GetCheeps()
     {
-        List<Cheep> cheeps = new List<Cheep>();
-        return cheeps;
-    }
+        return DBFacade.GetCheeps();
+  }
 
-    public List<Cheep> GetCheepsFromAuthor(Author author)
+    public List<CheepViewModel> GetCheepsFromAuthor(string author)
     {
+
+        return DBFacade.GetCheepsFromAuthor(author);
         // filter by the provided author name
-        //return _cheeps.Where(x => x.Author == author).ToList();
-        List<Cheep> cheeps = new List<Cheep>();
-        return cheeps;
+    }
     }
 
-    private static string UnixTimeStampToDateTimeString(double unixTimeStamp)
+   /* private static string UnixTimeStampToDateTimeString(double unixTimeStamp)
     {
         // Unix timestamp is seconds past epoch
         DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
@@ -31,4 +31,4 @@ public class CheepService : ICheepService
         return dateTime.ToString("MM/dd/yy H:mm:ss");
     }
 
-}
+}*/
