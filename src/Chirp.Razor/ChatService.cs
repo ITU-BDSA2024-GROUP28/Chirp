@@ -1,13 +1,14 @@
-namespace Chirp.Razor;
+using Chirp.Razor;
 
-public class CheepService : ICheepService
+public class ChatService : ICheepService
 {
     // These would normally be loaded from a database for example
     private static readonly List<CheepViewModel> _cheeps = new()
     {
-        new CheepViewModel("Emma", "Hello, Helge and Adrian!", UnixTimeStampToDateTimeString(1727776680)),
-        new CheepViewModel("Amira", "Welcome to our Chirp! web application built with razor pages", UnixTimeStampToDateTimeString(1727776690)),
+        new CheepViewModel("Helge", "Hello, BDSA students!", UnixTimeStampToDateTimeString(1690892208)),
+        new CheepViewModel("Adrian", "Hej, velkommen til kurset.", UnixTimeStampToDateTimeString(1690895308)),
     };
+
     public List<CheepViewModel> GetCheeps()
     {
         return _cheeps;
