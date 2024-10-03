@@ -1,7 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using MyChat.Razor;
-
-namespace Chirp.Razor.CheepRepository;
+namespace Chirp.Razor;
 
 public class CheepRepository : ICheepRepository
 {

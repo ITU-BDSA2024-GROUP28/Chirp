@@ -1,4 +1,4 @@
-namespace Chirp.Razor.AuthorRepository;
+namespace Chirp.Razor;
 
 public interface IAuthorRepository
 {

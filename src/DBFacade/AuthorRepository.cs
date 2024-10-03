@@ -1,8 +1,6 @@
-using MyChat.Razor;
+namespace Chirp.Razor;
 
-namespace Chirp.Razor.AuthorRepository;
-
-public class AuthorRepository : IAuthorRepository
+public class AuthorRepository
 {
     private readonly ChirpDBContext _dbContext;
     public AuthorRepository(ChirpDBContext dbContext)

@@ -1,4 +1,4 @@
-namespace Chirp.Razor.CheepRepository;
+namespace Chirp.Razor;
 
 public interface ICheepRepository
 {
