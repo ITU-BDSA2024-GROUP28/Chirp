@@ -7,6 +7,7 @@ public class DBFacade
     
     public DBFacade()
     {
+        //https://learn.microsoft.com/en-us/dotnet/api/system.io.path.gettemppath?view=net-7.0&tabs=linux
         // get the environment variable for CHIRPDBPATH
         string dbPath = Environment.GetEnvironmentVariable("CHIRPDBPATH");
 
