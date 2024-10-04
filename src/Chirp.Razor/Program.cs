@@ -1,3 +1,4 @@
+using Chirp.Razor;
 using SQLitePCL;  // Add this to import the SQLite namespace
 
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<DBFacade>();
 builder.Services.AddSingleton<ICheepService, CheepService>();
 
 
