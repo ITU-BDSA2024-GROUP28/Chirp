@@ -1,46 +1,46 @@
 using Microsoft.Data.Sqlite;
 
 namespace Chirp.Razor;
-public class DBFacade
+
+public class SQLDBFacade
 {
     private readonly string sqlDBFilePath;
-    
-    public DBFacade()
+
+    public SQLDBFacade()
     {
         //https://learn.microsoft.com/en-us/dotnet/api/system.io.path.gettemppath?view=net-7.0&tabs=linux
         // get the environment variable for CHIRPDBPATH
-        string dbPath = Environment.GetEnvironmentVariable("CHIRPDBPATH");
+        var dbPath = Environment.GetEnvironmentVariable("CHIRPDBPATH");
 
         // if CHIRPDBPATH is not set, use the user's temporary directory and default to chirp.db
         if (string.IsNullOrEmpty(dbPath))
-        {
             // combine the user's temp directory with "chirp.db" as the default filename
             dbPath = Path.Combine(Path.GetTempPath(), "chirp.db");
-        }
-    
+
         // assign the final path to sqlDBFilePath for use
         sqlDBFilePath = dbPath;
     }
-    
-    
-    public List<CheepViewModel> GetCheeps(int? pageNr){
-        List<CheepViewModel> cheeps = new List<CheepViewModel>();
-        string sqlQuery = 
+
+
+    public List<CheepViewModel> GetCheeps(int? pageNr)
+    {
+        var cheeps = new List<CheepViewModel>();
+        var sqlQuery =
             @"SELECT user.username, message.text, message.pub_date
               FROM message
               JOIN user on user.user_id = message.author_id
               ORDER by message.pub_date desc 
               limit 32 offset(@PageNr - 1) * 32";
-          
+
         using (var connection = new SqliteConnection($"Data Source={sqlDBFilePath}"))
-        { 
+        {
             connection.Open();
 
             var command = connection.CreateCommand();
             command.CommandText = sqlQuery;
-              
+
             command.Parameters.AddWithValue("@PageNr", pageNr);
-              
+
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -52,26 +52,27 @@ public class DBFacade
                 cheeps.Add(cheep);
             }
         }
+
         return cheeps;
     }
 
     public List<CheepViewModel> GetCheepsFromAuthor(string authorName, int? pageNr)
     {
-        List<CheepViewModel> cheeps = new List<CheepViewModel>();
-        string sqlQuery =
+        var cheeps = new List<CheepViewModel>();
+        var sqlQuery =
             @"SELECT user.username, message.text, message.pub_date
               FROM user
               JOIN message on user.user_id = message.author_id
               WHERE user.username = @AuthorName;
               ORDER by message.pub_date desc limit 32 offset(@pageNr - 1) * 32";
-        
+
         using (var connection = new SqliteConnection($"Data Source={sqlDBFilePath}"))
-        { 
+        {
             connection.Open();
 
             var command = connection.CreateCommand();
             command.CommandText = sqlQuery;
-              
+
             command.Parameters.AddWithValue("@AuthorName", authorName);
             command.Parameters.AddWithValue("@PageNr", pageNr);
 
@@ -85,6 +86,7 @@ public class DBFacade
                 cheeps.Add(cheep);
             }
         }
+
         return cheeps;
     }
 }
