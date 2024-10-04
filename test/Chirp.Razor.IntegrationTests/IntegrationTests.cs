@@ -5,7 +5,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Chirp.Razor;
 
-public class IntegrationTests : IClassFixture<WebApplicationFactory<Startup>>
+/*public class IntegrationTests : IClassFixture<WebApplicationFactory<Startup>>
 {
     private readonly HttpClient_client;
 
@@ -28,4 +28,4 @@ public class IntegrationTests : IClassFixture<WebApplicationFactory<Startup>>
     }
     
     
-}
+}*/

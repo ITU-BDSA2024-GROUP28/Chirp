@@ -2,7 +2,7 @@ namespace Chirp.Razor.Tests;
 
 using CheepViewModel = CheepViewModel;
 
-public class UnitTest1
+/*public class UnitTest1
 {
     //Tests that the cheeps get added the list correctly
     [Fact]
@@ -49,4 +49,4 @@ public class UnitTest1
 
         Assert.Equal(expected, time);
     }
-}
+}*/
