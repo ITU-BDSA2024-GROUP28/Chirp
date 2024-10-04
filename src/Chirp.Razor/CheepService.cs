@@ -10,13 +10,22 @@ public interface ICheepService
 
 public class CheepService : ICheepService
 {
+    private readonly DBFacade _dbFacade;
+    
+    //CheepService takes a DBFacade instance via its constructor
+    public CheepService(DBFacade dbFacade)
+    {
+        //injecting DBFacade
+        _dbFacade = dbFacade;
+    }
+    
     public List<CheepViewModel> GetCheeps(int? pageNr)
     {
-        return DBFacade.GetCheeps(pageNr);
+        return _dbFacade.GetCheeps(pageNr);
   }
 
     public List<CheepViewModel> GetCheepsFromAuthor(string author, int? pageNr)
     {
-        return DBFacade.GetCheepsFromAuthor(author, pageNr);
+        return _dbFacade.GetCheepsFromAuthor(author, pageNr);
     }
 }
