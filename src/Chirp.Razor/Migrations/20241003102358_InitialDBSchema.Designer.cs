@@ -9,8 +9,7 @@ using MyChat.Razor;
 
 namespace Chirp.Razor.Migrations
 {
-    [DbContext(typeof(ChatDBContext))]
-    [Migration("20241003102358_InitialDBSchema")]
+    
     partial class InitialDBSchema
     {
         /// <inheritdoc />

@@ -8,63 +8,70 @@ using MyChat.Razor;
 
 namespace Chirp.Razor.Migrations
 {
-    [DbContext(typeof(ChatDBContext))]
-    partial class ChatDBContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ChirpDBContext))]
+    partial class ChatDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
-            modelBuilder.Entity("Chirp.Razor.Message", b =>
+            modelBuilder.Entity("Chirp.Razor.Author", b =>
                 {
-                    b.Property<int>("MessageId")
+                    b.Property<int>("AuthorId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AuthorId");
+
+                    b.ToTable("authors");
+                });
+
+            modelBuilder.Entity("Chirp.Razor.Cheep", b =>
+                {
+                    b.Property<int>("CheepId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AuthorID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UserID")
+                    b.Property<int>("TimeStamp")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("MessageId");
+                    b.HasKey("CheepId");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("AuthorID");
 
-                    b.ToTable("messages");
+                    b.ToTable("cheeps");
                 });
 
-            modelBuilder.Entity("Chirp.Razor.User", b =>
+            modelBuilder.Entity("Chirp.Razor.Cheep", b =>
                 {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("users");
-                });
-
-            modelBuilder.Entity("Chirp.Razor.Message", b =>
-                {
-                    b.HasOne("Chirp.Razor.User", "User")
-                        .WithMany("Messages")
-                        .HasForeignKey("UserID")
+                    b.HasOne("Chirp.Razor.Author", "Author")
+                        .WithMany("Cheeps")
+                        .HasForeignKey("AuthorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Author");
                 });
 
-            modelBuilder.Entity("Chirp.Razor.User", b =>
+            modelBuilder.Entity("Chirp.Razor.Author", b =>
                 {
-                    b.Navigation("Messages");
+                    b.Navigation("Cheeps");
                 });
 #pragma warning restore 612, 618
         }
