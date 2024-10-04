@@ -1,7 +1,5 @@
-using System.Runtime.CompilerServices;
-
-namespace SimpleDB;// see later
-
+namespace SimpleDB;
+// see later
 
 public record Cheep(string Author, string Message, long Timestamp)
 {
@@ -10,4 +8,3 @@ public record Cheep(string Author, string Message, long Timestamp)
         return $"{Author}, \"{Message}\", {Timestamp}";
     }
 }
-

@@ -11,7 +11,7 @@ public class UserTimelineModel : PageModel
     public UserTimelineModel(ICheepService service)
     {
         _service = service;
-    }
+}
 
     public ActionResult OnGet([FromQuery]int? page, string author)
     {

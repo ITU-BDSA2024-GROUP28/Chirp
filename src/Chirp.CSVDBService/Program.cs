@@ -1,15 +1,15 @@
 using SimpleDB;
 
-
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-var csvDB=  CSVDatabase<Cheep>.GetInstance(); 
+var csvDB = CSVDatabase<Cheep>.GetInstance();
 
 app.MapGet("/cheeps", () => csvDB.Read());
 app.MapPost("/cheep", (Cheep cheep) => csvDB.Store(cheep));
 
 app.Run();
+
 public record Cheep(string Author, string Message, long Timestamp);
 
 /*
