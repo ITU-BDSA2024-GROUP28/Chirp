@@ -15,7 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chirp.Razor", "src\Chirp.Ra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FDD0B7E4-948A-48B1-82D1-1962006D6612}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chirp.Razor.Tests", "test\Chirp.Razor.Tests\Chirp.Razor.Tests.csproj", "{8C3D073C-D265-4320-A1FA-5E6E29B17FAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chirp.Razor.UnitTests", "test\Chirp.Razor.UnitTests\Chirp.Razor.UnitTests.csproj", "{8C3D073C-D265-4320-A1FA-5E6E29B17FAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chirp.Razor.IntegrationTests", "test\Chirp.Razor.IntegrationTests\Chirp.Razor.IntegrationTests.csproj", "{FA8AC867-0A06-4406-8ABB-6ACCEAB426D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,10 +48,15 @@ Global
 		{8C3D073C-D265-4320-A1FA-5E6E29B17FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C3D073C-D265-4320-A1FA-5E6E29B17FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C3D073C-D265-4320-A1FA-5E6E29B17FAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA8AC867-0A06-4406-8ABB-6ACCEAB426D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA8AC867-0A06-4406-8ABB-6ACCEAB426D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA8AC867-0A06-4406-8ABB-6ACCEAB426D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA8AC867-0A06-4406-8ABB-6ACCEAB426D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3D45A98C-ABAB-4133-8FDB-4BB9F5164748} = {D815473F-55E6-48B7-A834-EE28AEFC55FB}
 		{AE335B20-84BA-4A85-96DA-D8711A6B46B7} = {D815473F-55E6-48B7-A834-EE28AEFC55FB}
 		{8C3D073C-D265-4320-A1FA-5E6E29B17FAE} = {FDD0B7E4-948A-48B1-82D1-1962006D6612}
+		{FA8AC867-0A06-4406-8ABB-6ACCEAB426D5} = {FDD0B7E4-948A-48B1-82D1-1962006D6612}
 	EndGlobalSection
 EndGlobal

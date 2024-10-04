@@ -11,7 +11,7 @@ public class PublicModel : PageModel
     public PublicModel(ICheepService service)
     {
         _service = service;
-    }
+    }   
 
     public ActionResult OnGet([FromQuery] int ? page)
     {
