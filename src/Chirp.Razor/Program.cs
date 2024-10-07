@@ -1,5 +1,9 @@
 using Chirp.Razor;
-using SQLitePCL;  // Add this to import the SQLite namespace
+using DBFacade;
+using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
+
+// Add this to import the SQLite namespace
 
 
 Batteries.Init(); // Initialize SQLitePCL
@@ -8,8 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<DBFacade>();
+builder.Services.AddSingleton<SQLDBFacade>();
 builder.Services.AddSingleton<ICheepService, CheepService>();
+string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<CheepDbContext>(options => options.UseSqlite(connectionString));
+
 
 
 var app = builder.Build();
