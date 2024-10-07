@@ -1,8 +1,6 @@
-using Chirp.Razor;
-using SQLitePCL;  // Add this to import the SQLite namespace
-
-
-Batteries.Init(); // Initialize SQLitePCL
+using Chirp.Core;
+using DomainModel;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<ICheepService, CheepService>();
 
+// Load database connection via configuration
+string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<CheepDbContext>(options => options.UseSqlite(connectionString));
 
 var app = builder.Build();
 

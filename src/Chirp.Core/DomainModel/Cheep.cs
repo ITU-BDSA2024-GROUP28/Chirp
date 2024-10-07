@@ -1,4 +1,4 @@
-namespace Domain-Model;
+namespace DomainModel;
 
 public class Cheep
 {
