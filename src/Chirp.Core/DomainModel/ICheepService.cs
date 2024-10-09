@@ -2,9 +2,9 @@ namespace DomainModel;
 
 public interface ICheepService
 {
-    public List<Cheep> GetCheeps();
+    public List<CheepDTO> GetCheeps(int? pageNr);
     
-    public List<Cheep> GetCheepsFromAuthor(Author author);
+    public List<CheepDTO> GetCheepsFromAuthor(Author author, int? pageNr);
     
     
 }
