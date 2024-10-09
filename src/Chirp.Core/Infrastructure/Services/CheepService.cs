@@ -4,12 +4,10 @@ namespace DomainModel;
 
 public class CheepService : ICheepService
 {
-    
-
     //CheepService should take a DBFacade instance via its constructor
     public CheepService()
     {
-        //injecting SQLDBFacade
+        //injecting DBFacade
     }
 
     public List<CheepDTO> GetCheeps(int? pageNr)
