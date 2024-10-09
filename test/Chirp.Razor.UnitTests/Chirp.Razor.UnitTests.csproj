@@ -22,7 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\SimpleDB\SimpleDB.csproj"/>
         <ProjectReference Include="..\..\src\Chirp.Razor\Chirp.Razor.csproj"/>
     </ItemGroup>
 
