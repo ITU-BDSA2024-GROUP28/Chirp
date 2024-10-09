@@ -1,14 +1,27 @@
 using Chirp.Core;
+using Chirp.Core.Infrastructure;
 using DomainModel;
 using Microsoft.EntityFrameworkCore;
 
+// add a web app builder
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the builder container.
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<ICheepService, CheepService>();
 builder.Services.AddScoped<ICheepRepository, CheepRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+
+// add a service for dependency injection
+var services = new ServiceCollection();
+
+// Add services to the service container.
+services.AddSingleton<ICheepService, CheepService>();
+services.AddSingleton<DBFacade>();
+
+var serviceProvider = services.BuildServiceProvider();
+
+var service = serviceProvider.GetService<DBFacade>();
 
 // Load database connection via configuration
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
