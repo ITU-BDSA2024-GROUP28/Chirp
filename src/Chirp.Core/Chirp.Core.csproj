@@ -14,4 +14,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SQLite" Version="8.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Shared\" />
+    <Folder Include="wwwroot\favicon\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
