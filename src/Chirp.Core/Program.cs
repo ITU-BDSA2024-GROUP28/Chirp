@@ -15,13 +15,19 @@ builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 // add a service for dependency injection
 var services = new ServiceCollection();
 
-// Add services to the service container.
+// Add services to the dependency container.
 services.AddSingleton<ICheepService, CheepService>();
 services.AddSingleton<DBFacade>();
+services.AddSingleton<CheepDbContext>();
+services.AddSingleton<ICheepRepository, CheepRepository>();
 
 var serviceProvider = services.BuildServiceProvider();
 
-var service = serviceProvider.GetService<DBFacade>();
+var service1 = serviceProvider.GetService<DBFacade>();
+var service2 = serviceProvider.GetService<CheepDbContext>();
+var service3 = serviceProvider.GetService<CheepRepository>();
+
+
 
 // Load database connection via configuration
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

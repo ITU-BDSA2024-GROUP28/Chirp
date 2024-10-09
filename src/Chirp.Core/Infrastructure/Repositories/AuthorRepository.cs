@@ -7,10 +7,10 @@ public class AuthorRepository : IAuthorRepository
      * @param a AuthorDTO
      * @return Author object
      */
-    public Author create(AuthorDTO authorDTO)
+
+
+    public Author readAuthor(AuthorDTO authorDTO)
     {
-        Author author = new Author(authorDTO.Name, authorDTO.Email);
-        return author;
+        throw new NotImplementedException();
     }
-    
 }

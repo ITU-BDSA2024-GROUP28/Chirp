@@ -2,5 +2,6 @@ namespace DomainModel;
 
 public interface IAuthorRepository
 {
-    public Author create(AuthorDTO authorDTO);
+    public Author readAuthor(AuthorDTO authorDTO);
 }
+
