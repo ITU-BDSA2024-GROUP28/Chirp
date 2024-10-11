@@ -1,17 +1,25 @@
 using Chirp.Core;
-using Chirp.Core.Infrastructure;
+
 using DomainModel;
 using Microsoft.EntityFrameworkCore;
 
 // add a web app builder
 var builder = WebApplication.CreateBuilder(args);
 
+// Load database connection via configuration
+string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<CheepDbContext>(options => options.UseSqlite(connectionString));
+
 // Add services to the builder container.
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<ICheepService, CheepService>();
+
 builder.Services.AddScoped<ICheepRepository, CheepRepository>();
+builder.Services.AddScoped<ICheepService, CheepService>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 
+//builder.Services.AddScoped<DbContextOptions>();
+
+/*
 // add a service for dependency injection
 var services = new ServiceCollection();
 
@@ -20,18 +28,19 @@ services.AddSingleton<ICheepService, CheepService>();
 services.AddSingleton<DBFacade>();
 services.AddSingleton<CheepDbContext>();
 services.AddSingleton<ICheepRepository, CheepRepository>();
+services.AddSingleton<DbContextOptions>();
 
 var serviceProvider = services.BuildServiceProvider();
 
 var service1 = serviceProvider.GetService<DBFacade>();
 var service2 = serviceProvider.GetService<CheepDbContext>();
 var service3 = serviceProvider.GetService<CheepRepository>();
+var service4 = serviceProvider.GetService<DbContextOptions>();
+*/
 
 
 
-// Load database connection via configuration
-string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<CheepDbContext>(options => options.UseSqlite(connectionString));
+
 
 
 var app = builder.Build();

@@ -2,7 +2,7 @@ namespace DomainModel;
 
 public class CheepRepository : ICheepRepository
 {
-    AuthorRepository _authorRepository;
+    
     /*
      * Method that creates Cheep from existing CheepDTO that EF Core uses to update database.
      * @param a CheepDTO
