@@ -5,8 +5,7 @@ namespace DomainModel;
 
 public class CheepService : ICheepService
 {
-    //CheepService should take a DBFacade instance via its constructor
-    // add dependency to cheepdbcontext
+    // add dependency to cheepdbcontext and cheep repository
     CheepDbContext _context;
     ICheepRepository _repo;
     private List<CheepDTO> cheeps;

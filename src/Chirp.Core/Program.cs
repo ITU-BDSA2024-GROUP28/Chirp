@@ -17,32 +17,6 @@ builder.Services.AddScoped<ICheepRepository, CheepRepository>();
 builder.Services.AddScoped<ICheepService, CheepService>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 
-//builder.Services.AddScoped<DbContextOptions>();
-
-/*
-// add a service for dependency injection
-var services = new ServiceCollection();
-
-// Add services to the dependency container.
-services.AddSingleton<ICheepService, CheepService>();
-services.AddSingleton<DBFacade>();
-services.AddSingleton<CheepDbContext>();
-services.AddSingleton<ICheepRepository, CheepRepository>();
-services.AddSingleton<DbContextOptions>();
-
-var serviceProvider = services.BuildServiceProvider();
-
-var service1 = serviceProvider.GetService<DBFacade>();
-var service2 = serviceProvider.GetService<CheepDbContext>();
-var service3 = serviceProvider.GetService<CheepRepository>();
-var service4 = serviceProvider.GetService<DbContextOptions>();
-*/
-
-
-
-
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
