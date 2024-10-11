@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<CheepDbContext>(options => options.UseSqlite(connectionString));
 
-// Add services to the builder container.
+// Add services to the dependency container.
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<ICheepRepository, CheepRepository>();

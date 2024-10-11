@@ -8,16 +8,18 @@ public class UserTimelineModel : PageModel
 {
     private readonly ICheepService _service;
     public List<CheepDTO> Cheeps { get; set; }
+    
+    public string routeName;
 
     public UserTimelineModel(ICheepService service)
     {
         _service = service;
 }
 
-    public ActionResult OnGet([FromQuery]int? page, Author author)
+    public ActionResult OnGet([FromQuery] int ? page)
     {
         int pageNr = page ?? 1;
-        Cheeps = _service.GetCheepsFromAuthor(author, pageNr);
+        Cheeps = _service.GetCheepsFromAuthor(routeName, pageNr);
         return Page();
     }
 }

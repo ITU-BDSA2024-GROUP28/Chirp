@@ -6,9 +6,7 @@ public interface ICheepRepository
 
     public CheepDTO ReadCheep(Cheep cheep);
 
-    public AuthorDTO createAuthor(string Author);
+    public AuthorDTO ReadAuthor(Author author);
 
-    public string createEmail(string AuthorName);
-
-    public Author readAuthor(AuthorDTO authorDTO);
+    public Author ReadAuthor(AuthorDTO authorDTO);
 }

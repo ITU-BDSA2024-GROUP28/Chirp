@@ -8,29 +8,32 @@ public class CheepRepository : ICheepRepository
      * @param a CheepDTO
      * @return Cheep object
      */
-    public Cheep ReadCheep(CheepDTO cheepDTO)
-    {
-        Cheep cheep = new Cheep() {Text = cheepDTO.Text, TimeStamp = DateTime.Now, Author = readAuthor(createAuthor(cheepDTO.Author))};
-        return cheep;
-    }
+    
 
     public CheepDTO ReadCheep(Cheep cheep)
     {
-        return new CheepDTO(cheep.Text, 0 , cheep.Author.Name);
-    }
-    
-    public AuthorDTO createAuthor(string Author)
-    {
-        return new AuthorDTO(Author, createEmail(Author));
+        return new CheepDTO(cheep.Text, Convert(cheep.TimeStamp), cheep.Author.Name);
     }
 
-    public string createEmail(string AuthorName)
+    public AuthorDTO ReadAuthor(Author author)
     {
-        return AuthorName + "@mail.com";
+        return new AuthorDTO(author.Name, author.Email, author.AuthorId);
     }
-    public Author readAuthor(AuthorDTO authorDTO)
+    
+    public Cheep ReadCheep(CheepDTO cheepDTO)
+    {
+        Cheep cheep = new Cheep();
+        return cheep;
+    }
+    
+    public Author ReadAuthor(AuthorDTO authorDTO)
     {
         Author author = new Author();
         return author;
+    }
+
+    public static long Convert(DateTime dateTime)
+    {
+        return((DateTimeOffset)dateTime).ToUnixTimeSeconds();
     }
 }
