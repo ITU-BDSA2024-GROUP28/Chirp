@@ -10,13 +10,13 @@ public class CheepRepository : ICheepRepository
      */
     public Cheep ReadCheep(CheepDTO cheepDTO)
     {
-        Cheep cheep = new Cheep(cheepDTO.Text, cheepDTO.Timestamp, readAuthor(createAuthor(cheepDTO.Author)));
+        Cheep cheep = new Cheep() {Text = cheepDTO.Text, TimeStamp = DateTime.Now, Author = readAuthor(createAuthor(cheepDTO.Author))};
         return cheep;
     }
 
     public CheepDTO ReadCheep(Cheep cheep)
     {
-        return new CheepDTO(cheep.Text, cheep.Timestamp, cheep.Author.Name);
+        return new CheepDTO(cheep.Text, 0 , cheep.Author.Name);
     }
     
     public AuthorDTO createAuthor(string Author)
@@ -30,7 +30,7 @@ public class CheepRepository : ICheepRepository
     }
     public Author readAuthor(AuthorDTO authorDTO)
     {
-        Author author = new Author(authorDTO.Name, authorDTO.Email);
+        Author author = new Author();
         return author;
     }
 }

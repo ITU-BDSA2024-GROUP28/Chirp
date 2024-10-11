@@ -14,6 +14,7 @@ public class CheepService : ICheepService
     {
         _context = context;
         _repo = repo;
+        DbInitializer.SeedDatabase(context);
     }
 
     public List<CheepDTO> GetCheeps(int? pageNr)
@@ -23,7 +24,7 @@ public class CheepService : ICheepService
 
         // query the database to get all cheeps to show on page
         var query = (from cheep in _context.Cheeps
-                orderby cheep.Timestamp descending
+                orderby cheep.TimeStamp descending
                 select cheep)
             .Include(c => c.Author)
             .Skip(page * 32).Take(32);
@@ -46,7 +47,7 @@ public class CheepService : ICheepService
 
         // query the database to get all cheeps to show on page
         var query = (from cheep in _context.Cheeps
-                orderby cheep.Timestamp descending
+                orderby cheep.TimeStamp descending
                 select cheep)
             .Where(cheep => cheep.Author == author)
             .Include(c => c.Author)
