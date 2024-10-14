@@ -13,6 +13,8 @@ public class CheepRepository : ICheepRepository
     public CheepDTO ReadCheep(Cheep cheep)
     {
         return new CheepDTO(cheep.Text, Convert(cheep.TimeStamp), cheep.Author.Name);
+        //returns cheep med timestamp i sec siden 1970, skal være DateTime
+        //men Cheep.cs må kun bruge simple types
     }
 
     public AuthorDTO ReadAuthor(Author author)
