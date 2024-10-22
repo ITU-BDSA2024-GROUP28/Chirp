@@ -5,9 +5,12 @@ namespace DomainModel;
 
 public class CheepService : ICheepService
 {
+    //Queries
+    
     // add dependency to cheepdbcontext and cheep repository
     CheepDbContext _context;
     ICheepRepository _repo;
+    IAuthorRepository _repoAuthor;
     private List<CheepDTO> cheeps;
 
     public CheepService(CheepDbContext context, ICheepRepository repo)
@@ -97,11 +100,43 @@ public class CheepService : ICheepService
 
         return cheeps;
     }
+    
     public int PageNumber(int? pageNr)
     {
         int realpagenr;
         if (pageNr is null) realpagenr = 1;
         else realpagenr = pageNr.Value;
         return realpagenr;
+    }
+    
+    //find Author by name
+    public AuthorDTO GetAuthorByName(string name)
+    {
+        var author = _context.Authors.FirstOrDefault(a => a.Name == name);
+        AuthorDTO authorDto = _repoAuthor.ReadAuthor(author);
+        return authorDto;
+    }
+    
+    //find Author by email
+    public AuthorDTO GetAuthorByEmail(string email)
+    {
+        var author = _context.Authors.FirstOrDefault(a => a.Email == email);
+        AuthorDTO authorDto = _repoAuthor.ReadAuthor(author);
+        return authorDto;
+    }
+    
+    
+    //Commands
+    
+    //Create new Author
+    public void CreateAuthor(AuthorDTO authorDto)
+    {
+        
+    }
+    
+    //Create new Cheep
+    public void CreateCheep(CheepDTO cheepDto)
+    {
+        
     }
 }

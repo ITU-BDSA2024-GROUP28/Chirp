@@ -6,7 +6,7 @@ public interface ICheepRepository
 
     public CheepDTO ReadCheep(Cheep cheep);
 
-    public AuthorDTO ReadAuthor(Author author);
+    //public AuthorDTO ReadAuthor(Author author); should be in AuthorRepository 
 
-    public Author ReadAuthor(AuthorDTO authorDTO);
+    //public Author ReadAuthor(AuthorDTO authorDTO); should be in AuthorRepository 
 }
