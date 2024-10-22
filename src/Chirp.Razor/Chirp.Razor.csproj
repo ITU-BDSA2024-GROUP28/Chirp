@@ -18,8 +18,4 @@
         <PackageReference Include="Xunit" Version="2.9.2"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\DBFacade\DBFacade.csproj"/>
-    </ItemGroup>
-
 </Project>

@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chirp.Razor.UnitTests", "te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chirp.Razor.IntegrationTests", "test\Chirp.Razor.IntegrationTests\Chirp.Razor.IntegrationTests.csproj", "{FA8AC867-0A06-4406-8ABB-6ACCEAB426D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBFacade", "src\DBFacade\DBFacade.csproj", "{1C9F94DA-4802-41EA-AEA7-6CD6CC39A8BB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chirp.Core", "src\Chirp.Core\Chirp.Core.csproj", "{01862458-7A95-4288-9202-3401A6117916}"
 EndProject
 Global
@@ -38,10 +36,6 @@ Global
 		{FA8AC867-0A06-4406-8ABB-6ACCEAB426D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA8AC867-0A06-4406-8ABB-6ACCEAB426D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA8AC867-0A06-4406-8ABB-6ACCEAB426D5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C9F94DA-4802-41EA-AEA7-6CD6CC39A8BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C9F94DA-4802-41EA-AEA7-6CD6CC39A8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C9F94DA-4802-41EA-AEA7-6CD6CC39A8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C9F94DA-4802-41EA-AEA7-6CD6CC39A8BB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{01862458-7A95-4288-9202-3401A6117916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{01862458-7A95-4288-9202-3401A6117916}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01862458-7A95-4288-9202-3401A6117916}.Release|Any CPU.ActiveCfg = Release|Any CPU
