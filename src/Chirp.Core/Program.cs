@@ -11,14 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<CheepDbContext>(options => options.UseSqlite(connectionString));
 
-// Add services to the dependency container.
-builder.Services.AddRazorPages();
-
-builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
-builder.Services.AddScoped<ICheepRepository, CheepRepository>();
-builder.Services.AddScoped<ICheepService, CheepService>();
-
-builder.Services.AddAuthentication(options =>
+builder.Services
+    .AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -31,6 +25,15 @@ builder.Services.AddAuthentication(options =>
         o.ClientSecret = builder.Configuration["authentication:github:clientSecret"];
         o.CallbackPath = "/signin-github";
     });
+
+// Add services to the dependency container.
+builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<ICheepRepository, CheepRepository>();
+builder.Services.AddScoped<ICheepService, CheepService>();
+
+
 
 var app = builder.Build();
 
@@ -47,11 +50,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.MapRazorPages();
-
-//Used for authentication (oauth)
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
+
+app.MapRazorPages();
+
+//Used for authentication (oauth)
+
 
 app.Run();
