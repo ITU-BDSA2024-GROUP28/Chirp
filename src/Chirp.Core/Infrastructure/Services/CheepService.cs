@@ -61,10 +61,8 @@ public class CheepService : ICheepService
         {
             if (cheep.Author.Name == authorName)
             {
-                
-                    cheeps.Add(_repo.ReadCheep(cheep));
-                    counter++;
-                
+                cheeps.Add(_repo.ReadCheep(cheep));
+                counter++;
             }
         }
 
