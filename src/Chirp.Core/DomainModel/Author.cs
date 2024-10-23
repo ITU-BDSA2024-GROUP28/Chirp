@@ -3,6 +3,7 @@ namespace DomainModel;
 public class Author
 {
     public int AuthorId { get; set; }
+    //string limit CAN DO
     public string Name { get; set; }
     public string Email { get; set; }
     public ICollection<Cheep> Cheeps { get; set; }
