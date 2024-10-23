@@ -8,7 +8,6 @@ public class CheepService : ICheepService
     // add dependency to cheepdbcontext and cheep repository
     CheepDbContext _context;
     ICheepRepository _repo;
-    private List<CheepDTO> cheeps;
 
     public CheepService(CheepDbContext context, ICheepRepository repo)
     {
@@ -44,20 +43,6 @@ public class CheepService : ICheepService
     {
         int page = PageNumber(pageNr);
 
-        /*
-        // query the database to get all cheeps to show on page
-        var findAuthorObject = (from author in _context.Authors
-                select author)
-            .Where(author => author.Name == authorName);
-        var result = findAuthorObject.ToList();
-
-        Author myAuthor = new Author();
-        foreach (Author author in result)
-        {
-            myAuthor = author;
-        }
-        */
-
         var query = (from cheep in _context.Cheeps
                 orderby cheep.TimeStamp descending
                 select cheep)
@@ -70,17 +55,38 @@ public class CheepService : ICheepService
         foreach (Cheep cheep in result)
         {
             if (cheep.Author.Name == authorName)
-            { 
-                cheeps.Add(_repo.ReadCheep(cheep));
-                counter++;
+            {
+                
+                    cheeps.Add(_repo.ReadCheep(cheep));
+                    counter++;
+                
             }
         }
+
+        List<CheepDTO> cheepsOnPage; 
         if (counter > 32)
         {
-            // remove some cheeps
+            cheepsOnPage = new List<CheepDTO>();
+            counter = 0;
+            foreach (CheepDTO cheep in cheeps)
+            {
+                if (counter < page * 32)
+                {
+                    counter++;
+                }
+                else if (counter < page * 32 + 32)
+                {
+                    cheepsOnPage.Add(cheep);
+                    counter++;
+                }
+            }
         }
+        else return cheeps;
 
-        return cheeps;
+        Console.WriteLine("Amount of cheeps: " + cheepsOnPage.Count);
+        
+        return cheepsOnPage;
+        
     }
     public int PageNumber(int? pageNr)
     {
