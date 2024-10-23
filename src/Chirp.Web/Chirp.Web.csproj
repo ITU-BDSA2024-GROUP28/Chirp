@@ -11,4 +11,14 @@
       <ProjectReference Include="..\Chirp.Infrastructure\Chirp.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include=".azure\config" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Pages\Public.cshtml" />
+      <AdditionalFiles Include="Pages\Shared\_Layout.cshtml" />
+      <AdditionalFiles Include="Pages\UserTimeline.cshtml" />
+    </ItemGroup>
+
 </Project>
