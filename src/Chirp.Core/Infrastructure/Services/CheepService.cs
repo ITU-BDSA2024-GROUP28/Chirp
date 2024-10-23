@@ -13,10 +13,11 @@ public class CheepService : ICheepService
     IAuthorRepository _repoAuthor;
     private List<CheepDTO> cheeps;
 
-    public CheepService(CheepDbContext context, ICheepRepository repo)
+    public CheepService(CheepDbContext context, ICheepRepository repo, IAuthorRepository repoAuthor)
     {
         _context = context;
         _repo = repo;
+        _repoAuthor = repoAuthor;
         DbInitializer.SeedDatabase(context);
     }
 
