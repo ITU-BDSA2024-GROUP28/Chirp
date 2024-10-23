@@ -68,6 +68,7 @@ public class CheepService : ICheepService
     {
         int page = PageNumber(pageNr);
 
+        /*
         // query the database to get all cheeps to show on page
         var findAuthorObject = (from author in _context.Authors
                 select author)
@@ -79,18 +80,19 @@ public class CheepService : ICheepService
         {
             myAuthor = author;
         }
+        */
             
-        var findListOfCheeps = (from cheep in _context.Cheeps
+        var query = (from cheep in _context.Cheeps
                 orderby cheep.TimeStamp descending
                 select cheep)
-            .Where(cheep => cheep.Author == myAuthor)
             .Include(c => c.Author)
+            .Where(cheep => cheep.Author.Name == authorName)
             .Skip(page * 32).Take(32);
-        var newList = findListOfCheeps.ToList();
+        var result = query.ToList();
         
         // convert the cheep object list to cheepDTO objects
         List<CheepDTO> cheeps = new List<CheepDTO>();
-        foreach (Cheep cheep in newList)
+        foreach (Cheep cheep in result)
         {
             cheeps.Add(_repo.ReadCheep(cheep));
         }
