@@ -3,7 +3,6 @@
 using Xunit;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Chirp.Razor;
 
 /*public class IntegrationTests : IClassFixture<WebApplicationFactory<Startup>>
 {
