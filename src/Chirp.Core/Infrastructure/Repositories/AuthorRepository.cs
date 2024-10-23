@@ -2,14 +2,12 @@ namespace DomainModel;
 
 public class AuthorRepository : IAuthorRepository
 {
-    /*
-     * Method that creates Author from existing AuthorDTO that EF Core uses to update database.
-     * @param a AuthorDTO
-     * @return Author object
-     */
+    public AuthorDTO ReadAuthor(Author author)
+    {
+        return new AuthorDTO(author.Name, author.Email, author.AuthorId);
+    }
 
-
-    public Author readAuthor(AuthorDTO authorDTO)
+    public Author ReadAuthor(AuthorDTO authorDTO)
     {
         throw new NotImplementedException();
     }

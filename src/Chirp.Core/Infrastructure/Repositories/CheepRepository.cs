@@ -17,10 +17,7 @@ public class CheepRepository : ICheepRepository
         //men Cheep.cs må kun bruge simple types
     }
 
-    public AuthorDTO ReadAuthor(Author author)
-    {
-        return new AuthorDTO(author.Name, author.Email, author.AuthorId);
-    }
+   
     
     public Cheep ReadCheep(CheepDTO cheepDTO)
     {
@@ -28,11 +25,11 @@ public class CheepRepository : ICheepRepository
         return cheep;
     }
     
-    public Author ReadAuthor(AuthorDTO authorDTO)
+    /*public Author ReadAuthor(AuthorDTO authorDTO)
     {
         Author author = new Author();
         return author;
-    }
+    }*/ 
 
     public static long Convert(DateTime dateTime)
     {
