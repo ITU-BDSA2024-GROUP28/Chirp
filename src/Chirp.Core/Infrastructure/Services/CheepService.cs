@@ -40,30 +40,6 @@ public class CheepService : ICheepService
         return cheeps;
     }
 
-    public List<CheepDTO> GetCheepsFromAuthor(Author author, int? pageNr)
-    {
-        // adjust the pagenr away from nullable
-        int page = PageNumber(pageNr);
-
-        // query the database to get all cheeps to show on page
-        var query = (from cheep in _context.Cheeps
-                orderby cheep.TimeStamp descending
-                select cheep)
-            .Where(cheep => cheep.Author == author)
-            .Include(c => c.Author)
-            .Skip(page * 32).Take(32);
-        var result = query.ToList();
-
-        // convert the cheep object list to cheepDTO objects
-        List<CheepDTO> cheeps = new List<CheepDTO>();
-        foreach (Cheep cheep in result)
-        {
-            cheeps.Add(_repo.ReadCheep(cheep));
-        }
-
-        return cheeps;
-    }
-
     public List<CheepDTO> GetCheepsFromAuthor(string authorName, int? pageNr)
     {
         int page = PageNumber(pageNr);
@@ -81,20 +57,27 @@ public class CheepService : ICheepService
             myAuthor = author;
         }
         */
-            
+
         var query = (from cheep in _context.Cheeps
                 orderby cheep.TimeStamp descending
                 select cheep)
-            .Include(c => c.Author)
-            .Where(cheep => cheep.Author.Name == authorName)
-            .Skip(page * 32).Take(32);
+            .Include(c => c.Author);
         var result = query.ToList();
         
         // convert the cheep object list to cheepDTO objects
         List<CheepDTO> cheeps = new List<CheepDTO>();
+        var counter = 0;
         foreach (Cheep cheep in result)
         {
-            cheeps.Add(_repo.ReadCheep(cheep));
+            if (cheep.Author.Name == authorName)
+            { 
+                cheeps.Add(_repo.ReadCheep(cheep));
+                counter++;
+            }
+        }
+        if (counter > 32)
+        {
+            // remove some cheeps
         }
 
         return cheeps;
@@ -102,7 +85,7 @@ public class CheepService : ICheepService
     public int PageNumber(int? pageNr)
     {
         int realpagenr;
-        if (pageNr is null) realpagenr = 1;
+        if (pageNr is null) realpagenr = 0;
         else realpagenr = pageNr.Value;
         return realpagenr;
     }
