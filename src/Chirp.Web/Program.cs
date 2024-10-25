@@ -1,12 +1,13 @@
-using Chirp.Core;
 using Chirp.Infrastructure;
-using DomainModel;
+using Chirp.Infrastructure.Repositories;
+using Chirp.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 
 // add a web app builder
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<DbContext, ChirpDbContext>();
 // Load database connection via configuration
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ChirpDbContext>(options => options.UseSqlite(connectionString));

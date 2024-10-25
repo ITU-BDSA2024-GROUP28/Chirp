@@ -1,4 +1,4 @@
-namespace DomainModel;
+namespace Chirp.Core;
 
 public class CheepDTO
 {
