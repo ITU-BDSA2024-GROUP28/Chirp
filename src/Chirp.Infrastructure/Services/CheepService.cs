@@ -8,12 +8,12 @@ public class CheepService : ICheepService
     //Queries
     
     // add dependency to cheepdbcontext and cheep repository
-    CheepDbContext _context;
+    ChirpDbContext _context;
     ICheepRepository _repo;
     IAuthorRepository _repoAuthor;
     private List<CheepDTO> cheeps;
 
-    public CheepService(CheepDbContext context, ICheepRepository repo, IAuthorRepository repoAuthor)
+    public CheepService(ChirpDbContext context, ICheepRepository repo, IAuthorRepository repoAuthor)
     {
         _context = context;
         _repo = repo;

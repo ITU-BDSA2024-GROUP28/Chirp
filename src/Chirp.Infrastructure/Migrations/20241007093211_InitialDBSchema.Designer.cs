@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Chirp.Core.Migrations
 {
-    [DbContext(typeof(CheepDbContext))]
+    [DbContext(typeof(ChirpDbContext))]
     [Migration("20241007093211_InitialDBSchema")]
     partial class InitialDBSchema
     {

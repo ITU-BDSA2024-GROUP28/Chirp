@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Chirp.Core;
 
-public class CheepDbContext : DbContext
+public class ChirpDbContext : DbContext
 {
-    public CheepDbContext(DbContextOptions<CheepDbContext> options) : base(options) { }
+    public ChirpDbContext(DbContextOptions<ChirpDbContext> options) : base(options) { }
     
     public DbSet<Cheep> Cheeps { get; set; }
     public DbSet<Author> Authors { get; set; }

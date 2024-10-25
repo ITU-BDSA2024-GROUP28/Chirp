@@ -4,7 +4,7 @@ using DomainModel;
 
 public static class DbInitializer
 {
-    public static void SeedDatabase(CheepDbContext chirpContext)
+    public static void SeedDatabase(ChirpDbContext chirpContext)
     {
         if (!(chirpContext.Authors.Any() && chirpContext.Cheeps.Any()))
         {
