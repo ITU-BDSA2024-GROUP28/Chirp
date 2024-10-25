@@ -3,7 +3,6 @@ using Chirp.Infrastructure.Repositories;
 using Chirp.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
-
 // add a web app builder
 var builder = WebApplication.CreateBuilder(args);
 
