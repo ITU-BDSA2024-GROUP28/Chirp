@@ -1,0 +1,19 @@
+namespace Chirp.Core;
+
+public class Author
+{
+    public int AuthorId { get; set; }
+    //string limit CAN DO
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public ICollection<Cheep> Cheeps { get; set; }
+
+    /*
+    public Author(string authorId, string name, string email)
+    {
+        AuthorID = authorId;
+        Name = name;
+        Email = email;
+    }
+    */
+}

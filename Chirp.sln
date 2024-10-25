@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FDD0B7E4-9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chirp.Core", "src\Chirp.Core\Chirp.Core.csproj", "{01862458-7A95-4288-9202-3401A6117916}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chirp.Infrastructure", "src\Chirp.Infrastructure\Chirp.Infrastructure.csproj", "{80BE6D1B-79D6-413F-9E99-75889F666BFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chirp.Web", "src\Chirp.Web\Chirp.Web.csproj", "{F439FC5D-A104-4F48-9BB9-4CE3D4147003}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +26,14 @@ Global
 		{01862458-7A95-4288-9202-3401A6117916}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01862458-7A95-4288-9202-3401A6117916}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01862458-7A95-4288-9202-3401A6117916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80BE6D1B-79D6-413F-9E99-75889F666BFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80BE6D1B-79D6-413F-9E99-75889F666BFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80BE6D1B-79D6-413F-9E99-75889F666BFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80BE6D1B-79D6-413F-9E99-75889F666BFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F439FC5D-A104-4F48-9BB9-4CE3D4147003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F439FC5D-A104-4F48-9BB9-4CE3D4147003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F439FC5D-A104-4F48-9BB9-4CE3D4147003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F439FC5D-A104-4F48-9BB9-4CE3D4147003}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{01862458-7A95-4288-9202-3401A6117916} = {D815473F-55E6-48B7-A834-EE28AEFC55FB}
