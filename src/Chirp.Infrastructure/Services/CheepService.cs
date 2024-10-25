@@ -1,7 +1,9 @@
+using Chirp.Core;
 using Chirp.Infrastructure;
+using Chirp.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace DomainModel;
+namespace Chirp.Infrastructure.Services;
 
 public class CheepService : ICheepService
 {

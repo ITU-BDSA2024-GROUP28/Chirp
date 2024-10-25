@@ -1,4 +1,6 @@
-namespace DomainModel;
+using Chirp.Core;
+
+namespace Chirp.Infrastructure.Repositories;
 
 public class AuthorRepository : IAuthorRepository
 {

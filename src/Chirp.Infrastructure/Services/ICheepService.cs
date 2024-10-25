@@ -1,6 +1,7 @@
+using Chirp.Core;
 using Chirp.Infrastructure;
 
-namespace DomainModel;
+namespace Chirp.Infrastructure.Services;
 
 public interface ICheepService
 {
