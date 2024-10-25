@@ -1,4 +1,5 @@
 using Chirp.Core;
+using Chirp.Infrastructure;
 using DomainModel;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Load database connection via configuration
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ChirpDbContext>(options => options.UseSqlite(connectionString));
-
 // Add services to the dependency container.
 builder.Services.AddRazorPages();
 

@@ -1,5 +1,5 @@
 using System;
-using Chirp.Core;
+using Chirp.Infrastructure;
 using DomainModel;
 
 public static class DbInitializer
