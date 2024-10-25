@@ -1,3 +1,4 @@
+using Chirp.Core;
 using Chirp.Infrastructure;
 using Chirp.Infrastructure.Repositories;
 using Chirp.Infrastructure.Services;
@@ -9,6 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Load database connection via configuration
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ChirpDbContext>(options => options.UseSqlite(connectionString));
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+    options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ChirpDbContext>();
+
 // Add services to the dependency container.
 builder.Services.AddRazorPages();
 
@@ -31,6 +36,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapRazorPages();
 
