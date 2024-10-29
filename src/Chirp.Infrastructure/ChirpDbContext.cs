@@ -8,4 +8,5 @@ public class ChirpDbContext(DbContextOptions<ChirpDbContext> options) : Identity
 {
     public DbSet<Cheep> Cheeps { get; set; }
     public DbSet<Author> Authors { get; set; }
+    //OnModelCreating
 }

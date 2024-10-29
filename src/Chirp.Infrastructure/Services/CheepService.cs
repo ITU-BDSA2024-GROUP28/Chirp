@@ -1,5 +1,4 @@
 using Chirp.Core;
-using Chirp.Infrastructure;
 using Chirp.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +12,7 @@ public class CheepService : ICheepService
     ChirpDbContext _context;
     ICheepRepository _repo;
     IAuthorRepository _repoAuthor;
-    private List<CheepDTO> cheeps;
+    private List<CheepDTO>? _cheeps; //not initialized in constructor, but in the methods later
 
     public CheepService(ChirpDbContext context, ICheepRepository repo, IAuthorRepository repoAuthor)
     {
@@ -28,7 +27,7 @@ public class CheepService : ICheepService
         // adjust the pagenr away from nullable
         int page = PageNumber(pageNr);
 
-        // query the database to get all cheeps to show on page
+        // query the database to get all _cheeps to show on page
         var query = (from cheep in _context.Cheeps
                 orderby cheep.TimeStamp descending
                 select cheep)
@@ -37,13 +36,13 @@ public class CheepService : ICheepService
         var result = query.ToList();
 
         // convert the cheep object list to cheepDTO objects
-        List<CheepDTO> cheeps = new List<CheepDTO>();
+        _cheeps = new List<CheepDTO>();
         foreach (Cheep cheep in result)
         {
-            cheeps.Add(_repo.ReadCheep(cheep));
+            _cheeps.Add(_repo.ReadCheep(cheep));
         }
 
-        return cheeps;
+        return _cheeps;
     }
 
     public List<CheepDTO> GetCheepsFromAuthor(string authorName, int? pageNr)
@@ -57,13 +56,13 @@ public class CheepService : ICheepService
         var result = query.ToList();
         
         // convert the cheep object list to cheepDTO objects
-        List<CheepDTO> cheeps = new List<CheepDTO>();
+        _cheeps = new List<CheepDTO>();
         var counter = 0;
         foreach (Cheep cheep in result)
         {
             if (cheep.Author.Name == authorName)
             {
-                cheeps.Add(_repo.ReadCheep(cheep));
+                _cheeps.Add(_repo.ReadCheep(cheep));
                 counter++;
             }
         }
@@ -73,7 +72,7 @@ public class CheepService : ICheepService
         {
             cheepsOnPage = new List<CheepDTO>();
             counter = 0;
-            foreach (CheepDTO cheep in cheeps)
+            foreach (CheepDTO cheep in _cheeps)
             {
                 if (counter < page * 32)
                 {
@@ -86,9 +85,9 @@ public class CheepService : ICheepService
                 }
             }
         }
-        else return cheeps;
+        else return _cheeps;
 
-        Console.WriteLine("Amount of cheeps: " + cheepsOnPage.Count);
+        Console.WriteLine("Amount of _cheeps: " + cheepsOnPage.Count);
         
         return cheepsOnPage;
         
@@ -106,19 +105,33 @@ public class CheepService : ICheepService
     public AuthorDTO GetAuthorByName(string name)
     {
         var author = _context.Authors.FirstOrDefault(a => a.Name == name);
-        AuthorDTO authorDto = _repoAuthor.ReadAuthor(author);
-        return authorDto;
+        if (author == null)
+        {
+            throw new ApplicationException("Author not found");
+        }
+        else
+        {
+            AuthorDTO authorDto = _repoAuthor.ReadAuthor(author);
+            return authorDto;
+        }
     }
-    
+
     //find Author by email
     public AuthorDTO GetAuthorByEmail(string email)
     {
         var author = _context.Authors.FirstOrDefault(a => a.Email == email);
-        AuthorDTO authorDto = _repoAuthor.ReadAuthor(author);
-        return authorDto;
+        if (author == null)
+        {
+            throw new ApplicationException("Author not found");
+        }
+        else
+        {
+            AuthorDTO authorDto = _repoAuthor.ReadAuthor(author);
+            return authorDto;
+        }
     }
-    
-    
+
+
     //Commands
     
     //Create new Author

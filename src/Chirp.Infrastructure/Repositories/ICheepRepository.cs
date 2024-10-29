@@ -4,7 +4,7 @@ namespace Chirp.Infrastructure.Repositories;
 
 public interface ICheepRepository
 {
-    public Cheep ReadCheep(CheepDTO cheepDTO);
+    //public Cheep ReadCheep(CheepDTO cheepDTO);
 
     public CheepDTO ReadCheep(Cheep cheep);
 

@@ -21,7 +21,7 @@ public class CheepRepository : ICheepRepository
 
    
     
-    public Cheep ReadCheep(CheepDTO cheepDTO)
+    /*public Cheep ReadCheep(CheepDTO cheepDTO)
     {
         Cheep cheep = new Cheep();
         return cheep;
