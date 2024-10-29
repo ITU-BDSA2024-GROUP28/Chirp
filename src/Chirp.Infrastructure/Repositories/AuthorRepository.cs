@@ -12,5 +12,6 @@ public class AuthorRepository : IAuthorRepository
     public Author ReadAuthor(AuthorDTO authorDTO)
     {
         throw new NotImplementedException();
+        //Create instead, set defaults
     }
 }
