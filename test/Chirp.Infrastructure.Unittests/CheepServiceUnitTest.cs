@@ -34,7 +34,7 @@ public class CheapServiceUnitTest
     }
     
     [Fact]
-    public void Test1()
+    public void GetCheepsTest()
     {
         // Arrange
         using var scope = _serviceProvider.CreateScope();
@@ -45,6 +45,20 @@ public class CheapServiceUnitTest
             List<CheepDTO> cheeps = new List<CheepDTO>();
             cheeps = cheepService.GetCheeps(0);
             Assert.NotEmpty(cheeps);
+        }
+    }
+
+    [Fact]
+    public void GetCheepsFromAuthorTest()
+    {
+        using var scope = _serviceProvider.CreateScope();
+        {
+            var scopedServices = scope.ServiceProvider;
+            var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            
+            List<CheepDTO> authorCheeps = new List<CheepDTO>();
+            authorCheeps = cheepService.GetCheepsFromAuthor("Helge", 0);
+            Assert.NotEmpty(authorCheeps);
         }
     }
 }
