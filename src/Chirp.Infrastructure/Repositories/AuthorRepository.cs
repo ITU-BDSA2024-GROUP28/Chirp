@@ -9,9 +9,9 @@ public class AuthorRepository : IAuthorRepository
         return new AuthorDTO(author.Name, author.Email, author.AuthorId);
     }
     /*
-     * Method that creates Author from existing AuthorDTO that EF Core uses to update database.
-     * @param AuthorDTO
-     * @return Author
+     * Method that creates AuthorDTO from existing Author that EF Core uses to update database.
+     * @param a Author
+     * @return AuthorDTO
      */
 
     public Author ReadAuthor(AuthorDTO authorDTO)
@@ -20,8 +20,8 @@ public class AuthorRepository : IAuthorRepository
         //Create instead, set defaults
     }
     /*
-     * Method that creates AuthorDTO from existing Author that EF Core uses to update database.
-     * @param a Author
-     * @return AuthorDTO
+     * Method that creates Author from existing AuthorDTO that EF Core uses to update database.
+     * @param AuthorDTO
+     * @return Author
      */
 }
