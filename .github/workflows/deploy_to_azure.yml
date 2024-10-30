@@ -12,9 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Chirp
 
     steps:
       - uses: actions/checkout@v4
@@ -65,4 +62,5 @@ jobs:
           app-name: 'bdsagroup28chirpremotedb'
           slot-name: 'Production'
           package: .
+          startUpCommand: "dotnet Service.dll" 
           
