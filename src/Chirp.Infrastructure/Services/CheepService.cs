@@ -21,6 +21,10 @@ public class CheepService : ICheepService
         _repoAuthor = repoAuthor;
         DbInitializer.SeedDatabase(context);
     }
+    /*
+     *
+     * @param
+     */
 
     public List<CheepDTO> GetCheeps(int? pageNr)
     {
@@ -44,6 +48,11 @@ public class CheepService : ICheepService
 
         return _cheeps;
     }
+    /*
+     *
+     * @param
+     * @return List<CheepDTO>
+     */
 
     public List<CheepDTO> GetCheepsFromAuthor(string authorName, int? pageNr)
     {
@@ -92,6 +101,11 @@ public class CheepService : ICheepService
         return cheepsOnPage;
         
     }
+    /*
+     *
+     * @param
+     * @return List<CheepDTO>
+     */
     
     public int PageNumber(int? pageNr)
     {
@@ -100,6 +114,11 @@ public class CheepService : ICheepService
         else realpagenr = pageNr.Value;
         return realpagenr;
     }
+    /*
+     *
+     * @param
+     * @return int
+     */
     
     //find Author by name
     public AuthorDTO GetAuthorByName(string name)
@@ -115,6 +134,11 @@ public class CheepService : ICheepService
             return authorDto;
         }
     }
+    /*
+     *
+     * @param
+     * @return AuthorDTO
+     */
 
     //find Author by email
     public AuthorDTO GetAuthorByEmail(string email)
@@ -130,6 +154,11 @@ public class CheepService : ICheepService
             return authorDto;
         }
     }
+    /*
+     *
+     * @param
+     * @return AuthorDTO
+     */
 
 
     //Commands
@@ -139,10 +168,18 @@ public class CheepService : ICheepService
     {
         
     }
+    /*
+     *
+     * @param
+     */
     
     //Create new Cheep
     public void CreateCheep(CheepDTO cheepDto)
     {
         //limit cheep length
     }
+    /*
+     *
+     * @param
+     */
 }
