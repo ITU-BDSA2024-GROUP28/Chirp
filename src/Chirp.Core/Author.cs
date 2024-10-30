@@ -6,5 +6,5 @@ public class Author
     //string limit CAN DO
     public required string Name { get; set; }
     public required string Email { get; set; }
-    public ICollection<Cheep> Cheeps { get; set; }
+    public ICollection<Cheep>? Cheeps { get; set; }
 }
