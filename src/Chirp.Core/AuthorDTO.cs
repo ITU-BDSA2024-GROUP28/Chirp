@@ -21,7 +21,7 @@ public class AuthorDTO
         Id = id;
     }
     /*
-     * AuthorDTO takes the arguments name, email and id
-     * These are used to set the arguments as the values of Name, Email and Id
+     * Method to turn the arguments into the values of the class
+     * @param name, email, id
      */
 }

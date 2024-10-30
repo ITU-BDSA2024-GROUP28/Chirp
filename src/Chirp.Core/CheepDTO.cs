@@ -13,7 +13,7 @@ public class CheepDTO
         Author = author;
     }
     /*
-     * CheepDTO uses the arguments text, timestamp and author
-     * These are then used to set the values Text, Timestamp and Author
+     * Method to turn the arguments into the values of the class
+     * @param text, timestamp, author
      */
 }
