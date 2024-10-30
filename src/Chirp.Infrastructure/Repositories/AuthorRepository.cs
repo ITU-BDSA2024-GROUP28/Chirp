@@ -17,7 +17,6 @@ public class AuthorRepository : IAuthorRepository
     public Author ReadAuthor(AuthorDTO authorDTO)
     {
         throw new NotImplementedException();
-        //Create instead, set defaults
     }
     /*
      * Method that creates Author from existing AuthorDTO that EF Core uses to update database.
