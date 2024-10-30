@@ -5,27 +5,45 @@ namespace Chirp.Infrastructure.Services;
 
 public interface ICheepService
 {
-    //Queries
-    
     //retrieve cheeps for a certain page
     public List<CheepDTO> GetCheeps(int? pageNr);
+    /* From the interface
+     * Method to retrieve get cheeps on a certain page
+     * @param int (page number)
+     * @return List<CheepDTO>
+     */
     
-    //retrieve cheeps for a certain page that are written by a certain Author who is identified by name
     public List<CheepDTO> GetCheepsFromAuthor(string author, int? pageNr);
+    /* From the inteface
+     * Method to retrieve cheeps from a specific author, on a specific page
+     * @param string, int
+     * @return List<CheepDTO>
+     */
     
-    //find Author by name
     public AuthorDTO GetAuthorByName(string name);
+    /* From the interface
+     * Method to find an author by their name
+     * @param string
+     * @return AuthorDTO
+     */
     
-    //find Author by email
     public AuthorDTO GetAuthorByEmail(string email);
+    /* From the interface
+     * Method to find an author by their email
+     * @param string
+     * @return AuthorDTO
+     */
     
-    
-    //Commands
-    
-    //Create new Author
     public void CreateAuthor(AuthorDTO author);
+    /* From the interface
+     * Method to create an author
+     * @param AuthorDTO
+     */
     
-    //Create new Cheep
     public void CreateCheep(CheepDTO cheep);
+    /* From the interface
+     * Method to create a cheep
+     * @param CheepDTO
+     */
 
 }
