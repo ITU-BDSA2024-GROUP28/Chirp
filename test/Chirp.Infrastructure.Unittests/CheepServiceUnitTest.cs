@@ -34,16 +34,18 @@ public class CheapServiceUnitTest
     }
     
     [Fact]
-    public void Test1()
+    public void TestGetCheeps()
     {
-        // Arrange
         using var scope = _serviceProvider.CreateScope();
         {
+            // Arrange
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
             
-            List<CheepDTO> cheeps = new List<CheepDTO>();
-            cheeps = cheepService.GetCheeps(0);
+            // Run method
+            var cheeps = cheepService.GetCheeps(0);
+            
+            // Assert we get come cheeps from initial database
             Assert.NotEmpty(cheeps);
         }
     }
