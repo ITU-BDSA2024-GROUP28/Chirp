@@ -4,15 +4,15 @@ public class AuthorDTO
 {
     public string Name { get; set; }
     /**
-     * Name retrieves the name, then sets it as the name
+     * Name retrieves the current name, then sets it as the name
      */
     public string Email { get; set; }
     /**
-     * Email retrieves the email, then sets it as the email
+     * Email retrieves the current email, then sets it as the email
      */
     public int Id { get; set; }
     /**
-     * Id retrieves the Author id and sets it as the id.
+     * Id retrieves the current id and sets it as the id.
      */
     public AuthorDTO(string name, string email, int id)
     {
