@@ -19,7 +19,8 @@ public class CheapServiceUnitTest
     {
         SetUp();
     }
-
+    
+    //Sætter op vores start til at teste ved brug af inMemory database
     public void SetUp()
     {
         var services = new ServiceCollection();
