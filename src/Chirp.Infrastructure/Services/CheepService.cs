@@ -6,13 +6,11 @@ namespace Chirp.Infrastructure.Services;
 
 public class CheepService : ICheepService
 {
-    //Queries
     
-    // add dependency to cheepdbcontext and cheep repository
     ChirpDbContext _context;
     ICheepRepository _repo;
     IAuthorRepository _repoAuthor;
-    private List<CheepDTO>? _cheeps; //not initialized in constructor, but in the methods later
+    private List<CheepDTO>? _cheeps;
 
     public CheepService(ChirpDbContext context, ICheepRepository repo, IAuthorRepository repoAuthor)
     {
@@ -21,10 +19,13 @@ public class CheepService : ICheepService
         _repoAuthor = repoAuthor;
         DbInitializer.SeedDatabase(context);
     }
+    /*
+     * Constructor for CheepService
+     * @param ChirpDbContect, ICheepRepository, IAuthorRepository
+     */
 
     public List<CheepDTO> GetCheeps(int? pageNr)
     {
-        // adjust the pagenr away from nullable
         int page = PageNumber(pageNr);
 
         // query the database to get all _cheeps to show on page
@@ -44,6 +45,11 @@ public class CheepService : ICheepService
 
         return _cheeps;
     }
+    /*
+     * Method to retrieve get cheeps on a certain page
+     * @param int (page number)
+     * @return List<CheepDTO>
+     */
 
     public List<CheepDTO> GetCheepsFromAuthor(string authorName, int? pageNr)
     {
@@ -92,6 +98,11 @@ public class CheepService : ICheepService
         return cheepsOnPage;
         
     }
+    /*
+     * Method to retrieve cheeps from a specific author, on a specific page
+     * @param string, int
+     * @return List<CheepDTO>
+     */
     
     public int PageNumber(int? pageNr)
     {
@@ -100,8 +111,12 @@ public class CheepService : ICheepService
         else realpagenr = pageNr.Value;
         return realpagenr;
     }
+    /*
+     * Method to determine the page number
+     * @param int
+     * @return int
+     */
     
-    //find Author by name
     public AuthorDTO GetAuthorByName(string name)
     {
         var author = _context.Authors.FirstOrDefault(a => a.Name == name);
@@ -115,8 +130,12 @@ public class CheepService : ICheepService
             return authorDto;
         }
     }
+    /*
+     * Method to find an author by their name
+     * @param string
+     * @return AuthorDTO
+     */
 
-    //find Author by email
     public AuthorDTO GetAuthorByEmail(string email)
     {
         var author = _context.Authors.FirstOrDefault(a => a.Email == email);
@@ -130,19 +149,27 @@ public class CheepService : ICheepService
             return authorDto;
         }
     }
-
-
-    //Commands
+    /*
+     * Method to find an author by their email
+     * @param string
+     * @return AuthorDTO
+     */
     
-    //Create new Author
     public void CreateAuthor(AuthorDTO authorDto)
     {
         
     }
+    /*
+     * Method to create an author
+     * @param AuthorDTO
+     */
     
-    //Create new Cheep
     public void CreateCheep(CheepDTO cheepDto)
     {
         //limit cheep length
     }
+    /*
+     * Method to create a cheep
+     * @param CheepDTO
+     */
 }
