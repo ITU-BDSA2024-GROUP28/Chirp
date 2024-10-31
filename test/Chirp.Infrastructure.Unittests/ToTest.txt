@@ -1,0 +1,17 @@
+Unit testing Infrastructure:
+
+Methods:
+- For each file:
+    - Test each method functions correctly.
+    
+Create as many tests as possible in one file
+
+Follow the structure using:
+- Fact
+- Theory
+- Assert
+- Before, After
+
+To succeed:
+we need to make a database which can be queried
+we need to add cheeps to the database
