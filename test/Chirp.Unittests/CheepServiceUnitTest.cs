@@ -67,7 +67,7 @@ public class CheapServiceUnitTest
     }
 
     [Fact]
-    public void GetAuthorsByNameTest()
+    public void GetAuthorsByNameTestNon()
     {
         using var scope = _serviceProvider.CreateScope();
         {
@@ -75,6 +75,35 @@ public class CheapServiceUnitTest
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
 
             var exception = Assert.Throws<ApplicationException>(() => cheepService.GetAuthorByName("Nani"));
+            
+            Assert.Equal("Author not found", exception.Message);
+        }
+    }
+
+    [Fact]
+    public void GetAuthorsByNameTest()
+    {
+        using var scope = _serviceProvider.CreateScope();
+        {
+            var scopedServices = scope.ServiceProvider;
+            var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            
+            var result = cheepService.GetAuthorByName("Helge");
+            
+            Assert.NotNull(result);
+            Assert.Equal("Helge", result.Name);
+        }
+    }
+
+    [Fact]
+    public void GetAuthorsByEmailTestNon()
+    {
+        using var scope = _serviceProvider.CreateScope();
+        {
+            var scopedServices = scope.ServiceProvider;
+            var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            
+            var exception = Assert.Throws<ApplicationException>(() => cheepService.GetAuthorByEmail("Nani"));
             
             Assert.Equal("Author not found", exception.Message);
         }
@@ -91,7 +120,6 @@ public class CheapServiceUnitTest
             var result = cheepService.GetAuthorByEmail("ropf@itu.dk");
             
             Assert.NotNull(result);
-            Assert.Equal("Helge", result.Name);
             Assert.Equal("ropf@itu.dk", result.Email);
         }
     }

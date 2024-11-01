@@ -8,7 +8,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Chirp.Infrastructure\Chirp.Infrastructure.csproj" />
-        <InternalsVisibleTo Include="test/Chirp.IntegrationTests/Chirp.IntegrationTests.csproj" />
     </ItemGroup>
     
     <ItemGroup>
