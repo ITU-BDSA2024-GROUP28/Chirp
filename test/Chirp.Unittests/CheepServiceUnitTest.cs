@@ -1,12 +1,9 @@
 using Chirp.Core;
 using Chirp.Infrastructure.Repositories;
 using Chirp.Infrastructure.Services;
-using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Moq;
-using SQLitePCL;
+
 
 namespace Chirp.Infrastructure.Unittests;
 
@@ -14,13 +11,9 @@ public class CheapServiceUnitTest
 {
     
     private ServiceProvider _serviceProvider;
-
+    
+    //Setting up the different aspects for testing, it is what happens before each test
     public CheapServiceUnitTest()
-    {
-        SetUp();
-    }
-
-    public void SetUp()
     {
         var services = new ServiceCollection();
         
@@ -34,6 +27,7 @@ public class CheapServiceUnitTest
         _serviceProvider = services.BuildServiceProvider();
     }
     
+    //Tests that getCheeps works and that there are cheeps in our cheepService
     [Fact]
     public void GetCheepsTest()
     {
@@ -51,7 +45,8 @@ public class CheapServiceUnitTest
             Assert.NotEmpty(cheeps);
         }
     }
-
+    
+    //Tests the method GetCheepsFromAuthor so when you the method it will find cheeps from the author
     [Fact]
     public void GetCheepsFromAuthorTest()
     {
@@ -66,6 +61,7 @@ public class CheapServiceUnitTest
         }
     }
 
+    //Tests method GetAuthorsByName rises an exception when you call the method with a name that is not in our database
     [Fact]
     public void GetAuthorsByNameTestNon()
     {
@@ -79,7 +75,8 @@ public class CheapServiceUnitTest
             Assert.Equal("Author not found", exception.Message);
         }
     }
-
+    
+    //Tests method GetAuthorsByName gives the right author when you search
     [Fact]
     public void GetAuthorsByNameTest()
     {
@@ -94,7 +91,8 @@ public class CheapServiceUnitTest
             Assert.Equal("Helge", result.Name);
         }
     }
-
+    
+    //Tests method GetAuthorsByEmail rises an exception when you call the method with a name that is not in our database
     [Fact]
     public void GetAuthorsByEmailTestNon()
     {
@@ -108,7 +106,8 @@ public class CheapServiceUnitTest
             Assert.Equal("Author not found", exception.Message);
         }
     }
-
+    
+    //Tests method GetAuthorsByName gives the right author when you search
     [Fact]
     public void GetAuthorsByEmailTest()
     {
