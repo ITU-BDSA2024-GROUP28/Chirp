@@ -26,13 +26,34 @@
     }
     else
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity"
-               asp-page="/Account/Register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity"
+        <div>
+            <a class="nav-link text-dark" asp-area="Identity" 
+               asp-page="/Account/Register"
+            >Register</a>
+        </div>
+        <div>
+            <a class="nav-link text-dark" asp-area="Identity" 
                asp-page="/Account/Login">Login</a>
-        </li>
+        </div>
     }
 </ul>
+
+<style>
+    /* Hover effect for the entire div */
+    .navbar-nav > div:hover { 
+        background-color: #ce8181;
+        border-color: #ce8181;
+    }
+    /* Styling of divs around Register and Login links */
+    .navbar-nav > div {
+        display: inline-block;
+        margin: 0 5px; 
+        border: 1px solid #ce8181; 
+        padding: 5px 10px; 
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    /* Style the links */
+    .navbar-nav > div .nav-link {
+        text-decoration: none; 
+    }
+</style>
