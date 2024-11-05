@@ -6,7 +6,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
       <UserSecretsId>4c70b80c-aa96-4b51-8af1-24ac4552360a</UserSecretsId>
   </PropertyGroup>
-
     <ItemGroup>
         <ProjectReference Include="..\Chirp.Infrastructure\Chirp.Infrastructure.csproj" />
     </ItemGroup>
