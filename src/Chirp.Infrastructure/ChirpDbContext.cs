@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Chirp.Infrastructure;
 
-public class ChirpDbContext(DbContextOptions<ChirpDbContext> options) : IdentityDbContext(options)
+public class ChirpDbContext(DbContextOptions<ChirpDbContext> options) : IdentityDbContext<ApplicationUser>(options)
 {
     public DbSet<Cheep> Cheeps { get; set; }
     /*
