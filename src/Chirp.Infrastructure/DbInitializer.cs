@@ -4,6 +4,10 @@ using Chirp.Infrastructure;
 
 public static class DbInitializer
 {
+    /*
+     * Initial input so the Cheep-timeline has something to show
+     * @param ChirpDbContext
+     */
     public static void SeedDatabase(ChirpDbContext chirpContext)
     {
         if (!(chirpContext.Authors.Any() && chirpContext.Cheeps.Any()))
