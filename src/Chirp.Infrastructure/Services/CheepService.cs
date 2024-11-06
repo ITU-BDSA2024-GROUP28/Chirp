@@ -17,7 +17,6 @@ public class CheepService : ICheepService
         _context = context;
         _repo = repo;
         _repoAuthor = repoAuthor;
-        DbInitializer.SeedDatabase(context);
     }
     /*
      * Constructor for CheepService
