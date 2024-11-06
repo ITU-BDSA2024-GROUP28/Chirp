@@ -4,15 +4,17 @@ namespace Chirp.IntegrationTests;
 using Chirp.Web;
 using Microsoft.AspNetCore.Mvc.Testing;
 
-public class OAuthTest : IClassFixture<IntegrationTestCustomWeb<Program>>
+public class OAuthTest : IClassFixture<IntegrationTest>
 {
-    private readonly IntegrationTestCustomWeb<Program> testFactory;
+    private readonly CustomWebApplicationFactory<Program> testFactory;
 
-    public OAuthTest(IntegrationTestCustomWeb<Program> factory)
+    public OAuthTest(CustomWebApplicationFactory<Program> factory)
     {
         testFactory = factory;
     }
-
+    
+    
+    
     [Fact]
     public async Task GetGithubProfile()
     {
