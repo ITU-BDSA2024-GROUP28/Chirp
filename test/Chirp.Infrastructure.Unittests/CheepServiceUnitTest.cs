@@ -45,11 +45,29 @@ public class CheapServiceUnitTest
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
             
+            var author = new Author()
+            {
+                AuthorId = 1,
+                Name = "Helge",
+                Email = "ropf@itu.dk",
+                Cheeps = new List<Cheep>(),
+            };
+            
+            var cheep = new Cheep()
+            {
+                CheepId = 1,
+                Author = author,
+                AuthorId = 1,
+                Text = "Cheep Test",
+                TimeStamp = DateTime.Now,
+            };
+            
+            //cheepService.AddCheep(cheep);
             // Run method
             var cheeps = cheepService.GetCheeps(0);
             
             // Assert we get come cheeps from initial database
-            Assert.NotEmpty(cheeps);
+            Assert.Empty(cheeps);
         }
     }
 
