@@ -62,5 +62,6 @@ jobs:
           app-name: 'bdsagroup28chirpremotedb'
           slot-name: 'Production'
           package: .
-          startUpCommand: "dotnet Service.dll" 
+
+# startUpCommand: "dotnet Service.dll" 
           
