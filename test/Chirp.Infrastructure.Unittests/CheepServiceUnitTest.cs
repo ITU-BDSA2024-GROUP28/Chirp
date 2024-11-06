@@ -45,7 +45,7 @@ public class CheapServiceUnitTest
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
             
-            AddTestCheep(cheepService);
+            //AddTestCheep(cheepService);
             // Run method
             var cheeps = cheepService.GetCheeps(0);
             
