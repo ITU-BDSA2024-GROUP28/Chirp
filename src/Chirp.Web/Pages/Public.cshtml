@@ -5,10 +5,25 @@
     Layout = "Shared/_Layout";
 }
 
+<style> /*Used for the page buttons*/
+
+    .pages {
+        margin: 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .pagenumber {
+        margin: 2%;
+    }
+    
+</style>
+
 <div>
     <h2> Public Timeline </h2>
 
-    
+
     @if (Model.Cheeps != null)
     {
         @if (Model.Cheeps.Any())
@@ -27,8 +42,18 @@
                     </li>
                 }
             </ul>
-        }  else {
+        }
+        else
+        {
             <em>There are no cheeps so far.</em>
         }
     }
+    <div class = "pages">
+        <button><</button>
+        <div class = "pagenumber">
+            <p>page number here</p>
+        </div>
+        <button>></button>
+    </div>
 </div>
+
