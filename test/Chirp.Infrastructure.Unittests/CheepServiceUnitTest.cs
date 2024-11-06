@@ -45,29 +45,12 @@ public class CheapServiceUnitTest
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
             
-            var author = new Author()
-            {
-                AuthorId = 1,
-                Name = "Helge",
-                Email = "ropf@itu.dk",
-                Cheeps = new List<Cheep>(),
-            };
-            
-            var cheep = new Cheep()
-            {
-                CheepId = 1,
-                Author = author,
-                AuthorId = 1,
-                Text = "Cheep Test",
-                TimeStamp = DateTime.Now,
-            };
-            
-            //cheepService.AddCheep(cheep);
+            AddTestCheep(cheepService);
             // Run method
             var cheeps = cheepService.GetCheeps(0);
             
             // Assert we get come cheeps from initial database
-            Assert.Empty(cheeps);
+            Assert.NotEmpty(cheeps);
         }
     }
 
@@ -107,11 +90,35 @@ public class CheapServiceUnitTest
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
             
+            AddTestCheep(cheepService);
+            
             var result = cheepService.GetAuthorByEmail("ropf@itu.dk");
             
             Assert.NotNull(result);
             Assert.Equal("Helge", result.Name);
             Assert.Equal("ropf@itu.dk", result.Email);
         }
+    }
+
+    public void AddTestCheep(ICheepService cheepService)
+    {
+        var author = new Author()
+        {
+            AuthorId = 1,
+            Name = "Helge",
+            Email = "ropf@itu.dk",
+            Cheeps = new List<Cheep>(),
+        };
+            
+        var cheep = new Cheep()
+        {
+            CheepId = 1,
+            Author = author,
+            AuthorId = 1,
+            Text = "Cheep Test",
+            TimeStamp = DateTime.Now,
+        };
+            
+        cheepService.AddCheep(cheep);
     }
 }

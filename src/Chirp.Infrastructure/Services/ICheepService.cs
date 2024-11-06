@@ -46,4 +46,5 @@ public interface ICheepService
      * @param CheepDTO
      */
 
+    public void AddCheep(Cheep cheep);
 }

@@ -14,7 +14,7 @@ public class CheepService : ICheepService
 
     public CheepService(ChirpDbContext context, ICheepRepository repo, IAuthorRepository repoAuthor)
     {
-        _context = context;
+        this._context = context;
         _repo = repo;
         _repoAuthor = repoAuthor;
     }
@@ -26,23 +26,24 @@ public class CheepService : ICheepService
     public List<CheepDTO> GetCheeps(int? pageNr)
     {
         int page = PageNumber(pageNr);
+        
+            // query the database to get all _cheeps to show on page
+            var query = (from cheep in _context.Cheeps
+                    orderby cheep.TimeStamp descending
+                    select cheep)
+                .Include(c => c.Author)
+                .Skip(page * 32).Take(32);
+            var result = query.ToList();
 
-        // query the database to get all _cheeps to show on page
-        var query = (from cheep in _context.Cheeps
-                orderby cheep.TimeStamp descending
-                select cheep)
-            .Include(c => c.Author)
-            .Skip(page * 32).Take(32);
-        var result = query.ToList();
+            // convert the cheep object list to cheepDTO objects
+            _cheeps = new List<CheepDTO>();
+            foreach (Cheep cheep in result)
+            {
+                _cheeps.Add(_repo.ReadCheep(cheep));
+            }
 
-        // convert the cheep object list to cheepDTO objects
-        _cheeps = new List<CheepDTO>();
-        foreach (Cheep cheep in result)
-        {
-            _cheeps.Add(_repo.ReadCheep(cheep));
-        }
-
-        return _cheeps;
+            return _cheeps;
+        
     }
     /*
      * Method to retrieve get cheeps on a certain page
@@ -171,4 +172,10 @@ public class CheepService : ICheepService
      * Method to create a cheep
      * @param CheepDTO
      */
+
+    public void AddCheep(Cheep cheep)
+    {
+        _context.Cheeps.Add(cheep);
+        _context.SaveChanges();
+    }
 }
