@@ -27,8 +27,8 @@ builder.Services.AddAuthentication(options =>
     //.AddCookie()
     .AddGitHub(o =>
     {
-        o.ClientId = builder.Configuration["authentication:github:clientId"];
-        o.ClientSecret = builder.Configuration["authentication:github:clientSecret"];
+        o.ClientId = builder.Configuration["authentication:github:clientId"]?? throw new ArgumentNullException();
+        o.ClientSecret = builder.Configuration["authentication:github:clientSecret"]?? throw new ArgumentNullException();
         o.CallbackPath = "/signin-github";
     });
 
