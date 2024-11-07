@@ -60,7 +60,7 @@ public class IntegrationTest : IClassFixture<WebApplicationFactory<Program>>
     {
         var EmmaTestAuthor = new Author
         {
-            Name = "Emma test",
+            Name = "Emma",
             Email = "emma@test.com",
         };
         
@@ -77,7 +77,7 @@ public class IntegrationTest : IClassFixture<WebApplicationFactory<Program>>
         
         var JoseTestAuthor = new Author
         {
-            Name = "Jose test",
+            Name = "Jose",
             Email = "jose@test.com",
         };
         
