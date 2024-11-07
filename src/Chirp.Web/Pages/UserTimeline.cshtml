@@ -14,7 +14,7 @@
         align-items: center;
     }
 
-    .pagenumber {
+    .page_number {
         margin: 2%;
     }
 
@@ -54,7 +54,7 @@
                 <button>&lt;</button> <!--The &lt; means "<"-->
             </a>
         }
-        <div class="pagenumber">
+        <div class="page_number">
             <p>@Model.pageNr</p>
         </div>
         <a href="@(routeName)/?page=@(Model.pageNr + 1)">
