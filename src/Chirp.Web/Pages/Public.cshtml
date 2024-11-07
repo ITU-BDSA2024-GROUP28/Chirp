@@ -49,11 +49,11 @@
         }
     }
     <div class = "pages">
-        <button name="left" onclick="back"><</button>
+        <button ><a href="/?page=@(Model.pageNr-1)"><</a></button>
         <div class = "pagenumber">
-            <p>page number here</p>
+            <p>@Model.pageNr</p>
         </div>
-        <button name="right" onclick="next">></button>
+        <button><a href="/?page=@(Model.pageNr+1)">></a></button>
     </div>
 </div>
 
