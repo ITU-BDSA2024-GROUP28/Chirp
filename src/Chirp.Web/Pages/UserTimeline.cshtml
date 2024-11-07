@@ -47,11 +47,18 @@
             <em>There are no cheeps so far.</em>
         }  
     }
-    <div class = "pages">
-        <button ><a href="/?page=@(Model.pageNr-1)"><</a></button>
-        <div class = "pagenumber">
+    <div class="pages">
+        @if (Model.pageNr > 1) //To make sure the user doesn't go beyond the first page
+        {
+            <a href="@(routeName)/?page=@(Model.pageNr - 1)">
+                <button>&lt;</button> <!--The &lt; means "<"-->
+            </a>
+        }
+        <div class="pagenumber">
             <p>@Model.pageNr</p>
         </div>
-        <button><a href="/?page=@(Model.pageNr+1)">></a></button>
+        <a href="@(routeName)/?page=@(Model.pageNr + 1)">
+            <button>&gt;</button> <!--The &gt; means ">"-->
+        </a>
     </div>
 </div>
