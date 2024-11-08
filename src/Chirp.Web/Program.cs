@@ -16,15 +16,26 @@ builder.Services.AddDbContext<ChirpDbContext>(options => options.UseSqlite(conne
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ChirpDbContext>();
 
+builder.Configuration.AddEnvironmentVariables();
 // Github 
+
 builder.Services.AddAuthentication(options =>
-{
-    //options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    //options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    //options.DefaultChallengeScheme = "GitHub";
-    //options.RequireAuthenticatedSignIn = true;
-});
-    //.AddCookie()
+    {
+        //options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        //options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        //options.DefaultChallengeScheme = "GitHub";
+        //options.RequireAuthenticatedSignIn = true;
+    })
+    .AddCookie()
+    .AddGitHub(o =>
+    {
+        o.ClientId = Environment.GetEnvironmentVariable("GITHUB_PROVIDER_AUTHENTICATION_ID") // Gotten path from Azure
+                     ?? throw new InvalidOperationException("You must provide an authentication client ID.");
+        o.ClientSecret = Environment.GetEnvironmentVariable("GITHUB_PROVIDER_AUTHENTICATION_SECRET")
+                         ?? throw new InvalidOperationException("You must provide an authentication client Secret.");
+        o.CallbackPath = "/signin-github";
+    });
+
     
 
 // Add services to the dependency container.
