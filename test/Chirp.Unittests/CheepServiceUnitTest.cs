@@ -14,14 +14,9 @@ public class CheapServiceUnitTest
 {
     
     private ServiceProvider _serviceProvider;
-
-    public CheapServiceUnitTest()
-    {
-        SetUp();
-    }
     
-    //Sætter op vores start til at teste ved brug af inMemory database
-    public void SetUp()
+    //Setting up the different aspects for testing, it is what happens before each test
+    public CheapServiceUnitTest()
     {
         var services = new ServiceCollection();
         
@@ -35,6 +30,7 @@ public class CheapServiceUnitTest
         _serviceProvider = services.BuildServiceProvider();
     }
     
+    //Tests that getCheeps works and that there are cheeps in our cheepService
     [Fact]
     public void GetCheepsTest()
     {
@@ -45,6 +41,7 @@ public class CheapServiceUnitTest
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
             
+            AddTestCheep(cheepService);
             // Run method
             var cheeps = cheepService.GetCheeps(0);
             
@@ -52,7 +49,8 @@ public class CheapServiceUnitTest
             Assert.NotEmpty(cheeps);
         }
     }
-
+    
+    //Tests the method GetCheepsFromAuthor so when you the method it will find cheeps from the author
     [Fact]
     public void GetCheepsFromAuthorTest()
     {
@@ -61,12 +59,32 @@ public class CheapServiceUnitTest
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
             
+            AddTestCheep(cheepService);
+            
             List<CheepDTO> authorCheeps = new List<CheepDTO>();
             authorCheeps = cheepService.GetCheepsFromAuthor("Helge", 0);
             Assert.NotEmpty(authorCheeps);
         }
     }
 
+    //Tests method GetAuthorsByName rises an exception when you call the method with a name that is not in our database
+    [Fact]
+    public void GetAuthorsByNameTestNon()
+    {
+        using var scope = _serviceProvider.CreateScope();
+        {
+            var scopedServices = scope.ServiceProvider;
+            var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            
+            AddTestCheep(cheepService);
+
+            var exception = Assert.Throws<ApplicationException>(() => cheepService.GetAuthorByName("Nani"));
+            
+            Assert.Equal("Author not found", exception.Message);
+        }
+    }
+    
+    //Tests method GetAuthorsByName gives the right author when you search
     [Fact]
     public void GetAuthorsByNameTest()
     {
@@ -74,13 +92,32 @@ public class CheapServiceUnitTest
         {
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
-
-            var exception = Assert.Throws<ApplicationException>(() => cheepService.GetAuthorByName("Nani"));
+            
+            AddTestCheep(cheepService);
+            
+            var result = cheepService.GetAuthorByName("Helge");
+            
+            Assert.NotNull(result);
+            Assert.Equal("Helge", result.Name);
+        }
+    }
+    
+    //Tests method GetAuthorsByEmail rises an exception when you call the method with a name that is not in our database
+    [Fact]
+    public void GetAuthorsByEmailTestNon()
+    {
+        using var scope = _serviceProvider.CreateScope();
+        {
+            var scopedServices = scope.ServiceProvider;
+            var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            
+            var exception = Assert.Throws<ApplicationException>(() => cheepService.GetAuthorByEmail("Nani"));
             
             Assert.Equal("Author not found", exception.Message);
         }
     }
-
+    
+    //Tests method GetAuthorsByName gives the right author when you search
     [Fact]
     public void GetAuthorsByEmailTest()
     {
@@ -89,11 +126,34 @@ public class CheapServiceUnitTest
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
             
+            AddTestCheep(cheepService);
+            
             var result = cheepService.GetAuthorByEmail("ropf@itu.dk");
             
             Assert.NotNull(result);
-            Assert.Equal("Helge", result.Name);
             Assert.Equal("ropf@itu.dk", result.Email);
         }
+    }
+
+    public void AddTestCheep(ICheepService cheepService)
+    {
+        var author = new Author()
+        {
+            AuthorId = 1,
+            Name = "Helge",
+            Email = "ropf@itu.dk",
+            Cheeps = new List<Cheep>(),
+        };
+            
+        var cheep = new Cheep()
+        {
+            CheepId = 1,
+            Author = author,
+            AuthorId = 1,
+            Text = "Cheep Test",
+            TimeStamp = DateTime.Now,
+        };
+
+        cheepService.AddCheep(cheep);
     }
 }

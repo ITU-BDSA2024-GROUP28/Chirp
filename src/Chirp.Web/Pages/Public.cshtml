@@ -5,6 +5,21 @@
     Layout = "Shared/_Layout";
 }
 
+<style> /*Used for the page buttons*/
+
+    .pages {
+        margin: 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .page-number {
+        margin: 1%;
+    }
+    
+</style>
+
 <div>
     <h2> Public Timeline
         @if (User.Identity!.IsAuthenticated)
@@ -19,7 +34,7 @@
         }
     </h2>
 
-    
+
     @if (Model.Cheeps != null)
     {
         @if (Model.Cheeps.Any())
@@ -38,8 +53,25 @@
                     </li>
                 }
             </ul>
-        }  else {
+        }
+        else
+        {
             <em>There are no cheeps so far.</em>
         }
     }
+    <div class="pages">
+    @if (Model.pageNr > 1) //To make sure the user doesn't go beyond the first page
+    { 
+        <a href="/?page=@(Model.pageNr - 1)"> 
+            <button>&lt;</button> <!--The &lt; means "<"-->
+        </a>
+    }
+        <div class="page-number">
+            <p>@Model.pageNr</p>
+        </div>
+        <a href="/?page=@(Model.pageNr + 1)">
+            <button>&gt;</button> <!--The &gt; means ">"-->
+        </a>
+    </div>
 </div>
+

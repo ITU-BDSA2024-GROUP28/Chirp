@@ -9,6 +9,7 @@ public class PublicModel : PageModel
 {
     private readonly ICheepService _service;
     public List<CheepDTO>? Cheeps { get; set; }
+    public int pageNr;
 
     public PublicModel(ICheepService service)
     {
@@ -17,7 +18,7 @@ public class PublicModel : PageModel
 
     public ActionResult OnGet([FromQuery] int ? page)
     {
-        int pageNr = page ?? 1;
+        pageNr = page ?? 1;
         Cheeps = _service.GetCheeps(pageNr);
         return Page();
     }
