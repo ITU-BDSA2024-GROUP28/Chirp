@@ -18,19 +18,14 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 // Github 
 builder.Services.AddAuthentication(options =>
-    {
-        //options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        //options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        //options.DefaultChallengeScheme = "GitHub";
-        //options.RequireAuthenticatedSignIn = true;
-    })
+{
+    //options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    //options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    //options.DefaultChallengeScheme = "GitHub";
+    //options.RequireAuthenticatedSignIn = true;
+});
     //.AddCookie()
-    .AddGitHub(o =>
-    {
-        o.ClientId = builder.Configuration["authentication:github:clientId"]?? throw new ArgumentNullException();
-        o.ClientSecret = builder.Configuration["authentication:github:clientSecret"]?? throw new ArgumentNullException();
-        o.CallbackPath = "/signin-github";
-    });
+    
 
 // Add services to the dependency container.
 builder.Services.AddRazorPages();

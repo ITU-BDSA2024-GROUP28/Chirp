@@ -12,7 +12,7 @@ public class PagesTest : IntegrationTest
     }
 
     [Fact]
-    public async void publicTimeline()
+    public async Task publicTimeline()
     {
         var response = await _client.GetAsync("/");
         response.EnsureSuccessStatusCode();
@@ -22,5 +22,18 @@ public class PagesTest : IntegrationTest
         Assert.NotEmpty(cont);
         Assert.Contains("Public Timeline", cont);
     }
+    
+    [Fact]
+    public async void userTimeline()
+    {
+        var response = await _client.GetAsync("/Emma");
+        response.EnsureSuccessStatusCode();
+        
+        var cheep = await response.Content.ReadAsStringAsync();
+        Assert.Contains("This is a test cheep from Emma", cheep);
+        Console.WriteLine(cheep);
+        Assert.DoesNotContain("Welcome to my reality", cheep);
+    }
+
     
 }
