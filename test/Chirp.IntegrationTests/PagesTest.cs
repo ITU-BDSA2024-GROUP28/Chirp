@@ -30,10 +30,8 @@ public class PagesTest : IntegrationTest
         response.EnsureSuccessStatusCode();
         
         var cheep = await response.Content.ReadAsStringAsync();
-        Assert.Contains("This is a test cheep from Emma", cheep);
-        Console.WriteLine(cheep);
-        Assert.DoesNotContain("Welcome to my reality", cheep);
+        Assert.Contains("Emma's Timeline", cheep);
+        Assert.DoesNotContain("Jose's Timeline", cheep);
     }
-
     
 }
