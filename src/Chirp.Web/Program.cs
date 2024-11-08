@@ -17,6 +17,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ChirpDbContext>();
 
 // Github 
+/*
 builder.Services.AddAuthentication(options =>
     {
         //options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -31,6 +32,7 @@ builder.Services.AddAuthentication(options =>
         o.ClientSecret = builder.Configuration["authentication:github:clientSecret"]?? throw new ArgumentNullException();
         o.CallbackPath = "/signin-github";
     });
+    */
 
 // Add services to the dependency container.
 builder.Services.AddRazorPages();
