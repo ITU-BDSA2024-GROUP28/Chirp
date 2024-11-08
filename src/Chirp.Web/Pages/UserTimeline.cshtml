@@ -5,6 +5,21 @@
     Layout = "Shared/_Layout";
     var routeName = HttpContext.GetRouteValue("author");}
 
+<style> /*Used for the page buttons*/
+
+    .pages {
+        margin: 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .page-number {
+        margin: 2%;
+    }
+
+</style>
+
 <div>
     <h2> @routeName's Timeline </h2>
 
@@ -32,4 +47,18 @@
             <em>There are no cheeps so far.</em>
         }  
     }
+    <div class="pages">
+        @if (Model.pageNr > 1) //To make sure the user doesn't go beyond the first page
+        {
+            <a href="@(routeName)/?page=@(Model.pageNr - 1)">
+                <button>&lt;</button> <!--The &lt; means "<"-->
+            </a>
+        }
+        <div class="page-number">
+            <p>@Model.pageNr</p>
+        </div>
+        <a href="@(routeName)/?page=@(Model.pageNr + 1)">
+            <button>&gt;</button> <!--The &gt; means ">"-->
+        </a>
+    </div>
 </div>
