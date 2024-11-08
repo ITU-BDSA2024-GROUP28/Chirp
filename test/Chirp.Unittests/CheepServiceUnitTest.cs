@@ -21,7 +21,7 @@ public class CheapServiceUnitTest
         var services = new ServiceCollection();
         
         // use in memory database to test
-        services.AddDbContext<ChirpDbContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
+        services.AddDbContext<ChirpDbContext>(options => options.UseInMemoryDatabase($"InMemoryDatabase_{Guid.NewGuid()}"));
         
         services.AddScoped<ICheepRepository, CheepRepository>();
         services.AddScoped<IAuthorRepository, AuthorRepository>();
@@ -155,5 +155,7 @@ public class CheapServiceUnitTest
         };
 
         cheepService.AddCheep(cheep);
+        
     }
+
 }
