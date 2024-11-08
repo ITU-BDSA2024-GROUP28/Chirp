@@ -21,7 +21,18 @@
 </style>
 
 <div>
-    <h2> Public Timeline </h2>
+    <h2> Public Timeline
+        @if (User.Identity!.IsAuthenticated)
+        {
+            <div class="cheepbox">
+                <h3>What's on your mind @(User.Identity.Name)?</h3>
+                <form method="post">
+                    <input style="float: left" type="text" asp-for="Text" maxlength="160">
+                    <input type="submit" value="Share">
+                </form>
+            </div>
+        }
+    </h2>
 
 
     @if (Model.Cheeps != null)

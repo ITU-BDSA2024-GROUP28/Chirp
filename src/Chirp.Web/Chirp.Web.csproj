@@ -1,16 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
-
+      <UserSecretsId>4c70b80c-aa96-4b51-8af1-24ac4552360a</UserSecretsId>
+  </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\Chirp.Infrastructure\Chirp.Infrastructure.csproj" />
     </ItemGroup>
     
     <ItemGroup>
+      <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="8.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.10" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
