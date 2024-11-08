@@ -134,6 +134,16 @@ public class CheapServiceUnitTest
             Assert.Equal("ropf@itu.dk", result.Email);
         }
     }
+    
+    //Test for displaying the correct timestamp
+    [Fact]
+    public void ConvertTimestampTest()
+    {
+        var timestamp = 1731069898;
+        var convertedTimestamp = cheepService.convertTimestamp(timestamp);
+            
+        Assert.Equal("2024/11/08 13:44:58", convertedTimestamp);
+    }
 
     public void AddTestCheep(ICheepService cheepService)
     {
