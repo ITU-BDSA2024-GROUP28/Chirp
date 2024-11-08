@@ -18,7 +18,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 builder.Configuration.AddEnvironmentVariables();
 // Github 
-/*
+
 builder.Services.AddAuthentication(options =>
     {
         //options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -29,15 +29,13 @@ builder.Services.AddAuthentication(options =>
     .AddCookie()
     .AddGitHub(o =>
     {
-        o.ClientId = builder.Configuration["authentication:github:clientId"]
-                     ?? Environment.GetEnvironmentVariable("GITHUB_PROVIDER_AUTHENTICATION_ID") // Gotten path from Azure
+        o.ClientId = Environment.GetEnvironmentVariable("GITHUB_PROVIDER_AUTHENTICATION_ID") // Gotten path from Azure
                      ?? throw new InvalidOperationException("You must provide an authentication client ID.");
-        o.ClientSecret = builder.Configuration["authentication:github:clientSecret"] 
-                         ?? Environment.GetEnvironmentVariable("GITHUB_PROVIDER_AUTHENTICATION_SECRET")
+        o.ClientSecret = Environment.GetEnvironmentVariable("GITHUB_PROVIDER_AUTHENTICATION_SECRET")
                          ?? throw new InvalidOperationException("You must provide an authentication client Secret.");
         o.CallbackPath = "/signin-github";
     });
-    */
+    
 
 // Add services to the dependency container.
 builder.Services.AddRazorPages();
