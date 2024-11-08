@@ -22,4 +22,10 @@ public class PublicModel : PageModel
         Cheeps = _service.GetCheeps(pageNr);
         return Page();
     }
+
+    public string convertTimestamp(long timestamp)
+    {
+        DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
+        return dateTimeOffset.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
+    }
 }
