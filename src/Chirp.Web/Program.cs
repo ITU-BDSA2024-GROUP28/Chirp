@@ -18,6 +18,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 builder.Configuration.AddEnvironmentVariables();
 // Github 
+/*
 builder.Services.AddAuthentication(options =>
     {
         //options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -36,6 +37,7 @@ builder.Services.AddAuthentication(options =>
                          ?? throw new InvalidOperationException("You must provide an authentication client Secret.");
         o.CallbackPath = "/signin-github";
     });
+    */
 
 // Add services to the dependency container.
 builder.Services.AddRazorPages();
