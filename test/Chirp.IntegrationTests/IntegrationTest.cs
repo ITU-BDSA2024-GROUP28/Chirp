@@ -1,4 +1,5 @@
 ﻿using System.Data.Common;
+using System.Net.Http.Json;
 using Chirp.Core;
 using Chirp.Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -46,53 +47,53 @@ public class IntegrationTest : IClassFixture<WebApplicationFactory<Program>>
                 using (var scope = serviceProvider.CreateScope())
                 {
                     var scopedServices = scope.ServiceProvider;
-                    var dbContext = scopedServices.GetRequiredService<ChirpDbContext>();
+                    var cheepService = scopedServices.GetRequiredService<ICheepService>();
                     
-                    dbContext.Database.EnsureCreated();
-                    
-                    SeedDatabase(dbContext);
+                    TestCheeps(cheepService);
                 }
             }));
         _client = factory.CreateClient();
     }
 
-    public void SeedDatabase(ChirpDbContext context)
+    private void TestCheeps(ICheepService cheepService)
     {
-        var EmmaTestAuthor = new Author
-        {
+        var EmmaTestAuthor = new Author()
+        {   
+            AuthorId = 1,
             Name = "Emma",
             Email = "emma@test.com",
+            Cheeps = new List<Cheep>(),
         };
-        
-        context.Authors.Add(EmmaTestAuthor);
 
         var EmmaTestCheep = new Cheep
-        {
+        {   
+            CheepId = 1,
             Author = EmmaTestAuthor,
+            AuthorId = 1,
             Text = "This is a test cheep from Emma",
             TimeStamp = DateTime.Now,
         };
         
-        context.Cheeps.Add(EmmaTestCheep);
+        cheepService.AddCheep(EmmaTestCheep);
         
         var JoseTestAuthor = new Author
-        {
+        {   
+            AuthorId = 2,
             Name = "Jose",
             Email = "jose@test.com",
+            Cheeps = new List<Cheep>(),
         };
-        
-        context.Authors.Add(JoseTestAuthor);
 
         var JoseTestCheep = new Cheep
-        {
+        {   
+            CheepId = 2,
             Author = JoseTestAuthor,
+            AuthorId = 2,
             Text = "Welcome to my reality",
             TimeStamp = DateTime.Now,
         };
         
-        context.Cheeps.Add(JoseTestCheep);
-        
-        context.SaveChanges();
+        cheepService.AddCheep(JoseTestCheep);
     }
     
 }
