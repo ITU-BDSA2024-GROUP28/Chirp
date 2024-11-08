@@ -41,7 +41,7 @@ public class CheapServiceUnitTest
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
             
-            //AddTestCheep(cheepService);
+            AddTestCheep(cheepService);
             // Run method
             var cheeps = cheepService.GetCheeps(0);
             
@@ -59,6 +59,8 @@ public class CheapServiceUnitTest
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
             
+            AddTestCheep(cheepService);
+            
             List<CheepDTO> authorCheeps = new List<CheepDTO>();
             authorCheeps = cheepService.GetCheepsFromAuthor("Helge", 0);
             Assert.NotEmpty(authorCheeps);
@@ -73,6 +75,8 @@ public class CheapServiceUnitTest
         {
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            
+            AddTestCheep(cheepService);
 
             var exception = Assert.Throws<ApplicationException>(() => cheepService.GetAuthorByName("Nani"));
             
@@ -88,6 +92,8 @@ public class CheapServiceUnitTest
         {
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            
+            AddTestCheep(cheepService);
             
             var result = cheepService.GetAuthorByName("Helge");
             
@@ -147,7 +153,7 @@ public class CheapServiceUnitTest
             Text = "Cheep Test",
             TimeStamp = DateTime.Now,
         };
-            
+
         cheepService.AddCheep(cheep);
     }
 }
