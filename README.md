@@ -2,4 +2,4 @@
 
 ## Welcome to Chirp by group 28
 
-### You can login with github soon!
+### Please find our website at https://bdsagroup28chirpremotedb.azurewebsites.net/
