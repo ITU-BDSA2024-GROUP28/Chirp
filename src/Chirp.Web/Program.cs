@@ -5,6 +5,8 @@ using Chirp.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
+// Latest Release: v2.0.0 13/11/24
+
 // add a web app builder
 var builder = WebApplication.CreateBuilder(args);
 
