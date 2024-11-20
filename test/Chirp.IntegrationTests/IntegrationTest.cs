@@ -59,8 +59,8 @@ public class IntegrationTest : IClassFixture<WebApplicationFactory<Program>>
     {
         var EmmaTestAuthor = new Author()
         {   
-            AuthorId = 1,
-            Name = "Emma",
+            Id = 1,
+            UserName = "Emma",
             Email = "emma@test.com",
             Cheeps = new List<Cheep>(),
         };
