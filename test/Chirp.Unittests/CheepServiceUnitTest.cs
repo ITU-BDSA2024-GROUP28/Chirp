@@ -149,8 +149,8 @@ public class CheapServiceUnitTest
     {
         var author = new Author()
         {
-            AuthorId = 1,
-            Name = "Helge",
+            Id = 1,
+            UserName = "Helge",
             Email = "ropf@itu.dk",
             Cheeps = new List<Cheep>(),
         };
