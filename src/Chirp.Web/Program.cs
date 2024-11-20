@@ -17,7 +17,11 @@ builder.Services.AddDbContext<ChirpDbContext>(options => options.UseSqlite(conne
 
 // Identity 
 builder.Services.AddDefaultIdentity<Author>(options =>
-    options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ChirpDbContext>();
+    options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ChirpDbContext>()
+    .AddDefaultTokenProviders();
+
+        
 
 builder.Configuration.AddEnvironmentVariables();
 // Github 
