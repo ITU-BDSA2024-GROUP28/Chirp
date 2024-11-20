@@ -78,8 +78,8 @@ public class IntegrationTest : IClassFixture<WebApplicationFactory<Program>>
         
         var JoseTestAuthor = new Author
         {   
-            AuthorId = 2,
-            Name = "Jose",
+            Id = 2,
+            UserName = "Jose",
             Email = "jose@test.com",
             Cheeps = new List<Cheep>(),
         };
