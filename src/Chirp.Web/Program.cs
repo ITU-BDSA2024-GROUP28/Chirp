@@ -60,7 +60,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ChirpDbContext>();
     await context.Database.EnsureCreatedAsync();
-    DbInitializer.SeedDatabase(context);
+    //DbInitializer.SeedDatabase(context);
 }
 
 // Configure the HTTP request pipeline.
