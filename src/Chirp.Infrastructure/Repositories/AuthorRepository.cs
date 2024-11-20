@@ -6,7 +6,7 @@ public class AuthorRepository : IAuthorRepository
 {
     public AuthorDTO ReadAuthor(Author author)
     {
-        return new AuthorDTO(author.Name, author.Email, author.AuthorId);
+        return new AuthorDTO(author.UserName, author.Email, author.Id);
     }
     /*
      * Method that creates AuthorDTO from existing Author that EF Core uses to update database.

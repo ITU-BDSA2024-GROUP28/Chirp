@@ -7,7 +7,7 @@ public class CheepRepository : ICheepRepository
     
     public CheepDTO ReadCheep(Cheep cheep)
     {
-        return new CheepDTO(cheep.Text, Convert(cheep.TimeStamp), cheep.Author.Name);
+        return new CheepDTO(cheep.Text, Convert(cheep.TimeStamp), cheep.Author.UserName);
     }
     /*
      * Method that creates Cheep from existing CheepDTO that EF Core uses to update database.

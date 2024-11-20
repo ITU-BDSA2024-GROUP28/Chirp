@@ -66,7 +66,7 @@ public class CheepService : ICheepService
         var counter = 0;
         foreach (Cheep cheep in result)
         {
-            if (cheep.Author.Name == authorName)
+            if (cheep.Author.UserName == authorName)
             {
                 _cheeps.Add(_repo.ReadCheep(cheep));
                 counter++;
@@ -119,7 +119,7 @@ public class CheepService : ICheepService
     
     public AuthorDTO GetAuthorByName(string name)
     {
-        var author = _context.Authors.FirstOrDefault(a => a.Name == name);
+        var author = _context.Authors.FirstOrDefault(a => a.UserName == name);
         if (author == null)
         {
             throw new ApplicationException("Author not found");
