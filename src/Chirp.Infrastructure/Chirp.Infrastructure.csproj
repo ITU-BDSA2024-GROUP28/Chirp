@@ -18,8 +18,4 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.SQLite" Version="8.0.11" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Remove="DbInitializer.cs" />
-    </ItemGroup>
-
 </Project>
