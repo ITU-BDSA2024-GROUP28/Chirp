@@ -3,13 +3,14 @@ using Chirp.Core;
 using Chirp.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 
+namespace Chirp.Infrastructure;
 public static class DbInitializer
 {
     /*
      * Initial input so the Cheep-timeline has something to show
      * @param ChirpDbContext
      */
-    public static void SeedDatabase(ChirpDbContext chirpContext)
+    public static void SeedDatabase(ChirpDbContext chirpContext, UserManager<Author> usermanager)
     {
         if (!(chirpContext.Authors.Any() && chirpContext.Cheeps.Any()))
         {
