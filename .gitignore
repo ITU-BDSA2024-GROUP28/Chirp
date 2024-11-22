@@ -9,6 +9,8 @@ chirp.db
 .cache
 .nuget
 .idea
+chirp.db-shm
+chirp.db-wal
 
 # dotenv files
 .env
