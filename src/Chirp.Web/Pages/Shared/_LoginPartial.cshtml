@@ -4,9 +4,7 @@
 @inject UserManager<Author> UserManager
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@{
-    var author = await UserManager.GetUserAsync(User);
-}
+
 
     <div class="navigation">
         @if (User.Identity!.IsAuthenticated && SignInManager.IsSignedIn(User))
