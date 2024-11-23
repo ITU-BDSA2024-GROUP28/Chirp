@@ -1,32 +1,24 @@
 @using Chirp.Core
-@using Microsoft.AspNetCore.Identity
 @inject SignInManager<Author> SignInManager
-@inject UserManager<Author> UserManager
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@{
-    var author = await UserManager.GetUserAsync(User);
-}
-
-    <div class="navigation">
-        @if (User.Identity!.IsAuthenticated && SignInManager.IsSignedIn(User))
-        {
-            <div>
-                <a href="/@(User.Identity.Name)">my timeline</a> |
-                <a href="/">public timeline</a> |
-                <a class="nav-link text-dark" asp-area="Identity"
-                   asp-page="/Account/Logout">Logout</a>
-            </div>
-        }
-        else
-        {
-            <div>
-                <a href="/">public timeline</a>|
-                <a class="nav-link text-dark" asp-area="Identity"
-                   asp-page="/Account/Register">Register</a>
-                |
-                <a class="nav-link text-dark" asp-area="Identity"
-                   asp-page="/Account/Login">Login</a>
+<div class="navigation">
+    @if (User.Identity!.IsAuthenticated && SignInManager.IsSignedIn(User))
+    {
+        <div>
+            <a href="/@(User.Identity.Name)">my timeline</a> |
+            <a href="/">public timeline</a> |
+            <a class="nav-link text-dark" asp-area="Identity"
+               asp-page="/Account/Logout">Logout</a>
+            </div> 
+    } else {
+        <div>
+            <a href="/">public timeline</a>|
+            <a class="nav-link text-dark" asp-area="Identity"
+               asp-page="/Account/Register">Register</a>
+            |
+            <a class="nav-link text-dark" asp-area="Identity"
+               asp-page="/Account/Login">Login</a>
             </div>
         }
     </div>

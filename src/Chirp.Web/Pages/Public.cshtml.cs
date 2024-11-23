@@ -7,10 +7,10 @@ namespace Chirp.Web.Pages;
 
 public class PublicModel : PageModel
 {
-    public string Text { get; set; }
+    public required string Text { get; set; }
     
     private readonly ICheepService _service;
-    public List<CheepDTO>? Cheeps { get; set; }
+    public required List<CheepDTO> Cheeps { get; set; }
     public int pageNr;
 
     public PublicModel(ICheepService service)
