@@ -32,4 +32,27 @@ public class PublicModel : PageModel
         DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
         return dateTimeOffset.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
     }
+    public ActionResult OnPost([FromQuery] int? page)
+    {
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+
+        var authorName = User.Claims.FirstOrDefault(claim => claim.Type == "UserName")?.Value;
+
+        if (authorName == null)
+        {
+            return RedirectToPage("./PublicTimeline");
+        }
+
+        var author = _service.GetAuthorByName(authorName);
+        if (author == null)
+        {
+            return RedirectToPage("./PublicTimeline");
+        }
+
+        _service.CreateCheep(cheepDto);
+        return RedirectToPage("./UserTimeline", new { authorName });
+    }
 }
