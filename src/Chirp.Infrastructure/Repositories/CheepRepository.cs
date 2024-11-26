@@ -2,8 +2,14 @@ using Chirp.Core;
 
 namespace Chirp.Infrastructure.Repositories;
 
-public class CheepRepository (ChirpDbContext _context) : ICheepRepository
+public class CheepRepository : ICheepRepository
 {
+    private readonly ChirpDbContext _context;
+    
+    public CheepRepository(ChirpDbContext context)
+    {
+        context = _context;
+    }
     
     public CheepDTO ReadCheep(Cheep cheep)
     {

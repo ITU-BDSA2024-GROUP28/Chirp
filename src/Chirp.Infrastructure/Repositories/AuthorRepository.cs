@@ -2,8 +2,14 @@ using Chirp.Core;
 
 namespace Chirp.Infrastructure.Repositories;
 
-public class AuthorRepository(ChirpDbContext _context) : IAuthorRepository
+public class AuthorRepository : IAuthorRepository
 {
+    private readonly ChirpDbContext _context;
+    
+    public AuthorRepository(ChirpDbContext context)
+    {
+        context = _context;
+    }
     
     public AuthorDTO ReadAuthor(Author author)
     {
