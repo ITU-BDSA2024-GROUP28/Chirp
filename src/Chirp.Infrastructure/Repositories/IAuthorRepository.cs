@@ -7,6 +7,5 @@ public interface IAuthorRepository
     public AuthorDTO ReadAuthor(Author author);
     
     public Author ReadAuthor(AuthorDTO authorDTO);
-    public Author GetAuthorByName(string authorName);
 }
 

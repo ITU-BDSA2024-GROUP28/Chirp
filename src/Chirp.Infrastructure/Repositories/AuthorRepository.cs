@@ -35,9 +35,4 @@ public class AuthorRepository : IAuthorRepository
      * @param AuthorDTO
      * @return Author
      */
-    
-    public Author? GetAuthorByName(string authorName)
-    {
-        return _context.Authors.FirstOrDefault(a => a.UserName == authorName);
-    }
 }
