@@ -1,5 +1,6 @@
 ﻿using Chirp.Core;
 using Chirp.Infrastructure.Services;
+using Chirp.Web.Pages.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,8 +8,6 @@ namespace Chirp.Web.Pages;
 
 public class PublicModel : PageModel
 {
-    public required string Text { get; set; }
-    
     private readonly ICheepService _service;
     public required List<CheepDTO> Cheeps { get; set; }
     public int pageNr;
@@ -16,8 +15,11 @@ public class PublicModel : PageModel
     public PublicModel(ICheepService service)
     {
         _service = service;
-    }   
+    }
 
+    [BindProperty]
+    public _CheepBoxPartialModel CheepBoxPartialModel { get; set; }
+    
     public ActionResult OnGet([FromQuery] int ? page)
     {
         pageNr = page ?? 1;

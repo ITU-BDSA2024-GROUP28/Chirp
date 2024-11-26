@@ -1,5 +1,6 @@
 ﻿using Chirp.Core;
 using Chirp.Infrastructure.Services;
+using Chirp.Web.Pages.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -14,9 +15,11 @@ public class UserTimelineModel : PageModel
 
     public UserTimelineModel(ICheepService service)
     {
-        _service = service;
-}
-
+        _service = service; 
+    }
+    
+    public _CheepBoxPartialModel CheepBoxPartialModel { get; set; }
+    
     public ActionResult OnGet([FromQuery] int ? page, string author)
     {
         pageNr = page ?? 1;

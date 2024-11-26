@@ -22,16 +22,7 @@
 
 <div>
     <h2> @routeName's Timeline
-        @if (User.Identity!.IsAuthenticated)
-        {
-        <div class="cheepbox">
-            <h3>What's on your mind @(User.Identity.Name)?</h3>
-            <form method="post">
-                <input style="float: left" type="text" asp-for="Text" maxlength="160">
-                <input type="submit" value="Share">
-            </form>
-        </div>
-        }
+        <partial name="Shared/_CheepBoxPartial" model="Model.CheepBoxPartialModel"/>
         </h2>
 
     @if (Model.Cheeps != null)
