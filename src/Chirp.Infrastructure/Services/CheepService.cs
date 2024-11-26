@@ -166,7 +166,7 @@ public class CheepService : ICheepService
     
     public void CreateCheep(CheepDTO cheepDto)
     {
-        //limit cheep length
+        _repo.CreateCheep(cheepDto);
     }
     /*
      * Method to create a cheep
