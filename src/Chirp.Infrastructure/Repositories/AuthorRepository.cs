@@ -2,8 +2,9 @@ using Chirp.Core;
 
 namespace Chirp.Infrastructure.Repositories;
 
-public class AuthorRepository : IAuthorRepository
+public class AuthorRepository(ChirpDbContext _context) : IAuthorRepository
 {
+    
     public AuthorDTO ReadAuthor(Author author)
     {
         return new AuthorDTO
@@ -28,4 +29,14 @@ public class AuthorRepository : IAuthorRepository
      * @param AuthorDTO
      * @return Author
      */
+    
+    public Author? GetAuthorByName(string authorName)
+    {
+        return _context.Authors.FirstOrDefault(a => a.UserName == authorName);
+    }
+
+    public Author CreateAuthor(AuthorDTO authorDto)
+    {
+        
+    }
 }

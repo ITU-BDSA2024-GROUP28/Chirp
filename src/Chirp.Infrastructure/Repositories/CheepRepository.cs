@@ -24,7 +24,7 @@ public class CheepRepository (ChirpDbContext _context) : ICheepRepository
             throw new ApplicationException("Author not found");
         }
 
-        // Convert CheepDTO to Cheep entity
+        // Converts CheepDTO to Cheep entity
         var cheep = new Cheep
         {
             Text = cheepDto.Text,
@@ -33,7 +33,7 @@ public class CheepRepository (ChirpDbContext _context) : ICheepRepository
             Author = author
         };
         _context.Cheeps.Add(cheep);
-        _context.SaveChanges();  // Save the Cheep to the database
+        _context.SaveChanges();  // Saves the Cheep to the database
     }
     /*
      * Method that creates Cheep from existing CheepDTO that EF Core uses to update database.
