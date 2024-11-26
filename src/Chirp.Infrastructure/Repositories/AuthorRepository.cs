@@ -34,9 +34,4 @@ public class AuthorRepository(ChirpDbContext _context) : IAuthorRepository
     {
         return _context.Authors.FirstOrDefault(a => a.UserName == authorName);
     }
-
-    public Author CreateAuthor(AuthorDTO authorDto)
-    {
-        
-    }
 }
