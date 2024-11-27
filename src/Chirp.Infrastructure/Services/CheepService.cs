@@ -11,7 +11,6 @@ public class CheepService : ICheepService
     ICheepRepository _repo;
     IAuthorRepository _repoAuthor;
     private List<CheepDTO>? _cheeps;
-    //private List<AuthorDTO> _following
 
     /*
      * Constructor for CheepService
