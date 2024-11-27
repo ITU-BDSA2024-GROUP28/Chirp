@@ -39,8 +39,12 @@
                         <p>
                             <strong>
                                 <a href="/@cheep.Author">@cheep.Author</a>
+                                <button>Follow</button>
+                                <button>Unfollow</button>
                             </strong>
-                            @cheep.Text
+                            <div>
+                                @cheep.Text
+                            </div>
                             <small>&mdash; @Model.convertTimestamp(@cheep.Timestamp)</small>
                         </p>
                     </li>
