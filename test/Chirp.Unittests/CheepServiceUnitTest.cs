@@ -111,7 +111,7 @@ public class CheapServiceUnitTest
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
             
-            var exception = Assert.Throws<ApplicationException>(() => cheepService.GetAuthorByEmail("Nani"));
+            var exception = Assert.Throws<ApplicationException>(() => cheepService.GetAuthorDTOByEmail("Nani"));
             
             Assert.Equal("Author not found", exception.Message);
         }
@@ -128,7 +128,7 @@ public class CheapServiceUnitTest
             
             AddTestCheep(cheepService);
             
-            var result = cheepService.GetAuthorByEmail("ropf@itu.dk");
+            var result = cheepService.GetAuthorDTOByEmail("ropf@itu.dk");
             
             Assert.NotNull(result);
             Assert.Equal("ropf@itu.dk", result.Email);

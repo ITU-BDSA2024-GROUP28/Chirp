@@ -2,23 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Chirp.Core;
+using Chirp.Infrastructure;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 
 namespace Chirp.Web.Areas.Identity.Pages.Account
 {
@@ -30,13 +24,15 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<Author> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ChirpDbContext _context;
 
         public RegisterModel(
             UserManager<Author> userManager,
             IUserStore<Author> userStore,
             SignInManager<Author> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ChirpDbContext dbContext)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +40,8 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context  = dbContext;
+            
         }
 
         /// <summary>
@@ -71,6 +69,14 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            
+            /// <summary>
+            /// This data has been included by us
+            /// </summary>
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -114,10 +120,13 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                user.UserName = Input.Username;
+                user.Email = Input.Email;
+                await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                _context.Authors.Add(user);
+                _context.SaveChanges();
 
                 if (result.Succeeded)
                 {
@@ -154,6 +163,8 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
+        
 
         private Author CreateUser()
         {

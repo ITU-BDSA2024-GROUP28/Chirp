@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Chirp.Core;
 
 public class Cheep
@@ -10,6 +12,8 @@ public class Cheep
     /*
      * AuthorId retrieves the id of the current author, and sets it as the value
      */
+    [Required]
+    [StringLength(160)]
     public required string Text { get; set; }
     /*
      * Text retrieves the text of the current cheep, and sets it as the current value
@@ -18,7 +22,8 @@ public class Cheep
     /*
      * TimeStamp retrieves the timestamp of the current cheep, and sets it as the value
      */
-    public required Author Author { get; set; }
+    
+    public Author? Author { get; set; }
     /*
      * Author retrieves the author of the current cheep, ans sets it as the value
      */

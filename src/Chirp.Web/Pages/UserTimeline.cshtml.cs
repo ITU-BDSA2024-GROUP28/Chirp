@@ -1,5 +1,6 @@
 ﻿using Chirp.Core;
 using Chirp.Infrastructure.Services;
+using Chirp.Web.Pages.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,26 +8,24 @@ namespace Chirp.Web.Pages;
 
 public class UserTimelineModel : PageModel
 {
-    public string Text { get; set; }
+    public required string Text { get; set; }
     private readonly ICheepService _service;
-    public List<CheepDTO>? Cheeps { get; set; }
-    public int pageNr;
+    public required List<CheepDTO> Cheeps { get; set; }
+    public int PageNr;
+    
+    [BindProperty]
+    public CheepBoxPartialModel CheepBoxPartialModel { get; set; }
 
     public UserTimelineModel(ICheepService service)
     {
-        _service = service;
-}
-
-    public ActionResult OnGet([FromQuery] int ? page, string author)
-    {
-        pageNr = page ?? 1;
-        Cheeps = _service.GetCheepsFromAuthor(author, pageNr);
-        return Page();
+        _service = service; 
+        CheepBoxPartialModel = new CheepBoxPartialModel();
     }
     
-    public string convertTimestamp(long timestamp)
+    public ActionResult OnGet([FromQuery] int ? page, string author)
     {
-        DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
-        return dateTimeOffset.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
+        PageNr = page ?? 1;
+        Cheeps = _service.GetCheepsFromAuthor(author, PageNr);
+        return Page();
     }
 }

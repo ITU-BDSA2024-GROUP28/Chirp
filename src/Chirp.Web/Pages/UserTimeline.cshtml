@@ -1,7 +1,6 @@
 ﻿@page "/{author}"
-@using Microsoft.AspNetCore.Identity
+@using Chirp.Infrastructure.Services
 @model Chirp.Web.Pages.UserTimelineModel
-
 @{
     ViewData["Title"] = "Chirp!";
     Layout = "Shared/_Layout";
@@ -24,53 +23,42 @@
 
 <div>
     <h2> @routeName's Timeline
-        @if (User.Identity!.IsAuthenticated)
-        {
-        <div class="cheepbox">
-            <h3>What's on your mind @(User.Identity.Name)?</h3>
-            <form method="post">
-                <input style="float: left" type="text" asp-for="Text" maxlength="160">
-                <input type="submit" value="Share">
-            </form>
-        </div>
-        }
+        <partial name="Shared/_CheepBoxPartial" model="Model.CheepBoxPartialModel"/>
         </h2>
-
-    @if (Model.Cheeps != null)
+    
+    @if (Model.Cheeps.Any())
     {
-        @if (Model.Cheeps.Any())
-        {
-            <ul id="messagelist" class="cheeps">
-                @foreach (var cheep in Model.Cheeps)
-                {
-                    <li>
-                        <p>
-                            <strong>
-                                <a href="/@cheep.Author">@cheep.Author</a>
-                            </strong>
-                            @cheep.Text
-                            <small>&mdash; @Model.convertTimestamp(@cheep.Timestamp)</small>
-                        </p>
-                    </li>
-                }
-            </ul>
-        }
-        else
-        {
-            <em>There are no cheeps so far.</em>
-        }  
+        <ul id="messagelist" class="cheeps">
+            @foreach (var cheep in Model.Cheeps)
+            {
+                <li>
+                    <p>
+                        <strong>
+                            <a href="/@cheep.Author">@cheep.Author</a>
+                        </strong>
+                        @cheep.Text
+                        <small>&mdash; @Time.ConvertToString(@cheep.Timestamp)</small>
+                    </p>
+                </li>
+            }
+        </ul>
     }
+    else
+    {
+        <em>There are no cheeps so far.</em>
+    }  
+    
     <div class="pages">
-        @if (Model.pageNr > 1) //To make sure the user doesn't go beyond the first page
+        @if (Model.PageNr > 1) //To make sure the user doesn't go beyond the first page
         {
-            <a href="@(routeName)/?page=@(Model.pageNr - 1)">
+            <a href="@(routeName)/?page=@(Model.PageNr - 1)">
                 <button>&lt;</button> <!--The &lt; means "<"-->
             </a>
         }
         <div class="page-number">
-            <p>@Model.pageNr</p>
+            <p>@Model.PageNr</p>
         </div>
-        <a href="@(routeName)/?page=@(Model.pageNr + 1)">
+        <a href="@(routeName)/?page=@(Model.PageNr + 1)">
             <button>&gt;</button> <!--The &gt; means ">"-->
         </a>
     </div>
