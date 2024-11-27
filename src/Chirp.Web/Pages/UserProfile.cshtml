@@ -1,0 +1,15 @@
+@page "/{author}/My account"
+@using Chirp.Infrastructure.Services
+@using Microsoft.AspNetCore.Identity
+@model Chirp.Web.Pages.UserProfile
+
+@{
+    ViewData["Title"] = "My account";
+    Layout = "Shared/_Layout";
+    var author = HttpContext.GetRouteValue("author");
+}
+<body>
+<div>
+    <h2>HELLOEOOOEOEOEO</h2>
+</div>
+</body>
