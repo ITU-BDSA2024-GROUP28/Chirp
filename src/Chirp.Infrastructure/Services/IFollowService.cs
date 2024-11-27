@@ -4,7 +4,7 @@ namespace Chirp.Infrastructure.Services;
 
 public interface IFollowService
 {
-    public List<CheepDTO> GetCheepsFromAuthor(string author, int? pageNr);
+    public List<CheepDTO> GetCheepsFromAuthor(string author);
     /* From the inteface
      * Method to retrieve cheeps from a specific author, on a specific page
      * @param string, int
@@ -18,7 +18,7 @@ public interface IFollowService
      * @return AuthorDTO
      */
     
-    public List<AuthorDTO> GetFollowing(string author);
+    public List<AuthorDTO> GetFollowing();
     /* From the interface
      * Method to retrive the list of people they are following
      * @param string
@@ -28,4 +28,6 @@ public interface IFollowService
     protected void Follow(string author);
     
     protected void Unfollow(string author);
+    
+    public List<CheepDTO> GetCheepsFromFollowing(string author);
 }

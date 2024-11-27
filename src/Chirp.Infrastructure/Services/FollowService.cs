@@ -12,6 +12,7 @@ public class FollowService : IFollowService
     IAuthorRepository _repoAuthor;
     private List<CheepDTO>? _cheeps;
     private List<AuthorDTO> _following;
+    public List<CheepDTO> _cheepsFromFollowing;
 
     /*
      * Constructor for CheepService
@@ -22,13 +23,12 @@ public class FollowService : IFollowService
         _context = context;
         _repo = repo;
         _repoAuthor = repoAuthor;
-        _following = ;
+        _following = new List<AuthorDTO>();
+        _cheepsFromFollowing = new List<CheepDTO>();
     }
     
-    public List<CheepDTO> GetCheepsFromAuthor(string author, int? pageNr)
+    public List<CheepDTO> GetCheepsFromAuthor(string author)
     {
-        int page = PageNumber(pageNr);
-
         var query = (from cheep in _context.Cheeps
                 orderby cheep.TimeStamp descending
                 select cheep)
@@ -46,30 +46,8 @@ public class FollowService : IFollowService
                 counter++;
             }
         }
-
-        List<CheepDTO> cheepsOnPage; 
-        if (counter > 32)
-        {
-            cheepsOnPage = new List<CheepDTO>();
-            counter = 0;
-            foreach (CheepDTO cheep in _cheeps)
-            {
-                if (counter < page * 32)
-                {
-                    counter++;
-                }
-                else if (counter < page * 32 + 32)
-                {
-                    cheepsOnPage.Add(cheep);
-                    counter++;
-                }
-            }
-        }
-        else return _cheeps;
-
-        Console.WriteLine("Amount of _cheeps: " + cheepsOnPage.Count);
         
-        return cheepsOnPage;
+        return _cheeps;
     }
 
     public AuthorDTO GetAuthorByName(string name)
@@ -86,31 +64,32 @@ public class FollowService : IFollowService
         }
     }
 
-    public List<AuthorDTO> GetFollowing(string author)
+    public List<AuthorDTO> GetFollowing()
     {
-        throw new NotImplementedException();
+        return _following;
     }
 
     public void Follow(string author)
     {
-        throw new NotImplementedException();
+        _following.Add(GetAuthorByName(author));
     }
 
     public void Unfollow(string author)
     {
-        throw new NotImplementedException();
+        _following.Remove(GetAuthorByName(author));
     }
-    
-    /*
-     * Method to determine the page number
-     * @param int
-     * @return int
-     */
-    public int PageNumber(int? pageNr)
+
+    public List<CheepDTO> GetCheepsFromFollowing(string author)
     {
-        int realpagenr;
-        if (pageNr is null) realpagenr = 0;
-        else realpagenr = pageNr.Value;
-        return realpagenr;
+        foreach (var authorName in _following)
+        {
+            List<CheepDTO> temp = GetCheepsFromAuthor(author);
+            foreach (var cheep in temp)
+            {
+                _cheepsFromFollowing.Add(cheep);
+            }
+        }
+        return _cheepsFromFollowing;
     }
+
 }
