@@ -22,18 +22,10 @@ public class UserTimelineModel : PageModel
         CheepBoxPartialModel = new CheepBoxPartialModel();
     }
     
-    
-    
     public ActionResult OnGet([FromQuery] int ? page, string author)
     {
         PageNr = page ?? 1;
         Cheeps = _service.GetCheepsFromAuthor(author, PageNr);
         return Page();
-    }
-    
-    public string ConvertTimestamp(long timestamp)
-    {
-        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-        return dateTime.AddSeconds(timestamp).ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
     }
 }

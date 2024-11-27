@@ -31,13 +31,7 @@ public class PublicModel : PageModel
         return Page();
     }
 
-    public string ConvertTimestamp(long timestamp)
-    {
-        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-        return dateTime.AddSeconds(timestamp).ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
-        DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
-        return dateTimeOffset.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
-    }
+    
     
     public async Task<IActionResult> OnPost()
     {
@@ -67,7 +61,7 @@ public class PublicModel : PageModel
             {
                 Text = text,
                 Author = author.Name,
-                Timestamp = ((DateTimeOffset)DateTime.SpecifyKind(timestamp, DateTimeKind.Utc)).ToUnixTimeSeconds()
+                Timestamp = Time.ConvertToLong(timestamp)
             };
         
             _service.CreateCheep(author, cheepdto);

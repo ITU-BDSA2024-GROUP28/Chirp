@@ -1,4 +1,5 @@
 using Chirp.Core;
+using Chirp.Infrastructure.Services;
 
 namespace Chirp.Infrastructure.Repositories;
 
@@ -16,7 +17,7 @@ public class CheepRepository : ICheepRepository
         return new CheepDTO
         {
             Text = cheep.Text,
-            Timestamp = Convert(cheep.TimeStamp),
+            Timestamp = Time.ConvertToLong(cheep.TimeStamp),
             Author = cheep.Author.UserName
         };
     }
@@ -28,7 +29,7 @@ public class CheepRepository : ICheepRepository
         var cheep = new Cheep
         {
             Text = cheepdto.Text,
-            TimeStamp = Convert(cheepdto.Timestamp),
+            TimeStamp = Time.ConvertToDateTime(cheepdto.Timestamp),
             AuthorId = author.Id
         };
         _context.Cheeps.Add(cheep);
@@ -41,17 +42,7 @@ public class CheepRepository : ICheepRepository
      */
     
     
-
-    public static long Convert(DateTime dateTime)
-    {
-        return((DateTimeOffset)DateTime.SpecifyKind(dateTime, DateTimeKind.Utc)).ToUnixTimeSeconds();
-    }
-
-    public DateTime Convert(long timestamp)
-    {
-        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-        return dateTime.AddSeconds(timestamp).ToLocalTime();
-    }
+    
     /*
      * Method to convert the time and date to UnixTime
      * @param Datetime
