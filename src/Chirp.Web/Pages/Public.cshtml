@@ -39,8 +39,12 @@
                         <p>
                             <strong>
                                 <a href="/@cheep.Author">@cheep.Author</a>
-                                <button>Follow</button>
-                                <button>Unfollow</button>
+                                <!-- Add if statemnts so the user has to be logged in to follow -->
+                                @if (User.Identity!.IsAuthenticated)
+                                {
+                                    <button>Follow</button>
+                                    <button>Unfollow</button>
+                                }
                             </strong>
                             <div>
                                 @cheep.Text
@@ -62,7 +66,7 @@
         <a href="/?page=@(Model.pageNr - 1)"> 
             <button>&lt;</button> <!--The &lt; means "<"-->
         </a>
-    }
+    } <!--Add if-statement so the user can't gp beyond the last page-->
         <div class="page-number">
             <p>@Model.pageNr</p>
         </div>

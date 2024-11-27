@@ -36,8 +36,11 @@
                         <p>
                             <strong>
                                 <a href="/@cheep.Author">@cheep.Author</a>
+                                <!-- Add if statemnts so the user can unfollow a person that is not themselves -->
                             </strong>
-                            @cheep.Text
+                            <div>
+                                @cheep.Text
+                            </div>
                             <small>&mdash; @Model.convertTimestamp(@cheep.Timestamp)</small>
                         </p>
                     </li>
