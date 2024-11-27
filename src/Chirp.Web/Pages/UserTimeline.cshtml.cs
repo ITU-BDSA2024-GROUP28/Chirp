@@ -36,4 +36,14 @@ public class UserTimelineModel : PageModel
         DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
         return dateTimeOffset.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
     }
+
+    /*public addAuthor(Author cheeper)
+    {
+        Following.add()
+    }
+
+    public removeAuthor(Author cheeper)
+    {
+        
+    }*/
 }
