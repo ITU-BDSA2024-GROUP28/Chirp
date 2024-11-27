@@ -24,7 +24,7 @@
 
 <div>
     <h2> Public Timeline
-        <partial name="Shared/_CheepBoxPartial" model="Model._cheepBoxPartialModel"/>
+        <partial name="Shared/_CheepBoxPartial" model="Model.CheepBoxPartialModel"/>
     </h2>
 
 
@@ -41,7 +41,7 @@
                                 <a href="/@cheep.Author">@cheep.Author</a>
                             </strong>
                             @cheep.Text
-                            <small>&mdash; @Model.convertTimestamp(@cheep.Timestamp)</small>
+                            <small>&mdash; @Model.ConvertTimestamp(@cheep.Timestamp)</small>
                         </p>
                     </li>
                 }
@@ -53,16 +53,16 @@
         }
     }
     <div class="pages">
-    @if (Model.pageNr > 1) //To make sure the user doesn't go beyond the first page
+    @if (Model.PageNr > 1) //To make sure the user doesn't go beyond the first page
     { 
-        <a href="/?page=@(Model.pageNr - 1)"> 
+        <a href="/?page=@(Model.PageNr - 1)"> 
             <button>&lt;</button> <!--The &lt; means "<"-->
         </a>
     }
         <div class="page-number">
-            <p>@Model.pageNr</p>
+            <p>@Model.PageNr</p>
         </div>
-        <a href="/?page=@(Model.pageNr + 1)">
+        <a href="/?page=@(Model.PageNr + 1)">
             <button>&gt;</button> <!--The &gt; means ">"-->
         </a>
     </div>

@@ -140,7 +140,7 @@ public class CheepService : ICheepService
      * @param string
      * @return AuthorDTO
      */
-    public AuthorDTO GetAuthorByEmail(string email)
+    public AuthorDTO GetAuthorDTOByEmail(string email)
     {
         var author = _context.Authors.FirstOrDefault(a => a.Email == email);
         if (author == null)
@@ -152,6 +152,11 @@ public class CheepService : ICheepService
             AuthorDTO authorDto = _repoAuthor.ReadAuthor(author);
             return authorDto;
         }
+    }
+
+    public Author GetAuthorByEmail(string email)
+    {
+        return _context.Authors.FirstOrDefault(a => a.Email == email)!;
     }
     
     /*
@@ -167,9 +172,9 @@ public class CheepService : ICheepService
      * Method to create a cheep
      * @param CheepDTO
      */
-    public void CreateCheep(CheepDTO cheepDto)
+    public void CreateCheep(Author author, String text, long timeStamp)
     {
-        _repo.CreateCheep(cheepDto);
+        _repo.CreateCheep(author, text, timeStamp);
     }
    
     /*

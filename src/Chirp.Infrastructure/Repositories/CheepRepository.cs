@@ -8,7 +8,7 @@ public class CheepRepository : ICheepRepository
     
     public CheepRepository(ChirpDbContext context)
     {
-        context = _context;
+        _context = context;
     }
     
     public CheepDTO ReadCheep(Cheep cheep)
@@ -21,21 +21,13 @@ public class CheepRepository : ICheepRepository
         };
     }
 
-    public void CreateCheep(CheepDTO cheepDto)
+    public void CreateCheep(Author author, String text, long timestamp)
     {
-        // Retrieve the Author based on the author name
-        var author = _context.Authors.FirstOrDefault(a => a.UserName == cheepDto.Author);
-        
-        if (author == null)
-        {
-            throw new ApplicationException("Author not found");
-        }
-
-        // Converts CheepDTO to Cheep entity
+        // Converts info to cheep
         var cheep = new Cheep
         {
-            Text = cheepDto.Text,
-            TimeStamp = DateTimeOffset.FromUnixTimeSeconds(cheepDto.Timestamp).DateTime,
+            Text = text,
+            TimeStamp = DateTimeOffset.FromUnixTimeSeconds(timestamp).DateTime,
             AuthorId = author.Id,
             Author = author
         };

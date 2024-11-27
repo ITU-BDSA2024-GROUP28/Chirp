@@ -27,11 +27,18 @@ public interface ICheepService
      * @return AuthorDTO
      */
     
-    public AuthorDTO GetAuthorByEmail(string email);
+    public AuthorDTO GetAuthorDTOByEmail(string email);
     /* From the interface
      * Method to find an author by their email
      * @param string
      * @return AuthorDTO
+     */
+    
+    public Author GetAuthorByEmail(string email);
+    /* From the interface
+     * Method to find an author by their email
+     * @param string
+     * @return Author
      */
     
     public void CreateAuthor(AuthorDTO author);
@@ -39,8 +46,8 @@ public interface ICheepService
      * Method to create an author
      * @param AuthorDTO
      */
-    
-    public void CreateCheep(CheepDTO cheep);
+
+    public void CreateCheep(Author author, String text, long timeStamp);
     /* From the interface
      * Method to create a cheep
      * @param CheepDTO

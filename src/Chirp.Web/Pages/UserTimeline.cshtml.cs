@@ -11,23 +11,27 @@ public class UserTimelineModel : PageModel
     public required string Text { get; set; }
     private readonly ICheepService _service;
     public required List<CheepDTO> Cheeps { get; set; }
-    public int pageNr;
+    public int PageNr;
+    
+    [BindProperty]
+    public CheepBoxPartialModel CheepBoxPartialModel { get; set; }
 
     public UserTimelineModel(ICheepService service)
     {
         _service = service; 
+        CheepBoxPartialModel = new CheepBoxPartialModel();
     }
     
-    public _CheepBoxPartialModel CheepBoxPartialModel { get; set; }
+    
     
     public ActionResult OnGet([FromQuery] int ? page, string author)
     {
-        pageNr = page ?? 1;
-        Cheeps = _service.GetCheepsFromAuthor(author, pageNr);
+        PageNr = page ?? 1;
+        Cheeps = _service.GetCheepsFromAuthor(author, PageNr);
         return Page();
     }
     
-    public string convertTimestamp(long timestamp)
+    public string ConvertTimestamp(long timestamp)
     {
         DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
         return dateTimeOffset.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
