@@ -52,7 +52,7 @@ public class PublicModel : PageModel
             return RedirectToPage("./PublicTimeline");
         }
 
-        _service.CreateCheep(cheepDto);
+        _service.CreateCheep(CheepDTO);
         return RedirectToPage("./UserTimeline", new { authorName });
     }
 }

@@ -25,6 +25,7 @@ public class CheepRepository : ICheepRepository
     {
         // Retrieve the Author based on the author name
         var author = _context.Authors.FirstOrDefault(a => a.UserName == cheepDto.Author);
+        
         if (author == null)
         {
             throw new ApplicationException("Author not found");
