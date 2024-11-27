@@ -30,8 +30,6 @@ public class PublicModel : PageModel
         Cheeps = _service.GetCheeps(PageNr);
         return Page();
     }
-
-    
     
     public async Task<IActionResult> OnPost()
     {
@@ -46,25 +44,19 @@ public class PublicModel : PageModel
 
         //get author
         Debug.Assert(User.Identity != null, "User.Identity != null");
+        
+        // get author email
         var email = User.Identity.Name;
+        
         if (email != null)
         {
-            var author = _service.GetAuthorDTOByEmail(email);
+            // get the author dto
+            var authorDto = _service.GetAuthorDTOByEmail(email);
         
-            //get timestamp
-            var timestamp = DateTime.Now;
-        
-            //save and use the text
+            // get the text
             var text = CheepBoxPartialModel.Text;
             
-            var cheepdto = new CheepDTO
-            {
-                Text = text,
-                Author = author.Name,
-                Timestamp = Time.ConvertToLong(timestamp)
-            };
-        
-            _service.CreateCheep(author, cheepdto);
+            _service.CreateCheep(authorDto, text);
         
             return await Task.FromResult<IActionResult>(LocalRedirect("/")); // it is good practice to redirect the user after a post request
         }

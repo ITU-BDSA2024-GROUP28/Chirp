@@ -48,7 +48,7 @@ public interface ICheepService
      * @param AuthorDTO
      */
 
-    public void CreateCheep(AuthorDTO author, CheepDTO cheep);
+    public void CreateCheep(AuthorDTO author, String text);
     /* From the interface
      * Method to create a cheep
      * @param CheepDTO
