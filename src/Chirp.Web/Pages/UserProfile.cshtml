@@ -10,6 +10,13 @@
 }
 <body>
 <div>
-    <h2>HELLOEOOOEOEOEO</h2>
+    @if (User.Identity!.IsAuthenticated)
+    { 
+        <h2>Personal Information</h2> 
+        
+        <p><strong>Username:</strong> @User.Identity.Name </p> 
+        <p><strong>Email:</strong> @Model.Email </p>
+    }
+    
 </div>
 </body>
