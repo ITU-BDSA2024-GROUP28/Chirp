@@ -12,6 +12,8 @@ public class UserTimelineModel : PageModel
     private readonly ICheepService _service;
     public required List<CheepDTO> Cheeps { get; set; }
     public int pageNr;
+    public List<AuthorDTO> Following { get; set;}
+    public List<CheepDTO> FollowCheeps { get; set; }
 
     public UserTimelineModel(ICheepService service)
     {
@@ -24,6 +26,8 @@ public class UserTimelineModel : PageModel
     {
         pageNr = page ?? 1;
         Cheeps = _service.GetCheepsFromAuthor(author, pageNr);
+        //Following = _service.GetAuthors We need to create a method to get the authors a person is following
+        // For loop med FollowCheeps.add(_service.GetCheepsFromAuthor(author, pageNr))
         return Page();
     }
     
