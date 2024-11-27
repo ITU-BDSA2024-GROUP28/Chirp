@@ -29,5 +29,5 @@ public interface IFollowService
     
     protected void Unfollow(string author);
     
-    public List<CheepDTO> GetCheepsFromFollowing(string author);
+    public List<CheepDTO> GetCheepsFromFollowing(List<AuthorDTO> authors);
 }

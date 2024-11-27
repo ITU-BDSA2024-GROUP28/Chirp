@@ -79,11 +79,13 @@ public class FollowService : IFollowService
         _following.Remove(GetAuthorByName(author));
     }
 
-    public List<CheepDTO> GetCheepsFromFollowing(string author)
+    public List<CheepDTO> GetCheepsFromFollowing(List<AuthorDTO> authors)
     {
-        foreach (var authorName in _following)
+        _following = authors;
+        foreach (var author in _following)
         {
-            List<CheepDTO> temp = GetCheepsFromAuthor(author);
+            String authorName = author.Name;
+            List<CheepDTO> temp = GetCheepsFromAuthor(authorName);
             foreach (var cheep in temp)
             {
                 _cheepsFromFollowing.Add(cheep);

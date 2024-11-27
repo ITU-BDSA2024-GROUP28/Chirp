@@ -10,6 +10,7 @@ public class UserTimelineModel : PageModel
 {
     public required string Text { get; set; }
     private readonly ICheepService _service;
+    private readonly IFollowService _followService;
     public required List<CheepDTO> Cheeps { get; set; }
     public int pageNr;
 
@@ -24,8 +25,11 @@ public class UserTimelineModel : PageModel
     {
         pageNr = page ?? 1;
         Cheeps = _service.GetCheepsFromAuthor(author, pageNr);
-        //Following = _service.GetAuthors We need to create a method to get the authors a person is following
-        // For loop med FollowCheeps.add(_service.GetCheepsFromAuthor(author, pageNr))
+        FollowCheeps = _followService.GetCheepsFromFollowing(Following);
+        foreach (var cheep in FollowCheeps)
+        {
+            Cheeps.Add(cheep);
+        }
         return Page();
     }
     
@@ -34,5 +38,14 @@ public class UserTimelineModel : PageModel
         DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
         return dateTimeOffset.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
     }
+    
+    /*public addAuthor(Author cheeper)
+    {
+        Following.add()
+    }
 
+    public removeAuthor(Author cheeper)
+    {
+        
+    }*/
 }
