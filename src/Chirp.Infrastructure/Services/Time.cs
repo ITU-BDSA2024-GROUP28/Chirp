@@ -2,6 +2,12 @@ namespace Chirp.Infrastructure.Services;
 
 public class Time
 {
+    
+    /*
+     * Methods to convert the various types of time units
+     * @param Datetime
+     * @return a long
+     */
     public static DateTime ConvertToDateTime(long timestamp)
     {
         DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);

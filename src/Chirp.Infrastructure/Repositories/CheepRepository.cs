@@ -22,9 +22,13 @@ public class CheepRepository : ICheepRepository
         };
     }
 
+    /*
+     * Method that creates Cheep from existing CheepDTO that EF Core uses to update database.
+     * @param a CheepDTO
+     * @return Cheep object
+     */
     public void CreateCheep(AuthorDTO author, CheepDTO cheepdto)
     {
-        
         // Converts info to cheep
         var cheep = new Cheep
         {
@@ -35,17 +39,4 @@ public class CheepRepository : ICheepRepository
         _context.Cheeps.Add(cheep);
         _context.SaveChanges();  // Saves the Cheep to the database
     }
-    /*
-     * Method that creates Cheep from existing CheepDTO that EF Core uses to update database.
-     * @param a CheepDTO
-     * @return Cheep object
-     */
-    
-    
-    
-    /*
-     * Method to convert the time and date to UnixTime
-     * @param Datetime
-     * @return a long
-     */
 }
