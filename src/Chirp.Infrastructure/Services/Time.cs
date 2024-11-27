@@ -2,7 +2,6 @@ namespace Chirp.Infrastructure.Services;
 
 public class Time
 {
-    
     /*
      * Methods to convert the various types of time units
      * @param Datetime
