@@ -8,7 +8,7 @@
 }
 
 <style> /*Used for the page buttons*/
-
+    
     .pages {
         margin: 1%;
         display: flex;
@@ -50,6 +50,14 @@
                                 @cheep.Text
                             </div>
                             <small>&mdash; @Model.convertTimestamp(@cheep.Timestamp)</small>
+                            <!--<div>
+                                @if (User.Identity!.IsAuthenticated)
+                                {
+                                    <button>Like</button>
+                                    <p>Lots of likes</p>
+                                    <button>Dislike</button>
+                                }
+                            </div>-->
                         </p>
                     </li>
                 }
