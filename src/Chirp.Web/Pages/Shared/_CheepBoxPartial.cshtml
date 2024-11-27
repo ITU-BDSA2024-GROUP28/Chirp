@@ -1,17 +1,46 @@
 @using Microsoft.AspNetCore.Identity
 @model Chirp.Web.Pages.Shared.CheepBoxPartialModel
 
-@if (User.Identity.IsAuthenticated)
+@if (User.Identity!.IsAuthenticated)
 {
-    <head>
-    </head>
     <body>
     <div class="cheepbox">
         <h3>What's on your mind @(User.Identity.Name)?</h3>
         <form method="post">
-            <input style="float: left" type="text" asp-for="Text" maxlength="160">
+            <input 
+                id="cheepInput" 
+                style="float: left" 
+                type="text" 
+                asp-for="Text" 
+                maxlength="160" 
+                oninput="updateCharacterCount()"
+                placeholder="Share your thoughts...">
+
             <input type="submit" value="Share">
+
+            <div id="charCount" style="clear: both; font-size: small; margin-top: 5px;">
+                0 / 160 characters
+            </div>
         </form>
     </div>
+
+    <!-- Add JavaScript to handle character counting -->
+    <script>
+    function updateCharacterCount() {
+        // Get the input element
+        const input = document.getElementById('cheepInput');
+        // Get the character count display
+        const charCount = document.getElementById('charCount');
+        // Update the character count text
+        charCount.textContent = `${input.value.length} / 160 characters`;
+        
+        if (input.value.length >= 150) {
+            charCount.style.color = 'red'; // Warning color
+            } else {
+            charCount.style.color = 'black'; // Normal color
+            }   
+    }
+</script>
+
     </body>
 }
