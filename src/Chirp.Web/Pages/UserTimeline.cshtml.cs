@@ -12,8 +12,6 @@ public class UserTimelineModel : PageModel
     private readonly ICheepService _service;
     public required List<CheepDTO> Cheeps { get; set; }
     public int pageNr;
-    public List<AuthorDTO> Following { get; set;}
-    public List<CheepDTO> FollowCheeps { get; set; }
 
     public UserTimelineModel(ICheepService service)
     {
@@ -37,13 +35,4 @@ public class UserTimelineModel : PageModel
         return dateTimeOffset.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
     }
 
-    /*public addAuthor(Author cheeper)
-    {
-        Following.add()
-    }
-
-    public removeAuthor(Author cheeper)
-    {
-        
-    }*/
 }
