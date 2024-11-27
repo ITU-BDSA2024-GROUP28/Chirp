@@ -68,6 +68,7 @@ public class CheepService : ICheepService
         // convert the cheep object list to cheepDTO objects
         _cheeps = new List<CheepDTO>();
         var counter = 0;
+        
         foreach (Cheep cheep in result)
         {
             if (cheep.Author.UserName == authorName)

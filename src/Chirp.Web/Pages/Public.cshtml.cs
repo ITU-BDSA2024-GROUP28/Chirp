@@ -26,7 +26,7 @@ public class PublicModel : PageModel
     
     public ActionResult OnGet([FromQuery] int ? page)
     {
-        PageNr = page ?? 1;
+        PageNr = page ?? 0;
         Cheeps = _service.GetCheeps(PageNr);
         return Page();
     }
