@@ -21,15 +21,15 @@ public class CheepRepository : ICheepRepository
         };
     }
 
-    public void CreateCheep(Author author, String text, long timestamp)
+    public void CreateCheep(AuthorDTO author, CheepDTO cheepdto)
     {
+        
         // Converts info to cheep
         var cheep = new Cheep
         {
-            Text = text,
-            TimeStamp = DateTimeOffset.FromUnixTimeSeconds(timestamp).DateTime,
-            AuthorId = author.Id,
-            Author = author
+            Text = cheepdto.Text,
+            TimeStamp = Convert(cheepdto.Timestamp),
+            AuthorId = author.Id
         };
         _context.Cheeps.Add(cheep);
         _context.SaveChanges();  // Saves the Cheep to the database
@@ -44,7 +44,13 @@ public class CheepRepository : ICheepRepository
 
     public static long Convert(DateTime dateTime)
     {
-        return((DateTimeOffset)dateTime).ToUnixTimeSeconds();
+        return((DateTimeOffset)DateTime.SpecifyKind(dateTime, DateTimeKind.Utc)).ToUnixTimeSeconds();
+    }
+
+    public DateTime Convert(long timestamp)
+    {
+        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+        return dateTime.AddSeconds(timestamp).ToLocalTime();
     }
     /*
      * Method to convert the time and date to UnixTime

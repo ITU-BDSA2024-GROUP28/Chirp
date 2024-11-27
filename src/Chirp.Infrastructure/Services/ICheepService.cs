@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.JavaScript;
 using Chirp.Core;
 using Chirp.Infrastructure;
 
@@ -47,7 +48,7 @@ public interface ICheepService
      * @param AuthorDTO
      */
 
-    public void CreateCheep(Author author, String text, long timeStamp);
+    public void CreateCheep(AuthorDTO author, CheepDTO cheep);
     /* From the interface
      * Method to create a cheep
      * @param CheepDTO

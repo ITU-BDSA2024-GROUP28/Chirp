@@ -172,9 +172,9 @@ public class CheepService : ICheepService
      * Method to create a cheep
      * @param CheepDTO
      */
-    public void CreateCheep(Author author, String text, long timeStamp)
+    public void CreateCheep(AuthorDTO author, CheepDTO cheep)
     {
-        _repo.CreateCheep(author, text, timeStamp);
+        _repo.CreateCheep(author, cheep);
     }
    
     /*

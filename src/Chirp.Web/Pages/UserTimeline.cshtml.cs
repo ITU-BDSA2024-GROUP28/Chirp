@@ -33,7 +33,7 @@ public class UserTimelineModel : PageModel
     
     public string ConvertTimestamp(long timestamp)
     {
-        DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
-        return dateTimeOffset.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
+        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+        return dateTime.AddSeconds(timestamp).ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
     }
 }

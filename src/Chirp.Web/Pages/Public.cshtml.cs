@@ -33,14 +33,14 @@ public class PublicModel : PageModel
 
     public string ConvertTimestamp(long timestamp)
     {
+        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+        return dateTime.AddSeconds(timestamp).ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
         DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
         return dateTimeOffset.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
     }
     
     public async Task<IActionResult> OnPost()
     {
-        var returnUrl = Request.Query["returnUrl"].FirstOrDefault();
-        
         if (string.IsNullOrWhiteSpace(CheepBoxPartialModel.Text))
         {
             ModelState.AddModelError("_cheepBoxPartialModel.Text", "The message can't be empty.");
@@ -55,15 +55,22 @@ public class PublicModel : PageModel
         var email = User.Identity.Name;
         if (email != null)
         {
-            var author = _service.GetAuthorByEmail(email);
+            var author = _service.GetAuthorDTOByEmail(email);
         
             //get timestamp
-            var timestamp = DateTimeOffset.Now.ToUnixTimeSeconds();
+            var timestamp = DateTime.Now;
         
             //save and use the text
             var text = CheepBoxPartialModel.Text;
+            
+            var cheepdto = new CheepDTO
+            {
+                Text = text,
+                Author = author.Name,
+                Timestamp = ((DateTimeOffset)DateTime.SpecifyKind(timestamp, DateTimeKind.Utc)).ToUnixTimeSeconds()
+            };
         
-            _service.CreateCheep(author, text, timestamp);
+            _service.CreateCheep(author, cheepdto);
         
             return await Task.FromResult<IActionResult>(LocalRedirect("/")); // it is good practice to redirect the user after a post request
         }

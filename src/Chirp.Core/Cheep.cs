@@ -22,8 +22,8 @@ public class Cheep
     /*
      * TimeStamp retrieves the timestamp of the current cheep, and sets it as the value
      */
-    [Required]
-    public required Author Author { get; set; }
+    
+    public Author? Author { get; set; }
     /*
      * Author retrieves the author of the current cheep, ans sets it as the value
      */
