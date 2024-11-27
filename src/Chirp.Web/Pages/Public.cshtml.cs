@@ -1,6 +1,8 @@
-﻿using Chirp.Core;
+﻿using System.Security.Claims;
+using Chirp.Core;
 using Chirp.Infrastructure.Services;
 using Chirp.Web.Pages.Shared;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -9,16 +11,16 @@ namespace Chirp.Web.Pages;
 public class PublicModel : PageModel
 {
     private readonly ICheepService _service;
+    private readonly UserManager<Author> _userManager;
     public required List<CheepDTO> Cheeps { get; set; }
     public int pageNr;
 
-    public PublicModel(ICheepService service)
+    public PublicModel(ICheepService service, UserManager<Author> userManager)
     {
         _service = service;
+        _userManager = userManager;
     }
-
-    [BindProperty]
-    public _CheepBoxPartialModel CheepBoxPartialModel { get; set; }
+    
     
     public ActionResult OnGet([FromQuery] int ? page)
     {
@@ -32,27 +34,35 @@ public class PublicModel : PageModel
         DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
         return dateTimeOffset.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
     }
-    public ActionResult OnPost([FromQuery] int? page)
+    
+    [BindProperty]
+    public _CheepBoxPartialModel _cheepBoxPartialModel { get; set; }
+    public async Task<IActionResult> OnPost()
     {
-        if (!ModelState.IsValid)
+        if (string.IsNullOrWhiteSpace(_cheepBoxPartialModel.Text))
         {
-            return Page();
+            ModelState.AddModelError("_cheepBoxPartialModel.Text", "The message can't be empty.");
+        }
+        else if (_cheepBoxPartialModel.Text.Length > 160)
+        {
+            ModelState.AddModelError("_cheepBoxPartialModel.Text", "The message can't be longer than 160 characters");
         }
 
-        var authorName = User.Claims.FirstOrDefault(claim => claim.Type == "UserName")?.Value;
-
-        if (authorName == null)
+        //get author
+        var email = User.Identity.Name;
+        var author = _service.GetAuthorByEmail(email);
+        //get timestamp
+        var timestamp = DateTimeOffset.Now.ToUnixTimeSeconds();
+        //save and use the text
+        var text = _cheepBoxPartialModel.Text ?? "";
+        var cheepDto = new CheepDTO
         {
-            return RedirectToPage("./PublicTimeline");
-        }
-
-        var author = _service.GetAuthorByName(authorName);
-        if (author == null)
-        {
-            return RedirectToPage("./PublicTimeline");
-        }
-
-        _service.CreateCheep(CheepDTO);
-        return RedirectToPage("./UserTimeline", new { authorName });
+            Text = text,
+            Author = author.Name,
+            Timestamp = timestamp,
+        };
+        _service.CreateCheep(cheepDto);
+        
+        return RedirectToPage("./UserTimeline", new {author.Name}); // it is good practice to redirect the user after a post request
     }
 }
