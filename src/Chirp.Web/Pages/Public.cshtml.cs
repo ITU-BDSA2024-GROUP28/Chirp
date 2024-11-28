@@ -2,6 +2,7 @@
 using Chirp.Core;
 using Chirp.Infrastructure.Services;
 using Chirp.Web.Pages.Shared;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -10,6 +11,7 @@ namespace Chirp.Web.Pages;
 public class PublicModel : PageModel
 {
     private readonly ICheepService _service;
+    private readonly UserManager<Author> _userManager;
     public required List<CheepDTO> Cheeps { get; set; }
     
     [BindProperty]
@@ -17,9 +19,10 @@ public class PublicModel : PageModel
     
     public int PageNr;
 
-    public PublicModel(ICheepService service)
+    public PublicModel(ICheepService service, UserManager<Author> userManager)
     {
         _service = service;
+        _userManager = userManager;
         CheepBoxPartialModel = new CheepBoxPartialModel();
     }
     
@@ -50,8 +53,9 @@ public class PublicModel : PageModel
         
         if (email != null)
         {
+            var author = await _userManager.GetUserAsync(User);
             // get the author dto
-            var authorDto = _service.GetAuthorDTOByEmail(email);
+            var authorDto = _service.GetAuthorDTOByEmail(author.Email);
         
             // get the text
             var text = CheepBoxPartialModel.Text;
