@@ -14,6 +14,7 @@ public class UserTimelineModel : PageModel
     private readonly UserManager<Author> _userManager;
     public required List<CheepDTO> Cheeps { get; set; }
     public int PageNr;
+    public bool HasMorePages { get; set; }
     
     [BindProperty]
     public CheepBoxPartialModel CheepBoxPartialModel { get; set; }
@@ -29,6 +30,7 @@ public class UserTimelineModel : PageModel
     {
         PageNr = page ?? 0;
         Cheeps = _service.GetCheepsFromAuthor(author, PageNr);
+        HasMorePages = _service.MoreCheepsFromAuthor(author, PageNr);
         return Page();
     }
     
@@ -60,4 +62,5 @@ public class UserTimelineModel : PageModel
         return await Task.FromResult<IActionResult>(LocalRedirect("/" + authorDto.Name)); // it is good practice to redirect the user after a post request
         
     }
+    
 }
