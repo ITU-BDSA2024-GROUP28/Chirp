@@ -15,6 +15,7 @@ public class UserProfile : PageModel
     private readonly SignInManager<Author> _signInManager;
     private readonly UserManager<Author> _userManager;
     private readonly ChirpDbContext _dbContext;
+    public required List<CheepDTO> CheepList;
     
     [BindProperty]
     public required string Email { get; set; }
@@ -27,8 +28,19 @@ public class UserProfile : PageModel
         _cheepService = cheepService;
         _authorRepository = authorRepository;
     }
-    public void OnGet()
+    public async Task<IActionResult> OnGet([FromQuery] int? pageNumber)
     {
+        Author author  = await _userManager.GetUserAsync(User);
+        //var author = _cheepService.GetAuthorByName(User.Identity.Name);
+        Email = author.Email.ToString();
+        if (Email == null)
+        {
+            throw new ApplicationException("Email could not be found.");
+        }
+
+        var authorName = author.UserName;
+        CheepList = _cheepService.GetCheepsFromAuthor(authorName, pageNumber);
         
+        return Page();
     }
 }
