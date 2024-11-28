@@ -18,7 +18,7 @@ public class UserProfile : PageModel
     public required List<CheepDTO> CheepList;
     
     [BindProperty]
-    public required string Email { get; set; }
+    public string Email { get; set; }
 
     public UserProfile(ICheepService cheepService, IAuthorRepository authorRepository, SignInManager<Author> signInManager, UserManager<Author> userManager, ChirpDbContext context)
     {
@@ -30,15 +30,14 @@ public class UserProfile : PageModel
     }
     public async Task<IActionResult> OnGet([FromQuery] int? pageNumber)
     {
-        Author author  = await _userManager.GetUserAsync(User);
+        Author author = await _userManager.GetUserAsync(User);
+        
         //var author = _cheepService.GetAuthorByName(User.Identity.Name);
-        Email = author.Email.ToString();
-        if (Email == null)
-        {
-            throw new ApplicationException("Email could not be found.");
-        }
+        
+        Email = author.Email;
 
         var authorName = author.UserName;
+        
         CheepList = _cheepService.GetCheepsFromAuthor(authorName, pageNumber);
         
         return Page();
