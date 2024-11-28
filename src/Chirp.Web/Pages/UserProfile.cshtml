@@ -1,0 +1,55 @@
+@page "/{author}/MyAccount"
+@using Chirp.Infrastructure.Services
+@using Chirp.Web.Pages
+@using Microsoft.AspNetCore.Identity
+@model Chirp.Web.Pages.UserProfile
+
+@{
+    ViewData["Title"] = "My account";
+    Layout = "Shared/_Layout";
+    var author = HttpContext.GetRouteValue("author");
+}
+<body>
+<div>
+    @if (User.Identity!.IsAuthenticated)
+    { 
+        <h2>Personal Information</h2> 
+        
+        <p><strong>Username:</strong> @User.Identity.Name </p> 
+        <p><strong>Email:</strong> @Model.Email </p>
+    }
+</div>
+<br/>
+<div>
+    <a href="/">
+        <button>Forget me</button>
+    </a>
+</div>
+<br/>
+<br/>
+<h2>My cheeps</h2>
+<div>
+    @if (Model.CheepList.Any())
+    {
+        <ul id="messagelist" class="cheeps">
+            @foreach (var cheep in Model.CheepList)
+            {
+                <li>
+                    <p>
+                        <strong>
+                            <a href="/@cheep.Author">@cheep.Author</a>
+                        </strong>
+                        @cheep.Text
+                        <small>&mdash; @Time.ConvertToString(@cheep.Timestamp)</small>
+                    </p>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <em>You haven't cheeped yet!</em>
+    } 
+</div>
+
+</body>

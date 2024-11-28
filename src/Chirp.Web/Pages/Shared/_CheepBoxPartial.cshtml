@@ -34,11 +34,13 @@
         // Update the character count text
         charCount.textContent = `${input.value.length} / 160 characters`;
         
-        if (input.value.length >= 150) {
-            charCount.style.color = 'red'; // Warning color
-            } else {
+        if (input.value.length >= 160) {
+            charCount.style.color = 'red';
+            } else if (input.value.length >= 150) {
+            charCount.style.color = 'yellow'; // Warning color
+            }  else {
             charCount.style.color = 'black'; // Normal color
-            }   
+        }
     }
 </script>
 

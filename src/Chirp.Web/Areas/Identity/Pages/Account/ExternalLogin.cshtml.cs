@@ -82,6 +82,9 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            [EmailAddress]
+            public string Email { get; set; }
+            
             [Required]
             [DataType(DataType.Text)]
             public string Username { get; set; }
@@ -155,9 +158,8 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
                 await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, info.Principal.Identity.Name, CancellationToken.None);
+                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
@@ -166,8 +168,8 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
-                        //user.EmailConfirmed=true;
-                        /*var userId = await _userManager.GetUserIdAsync(user);
+                        user.EmailConfirmed=true;
+                        var userId = await _userManager.GetUserIdAsync(user);
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                         //
                         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -181,11 +183,11 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
                             $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                         // If account confirmation is required, we need to show the link if we don't have a real email sender
-                        /*if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                        if (_userManager.Options.SignIn.RequireConfirmedAccount)
                         {
                             return RedirectToPage("./RegisterConfirmation", new { Email = info.Principal.Identity.Name });
                         }
-*/
+
                         await _signInManager.SignInAsync(user, isPersistent: false, info.LoginProvider);
                         return LocalRedirect(returnUrl);
                     }
