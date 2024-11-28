@@ -26,7 +26,6 @@ public class PublicModel : PageModel
         CheepBoxPartialModel = new CheepBoxPartialModel();
     }
     
-    
     public ActionResult OnGet([FromQuery] int ? page)
     {
         PageNr = page ?? 0;
@@ -44,27 +43,19 @@ public class PublicModel : PageModel
         {
             ModelState.AddModelError("_cheepBoxPartialModel.Text", "The message can't be longer than 160 characters");
         }
-
         //get author
         Debug.Assert(User.Identity != null, "User.Identity != null");
-        
         // get author email
-        var email = User.Identity.Name;
-        
-        if (email != null)
-        {
-            var author = await _userManager.GetUserAsync(User);
-            // get the author dto
-            var authorDto = _service.GetAuthorDTOByEmail(author.Email);
-        
-            // get the text
-            var text = CheepBoxPartialModel.Text;
-            
-            _service.CreateCheep(authorDto, text);
-        
-            return await Task.FromResult<IActionResult>(LocalRedirect("/")); // it is good practice to redirect the user after a post request
-        }
-        return await Task.FromResult<IActionResult>(LocalRedirect("/")); // it is good practice to redirect the user after a post request
+        var author = await _userManager.GetUserAsync(User);
 
+        // get the author dto
+        var authorDto = _service.GetAuthorDTOByEmail(author.Email);
+    
+        // get the text
+        var text = CheepBoxPartialModel.Text;
+        
+        _service.CreateCheep(authorDto, text);
+    
+        return await Task.FromResult<IActionResult>(LocalRedirect("/" + authorDto.Name)); // it is good practice to redirect the user after a post request
     }
 }

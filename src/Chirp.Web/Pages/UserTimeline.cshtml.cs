@@ -2,6 +2,7 @@
 using Chirp.Core;
 using Chirp.Infrastructure.Services;
 using Chirp.Web.Pages.Shared;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -9,17 +10,18 @@ namespace Chirp.Web.Pages;
 
 public class UserTimelineModel : PageModel
 {
-    public required string Text { get; set; }
     private readonly ICheepService _service;
+    private readonly UserManager<Author> _userManager;
     public required List<CheepDTO> Cheeps { get; set; }
     public int PageNr;
     
     [BindProperty]
     public CheepBoxPartialModel CheepBoxPartialModel { get; set; }
 
-    public UserTimelineModel(ICheepService service)
+    public UserTimelineModel(ICheepService service, UserManager<Author> userManager)
     {
         _service = service; 
+        _userManager = userManager;
         CheepBoxPartialModel = new CheepBoxPartialModel();
     }
     
@@ -45,21 +47,17 @@ public class UserTimelineModel : PageModel
         Debug.Assert(User.Identity != null, "User.Identity != null");
         
         // get author email
-        var email = User.Identity.Name;
-        
-        if (email != null)
-        {
-            // get the author dto
-            var authorDto = _service.GetAuthorDTOByEmail(email);
-        
-            // get the text
-            var text = CheepBoxPartialModel.Text;
-            
-            _service.CreateCheep(authorDto, text);
-        
-            return await Task.FromResult<IActionResult>(LocalRedirect("/" + authorDto.Name)); // it is good practice to redirect the user after a post request
-        }
-        return await Task.FromResult<IActionResult>(LocalRedirect("/")); // it is good practice to redirect the user after a post request
+        var author = await _userManager.GetUserAsync(User);
 
+        // get the author dto
+        var authorDto = _service.GetAuthorDTOByEmail(author.Email);
+    
+        // get the text
+        var text = CheepBoxPartialModel.Text;
+        
+        _service.CreateCheep(authorDto, text);
+    
+        return await Task.FromResult<IActionResult>(LocalRedirect("/" + authorDto.Name)); // it is good practice to redirect the user after a post request
+        
     }
 }
