@@ -103,6 +103,17 @@ public class CheepService : ICheepService
         return cheepsOnPage;
         
     }
+
+    public bool MoreCheepsFromAuthor(string authorName, int? pageNr)
+    {
+        int page = PageNumber(pageNr);
+        
+        var CheepsCount = _context.Cheeps
+            .Include(c => c.Author)
+            .Count(c => c.Author.UserName == authorName);
+        
+        return CheepsCount >= (page + 1) * 32;
+    }
     
     /*
      * Method to determine the page number

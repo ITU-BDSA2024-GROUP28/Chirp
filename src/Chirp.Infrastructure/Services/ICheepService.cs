@@ -55,4 +55,6 @@ public interface ICheepService
      */
 
     public void AddCheep(Cheep cheep);
+
+    public bool MoreCheepsFromAuthor(string authorName, int? pageNr);
 }
