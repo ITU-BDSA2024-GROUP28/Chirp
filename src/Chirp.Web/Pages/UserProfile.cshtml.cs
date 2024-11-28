@@ -32,8 +32,6 @@ public class UserProfile : PageModel
     {
         Author author = await _userManager.GetUserAsync(User);
         
-        //var author = _cheepService.GetAuthorByName(User.Identity.Name);
-        
         Email = author.Email;
 
         var authorName = author.UserName;
@@ -42,4 +40,13 @@ public class UserProfile : PageModel
         
         return Page();
     }
+
+    public async Task<IActionResult> OnPostDelete(string name)
+    {
+        //use DeleteAuthor method in cheepService to delete author (and maybe cheeps (not necessarily))
+        _cheepService.DeleteAuthor(name);
+        //sign out 
+        await _signInManager.SignOutAsync();
+        //redirect
+        return await Task.FromResult<IActionResult>(LocalRedirect("/"));    }
 }

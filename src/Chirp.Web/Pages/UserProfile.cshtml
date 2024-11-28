@@ -20,11 +20,14 @@
     }
 </div>
 <br/>
+
 <div>
-    <a href="/">
-        <button>Forget me</button>
-    </a>
+    <form method="post" asp-page-handler="Delete" onsubmit="return confirmDeletion()">
+        <input type="hidden" name="name" value="@User.Identity!.Name">
+        <button type="submit">Forget Me</button>
+    </form>
 </div>
+
 <br/>
 <br/>
 <h2>My cheeps</h2>
@@ -52,4 +55,10 @@
     } 
 </div>
 
+<script>
+    function confirmDeletion() {
+        // Show a confirmation dialog
+        return confirm("Are you sure you want to delete your account? This action cannot be undone.");
+    }
+</script>
 </body>

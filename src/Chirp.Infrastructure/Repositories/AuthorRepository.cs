@@ -1,14 +1,19 @@
 using Chirp.Core;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Chirp.Infrastructure.Repositories;
 
 public class AuthorRepository : IAuthorRepository
 {
     private readonly ChirpDbContext _context;
+    private readonly UserManager<Author> _userManager;
+
     
-    public AuthorRepository(ChirpDbContext context)
+    public AuthorRepository(ChirpDbContext context, UserManager<Author> userManager)
     {
-        context = _context;
+        _context = context;
+        _userManager = userManager;
     }
     
     public AuthorDTO ReadAuthor(Author author)
@@ -35,4 +40,26 @@ public class AuthorRepository : IAuthorRepository
      * @param AuthorDTO
      * @return Author
      */
+
+    public async Task DeleteAuthor(string name)
+    {
+        var author = await _context.Authors.FirstOrDefaultAsync(a => a.UserName == name);
+        var user = await _userManager.FindByNameAsync(name);
+        
+        if (user != null)
+        {
+            await _userManager.DeleteAsync(user);
+        }
+        
+        if (author != null)
+        {
+            _context.Authors.Remove(author);
+        }
+        else
+        {
+            Console.WriteLine($"Author {name} was not found");
+        }
+        
+        await _context.SaveChangesAsync();
+    }
 }

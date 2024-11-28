@@ -208,4 +208,12 @@ public class CheepService : ICheepService
         _context.Cheeps.Add(cheep);
         _context.SaveChanges();
     }
+    
+    /*
+     * Method that "deletes" the author from the database
+     */
+    public void DeleteAuthor(string name)
+    {
+        _repoAuthor.DeleteAuthor(name);
+    }
 }
