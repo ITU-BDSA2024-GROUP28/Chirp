@@ -53,7 +53,12 @@ public class AuthorRepository : IAuthorRepository
         
         if (author != null)
         {
+            // remove author from Author table
             _context.Authors.Remove(author);
+            
+            // get cheeps from Cheeps table
+            var cheeps = _context.Cheeps.Where(c => c.Author == author);
+            _context.Cheeps.RemoveRange(cheeps);
         }
         else
         {
