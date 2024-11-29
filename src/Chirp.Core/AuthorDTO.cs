@@ -15,5 +15,4 @@ public class AuthorDTO
      * Id retrieves the current id and sets it as the id.
      */
     
-    public List<Author> Following { get; set; }
 }
