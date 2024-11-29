@@ -44,6 +44,13 @@
                         </strong>
                         @cheep.Text
                         <small>&mdash; @Time.ConvertToString(@cheep.Timestamp)</small>
+                        <br/>
+                        <form method="post" asp-page-handler="DeleteCheep" onsubmit="return confirmCheepDeletion()">
+                            <input type="hidden" name="cheepId" value="@cheep.CheepId">
+                            <br/>
+                            <button type="submit" style="font-size: 10px; padding: 2px 5px;">Delete</button>
+                        </form>
+
                     </p>
                 </li>
             }
@@ -59,6 +66,11 @@
     function confirmDeletion() {
         // Show a confirmation dialog
         return confirm("Are you sure you want to delete your account? This action cannot be undone.");
+    }
+    
+    function confirmCheepDeletion() {
+        // Show a confirmation dialog
+        return confirm("Are you sure you want to delete your cheep?");
     }
 </script>
 </body>

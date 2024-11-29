@@ -48,7 +48,7 @@ public interface ICheepService
      * @param AuthorDTO
      */
 
-    public void CreateCheep(AuthorDTO author, String text);
+    public void CreateCheep(AuthorDTO author, String text, int CheepId);
     /* From the interface
      * Method to create a cheep
      * @param CheepDTO
@@ -59,4 +59,6 @@ public interface ICheepService
     public bool MoreCheepsFromAuthor(string authorName, int? pageNr);
     
     public void DeleteAuthor(string name);
+    
+    public void DeleteCheep(int cheepId);
 }

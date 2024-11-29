@@ -48,5 +48,12 @@ public class UserProfile : PageModel
         //sign out 
         await _signInManager.SignOutAsync();
         //redirect
-        return await Task.FromResult<IActionResult>(LocalRedirect("/"));    }
+        return await Task.FromResult<IActionResult>(LocalRedirect("/"));    
+    }
+
+    public async Task<IActionResult> OnPostDeleteCheep(int cheepId)
+    {
+        _cheepService.DeleteCheep(cheepId);
+        return await Task.FromResult<IActionResult>(LocalRedirect("/"));    
+    }
 }

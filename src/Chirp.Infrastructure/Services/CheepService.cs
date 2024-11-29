@@ -184,7 +184,7 @@ public class CheepService : ICheepService
      * Method to create a cheep
      * @param CheepDTO
      */
-    public void CreateCheep(AuthorDTO authorDto, String text)
+    public void CreateCheep(AuthorDTO authorDto, String text, int CheepId)
     {
         //get timestamp
         var timestamp = DateTime.Now;
@@ -194,7 +194,8 @@ public class CheepService : ICheepService
         {
             Text = text,
             Author = authorDto.Name,
-            Timestamp = Time.ConvertToLong(timestamp)
+            Timestamp = Time.ConvertToLong(timestamp),
+            CheepId = CheepId
         };
         
         _repo.CreateCheep(authorDto, cheepDto);
@@ -215,5 +216,10 @@ public class CheepService : ICheepService
     public void DeleteAuthor(string name)
     {
         _repoAuthor.DeleteAuthor(name);
+    }
+
+    public void DeleteCheep(int cheepId)
+    {
+        _repo.DeleteCheep(cheepId);
     }
 }
