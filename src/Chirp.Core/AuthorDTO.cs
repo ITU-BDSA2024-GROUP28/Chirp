@@ -15,9 +15,5 @@ public class AuthorDTO
      * Id retrieves the current id and sets it as the id.
      */
     
-    
-    /*
-     * Method to turn the arguments into the values of the class
-     * @param name, email, id
-     */
+    public List<Author> Following { get; set; }
 }
