@@ -20,11 +20,14 @@
     }
 </div>
 <br/>
+
 <div>
-    <a href="/">
-        <button>Forget me</button>
-    </a>
+    <form method="post" asp-page-handler="Delete" onsubmit="return confirmDeletion()">
+        <input type="hidden" name="name" value="@User.Identity!.Name">
+        <button type="submit">Forget Me</button>
+    </form>
 </div>
+
 <br/>
 <br/>
 <h2>My cheeps</h2>
@@ -41,6 +44,13 @@
                         </strong>
                         @cheep.Text
                         <small>&mdash; @Time.ConvertToString(@cheep.Timestamp)</small>
+                        <br/>
+                        <form method="post" asp-page-handler="DeleteCheep" onsubmit="return confirmCheepDeletion()">
+                            <input type="hidden" name="cheepId" value="@cheep.CheepId">
+                            <br/>
+                            <button type="submit" style="font-size: 10px; padding: 2px 5px;">Delete</button>
+                        </form>
+
                     </p>
                 </li>
             }
@@ -52,4 +62,15 @@
     } 
 </div>
 
+<script>
+    function confirmDeletion() {
+        // Show a confirmation dialog
+        return confirm("Are you sure you want to delete your account? This action cannot be undone.");
+    }
+    
+    function confirmCheepDeletion() {
+        // Show a confirmation dialog
+        return confirm("Are you sure you want to delete your cheep?");
+    }
+</script>
 </body>
