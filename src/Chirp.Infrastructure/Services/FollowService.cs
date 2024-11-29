@@ -13,7 +13,14 @@ public class FollowService : IFollowService
 	private List<Author> _following;
 	public List<CheepDTO> _cheepsFromFollowing;
 
-	public FollowService(ChirpDbContext context, ICheepRepository repe, IAuthorRepository repoAuthor)
+	public FollowService(ChirpDbContext context, ICheepRepository repo, IAuthorRepository repoAuthor)
+    {
+        _context = context;
+        _repo = repo;
+        _repoAuthor = repoAuthor;
+        _following = new List<Author>();
+        _cheepsFromFollowing = new List<CheepDTO>();
+    }
 
     public List<CheepDTO> GetCheepsFromAuthor(string author, int? pageNr);
     
