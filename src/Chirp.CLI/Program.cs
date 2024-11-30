@@ -1,4 +1,5 @@
-﻿using DocoptNet;
+﻿using System;
+using DocoptNet;
 using SimpleDB;
 
 namespace Chirp.CLI;
