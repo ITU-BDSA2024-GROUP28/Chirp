@@ -17,25 +17,22 @@ public static class Program
               -h --help     Show this screen.
               --version     Show version.
 	";
-
-	// Emma was here :))))))))))))))))))
+	
 	public static void Main(String[] args)
 	{
 		var arguments = new Docopt().Apply(Usage, args, version: "1.0", exit: true)!;
 		
 		CSVDatabase<Cheep> csvDatabase =  CSVDatabase<Cheep>.GetInstance(); 
 		
-		
 		if (arguments["read"].IsTrue)
 		{
-			// read using database from docopt
+			// Read using database from docopt
 			int limit = arguments["<limit>"].AsInt;
 			UserInterface.printCheeps(csvDatabase.Read(), limit);
 		} 
 		else if (arguments["cheep"].IsTrue)
 		{
-			//Get the message from the line, so it can be stored
-			//Find en måde at få cheepen man har skrevet på
+			// Create a cheep
 			long timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 			var message = arguments["<message>"].ToString();
 			var author = Environment.UserDomainName;
@@ -45,12 +42,10 @@ public static class Program
 			csvDatabase.Store(cheep);
 			
 			Console.WriteLine($"Reading cheep message: {message} and timestamp: {timestamp}");
-			
-			//csvDatabase.Store();
-			// Note: third auto release attempt
 		} 
 		else if (arguments["-h"].IsTrue || arguments["--help"].IsTrue)
 		{
+			// Print help line
 			Console.WriteLine(Usage);
 		} 
 	}
