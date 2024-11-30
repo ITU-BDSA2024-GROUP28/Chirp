@@ -1,7 +1,4 @@
-using System.Runtime.CompilerServices;
-
-namespace SimpleDB;// see later
-
+namespace SimpleDB;
 
 public record Cheep(string Author, string Message, long Timestamp)
 {

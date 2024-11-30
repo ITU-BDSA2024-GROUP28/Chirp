@@ -22,13 +22,13 @@ public static class Program
 	{
 		var arguments = new Docopt().Apply(Usage, args, version: "1.0", exit: true)!;
 		
-		CSVDatabase<Cheep> csvDatabase =  CSVDatabase<Cheep>.GetInstance(); 
+		CsvDatabase<Cheep> csvDatabase =  CsvDatabase<Cheep>.GetInstance(); 
 		
 		if (arguments["read"].IsTrue)
 		{
 			// Read using database from docopt
 			int limit = arguments["<limit>"].AsInt;
-			UserInterface.printCheeps(csvDatabase.Read(), limit);
+			UserInterface.PrintCheeps(csvDatabase.Read(), limit);
 		} 
 		else if (arguments["cheep"].IsTrue)
 		{
