@@ -65,12 +65,12 @@ public class UserTimelineModel : PageModel
     
     public async Task<IActionResult> Follow(string cheeper) 
     {
-        FollowService.Follow(cheeper)
+        FollowService.Follow(cheeper);
     }
     
     public async Task<IActionResult> Unfollow(string cheeper) 
     {
-        FollowService.Follow(cheeper)
+        FollowService.Follow(cheeper);
     }
    
 }
