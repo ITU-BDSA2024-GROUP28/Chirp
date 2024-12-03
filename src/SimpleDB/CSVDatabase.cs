@@ -26,7 +26,9 @@ public sealed class CsvDatabase<T>:IDatabaseRepository<T> {
     }
     public static CsvDatabase<T> GetInstance()
     {
-        return _instance ??= new CsvDatabase<T>(); // create instance or return existing instance
+        if (_instance != null) return _instance; // create instance or return existing instance
+        _instance = new CsvDatabase<T>();
+        return _instance;
     }
     /*
     The getInstance method makes sure that no other instances of CSVDatabase are created if there already exists one - singleton pattern
