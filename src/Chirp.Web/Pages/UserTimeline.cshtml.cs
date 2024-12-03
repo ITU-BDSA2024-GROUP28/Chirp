@@ -57,7 +57,11 @@ public class UserTimelineModel : PageModel
         // get the text
         var text = CheepBoxPartialModel.Text;
         
-        _service.CreateCheep(authorDto, text);
+        // make the CheepId
+        var guid = Guid.NewGuid();
+        var cheepId = BitConverter.ToInt32(guid.ToByteArray(), 0);
+        
+        _service.CreateCheep(authorDto, text, cheepId);
     
         return await Task.FromResult<IActionResult>(LocalRedirect("/" + authorDto.Name)); // it is good practice to redirect the user after a post request
         

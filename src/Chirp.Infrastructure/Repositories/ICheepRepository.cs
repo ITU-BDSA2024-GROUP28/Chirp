@@ -6,4 +6,5 @@ public interface ICheepRepository
 {
     public CheepDTO ReadCheep(Cheep cheep);
     public void CreateCheep(AuthorDTO author, CheepDTO cheep);
+    public void DeleteCheep(int cheepId);
 }

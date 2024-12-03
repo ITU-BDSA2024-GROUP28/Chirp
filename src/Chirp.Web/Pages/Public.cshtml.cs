@@ -55,7 +55,12 @@ public class PublicModel : PageModel
         // get the text
         var text = CheepBoxPartialModel.Text;
         
-        _service.CreateCheep(authorDto, text);
+        // create CheepId
+        var guid = Guid.NewGuid();
+        var cheepId = BitConverter.ToInt32(guid.ToByteArray(), 0);
+        
+        // add the Cheep to the context
+        _service.CreateCheep(authorDto, text, cheepId);
     
         return await Task.FromResult<IActionResult>(LocalRedirect("/" + authorDto.Name)); // it is good practice to redirect the user after a post request
     }

@@ -18,7 +18,8 @@ public class CheepRepository : ICheepRepository
         {
             Text = cheep.Text,
             Timestamp = Time.ConvertToLong(cheep.TimeStamp),
-            Author = cheep.Author.UserName
+            Author = cheep.Author.UserName,
+            CheepId = cheep.CheepId,
         };
     }
 
@@ -38,5 +39,12 @@ public class CheepRepository : ICheepRepository
         };
         _context.Cheeps.Add(cheep);
         _context.SaveChanges();  // Saves the Cheep to the database
+    }
+
+    public void DeleteCheep(int cheepId)
+    {
+        var cheep = _context.Cheeps.Find(cheepId);
+        _context.Cheeps.Remove(cheep);
+        _context.SaveChanges();
     }
 }
