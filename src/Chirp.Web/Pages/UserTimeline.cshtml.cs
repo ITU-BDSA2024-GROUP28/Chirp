@@ -79,13 +79,13 @@ public class UserTimelineModel : PageModel
     public async Task<IActionResult> OnPostFollow(string cheeper) 
     {
         _followservice.Follow(cheeper);
-        return null;
+        return await Task.FromResult<IActionResult>(LocalRedirect("/" + cheeper));
     }
     
     public async Task<IActionResult> OnPostUnfollow(string cheeper) 
     {
-        _followservice.Follow(cheeper);
-        return null;
+        _followservice.Unfollow(cheeper);
+        return await Task.FromResult<IActionResult>(LocalRedirect("/" + cheeper));
     }
 
     public List<CheepDTO> GetCheepsFromFollowing(string username)
