@@ -51,6 +51,7 @@ public class CheepRepository : ICheepRepository
 
     public async Task<IEnumerable<CheepDTO>> GetCheepsFromAuthors(IEnumerable<string> authors, int page, int pageSize)
     {
+        //Co-authored-by: Mathias <mlao@itu.dk> 
         var query = _context.Cheeps
             .Where(cheep => authors.Contains(cheep.Author.UserName)) //If the list of authors, contains the author of the cheep, then we want the cheep
             .Select(cheep => new {cheep.Author.UserName, cheep.CheepId, cheep.TimeStamp, cheep.Text})

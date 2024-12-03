@@ -68,7 +68,7 @@ public class AuthorRepository : IAuthorRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task Follow(string user, string userToFollow)
+    public async Task Follow(string user, string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
     {
         var author = _context.Authors
             .Where(c => c.UserName == user)
@@ -79,7 +79,7 @@ public class AuthorRepository : IAuthorRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task Unfollow(string user, string userToFollow)
+    public async Task Unfollow(string user, string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
     {
         var author = _context.Authors
             .Include(a => a.Following)
@@ -93,7 +93,7 @@ public class AuthorRepository : IAuthorRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<AuthorDTO>> GetUserFollowers(string user)
+    public async Task<IEnumerable<AuthorDTO>> GetUserFollowers(string user) //Co-authored-by: Mathias <mlao@itu.dk>
     {
         var author = _context.Authors
             .Include(a => a.Following)//Include data from the list of following. Join ish, but not join

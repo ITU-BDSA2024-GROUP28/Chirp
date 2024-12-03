@@ -76,20 +76,20 @@ public class UserTimelineModel : PageModel
         
     }
     
-    public async Task<IActionResult> OnPostFollow(string userToFollow) 
+    public async Task<IActionResult> OnPostFollow(string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
     {
         _followservice.Follow(User.Identity.Name, userToFollow);
         return RedirectToPage(null);
     }
     
-    public async Task<IActionResult> OnPostUnfollow(string userToUnfollow) 
+    public async Task<IActionResult> OnPostUnfollow(string userToUnfollow) //Co-authored-by: Mathias <mlao@itu.dk>
     {
         _followservice.Unfollow(User.Identity.Name, userToUnfollow);
         return RedirectToPage(null);
     }
 
     
-    public bool CheckIfFollowing(string userToFollow)
+    public bool CheckIfFollowing(string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
     {
         if (userToFollow == null || User.Identity.Name == null) throw new ArgumentNullException();
         var follows = _followservice

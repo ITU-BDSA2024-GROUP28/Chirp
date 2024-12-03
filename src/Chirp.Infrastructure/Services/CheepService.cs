@@ -223,7 +223,7 @@ public class CheepService : ICheepService
         _repo.DeleteCheep(cheepId);
     }
 
-    public List<CheepDTO> GetCheepsFromAuthors(IEnumerable<string> authors, int page, int pageSize)
+    public List<CheepDTO> GetCheepsFromAuthors(IEnumerable<string> authors, int page, int pageSize) //Co-authored-by: Mathias <mlao@itu.dk>
     {
         return _repo.GetCheepsFromAuthors(authors, page, pageSize).Result.ToList();
     }

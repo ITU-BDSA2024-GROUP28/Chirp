@@ -18,9 +18,6 @@ public class FollowService : IFollowService
         _context = context;
         _repo = repo;
         _repoAuthor = repoAuthor;
-        /*
-        _following = new List<AuthorDTO>();
-        _cheepsFromFollowing = new List<CheepDTO>();*/
     }
 
 
@@ -48,12 +45,12 @@ public class FollowService : IFollowService
 		return _cheeps;
 	}
 
-	public List<AuthorDTO> GetFollowing(string username)
+	public List<AuthorDTO> GetFollowing(string username) //Co-authored-by: Mathias <mlao@itu.dk>
 	{
 		return _repoAuthor.GetUserFollowers(username).Result.ToList();
 	}
 
-	public AuthorDTO GetAuthorByName(string name)
+	public AuthorDTO GetAuthorByName(string name) //Co-authored-by: Mathias <mlao@itu.dk>
 	{
 		var author = _context.Authors.FirstOrDefault(a => a.UserName == name);
 		if (author == null)
@@ -67,17 +64,17 @@ public class FollowService : IFollowService
 		}
 	}
 
-	public void Follow(string user,string followUsername)
+	public void Follow(string user,string followUsername) //Co-authored-by: Mathias <mlao@itu.dk>
 	{
 		_repoAuthor.Follow(user, followUsername);
 	}
 
-	public void Unfollow(string user,string followUsername)
+	public void Unfollow(string user,string followUsername) //Co-authored-by: Mathias <mlao@itu.dk>
 	{
 		_repoAuthor.Unfollow(user, followUsername);
 	}
 
-	public List<CheepDTO> GetCheepsFromFollowing(List<AuthorDTO> following)
+	public List<CheepDTO> GetCheepsFromFollowing(List<AuthorDTO> following) //Co-authored-by: Mathias <mlao@itu.dk>
 	{
 		_following = following;
 		
