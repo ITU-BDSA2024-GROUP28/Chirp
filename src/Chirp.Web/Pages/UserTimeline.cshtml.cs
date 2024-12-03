@@ -11,6 +11,7 @@ namespace Chirp.Web.Pages;
 public class UserTimelineModel : PageModel
 {
     private readonly ICheepService _service;
+    private readonly IFollowService _followservice;
     private readonly UserManager<Author> _userManager;
     public required List<CheepDTO> Cheeps { get; set; }
     public int PageNr;
@@ -19,10 +20,12 @@ public class UserTimelineModel : PageModel
     [BindProperty]
     public CheepBoxPartialModel CheepBoxPartialModel { get; set; }
 
-    public UserTimelineModel(ICheepService service, UserManager<Author> userManager)
+    public UserTimelineModel(ICheepService service, IFollowService followService, UserManager<Author> userManager)
     {
         _service = service; 
+        _followservice = followService;
         _userManager = userManager;
+        
         CheepBoxPartialModel = new CheepBoxPartialModel();
     }
     
@@ -69,12 +72,14 @@ public class UserTimelineModel : PageModel
     
     public async Task<IActionResult> Follow(string cheeper) 
     {
-        FollowService.Follow(cheeper);
+        _followservice.Follow(cheeper);
+        return null;
     }
     
     public async Task<IActionResult> Unfollow(string cheeper) 
     {
-        FollowService.Follow(cheeper);
+        _followservice.Follow(cheeper);
+        return null;
     }
    
 }

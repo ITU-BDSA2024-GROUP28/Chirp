@@ -24,10 +24,12 @@
 <div>
     <h2> @routeName's Timeline
         @if (User.Identity!.IsAuthenticated){
-        <form asp-page-handler="button" method="follow">
-            <button class="btn btn-default">Button</button>
-        </form>
-        <button>Unfollow</button>
+            <form asp-page-handler="button" method="Follow(@routeName)">
+                <button class="btn btn-default">Follow</button>
+            </form>
+            <form asp-page-handler="button" method="Unfollow(@routeName)">
+                <button class="btn btn-default">Unfollow</button>
+            </form>
         }
         <partial name="Shared/_CheepBoxPartial" model="Model.CheepBoxPartialModel"/>
         </h2>
