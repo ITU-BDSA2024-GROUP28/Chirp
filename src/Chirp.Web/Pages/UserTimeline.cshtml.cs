@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.InteropServices.JavaScript;
 using Chirp.Core;
 using Chirp.Infrastructure.Services;
 using Chirp.Web.Pages.Shared;
@@ -91,8 +92,8 @@ public class UserTimelineModel : PageModel
         return cheeps;
     }  
     
-    public bool statusFollowing(AuthorDTO username)
+    public bool statusFollowing(object username)
     {
-        return _followservice.statusFollowing(username);
+        return _followservice.statusFollowing(username.ToString());
     }
 }

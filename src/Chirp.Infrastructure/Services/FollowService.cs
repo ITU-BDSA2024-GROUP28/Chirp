@@ -93,9 +93,9 @@ public class FollowService : IFollowService
 		return _cheepsFromFollowing;
 	}
     
-    public bool statusFollowing(AuthorDTO username)
+    public bool statusFollowing(string username)
     {
-        if (_following.Contains(username))
+        if (_following.Contains(GetAuthorByName(username)))
         {
             return true;
         }else{

@@ -25,5 +25,5 @@ public interface IFollowService
     
     public List<CheepDTO> GetCheepsFromFollowing(List<AuthorDTO> following);
     
-    public bool statusFollowing(AuthorDTO username);
+    public bool statusFollowing(string username);
 }
