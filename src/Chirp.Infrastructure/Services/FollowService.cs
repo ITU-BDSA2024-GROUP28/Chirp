@@ -95,11 +95,11 @@ public class FollowService : IFollowService
     
     public bool statusFollowing(string username)
     {
-        if (_following.Contains(username))
+        if (_following.Contains(GetAuthorByName(username)))
         {
             return true;
         }else{
-            return false
+            return false;
         }
     }
 }

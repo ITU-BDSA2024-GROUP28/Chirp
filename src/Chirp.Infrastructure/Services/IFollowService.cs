@@ -24,4 +24,6 @@ public interface IFollowService
     public void Unfollow(string followUsername);
     
     public List<CheepDTO> GetCheepsFromFollowing(List<AuthorDTO> following);
+    
+    public bool statusFollowing(string username);
 }

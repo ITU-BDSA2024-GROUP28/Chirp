@@ -69,13 +69,13 @@ public class UserTimelineModel : PageModel
         
     }
     
-    public async Task<IActionResult> Follow(string cheeper) 
+    public async Task<IActionResult> OnFollowFollow(string cheeper) 
     {
         _followservice.Follow(cheeper);
         return null;
     }
     
-    public async Task<IActionResult> Unfollow(string cheeper) 
+    public async Task<IActionResult> OnFollowUnfollow(string cheeper) 
     {
         _followservice.Follow(cheeper);
         return null;
@@ -90,6 +90,6 @@ public class UserTimelineModel : PageModel
     
     public bool statusFollowing(string username)
     {
-        return _followservice.statusFollowing(username)
+        return _followservice.statusFollowing(username);
     }
 }
