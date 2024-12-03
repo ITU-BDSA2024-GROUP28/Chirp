@@ -80,5 +80,12 @@ public class UserTimelineModel : PageModel
         _followservice.Follow(cheeper);
         return null;
     }
+
+    public List<CheepDTO> GetCheepsFromFollowing(string username)
+    {
+        List<AuthorDTO> list = _followservice.GetFollowing(username);
+        List<CheepDTO> cheeps = _followservice.GetCheepsFromFollowing(list);
+        return cheeps;
+    }
    
 }
