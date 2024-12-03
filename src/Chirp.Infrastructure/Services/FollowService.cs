@@ -102,4 +102,16 @@ public class FollowService : IFollowService
             return false;
         }
     }
+
+    public bool checkForEmptyFollowing(string username)
+    {
+	    if (_following.Any())
+	    {
+		    return true;
+	    }
+	    else
+	    {
+		    return false;
+	    }
+    }
 }
