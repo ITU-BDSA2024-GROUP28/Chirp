@@ -92,5 +92,14 @@ public class FollowService : IFollowService
 
 		return _cheepsFromFollowing;
 	}
-
+    
+    public bool statusFollowing(string username)
+    {
+        if (_following.Contains(username))
+        {
+            return true;
+        }else{
+            return false
+        }
+    }
 }

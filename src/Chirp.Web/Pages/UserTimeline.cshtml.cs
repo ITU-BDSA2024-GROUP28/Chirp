@@ -86,8 +86,10 @@ public class UserTimelineModel : PageModel
         List<AuthorDTO> list = _followservice.GetFollowing(username);
         List<CheepDTO> cheeps = _followservice.GetCheepsFromFollowing(list);
         return cheeps;
+    }  
+    
+    public bool statusFollowing(string username)
+    {
+        return _followservice.statusFollowing(username)
     }
-
-
-   
 }
