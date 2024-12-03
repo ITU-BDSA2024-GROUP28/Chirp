@@ -33,6 +33,8 @@ public class UserTimelineModel : PageModel
     {
         PageNr = page ?? 0;
         Cheeps = _service.GetCheepsFromAuthor(author, PageNr);
+        // append following cheeps to own Cheeps
+        Cheeps.AddRange(GetCheepsFromFollowing(author));
         HasMorePages = _service.MoreCheepsFromAuthor(author, PageNr);
         return Page();
     }
@@ -89,7 +91,7 @@ public class UserTimelineModel : PageModel
         return cheeps;
     }  
     
-    public bool statusFollowing(string username)
+    public bool statusFollowing(AuthorDTO username)
     {
         return _followservice.statusFollowing(username);
     }
