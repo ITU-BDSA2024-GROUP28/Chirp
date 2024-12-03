@@ -222,4 +222,9 @@ public class CheepService : ICheepService
     {
         _repo.DeleteCheep(cheepId);
     }
+
+    public List<CheepDTO> GetCheepsFromAuthors(IEnumerable<string> authors, int page, int pageSize)
+    {
+        return _repo.GetCheepsFromAuthors(authors, page, pageSize).Result.ToList();
+    }
 }

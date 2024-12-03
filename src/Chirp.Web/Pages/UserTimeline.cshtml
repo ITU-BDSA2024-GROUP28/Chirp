@@ -23,8 +23,7 @@
 
 <div>
     <h2> @routeName's Timeline
-        @if (User.Identity!.IsAuthenticated){
-            @(!Model.CheckIfFollowing(@routeName.ToString()))
+        @if (User.Identity!.IsAuthenticated && User.Identity.Name != routeName.ToString()){
             @if (!Model.CheckIfFollowing(@routeName.ToString()))
             {
                 <form method="post" asp-page-handler="Follow">

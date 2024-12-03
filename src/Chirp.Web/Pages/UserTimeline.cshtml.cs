@@ -32,10 +32,13 @@ public class UserTimelineModel : PageModel
     
     public ActionResult OnGet([FromQuery] int ? page, string author)
     {
+        var follows = _followservice
+            .GetFollowing(User.Identity.Name) //Gets list of followed authors
+            .Select(a => a.Name).ToList(); //Remaps the AuthorDTOs to their names
+        follows.Add(author); //Adding the user, so the user can see their own cheeps
+        
         PageNr = page ?? 0;
-        Cheeps = _service.GetCheepsFromAuthor(author, PageNr);
-        // append following cheeps to own Cheeps
-        //Cheeps.AddRange(GetCheepsFromFollowing(author));
+        Cheeps = _service.GetCheepsFromAuthors(follows, PageNr, 32);
         HasMorePages = _service.MoreCheepsFromAuthor(author, PageNr);
         return Page();
     }
@@ -84,14 +87,8 @@ public class UserTimelineModel : PageModel
         _followservice.Unfollow(User.Identity.Name, userToUnfollow);
         return RedirectToPage(null);
     }
-/*
-    public List<CheepDTO> GetCheepsFromFollowing(string username)
-    {
-        List<AuthorDTO> list = _followservice.GetFollowing(username);
-        List<CheepDTO> cheeps = _followservice.GetCheepsFromFollowing(list);
-        return cheeps;
-    }
-*/
+
+    
     public bool CheckIfFollowing(string userToFollow)
     {
         if (userToFollow == null || User.Identity.Name == null) throw new ArgumentNullException();
