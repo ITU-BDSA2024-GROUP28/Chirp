@@ -35,10 +35,7 @@ public class UserTimelineModel : PageModel
         PageNr = page ?? 0;
         Cheeps = _service.GetCheepsFromAuthor(author, PageNr);
         // append following cheeps to own Cheeps
-        if (checkForEmptyFollowing(author))
-        {
-            Cheeps.AddRange(GetCheepsFromFollowing(author));
-        }
+        Cheeps.AddRange(GetCheepsFromFollowing(author));
         HasMorePages = _service.MoreCheepsFromAuthor(author, PageNr);
         return Page();
     }

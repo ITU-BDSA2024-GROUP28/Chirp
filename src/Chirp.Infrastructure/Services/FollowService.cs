@@ -107,11 +107,11 @@ public class FollowService : IFollowService
     {
 	    if (_following.Any())
 	    {
-		    return true;
+		    return false;
 	    }
 	    else
 	    {
-		    return false;
+		    return true;
 	    }
     }
 }
