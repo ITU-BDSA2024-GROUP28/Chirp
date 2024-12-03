@@ -67,4 +67,22 @@ public class AuthorRepository : IAuthorRepository
         
         await _context.SaveChangesAsync();
     }
+
+    public async Task Follow(string user, string userToFollow)
+    {
+        var author = _context.Authors.Where(c => c.UserName == user).FirstOrDefaultAsync();
+        var authorToFollow = await _context.Authors.Where(c => c.UserName == userToFollow).FirstOrDefaultAsync();
+        author.Result.Following.Add(authorToFollow);
+        
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task Unfollow(string user, string userToFollow)
+    {
+        var author = _context.Authors.Where(c => c.UserName == user).FirstOrDefaultAsync();
+        var authorToFollow = await _context.Authors.Where(c => c.UserName == userToFollow).FirstOrDefaultAsync();
+        author.Result.Following.Remove(authorToFollow);
+        
+        await _context.SaveChangesAsync();
+    }
 }
