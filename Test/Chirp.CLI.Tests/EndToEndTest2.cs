@@ -14,50 +14,17 @@ namespace Chirp.CLI.Tests;
     * stores the respective values in the database.
  */
 
-public class EndToEndTest
+public class EndToEndTest2
 {
     private static readonly string TestDbPath = "../../../../../../Chirp/src/SimpleDB/TestDatabase.csv";
     readonly CsvDatabase<Cheep> _csvDatabase = CsvDatabase<Cheep>.GetTestInstance(TestDbPath);
     
     [Fact]
-    public void GetCheepTest()
+    public void Test_Calling_Cheep_And_Read_From_Main()
     {
-        int timestamp = 1727083893;
-        
-        Cheep cheep = new Cheep("kajn", "Hej!", timestamp);
-
-        _csvDatabase.Store(cheep);
-        
-        var time = DateTimeOffset.FromUnixTimeSeconds(timestamp).DateTime;
-        string formattedTime = time.ToString("dd/MM/yy HH:mm:ss");
-        
-        string expected = "kajn @ " + formattedTime + ": Hej!\n";
-        
-        IEnumerable<Cheep> db = _csvDatabase.Read(2);
-
-        string consoleOutput = "";
-        
-        using (StringWriter stringWriter = new StringWriter())
-        {
-            Console.SetOut(stringWriter);
-
-            UserInterface.PrintCheeps(db, 1);
-
-            consoleOutput = stringWriter.ToString();
-        }
-        
-        Assert.Equal(expected, consoleOutput); //Assert if the gotten cheep equals the created one
         CleanDatabase();
-    }
-
-    [Fact]
-    public void Test_Running_Program_From_Main()
-    {
-        int timestamp = 1727083893;
-        
-        Cheep cheep = new Cheep("kajn", "Hej!", timestamp);
-
-        _csvDatabase.Store(cheep);
+        Program.Main(["cheep", "Hello World!"]);
+        string timestamp = UserInterface.GetTime(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
         
         string consoleOutput = "";
         
@@ -71,8 +38,10 @@ public class EndToEndTest
 
             consoleOutput = stringWriter.ToString();
         }
+
+        string userName = Environment.UserDomainName;
         
-        Assert.Equal("kajn @ 23/09/24 09:31:33: Hej!\n", consoleOutput);
+        Assert.Equal(userName + " @ " + timestamp + ": Hello World!\n", consoleOutput);
         
         CleanDatabase();
     }

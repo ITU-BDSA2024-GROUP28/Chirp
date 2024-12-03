@@ -29,10 +29,14 @@ public static class UserInterface
     
     public static String GetPrint(Cheep cheep)
     {
-        var time = DateTimeOffset.FromUnixTimeSeconds(cheep.Timestamp).DateTime;
-        string formattedTime = time.ToString("dd/MM/yy HH:mm:ss");
+        string formattedTime = GetTime(cheep.Timestamp);
         
         return $"{cheep.Author} @ {formattedTime}: {cheep.Message}";
     }
 
+    public static String GetTime(long seconds)
+    {
+        var time = DateTimeOffset.FromUnixTimeSeconds(seconds).DateTime;
+        return time.ToString("dd/MM/yy HH:mm:ss");
+    }
 }
