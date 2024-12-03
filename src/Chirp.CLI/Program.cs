@@ -22,8 +22,19 @@ public static class Program
 	public static void Main(String[] args)
 	{
 		var arguments = new Docopt().Apply(Usage, args, version: "1.0", exit: true)!;
+
+		CsvDatabase<Cheep> csvDatabase;
 		
-		CsvDatabase<Cheep> csvDatabase =  CsvDatabase<Cheep>.GetInstance(); 
+		if (Environment.CurrentDirectory.Contains("Debug"))
+		{
+			// FOR TESTING
+			csvDatabase = CsvDatabase<Cheep>.GetTestInstance("../../../../../../Chirp/src/SimpleDB/TestDatabase.csv");
+		}
+		else
+		{
+			// FOR NORMAL RUN
+			csvDatabase =  CsvDatabase<Cheep>.GetInstance();
+		}
 		
 		if (arguments["read"].IsTrue)
 		{

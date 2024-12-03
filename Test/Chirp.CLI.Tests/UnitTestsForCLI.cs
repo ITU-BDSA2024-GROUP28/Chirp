@@ -1,22 +1,40 @@
+using System.Globalization;
+using CsvHelper;
 using SimpleDB;
 
 namespace Chirp.CLI.Tests;
 
+/**
+ * Add unit tests to your _Chirp!_ CLI app.
+ * Add unit tests for suitable functionality.
+ * For example,
+    * conversion of UNIX timestamps to user readable times
+    * and similar functionality are good candidates for unit testing.
+ */
+
 public class UnitTestsForCLI
 {
-    readonly CsvDatabase<Cheep> _csvDatabase = CsvDatabase<Cheep>.GetInstance();
+    private static readonly string TestDbPath = "../../../../../../Chirp/src/SimpleDB/TestDatabase.csv";
+    readonly CsvDatabase<Cheep> _csvDatabase = CsvDatabase<Cheep>.GetTestInstance(TestDbPath);
     
+    [Fact]  
+    public void Check_TestCSVDatabase_is_singleton()  
+    {  
+        var dbInstanceTwo = CsvDatabase<Cheep>.GetTestInstance(TestDbPath);  
+        Assert.Equal(dbInstanceTwo, _csvDatabase);    //uses method AreEqual to check if they are the same  
+    }  
     [Fact]  
     public void Check_CSVDatabase_is_singleton()  
     {  
+        var dbInstanceOne = CsvDatabase<Cheep>.GetInstance();
         var dbInstanceTwo = CsvDatabase<Cheep>.GetInstance();  
-        Assert.Equal(dbInstanceTwo, _csvDatabase);    //uses method AreEqual to check if they are the same  
+        Assert.Equal(dbInstanceTwo, dbInstanceOne);    //uses method AreEqual to check if they are the same  
     }  
     
     [Fact]
-    public void PrintTest()
+    public void Test_UserInterface_Prints_Cheep_Correctly()
     {
-        //The test is not done, but the base for the test should look somthing like this
+        //The test is not done, but the base for the test should look something like this
         string author = "shhs";
         string message = "this is a test";
         long timestamp = 1727083893; //Example timestamp in long ()
@@ -30,24 +48,36 @@ public class UnitTestsForCLI
     }
     
     [Fact]
-    public void HelpTest()
+    public void Test_CSVDatabase_Stores_Cheep()
     {
-        String[] input = new String[] { "-h" };
+        int timestamp = 1727083893;
         
+        Cheep cheep = new Cheep("kajn", "Hej!", timestamp);
+
+        _csvDatabase.Store(cheep);
+
+        IEnumerable<Cheep> cheeps = _csvDatabase.Read(1);
         
-        string help = @"Chirp CLI version.
+        var enumerable = cheeps as Cheep[] ?? cheeps.ToArray();
+
+        Cheep readCheep = enumerable[0];
         
-            Usage:
-              chirp read <limit>
-              chirp cheep <message>
-              chirp (-h | --help)
-              chirp --version
+        Assert.Equal(cheep, readCheep);
         
-            Options:
-              -h --help     Show this screen.
-              --version     Show version.
-	";
-        
-        
+        CleanDatabase();
+    }
+
+    public void CleanDatabase()
+    {
+        File.Delete(TestDbPath);
+
+        using (var stream = File.Create(TestDbPath))
+        {
+            stream.Close();
+        }
+        using (var sw = new StreamWriter(TestDbPath))
+        {
+            sw.WriteLine("Author,Message,Timestamp");
+        }
     }
 }

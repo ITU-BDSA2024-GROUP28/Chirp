@@ -3,43 +3,53 @@ using SimpleDB;
 
 namespace Chirp.CLI.Tests;
 
+/**
+ * Add integration tests that test your CSV database library works as intended.
+ * For example,
+    * add a test case that checks that an entry can be received from the database after it was stored in there.
+ */
+
 public class IntegrationTestsForCLI
 {
-    readonly CsvDatabase<Cheep> _csvDatabase = CsvDatabase<Cheep>.GetTestInstance("../../../../../../Chirp/src/SimpleDB/TestDatabase.csv");
-
+    private static readonly string TestDbPath = "../../../../../../Chirp/src/SimpleDB/TestDatabase.csv";
+    readonly CsvDatabase<Cheep> _csvDatabase = CsvDatabase<Cheep>.GetTestInstance(TestDbPath);
+    
     [Fact]
-    public void GetCheepTest()
+    public void Test_CSVDatabase_Stores_Cheep()
     {
         int timestamp = 1727083893;
+        
         Cheep cheep = new Cheep("kajn", "Hej!", timestamp);
 
         _csvDatabase.Store(cheep);
-        
-        var time = DateTimeOffset.FromUnixTimeSeconds(timestamp).DateTime;
-        string formattedTime = time.ToString("dd/MM/yy HH:mm:ss");
-        
-        string expected = "kajn @ " + formattedTime + ": Hej!\n";
-        
-        IEnumerable<Cheep> db = _csvDatabase.Read(2);
 
-        string consoleOutput = "";
+        IEnumerable<Cheep> cheeps = _csvDatabase.Read(1);
         
-        using (StringWriter stringWriter = new StringWriter())
-        {
-            Console.SetOut(stringWriter);
+        var enumerable = cheeps as Cheep[] ?? cheeps.ToArray();
 
-            UserInterface.PrintCheeps(db, 1);
-
-            consoleOutput = stringWriter.ToString();
-        }
+        Cheep readCheep = enumerable[0];
         
-        Assert.Equal(expected, consoleOutput); //Assert if the gotten cheep equals the created one
+        Assert.Equal(cheep, readCheep);
+        
+        CleanDatabase();
     }
-    
-    public void WriteCheepTest()
+
+    public void Test_CsvDatabase_Can_Read_Cheep()
     {
         
-        //Cheep cheep = new Cheep("kajn", "Hej!", 0);
-        //Assert if the cheep is being written correctly according to output
+    }
+
+    public void CleanDatabase()
+    {
+        File.Delete(TestDbPath);
+
+        using (var stream = File.Create(TestDbPath))
+        {
+            stream.Close();
+        }
+        using (var sw = new StreamWriter(TestDbPath))
+        {
+            sw.WriteLine("Author,Message,Timestamp");
+        }
     }
 }

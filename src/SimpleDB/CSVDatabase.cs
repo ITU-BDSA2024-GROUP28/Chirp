@@ -10,12 +10,14 @@ namespace SimpleDB;
 public sealed class CsvDatabase<T>:IDatabaseRepository<T> {
     
     private static CsvDatabase<T>? _instance;
+    private static CsvDatabase<T>? _testInstance;
+
     string _databasePath;
     
 
     private CsvDatabase()
     {
-       _databasePath = "../SimpleDB/Database.csv" ??
+       _databasePath = "../SimpleDB/Database.CSV" ??
                        throw new ArgumentNullException(nameof(_databasePath), "Path to csv file can not be found");
        
     } //private constructor to hide from client code
@@ -39,7 +41,7 @@ public sealed class CsvDatabase<T>:IDatabaseRepository<T> {
 
     public static CsvDatabase<T> GetTestInstance(string databasePath)
     {
-        return _instance ??= new CsvDatabase<T>(databasePath); // create instance or return existing instance
+        return _testInstance ??= new CsvDatabase<T>(databasePath); // create instance or return existing instance
     }
     
     public IEnumerable<T> Read(int? limit = null)
