@@ -85,4 +85,10 @@ public class AuthorRepository : IAuthorRepository
         
         await _context.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<AuthorDTO>> GetUserFollowers(string user)
+    {
+        var author = _context.Authors.Where(c => c.UserName == user).FirstOrDefaultAsync();
+        return author.Result.Following.Select(a => ReadAuthor(a));
+    }
 }
