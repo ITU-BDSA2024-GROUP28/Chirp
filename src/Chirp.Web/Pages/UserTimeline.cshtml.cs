@@ -35,7 +35,7 @@ public class UserTimelineModel : PageModel
         PageNr = page ?? 0;
         Cheeps = _service.GetCheepsFromAuthor(author, PageNr);
         // append following cheeps to own Cheeps
-        Cheeps.AddRange(GetCheepsFromFollowing(author));
+        //Cheeps.AddRange(GetCheepsFromFollowing(author));
         HasMorePages = _service.MoreCheepsFromAuthor(author, PageNr);
         return Page();
     }
@@ -73,32 +73,32 @@ public class UserTimelineModel : PageModel
         
     }
     
-    public async Task<IActionResult> OnPostFollow(string cheeper) 
+    public async Task<IActionResult> OnPostFollow(string userToFollow) 
     {
-        _followservice.Follow(cheeper);
-        return await Task.FromResult<IActionResult>(LocalRedirect("/" + cheeper));
+        _followservice.Follow(User.Identity.Name,userToFollow);
+        return await Task.FromResult<IActionResult>(LocalRedirect("/" + userToFollow));
     }
     
-    public async Task<IActionResult> OnPostUnfollow(string cheeper) 
+    public async Task<IActionResult> OnPostUnfollow(string userToUnfollow) 
     {
-        _followservice.Unfollow(cheeper);
-        return await Task.FromResult<IActionResult>(LocalRedirect("/" + cheeper));
+        _followservice.Unfollow(User.Identity.Name, userToUnfollow);
+        return await Task.FromResult<IActionResult>(LocalRedirect("/" + userToUnfollow));
     }
-
+/*
     public List<CheepDTO> GetCheepsFromFollowing(string username)
     {
         List<AuthorDTO> list = _followservice.GetFollowing(username);
         List<CheepDTO> cheeps = _followservice.GetCheepsFromFollowing(list);
         return cheeps;
-    }  
-    
-    public bool statusFollowing(object username)
-    {
-        return _followservice.statusFollowing(username.ToString());
     }
-    
-    public bool checkForEmptyFollowing(string username)
+*/
+    public bool CheckIfFollowing(string userToFollow)
     {
-        return _followservice.checkForEmptyFollowing(username);
+        if (userToFollow == null || User.Identity.Name == null) throw new ArgumentNullException();
+        
+        return _followservice
+            .GetFollowing(User.Identity.Name) //Gets list of followed authors
+            .Select(a => a.Name) //Remaps the AuthorDTOs to their names
+            .Contains(userToFollow); //Checks if the desired author is in the list
     }
 }

@@ -24,8 +24,7 @@
 <div>
     <h2> @routeName's Timeline
         @if (User.Identity!.IsAuthenticated){
-            <p>@(!Model.statusFollowing(@routeName))</p> 
-            @if (!Model.statusFollowing(@routeName))
+            @if (!Model.CheckIfFollowing(@routeName.ToString()))
             {
                 <form method="post" asp-page-handler="Follow">
                     <input type="hidden" name="cheeper" value="@routeName">

@@ -18,8 +18,9 @@ public class FollowService : IFollowService
         _context = context;
         _repo = repo;
         _repoAuthor = repoAuthor;
+        /*
         _following = new List<AuthorDTO>();
-        _cheepsFromFollowing = new List<CheepDTO>();
+        _cheepsFromFollowing = new List<CheepDTO>();*/
     }
 
 
@@ -49,7 +50,7 @@ public class FollowService : IFollowService
 
 	public List<AuthorDTO> GetFollowing(string username)
 	{
-		return _following;
+		return _repoAuthor.GetUserFollowers(username).Result.ToList();
 	}
 
 	public AuthorDTO GetAuthorByName(string name)
@@ -66,14 +67,14 @@ public class FollowService : IFollowService
 		}
 	}
 
-	public void Follow(string followUsername)
+	public void Follow(string user,string followUsername)
 	{
-		_following.Add(GetAuthorByName(followUsername));
+		_repoAuthor.Follow(user, followUsername);
 	}
 
-	public void Unfollow(string followUsername)
+	public void Unfollow(string user,string followUsername)
 	{
-		_following.Remove(GetAuthorByName(followUsername));
+		_repoAuthor.Unfollow(user, followUsername);
 	}
 
 	public List<CheepDTO> GetCheepsFromFollowing(List<AuthorDTO> following)
@@ -92,26 +93,5 @@ public class FollowService : IFollowService
 
 		return _cheepsFromFollowing;
 	}
-    
-    public bool statusFollowing(string username)
-    {
-        if (_following.Contains(GetAuthorByName(username)))
-        {
-            return true;
-        }else{
-            return false;
-        }
-    }
 
-    public bool checkForEmptyFollowing(string username)
-    {
-	    if (_following.Any())
-	    {
-		    return false;
-	    }
-	    else
-	    {
-		    return true;
-	    }
-    }
 }

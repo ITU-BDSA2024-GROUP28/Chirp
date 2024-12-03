@@ -19,13 +19,10 @@ public interface IFollowService
      * @return AuthorDTO
      */
 
-    public void Follow(string followUsername);
+    public void Follow(string user, string userToFollow);
     
-    public void Unfollow(string followUsername);
+    public void Unfollow(string user, string userToUnfollow);
     
     public List<CheepDTO> GetCheepsFromFollowing(List<AuthorDTO> following);
     
-    public bool statusFollowing(string username);
-
-    public bool checkForEmptyFollowing(string username);
 }

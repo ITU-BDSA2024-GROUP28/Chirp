@@ -88,7 +88,10 @@ public class AuthorRepository : IAuthorRepository
 
     public async Task<IEnumerable<AuthorDTO>> GetUserFollowers(string user)
     {
-        var author = _context.Authors.Where(c => c.UserName == user).FirstOrDefaultAsync();
-        return author.Result.Following.Select(a => ReadAuthor(a));
+        var author = _context.Authors
+            .Where(c => c.UserName == user)
+            .FirstOrDefaultAsync();
+        var authorDTO = author.Result.Following.Select(a => ReadAuthor(a));
+        return authorDTO;
     }
 }
