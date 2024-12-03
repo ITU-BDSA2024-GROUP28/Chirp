@@ -53,6 +53,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<ICheepRepository, CheepRepository>();
 builder.Services.AddScoped<ICheepService, CheepService>();
+builder.Services.AddScoped<IFollowService, FollowService>();
 
 
 var app = builder.Build();

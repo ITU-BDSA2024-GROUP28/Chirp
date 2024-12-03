@@ -20,10 +20,11 @@ public class UserTimelineModel : PageModel
     [BindProperty]
     public CheepBoxPartialModel CheepBoxPartialModel { get; set; }
 
-    public UserTimelineModel(ICheepService service, UserManager<Author> userManager)
+    public UserTimelineModel(ICheepService service, UserManager<Author> userManager, IFollowService followService)
     {
         _service = service; 
         _userManager = userManager;
+        _followservice = followService;
         
         CheepBoxPartialModel = new CheepBoxPartialModel();
     }
@@ -69,13 +70,13 @@ public class UserTimelineModel : PageModel
         
     }
     
-    public async Task<IActionResult> OnFollowFollow(string cheeper) 
+    public async Task<IActionResult> OnPostFollow(string cheeper) 
     {
         _followservice.Follow(cheeper);
         return null;
     }
     
-    public async Task<IActionResult> OnFollowUnfollow(string cheeper) 
+    public async Task<IActionResult> OnPostUnfollow(string cheeper) 
     {
         _followservice.Follow(cheeper);
         return null;
