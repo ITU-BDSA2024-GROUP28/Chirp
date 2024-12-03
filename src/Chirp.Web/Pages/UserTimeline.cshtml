@@ -24,10 +24,10 @@
 <div>
     <h2> @routeName's Timeline
         @if (User.Identity!.IsAuthenticated){
-            <form asp-page-handler="button" method="Follow(@routeName)">
+            <form method="post" asp-page-handler="Follow">
                 <button class="btn btn-default">Follow</button>
             </form>
-            <form asp-page-handler="button" method="Unfollow(@routeName)">
+            <form method="post" asp-page-handler="Unfollow">
                 <button class="btn btn-default">Unfollow</button>
             </form>
         }

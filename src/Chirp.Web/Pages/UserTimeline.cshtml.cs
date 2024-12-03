@@ -88,7 +88,6 @@ public class UserTimelineModel : PageModel
         return cheeps;
     }
 
-	public bool followingStatus(){
 
    
 }
