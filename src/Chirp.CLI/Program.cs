@@ -52,7 +52,11 @@ public static class Program
 			Cheep cheep = new Cheep(author, message, timestamp);
 			
 			csvDatabase.Store(cheep);
-			
+
+			if (Environment.CurrentDirectory.Contains("Debug"))
+			{
+				return;
+			}
 			Console.WriteLine($"Reading cheep message: {message} and timestamp: {timestamp}");
 		} 
 		else if (arguments["-h"].IsTrue || arguments["--help"].IsTrue)
