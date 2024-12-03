@@ -87,5 +87,8 @@ public class UserTimelineModel : PageModel
         List<CheepDTO> cheeps = _followservice.GetCheepsFromFollowing(list);
         return cheeps;
     }
+
+	public bool followingStatus(){
+
    
 }
