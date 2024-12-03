@@ -9,7 +9,7 @@ public class Author : IdentityUser<int>
      * Cheeps retrieves the relevant cheeps from the author and sets them as the collection
      */
 
-    public List<Author> Following { get; set; }
-    
-    public List<Author> Followers { get; set; }
+    public List<Author> Following { get; set; } = [];
+
+    public List<Author> Followers { get; set; } = [];
 }

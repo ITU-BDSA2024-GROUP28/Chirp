@@ -24,17 +24,18 @@
 <div>
     <h2> @routeName's Timeline
         @if (User.Identity!.IsAuthenticated){
+            @(!Model.CheckIfFollowing(@routeName.ToString()))
             @if (!Model.CheckIfFollowing(@routeName.ToString()))
             {
                 <form method="post" asp-page-handler="Follow">
-                    <input type="hidden" name="cheeper" value="@routeName">
+                    <input type="hidden" name="userToFollow" value="@routeName">
                     <button class="btn btn-default">Follow</button>
                 </form>
             }
             else
             {
                 <form method="post" asp-page-handler="Unfollow">
-                    <input type="hidden" name="cheeper" value="@routeName">
+                    <input type="hidden" name="userToUnFollow" value="@routeName">
                     <button class="btn btn-default">Unfollow</button>
                 </form>
             }

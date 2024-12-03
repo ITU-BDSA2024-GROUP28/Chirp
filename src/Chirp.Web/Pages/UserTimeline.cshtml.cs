@@ -75,14 +75,14 @@ public class UserTimelineModel : PageModel
     
     public async Task<IActionResult> OnPostFollow(string userToFollow) 
     {
-        _followservice.Follow(User.Identity.Name,userToFollow);
-        return await Task.FromResult<IActionResult>(LocalRedirect("/" + userToFollow));
+        _followservice.Follow(User.Identity.Name, userToFollow);
+        return RedirectToPage(null);
     }
     
     public async Task<IActionResult> OnPostUnfollow(string userToUnfollow) 
     {
         _followservice.Unfollow(User.Identity.Name, userToUnfollow);
-        return await Task.FromResult<IActionResult>(LocalRedirect("/" + userToUnfollow));
+        return RedirectToPage(null);
     }
 /*
     public List<CheepDTO> GetCheepsFromFollowing(string username)
@@ -95,10 +95,10 @@ public class UserTimelineModel : PageModel
     public bool CheckIfFollowing(string userToFollow)
     {
         if (userToFollow == null || User.Identity.Name == null) throw new ArgumentNullException();
-        
-        return _followservice
+        var follows = _followservice
             .GetFollowing(User.Identity.Name) //Gets list of followed authors
-            .Select(a => a.Name) //Remaps the AuthorDTOs to their names
-            .Contains(userToFollow); //Checks if the desired author is in the list
+            .Select(a => a.Name).ToList(); //Remaps the AuthorDTOs to their names
+            
+        return follows.Contains(userToFollow); //Checks if the desired author is in the list
     }
 }
