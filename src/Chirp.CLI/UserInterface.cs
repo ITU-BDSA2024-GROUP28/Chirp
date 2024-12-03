@@ -7,6 +7,10 @@ namespace Chirp.CLI;
 
 public static class UserInterface
 {
+    public static void getCheeps(IEnumerable<Cheep> cheeps, int postion)
+    {
+        
+    }
     
     public static void PrintCheeps(IEnumerable<Cheep> cheeps, int limit)
     {
