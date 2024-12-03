@@ -20,10 +20,9 @@ public class UserTimelineModel : PageModel
     [BindProperty]
     public CheepBoxPartialModel CheepBoxPartialModel { get; set; }
 
-    public UserTimelineModel(ICheepService service, IFollowService followService, UserManager<Author> userManager)
+    public UserTimelineModel(ICheepService service, UserManager<Author> userManager)
     {
         _service = service; 
-        _followservice = followService;
         _userManager = userManager;
         
         CheepBoxPartialModel = new CheepBoxPartialModel();
