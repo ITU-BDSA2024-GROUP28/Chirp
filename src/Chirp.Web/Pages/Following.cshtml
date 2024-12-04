@@ -21,7 +21,11 @@
     <ul>
         @foreach (var follower in Model.ListOfFollowing)
         {
-            <li>@follower.Name</li>
+            <li>
+                <a href="/@(follower.Name)">
+                    @follower.Name
+                </a>
+            </li>
         }
     </ul>
 </div>
