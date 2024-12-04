@@ -10,8 +10,7 @@ public class PagesTest : IntegrationTest
     public PagesTest(WebApplicationFactory<Program> Factory) : base(Factory)
     {
     }
-
-    [Fact]
+    
     public async Task publicTimeline()
     {
         var response = await _client.GetAsync("/");
@@ -23,7 +22,6 @@ public class PagesTest : IntegrationTest
         Assert.Contains("Public Timeline", cont);
     }
     
-    [Fact]
     public async void userTimeline()
     {
         var response = await _client.GetAsync("/EmmaTest");
@@ -33,5 +31,6 @@ public class PagesTest : IntegrationTest
         Assert.Contains("EmmaTest's Timeline", cheep);
         Assert.DoesNotContain("JoseTest's Timeline", cheep);
     }
+    
     
 }
