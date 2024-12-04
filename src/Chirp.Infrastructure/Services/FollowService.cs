@@ -49,6 +49,11 @@ public class FollowService : IFollowService
 	{
 		return _repoAuthor.GetUserFollowers(username).Result.ToList();
 	}
+	
+	public List<AuthorDTO> GetFollowers(string username)
+	{
+		return _repoAuthor.GetFollowersOfUser(username).Result.ToList();
+	}
 
 	public AuthorDTO GetAuthorByName(string name) //Co-authored-by: Mathias <mlao@itu.dk>
 	{
