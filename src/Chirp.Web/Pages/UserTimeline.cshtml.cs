@@ -32,11 +32,15 @@ public class UserTimelineModel : PageModel
     
     public ActionResult OnGet([FromQuery] int ? page, string author)
     {
-        var follows = _followservice
-            .GetFollowing(User.Identity.Name) //Gets list of followed authors
-            .Select(a => a.Name).ToList(); //Remaps the AuthorDTOs to their names
-        follows.Add(author); //Adding the user, so the user can see their own cheeps
+        List<string> follows = [];
+        if (User.Identity.IsAuthenticated)
+        {
+            follows = _followservice
+                .GetFollowing(User.Identity.Name) //Gets list of followed authors
+                .Select(a => a.Name).ToList(); //Remaps the AuthorDTOs to their names
+        }
         
+        follows.Add(author); //Adding the user, so the user can see their own cheeps
         PageNr = page ?? 0;
         Cheeps = _service.GetCheepsFromAuthors(follows, PageNr, 32);
         HasMorePages = _service.MoreCheepsFromAuthor(author, PageNr);
