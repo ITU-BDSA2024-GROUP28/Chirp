@@ -1,0 +1,29 @@
+﻿@page "/{author}/Following"
+@using Chirp.Infrastructure.Services
+@using Chirp.Web.Pages
+@using Microsoft.AspNetCore.Identity
+@model Chirp.Web.Pages.Following
+
+@{
+    ViewData["Title"] = "Following";
+    Layout = "Shared/_Layout";
+    var author = HttpContext.GetRouteValue("author");
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <ul>
+        @foreach (var follower in Model.ListOfFollowing)
+        {
+            <li>@follower.Name</li>
+        }
+    </ul>
+</div>
+</body>
+</html>

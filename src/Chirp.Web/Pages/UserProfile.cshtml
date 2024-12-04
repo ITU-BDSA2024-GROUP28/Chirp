@@ -22,6 +22,12 @@
 <br/>
 
 <div>
+    <a href="/@(author)/Following">
+        <button>Following</button>
+    </a>
+    <a href="/@(author)/Followers">
+        <button>Followers</button>
+    </a>
     <form method="post" asp-page-handler="Delete" onsubmit="return confirmDeletion()">
         <input type="hidden" name="name" value="@User.Identity!.Name">
         <button type="submit">Forget Me</button>
