@@ -23,14 +23,14 @@
 
 <div>
     <a href="/@(author)/Following">
-        <button>Following</button>
+        <button style="border-radius: 7px">Following</button>
     </a>
     <a href="/@(author)/Followers">
-        <button>Followers</button>
+        <button style="border-radius: 7px">Followers</button>
     </a>
     <form method="post" asp-page-handler="Delete" onsubmit="return confirmDeletion()">
         <input type="hidden" name="name" value="@User.Identity!.Name">
-        <button type="submit">Forget Me</button>
+        <button style="border-radius: 7px" type="submit">Forget Me</button>
     </form>
 </div>
 
@@ -56,7 +56,7 @@
                         <form method="post" asp-page-handler="DeleteCheep" onsubmit="return confirmCheepDeletion()">
                             <input type="hidden" name="cheepId" value="@cheep.CheepId">
                             <br/>
-                            <button type="submit" style="font-size: 10px; padding: 2px 5px;">Delete</button>
+                            <button type="submit" style="font-size: 10px; padding: 2px 5px; border-radius: 3px">Delete</button>
                         </form>
 
                     </p>

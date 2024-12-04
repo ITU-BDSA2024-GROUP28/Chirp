@@ -28,14 +28,14 @@
             {
                 <form method="post" asp-page-handler="Follow">
                     <input type="hidden" name="userToFollow" value="@routeName">
-                    <button class="btn btn-default">Follow</button>
+                    <button style="border-radius: 7px" class="btn btn-default">Follow</button>
                 </form>
             }
             else
             {
                 <form method="post" asp-page-handler="Unfollow">
                     <input type="hidden" name="userToUnFollow" value="@routeName">
-                    <button class="btn btn-default">Unfollow</button>
+                    <button style="border-radius: 7px" class="btn btn-default">Unfollow</button>
                 </form>
             }
         }
@@ -70,7 +70,7 @@
         @if (Model.PageNr > 0) //To make sure the user doesn't go beyond the first page
         {
             <a href="/@(routeName)/?page=@(Model.PageNr - 1)">
-                <button>&lt;</button> <!--The &lt; means "<"-->
+                <button style="border-radius: 7px">&lt;</button> <!--The &lt; means "<"-->
             </a>
         }
         <div class="page-number">
@@ -79,7 +79,7 @@
         @if (Model.HasMorePages)
         {
             <a href="/@(routeName)/?page=@(Model.PageNr + 1)">
-                <button>&gt;</button> <!--The &gt; means ">"-->
+                <button style="border-radius: 7px">&gt;</button> <!--The &gt; means ">"-->
             </a>
         }
     </div>
