@@ -53,6 +53,12 @@ public class AuthorRepository : IAuthorRepository
         
         if (author != null)
         {
+            // remove author from followers' list
+            foreach (var follower in author.Followers)
+            {
+                follower.Following.Remove(author);
+            }
+            
             // remove author from Author table
             _context.Authors.Remove(author);
             
