@@ -11,6 +11,8 @@ public interface IFollowService
      */
     
     public List<AuthorDTO> GetFollowing (string username);
+
+    public List<AuthorDTO> GetFollowers(string username);
     
     public AuthorDTO GetAuthorByName(string name);
     /* From the interface
