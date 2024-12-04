@@ -26,12 +26,12 @@ public class PagesTest : IntegrationTest
     [Fact]
     public async void userTimeline()
     {
-        var response = await _client.GetAsync("/Emma");
+        var response = await _client.GetAsync("/EmmaTest");
         response.EnsureSuccessStatusCode();
         
         var cheep = await response.Content.ReadAsStringAsync();
-        Assert.Contains("Emma's Timeline", cheep);
-        Assert.DoesNotContain("Jose's Timeline", cheep);
+        Assert.Contains("EmmaTest's Timeline", cheep);
+        Assert.DoesNotContain("JoseTest's Timeline", cheep);
     }
     
 }

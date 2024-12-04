@@ -1,6 +1,7 @@
 using Chirp.Core;
 using Chirp.Infrastructure.Repositories;
 using Chirp.Infrastructure.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,9 @@ public class CheapServiceUnitTest
         // use in memory database to test
         services.AddDbContext<ChirpDbContext>(options => options.UseInMemoryDatabase($"InMemoryDatabase_{Guid.NewGuid()}"));
         
+        var mockUser = MockUser();
+        services.AddSingleton(mockUser);
+        
         services.AddScoped<ICheepRepository, CheepRepository>();
         services.AddScoped<IAuthorRepository, AuthorRepository>();
         services.AddScoped<ICheepService, CheepService>();
@@ -40,7 +44,7 @@ public class CheapServiceUnitTest
             // Arrange
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
-            
+
             AddTestCheep(cheepService);
             // Run method
             var cheeps = cheepService.GetCheeps(0);
@@ -134,25 +138,32 @@ public class CheapServiceUnitTest
             Assert.Equal("ropf@itu.dk", result.Email);
         }
     }
-    /* (Commented out until we know where to put the test)
-    //Test for displaying the correct timestamp
+    
     [Fact]
-    public void ConvertTimestampTest()
+    public void TestTime()
     {
-        var timestamp = 1731069898;
-        var convertedTimestamp = cheepService.convertTimestamp(timestamp);
+        using var scope = _serviceProvider.CreateScope();
+        {
+            var scopedServices = scope.ServiceProvider;
+            var cheepService = scopedServices.GetRequiredService<ICheepService>();
             
-        Assert.Equal("2024/11/08 13:44:58", convertedTimestamp);
-    }*/
+            AddTestCheep(cheepService);
 
+            var Cheep = cheepService.GetCheeps(0).First().Timestamp;
+            var result = Time.ConvertToString(Cheep);
+            
+            Assert.Equal("2000-01-01 16.50.40", result);
+        }
+    }
+    
     public void AddTestCheep(ICheepService cheepService)
     {
-        var author = new Author()
+        var author = new Author
         {
             Id = 1,
             UserName = "Helge",
             Email = "ropf@itu.dk",
-            Cheeps = new List<Cheep>(),
+            Cheeps = new List<Cheep>()
         };
             
         var cheep = new Cheep()
@@ -161,11 +172,24 @@ public class CheapServiceUnitTest
             Author = author,
             AuthorId = 1,
             Text = "Cheep Test",
-            TimeStamp = DateTime.Now,
+            TimeStamp = new DateTime(2000, 1, 1, 15, 50, 40)
         };
 
         cheepService.AddCheep(cheep);
         
+    }
+    
+    private static UserManager<Author> MockUser()
+    {
+        var store = new Mock<IUserStore<Author>>();
+        var mockUserManager = new Mock<UserManager<Author>>(
+            store.Object, null, null, null, null, null, null, null, null
+        );
+        
+        mockUserManager.Setup(um => um.FindByEmailAsync(It.IsAny<string>()))
+            .ReturnsAsync((string email) => new Author { Email = email, UserName = "TestUser", Cheeps = new List<Cheep>() });
+
+        return mockUserManager.Object;
     }
 
 }
