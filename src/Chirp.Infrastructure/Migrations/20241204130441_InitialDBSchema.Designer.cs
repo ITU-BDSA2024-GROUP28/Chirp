@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chirp.Infrastructure.Migrations
 {
     [DbContext(typeof(ChirpDbContext))]
-    [Migration("20241203155524_AddedFollowersRelation")]
-    partial class AddedFollowersRelation
+    [Migration("20241204130441_InitialDBSchema")]
+    partial class InitialDBSchema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
