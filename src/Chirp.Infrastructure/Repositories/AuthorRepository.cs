@@ -67,4 +67,39 @@ public class AuthorRepository : IAuthorRepository
         
         await _context.SaveChangesAsync();
     }
+
+    public async Task Follow(string user, string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
+    {
+        var author = _context.Authors
+            .Where(c => c.UserName == user)
+            .FirstOrDefaultAsync();
+        var authorToFollow = await _context.Authors.Where(c => c.UserName == userToFollow).FirstOrDefaultAsync();
+        author.Result.Following.Add(authorToFollow);
+        
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task Unfollow(string user, string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
+    {
+        var author = _context.Authors
+            .Include(a => a.Following)
+            .Where(c => c.UserName == user)
+            .FirstOrDefaultAsync();
+        var authorToFollow = await _context.Authors
+            .Where(c => c.UserName == userToFollow)
+            .FirstOrDefaultAsync();
+        author.Result.Following.Remove(authorToFollow);
+        
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<AuthorDTO>> GetUserFollowers(string user) //Co-authored-by: Mathias <mlao@itu.dk>
+    {
+        var author = _context.Authors
+            .Include(a => a.Following)//Include data from the list of following. Join ish, but not join
+            .Where(c => c.UserName == user)//Author turns to a name(string) that can be compares to the string
+            .FirstOrDefaultAsync();//Runs the IQueryable from .Where and fetches the first. Only returns 1 entry
+        var authorDTO = author.Result.Following.Select(a => ReadAuthor(a));
+        return authorDTO;
+    }
 }

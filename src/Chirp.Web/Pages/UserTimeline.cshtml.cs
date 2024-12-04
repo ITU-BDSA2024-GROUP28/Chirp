@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.InteropServices.JavaScript;
 using Chirp.Core;
 using Chirp.Infrastructure.Services;
 using Chirp.Web.Pages.Shared;
@@ -11,6 +12,7 @@ namespace Chirp.Web.Pages;
 public class UserTimelineModel : PageModel
 {
     private readonly ICheepService _service;
+    private readonly IFollowService _followservice;
     private readonly UserManager<Author> _userManager;
     public required List<CheepDTO> Cheeps { get; set; }
     public int PageNr;
@@ -19,17 +21,28 @@ public class UserTimelineModel : PageModel
     [BindProperty]
     public CheepBoxPartialModel CheepBoxPartialModel { get; set; }
 
-    public UserTimelineModel(ICheepService service, UserManager<Author> userManager)
+    public UserTimelineModel(ICheepService service, UserManager<Author> userManager, IFollowService followService)
     {
         _service = service; 
         _userManager = userManager;
+        _followservice = followService;
+        
         CheepBoxPartialModel = new CheepBoxPartialModel();
     }
     
     public ActionResult OnGet([FromQuery] int ? page, string author)
     {
+        List<string> follows = [];
+        if (User.Identity.IsAuthenticated)
+        {
+            follows = _followservice
+                .GetFollowing(User.Identity.Name) //Gets list of followed authors
+                .Select(a => a.Name).ToList(); //Remaps the AuthorDTOs to their names
+        }
+        
+        follows.Add(author); //Adding the user, so the user can see their own cheeps
         PageNr = page ?? 0;
-        Cheeps = _service.GetCheepsFromAuthor(author, PageNr);
+        Cheeps = _service.GetCheepsFromAuthors(follows, PageNr, 32);
         HasMorePages = _service.MoreCheepsFromAuthor(author, PageNr);
         return Page();
     }
@@ -67,4 +80,26 @@ public class UserTimelineModel : PageModel
         
     }
     
+    public async Task<IActionResult> OnPostFollow(string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
+    {
+        _followservice.Follow(User.Identity.Name, userToFollow);
+        return RedirectToPage(null);
+    }
+    
+    public async Task<IActionResult> OnPostUnfollow(string userToUnfollow) //Co-authored-by: Mathias <mlao@itu.dk>
+    {
+        _followservice.Unfollow(User.Identity.Name, userToUnfollow);
+        return RedirectToPage(null);
+    }
+
+    
+    public bool CheckIfFollowing(string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
+    {
+        if (userToFollow == null || User.Identity.Name == null) throw new ArgumentNullException();
+        var follows = _followservice
+            .GetFollowing(User.Identity.Name) //Gets list of followed authors
+            .Select(a => a.Name).ToList(); //Remaps the AuthorDTOs to their names
+            
+        return follows.Contains(userToFollow); //Checks if the desired author is in the list
+    }
 }

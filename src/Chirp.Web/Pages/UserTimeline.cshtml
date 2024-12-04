@@ -23,6 +23,22 @@
 
 <div>
     <h2> @routeName's Timeline
+        @if (User.Identity!.IsAuthenticated && User.Identity.Name != routeName.ToString()){
+            @if (!Model.CheckIfFollowing(@routeName.ToString()))
+            {
+                <form method="post" asp-page-handler="Follow">
+                    <input type="hidden" name="userToFollow" value="@routeName">
+                    <button class="btn btn-default">Follow</button>
+                </form>
+            }
+            else
+            {
+                <form method="post" asp-page-handler="Unfollow">
+                    <input type="hidden" name="userToUnFollow" value="@routeName">
+                    <button class="btn btn-default">Unfollow</button>
+                </form>
+            }
+        }
         <partial name="Shared/_CheepBoxPartial" model="Model.CheepBoxPartialModel"/>
         </h2>
     
@@ -36,7 +52,9 @@
                         <strong>
                             <a href="/@cheep.Author">@cheep.Author</a>
                         </strong>
-                        @cheep.Text
+                        <div>
+                            @cheep.Text
+                        </div>
                         <small>&mdash; @Time.ConvertToString(@cheep.Timestamp)</small>
                     </p>
                 </li>

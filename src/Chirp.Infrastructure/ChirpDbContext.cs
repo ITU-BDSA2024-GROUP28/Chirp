@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using Chirp.Core;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -18,5 +19,16 @@ public class ChirpDbContext : IdentityDbContext<Author, IdentityRole<int>, int>
     public ChirpDbContext(DbContextOptions<ChirpDbContext> options) : base(options)
     {
     }
-    
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        builder.Entity<Author>(entity =>
+        {
+            entity.HasMany(x => x.Following).WithMany(x => x.Followers);
+        });
+    }
+    /*
+     * Function to tell the program that many followings have many followers. A many-to-many relation in the DB
+     */
 }
