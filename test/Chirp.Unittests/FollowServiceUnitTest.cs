@@ -50,9 +50,30 @@ public class FollowServiceUnitTest
         }
     }
 
+    [Fact]
+    public void GetFollwingTest()
+    {
+        using var scope = _serviceProvider.CreateScope();
+        {
+            var scopedServices = scope.ServiceProvider;
+            var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            var followService = scopedServices.GetRequiredService<IFollowService>();
+            
+            AddTestCheep(cheepService);
+            followService.Follow("Helge", "Adrian");
+
+            var result = followService.GetFollowing("Helge");
+            
+            var follwingAdrian = followService.GetFollowing("Helge")[0];
+            
+            Assert.NotEmpty(result);
+            Assert.Equal("Adrian", follwingAdrian.Name);
+        }
+    }
     
     public void AddTestCheep(ICheepService cheepService)
     {
+        
         var author = new Author
         {
             Id = 1,
@@ -66,11 +87,29 @@ public class FollowServiceUnitTest
             CheepId = 1,
             Author = author,
             AuthorId = 1,
-            Text = "Cheep Test",
+            Text = "Cheep Test Helge",
             TimeStamp = new DateTime(2000, 1, 1, 15, 50, 40)
         };
 
+        var author2 = new Author()
+        {
+            Id = 2,
+            UserName = "Adrian",
+            Email = "adrian@itu.dk",
+            Cheeps = new List<Cheep>()
+        };
+
+        var cheep2 = new Cheep()
+        {
+            CheepId = 2,
+            Author = author2,
+            AuthorId = 2,
+            Text = "Cheep Test Adrian",
+            TimeStamp = DateTime.Now
+        };
+        
         cheepService.AddCheep(cheep);
+        cheepService.AddCheep(cheep2);
         
     }
     
