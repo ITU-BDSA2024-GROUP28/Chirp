@@ -18,16 +18,28 @@
 </head>
 <body>
 <div>
-    <ul>
-        @foreach (var follower in Model.ListOfFollowers)
-        {
-            <li>
-                <a href="/@(follower.Name)">
-                    @follower.Name
-                </a>
-            </li>
-        }
-    </ul>
+    @if (Model.ListOfFollowers.Any())
+    {
+        <ul>
+            <div>
+                <h1>
+                    Followers List
+                </h1>
+            </div>
+            @foreach (var follower in Model.ListOfFollowers)
+            {
+                <li>
+                    <a href="/@(follower.Name)">
+                        @follower.Name
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <em> No one is following you yet so get cheeping</em>
+    }
 </div>
 </body>
 </html>
