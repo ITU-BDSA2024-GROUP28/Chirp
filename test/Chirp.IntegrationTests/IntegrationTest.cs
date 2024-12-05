@@ -41,12 +41,19 @@ public class IntegrationTest : IClassFixture<WebApplicationFactory<Program>>
                 }
                 
                 services.AddDbContext<ChirpDbContext>(options =>
-                    options.UseInMemoryDatabase("InMemoryDatabase"));
+                    options.UseSqlite(new SqliteConnection("DatabaseSource=:memory:")));
                 
                 var serviceProvider = services.BuildServiceProvider();
                 using (var scope = serviceProvider.CreateScope())
                 {
                     var scopedServices = scope.ServiceProvider;
+                    
+                    var datab = scopedServices.GetRequiredService<ChirpDbContext>();
+                    datab.Database.EnsureDeleted();
+                    datab.Database.OpenConnection();
+                    datab.Database.EnsureCreated();
+                    datab.Database.Migrate();
+                    
                     var cheepService = scopedServices.GetRequiredService<ICheepService>();
                     
                     TestCheeps(cheepService);
@@ -60,7 +67,7 @@ public class IntegrationTest : IClassFixture<WebApplicationFactory<Program>>
         var EmmaTestAuthor = new Author()
         {   
             Id = 1,
-            UserName = "Emma",
+            UserName = "EmmaTest",
             Email = "emma@test.com",
             Cheeps = new List<Cheep>(),
         };
@@ -79,7 +86,7 @@ public class IntegrationTest : IClassFixture<WebApplicationFactory<Program>>
         var JoseTestAuthor = new Author
         {   
             Id = 2,
-            UserName = "Jose",
+            UserName = "JoseTest",
             Email = "jose@test.com",
             Cheeps = new List<Cheep>(),
         };
@@ -94,6 +101,16 @@ public class IntegrationTest : IClassFixture<WebApplicationFactory<Program>>
         };
         
         cheepService.AddCheep(JoseTestCheep);
+    }
+
+    public async Task reset()
+    {
+        var serviceProvider = _factory.Services;
+        using (var scope = serviceProvider.CreateScope())
+        {
+            var datab = scope.ServiceProvider.GetRequiredService<ChirpDbContext>();
+            await datab.Database.EnsureCreatedAsync();
+        }
     }
     
 }

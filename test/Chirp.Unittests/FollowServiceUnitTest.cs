@@ -1,23 +1,19 @@
-using Chirp.Core;
+﻿using Chirp.Core;
 using Chirp.Infrastructure.Repositories;
 using Chirp.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Moq;
-using SQLitePCL;
 
 namespace Chirp.Infrastructure.Unittests;
 
-public class CheepServiceUnitTest
+public class FollowServiceUnitTest
 {
-    
     private ServiceProvider _serviceProvider;
     
     //Setting up the different aspects for testing, it is what happens before each test
-    public CheepServiceUnitTest()
+    public FollowServiceUnitTest()
     {
         var services = new ServiceCollection();
         
@@ -30,13 +26,14 @@ public class CheepServiceUnitTest
         services.AddScoped<ICheepRepository, CheepRepository>();
         services.AddScoped<IAuthorRepository, AuthorRepository>();
         services.AddScoped<ICheepService, CheepService>();
+        services.AddScoped<IFollowService, FollowService>();
         
         _serviceProvider = services.BuildServiceProvider();
     }
     
-    //Tests that getCheeps works and that there are cheeps in our cheepService
+    //Testing that we can retrieve the Cheeps from an author
     [Fact]
-    public void GetCheepsTest()
+    public void GetCheepsFromAuthorTest()
     {
         // Arrange
         using var scope = _serviceProvider.CreateScope();
@@ -44,127 +41,97 @@ public class CheepServiceUnitTest
             // Arrange
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            var followService = scopedServices.GetRequiredService<IFollowService>();
 
             AddTestCheep(cheepService);
-            // Run method
-            var cheeps = cheepService.GetCheeps(0);
-            
-            // Assert we get come cheeps from initial database
-            Assert.NotEmpty(cheeps);
-            Assert.Equal(3, cheeps.Count);
-        }
-    }
-    
-    //Tests the method GetCheepsFromAuthor so when you the method it will find cheeps from the author
-    [Fact]
-    public void GetCheepsFromAuthorTest()
-    {
-        using var scope = _serviceProvider.CreateScope();
-        {
-            var scopedServices = scope.ServiceProvider;
-            var cheepService = scopedServices.GetRequiredService<ICheepService>();
-            
-            AddTestCheep(cheepService);
-            
-            var authorCheeps = cheepService.GetCheepsFromAuthor("Helge", 0);
-            var cheep1 = authorCheeps[0].Text;
-            var cheep2 = authorCheeps[1].Text;
-            
-            Assert.NotEmpty(authorCheeps);
-            Assert.Equal(2, authorCheeps.Count);
-            Assert.Contains("Second cheep from Helge", cheep1);
-            Assert.Contains("Cheep test Helge", cheep2);
-            Assert.DoesNotContain("Hello world", authorCheeps.Select(x => x.Text));
-        }
-    }
 
-    //Tests method GetAuthorsByName rises an exception when you call the method with a name that is not in our database
+            var result = followService.GetCheepsFromAuthor("Helge");
+            var resultCheep = followService.GetCheepsFromAuthor("Helge")[0].Text;
+            
+            
+            Assert.NotEmpty(result);
+            Assert.Equal(2, result.Count());
+            Assert.Contains("Second cheep from Helge", resultCheep);
+        }
+    }
+    
+    //Testing that if you follow another user we can retrieve the list of the users we are following
     [Fact]
-    public void GetAuthorsByNameTestNon()
+    public void GetFollowingTest()
     {
         using var scope = _serviceProvider.CreateScope();
         {
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            var followService = scopedServices.GetRequiredService<IFollowService>();
             
             AddTestCheep(cheepService);
+            followService.Follow("Helge", "Adrian");
 
-            var exception = Assert.Throws<ApplicationException>(() => cheepService.GetAuthorByName("Nani"));
+            var result = followService.GetFollowing("Helge");
             
-            Assert.Equal("Author not found", exception.Message);
+            var followingAdrian = followService.GetFollowing("Helge")[0];
+            
+            Assert.NotEmpty(result);
+            Assert.Equal("Adrian", followingAdrian.Name);
         }
     }
     
-    //Tests method GetAuthorsByName gives the right author when you search
+    //Testing that following and unfollwing works
     [Fact]
-    public void GetAuthorsByNameTest()
+    public void UnfollowFollowTest()
     {
         using var scope = _serviceProvider.CreateScope();
         {
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            var followService = scopedServices.GetRequiredService<IFollowService>();
             
             AddTestCheep(cheepService);
+            followService.Follow("Helge", "Adrian");
+            followService.Follow("Adrian", "Helge");
             
-            var result = cheepService.GetAuthorByName("Helge");
+            followService.Unfollow("Helge", "Adrian");
             
-            Assert.NotNull(result);
-            Assert.Equal("Helge", result.Name);
+            var resultHelge = followService.GetFollowing("Helge");
+            var resultAdrian = followService.GetFollowing("Adrian");
+            var followingHelge = followService.GetFollowing("Adrian")[0];
+            
+            Assert.Empty(resultHelge);
+            Assert.NotEmpty(resultAdrian);
+            Assert.Equal("Helge", followingHelge.Name);
         }
     }
     
-    //Tests method GetAuthorsByEmail rises an exception when you call the method with a name that is not in our database
+    //Testing that we can retrieve the list of the users that are following us
     [Fact]
-    public void GetAuthorsByEmailTestNon()
+    public void GetFollowersTest()
     {
         using var scope = _serviceProvider.CreateScope();
         {
             var scopedServices = scope.ServiceProvider;
             var cheepService = scopedServices.GetRequiredService<ICheepService>();
-            
-            var exception = Assert.Throws<ApplicationException>(() => cheepService.GetAuthorDTOByEmail("Nani"));
-            
-            Assert.Equal("Author not found", exception.Message);
-        }
-    }
-    
-    //Tests method GetAuthorsByName gives the right author when you search
-    [Fact]
-    public void GetAuthorsByEmailTest()
-    {
-        using var scope = _serviceProvider.CreateScope();
-        {
-            var scopedServices = scope.ServiceProvider;
-            var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            var followService = scopedServices.GetRequiredService<IFollowService>();
             
             AddTestCheep(cheepService);
+            followService.Follow("Adrian", "Helge");
+            followService.Follow("Birdy", "Helge");
             
-            var result = cheepService.GetAuthorDTOByEmail("ropf@itu.dk");
+            var result = followService.GetFollowers("Helge");
+            var resultAdrian = followService.GetFollowers("Helge")[0];
+            var resultBirdy = followService.GetFollowers("Helge")[1];
             
-            Assert.NotNull(result);
-            Assert.Equal("ropf@itu.dk", result.Email);
+            Assert.NotEmpty(result);
+            Assert.Equal(2, result.Count());
+            Assert.Equal("Adrian", resultAdrian.Name);
+            Assert.Equal("Birdy", resultBirdy.Name);
         }
     }
     
-    [Fact]
-    public void TestTime()
-    {
-        using var scope = _serviceProvider.CreateScope();
-        {
-            var scopedServices = scope.ServiceProvider;
-            var cheepService = scopedServices.GetRequiredService<ICheepService>();
-            
-            AddTestCheep(cheepService);
-
-            var Cheep = cheepService.GetCheeps(0)[2].Timestamp;
-            var result = Time.ConvertToString(Cheep);
-            
-            Assert.Equal("2000-01-01 16.50.40", result);
-        }
-    }
-    
+    //The testing inputs
     public void AddTestCheep(ICheepService cheepService)
     {
+        
         var author = new Author
         {
             Id = 1,
@@ -178,19 +145,19 @@ public class CheepServiceUnitTest
             CheepId = 1,
             Author = author,
             AuthorId = 1,
-            Text = "Cheep test Helge",
+            Text = "Cheep Test Helge",
             TimeStamp = new DateTime(2000, 1, 1, 15, 50, 40)
         };
-        
-        var cheep2 = new Cheep()
+
+        var cheep2Helge = new Cheep()
         {
-            CheepId = 2,
+            CheepId = 5,
             Author = author,
             AuthorId = 1,
             Text = "Second cheep from Helge",
             TimeStamp = DateTime.Now
         };
-        
+
         var author2 = new Author()
         {
             Id = 2,
@@ -199,22 +166,57 @@ public class CheepServiceUnitTest
             Cheeps = new List<Cheep>()
         };
 
-        var cheep3 = new Cheep()
+        var cheep2 = new Cheep()
         {
-            CheepId = 3,
+            CheepId = 2,
             Author = author2,
             AuthorId = 2,
             Text = "Cheep Test Adrian",
             TimeStamp = DateTime.Now
         };
 
+        var author3 = new Author()
+        {
+            Id = 3,
+            UserName = "Birdy",
+            Email = "birdy@itu.dk",
+            Cheeps = new List<Cheep>()
+        };
 
+        var cheep3 = new Cheep()
+        {
+            CheepId = 3,
+            Author = author3,
+            AuthorId = 3,
+            Text = "Cheep Test Birdy",
+            TimeStamp = DateTime.Now
+        };
+
+        var author4 = new Author()
+        {
+            Id = 4,
+            UserName = "Tweety",
+            Email = "tweety@itu.dk",
+            Cheeps = new List<Cheep>()
+        };
+
+        var cheep4 = new Cheep()
+        {
+            CheepId = 4,
+            Author = author4,
+            AuthorId = 4,
+            Text = "Cheep Test Tweety",
+            TimeStamp = DateTime.Now
+        };
+        
         cheepService.AddCheep(cheep);
+        cheepService.AddCheep(cheep2Helge);
         cheepService.AddCheep(cheep2);
         cheepService.AddCheep(cheep3);
-        
+        cheepService.AddCheep(cheep4);
     }
     
+    //Setting up a mockUser for the tests
     private static UserManager<Author> MockUser()
     {
         var store = new Mock<IUserStore<Author>>();
@@ -227,5 +229,4 @@ public class CheepServiceUnitTest
 
         return mockUserManager.Object;
     }
-
 }
