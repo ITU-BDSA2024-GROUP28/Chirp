@@ -70,6 +70,31 @@ public class FollowServiceUnitTest
             Assert.Equal("Adrian", follwingAdrian.Name);
         }
     }
+
+    [Fact]
+    public void UnfollowFollowTest()
+    {
+        using var scope = _serviceProvider.CreateScope();
+        {
+            var scopedServices = scope.ServiceProvider;
+            var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            var followService = scopedServices.GetRequiredService<IFollowService>();
+            
+            AddTestCheep(cheepService);
+            followService.Follow("Helge", "Adrian");
+            followService.Follow("Adrian", "Helge");
+            
+            followService.Unfollow("Helge", "Adrian");
+            
+            var resultHelge = followService.GetFollowing("Helge");
+            var resultAdrian = followService.GetFollowing("Adrian");
+            var followingHelge = followService.GetFollowing("Adrian")[0];
+            
+            Assert.Empty(resultHelge);
+            Assert.NotEmpty(resultAdrian);
+            Assert.Equal("Helge", followingHelge.Name);
+        }
+    }
     
     public void AddTestCheep(ICheepService cheepService)
     {
