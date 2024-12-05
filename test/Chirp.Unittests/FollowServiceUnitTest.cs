@@ -49,7 +49,7 @@ public class FollowServiceUnitTest
             Assert.NotEmpty(result);
         }
     }
-    
+
     
     public void AddTestCheep(ICheepService cheepService)
     {
