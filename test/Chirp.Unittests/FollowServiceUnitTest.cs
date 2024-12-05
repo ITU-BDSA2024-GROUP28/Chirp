@@ -46,17 +46,17 @@ public class FollowServiceUnitTest
             AddTestCheep(cheepService);
 
             var result = followService.GetCheepsFromAuthor("Helge");
-            var resultCheep = followService.GetCheepsFromAuthor("Helge")[0];
+            var resultCheep = followService.GetCheepsFromAuthor("Helge")[0].Text;
             
             
             Assert.NotEmpty(result);
-            Assert.Equal(1, result.Count());
-            
+            Assert.Equal(2, result.Count());
+            Assert.Contains("Second cheep from Helge", resultCheep);
         }
     }
 
     [Fact]
-    public void GetFollwingTest()
+    public void GetFollowingTest()
     {
         using var scope = _serviceProvider.CreateScope();
         {
@@ -69,10 +69,10 @@ public class FollowServiceUnitTest
 
             var result = followService.GetFollowing("Helge");
             
-            var follwingAdrian = followService.GetFollowing("Helge")[0];
+            var followingAdrian = followService.GetFollowing("Helge")[0];
             
             Assert.NotEmpty(result);
-            Assert.Equal("Adrian", follwingAdrian.Name);
+            Assert.Equal("Adrian", followingAdrian.Name);
         }
     }
 
@@ -118,7 +118,10 @@ public class FollowServiceUnitTest
             var resultAdrian = followService.GetFollowers("Helge")[0];
             var resultBirdy = followService.GetFollowers("Helge")[1];
             
-            
+            Assert.NotEmpty(result);
+            Assert.Equal(2, result.Count());
+            Assert.Equal("Adrian", resultAdrian.Name);
+            Assert.Equal("Birdy", resultBirdy.Name);
         }
     }
     
