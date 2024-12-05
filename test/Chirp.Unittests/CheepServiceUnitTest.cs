@@ -51,6 +51,7 @@ public class CheepServiceUnitTest
             
             // Assert we get come cheeps from initial database
             Assert.NotEmpty(cheeps);
+            Assert.Equal(3, cheeps.Count);
         }
     }
     
@@ -65,9 +66,15 @@ public class CheepServiceUnitTest
             
             AddTestCheep(cheepService);
             
-            List<CheepDTO> authorCheeps = new List<CheepDTO>();
-            authorCheeps = cheepService.GetCheepsFromAuthor("Helge", 0);
+            var authorCheeps = cheepService.GetCheepsFromAuthor("Helge", 0);
+            var cheep1 = authorCheeps[0].Text;
+            var cheep2 = authorCheeps[1].Text;
+            
             Assert.NotEmpty(authorCheeps);
+            Assert.Equal(2, authorCheeps.Count);
+            Assert.Contains("Second cheep from Helge", cheep1);
+            Assert.Contains("Cheep test Helge", cheep2);
+            Assert.DoesNotContain("Hello world", authorCheeps.Select(x => x.Text));
         }
     }
 
@@ -149,7 +156,7 @@ public class CheepServiceUnitTest
             
             AddTestCheep(cheepService);
 
-            var Cheep = cheepService.GetCheeps(0).First().Timestamp;
+            var Cheep = cheepService.GetCheeps(0)[2].Timestamp;
             var result = Time.ConvertToString(Cheep);
             
             Assert.Equal("2000-01-01 16.50.40", result);
@@ -171,11 +178,40 @@ public class CheepServiceUnitTest
             CheepId = 1,
             Author = author,
             AuthorId = 1,
-            Text = "Cheep Test",
+            Text = "Cheep test Helge",
             TimeStamp = new DateTime(2000, 1, 1, 15, 50, 40)
         };
+        
+        var cheep2 = new Cheep()
+        {
+            CheepId = 2,
+            Author = author,
+            AuthorId = 1,
+            Text = "Second cheep from Helge",
+            TimeStamp = DateTime.Now
+        };
+        
+        var author2 = new Author()
+        {
+            Id = 2,
+            UserName = "Adrian",
+            Email = "adrian@itu.dk",
+            Cheeps = new List<Cheep>()
+        };
+
+        var cheep3 = new Cheep()
+        {
+            CheepId = 3,
+            Author = author2,
+            AuthorId = 2,
+            Text = "Cheep Test Adrian",
+            TimeStamp = DateTime.Now
+        };
+
 
         cheepService.AddCheep(cheep);
+        cheepService.AddCheep(cheep2);
+        cheepService.AddCheep(cheep3);
         
     }
     

@@ -51,7 +51,7 @@ public class FollowServiceUnitTest
             
             Assert.NotEmpty(result);
             Assert.Equal(1, result.Count());
-            Assert.Equal();
+            
         }
     }
 
