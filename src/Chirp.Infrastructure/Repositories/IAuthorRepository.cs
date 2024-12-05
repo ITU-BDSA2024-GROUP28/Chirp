@@ -15,5 +15,7 @@ public interface IAuthorRepository
     public Task Unfollow(string user, string userToFollow);
 
     public Task<IEnumerable<AuthorDTO>> GetUserFollowers(string user);
+
+    public Task<IEnumerable<AuthorDTO>> GetFollowersOfUser(string user);
 }
 

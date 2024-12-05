@@ -12,18 +12,23 @@ public class UserProfile : PageModel
 {
     private readonly ICheepService _cheepService;
     private readonly IAuthorRepository _authorRepository;
+    private readonly IFollowService _followService;
     private readonly SignInManager<Author> _signInManager;
     private readonly UserManager<Author> _userManager;
     private readonly ChirpDbContext _dbContext;
     public required List<CheepDTO> CheepList;
+    public List<AuthorDTO> ListOfFollowing;
+    public List<AuthorDTO> ListOfFollowers;
+    
     
     [BindProperty]
     public string Email { get; set; }
 
-    public UserProfile(ICheepService cheepService, IAuthorRepository authorRepository, SignInManager<Author> signInManager, UserManager<Author> userManager, ChirpDbContext context)
+    public UserProfile(ICheepService cheepService, IAuthorRepository authorRepository, SignInManager<Author> signInManager, UserManager<Author> userManager, ChirpDbContext context, IFollowService followService)
     {
         _signInManager = signInManager;
         _userManager = userManager;
+        _followService = followService;
         _dbContext = context;
         _cheepService = cheepService;
         _authorRepository = authorRepository;
@@ -33,6 +38,8 @@ public class UserProfile : PageModel
         Author author = await _userManager.GetUserAsync(User);
         
         Email = author.Email;
+        ListOfFollowing = _followService.GetFollowing(author.UserName);
+        ListOfFollowers = _followService.GetFollowers(author.UserName);
 
         var authorName = author.UserName;
         

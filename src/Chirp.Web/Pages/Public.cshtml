@@ -59,14 +59,14 @@
     @if (Model.PageNr > 0) //To make sure the user doesn't go beyond the first page
     { 
         <a href="/?page=@(Model.PageNr - 1)"> 
-            <button>&lt;</button> <!--The &lt; means "<"-->
+            <button style="border-radius: 7px">&lt;</button> <!--The &lt; means "<"-->
         </a>
     }
         <div class="page-number">
             <p>@Model.PageNr</p>
         </div>
         <a href="/?page=@(Model.PageNr + 1)">
-            <button>&gt;</button> <!--The &gt; means ">"-->
+            <button style="border-radius: 7px">&gt;</button> <!--The &gt; means ">"-->
         </a>
     </div>
 </div>

@@ -53,6 +53,12 @@ public class AuthorRepository : IAuthorRepository
         
         if (author != null)
         {
+            // remove author from followers' list
+            foreach (var follower in author.Followers)
+            {
+                follower.Following.Remove(author);
+            }
+            
             // remove author from Author table
             _context.Authors.Remove(author);
             
@@ -100,6 +106,16 @@ public class AuthorRepository : IAuthorRepository
             .Where(c => c.UserName == user)//Author turns to a name(string) that can be compares to the string
             .FirstOrDefaultAsync();//Runs the IQueryable from .Where and fetches the first. Only returns 1 entry
         var authorDTO = author.Result.Following.Select(a => ReadAuthor(a));
+        return authorDTO;
+    }
+    
+    public async Task<IEnumerable<AuthorDTO>> GetFollowersOfUser(string user) //Co-authored-by: Mathias <mlao@itu.dk>
+    {
+        var author = _context.Authors
+            .Include(a => a.Followers)//Include data from the list of following. Join ish, but not join
+            .Where(c => c.UserName == user)//Author turns to a name(string) that can be compares to the string
+            .FirstOrDefaultAsync();//Runs the IQueryable from .Where and fetches the first. Only returns 1 entry
+        var authorDTO = author.Result.Followers.Select(a => ReadAuthor(a));
         return authorDTO;
     }
 }

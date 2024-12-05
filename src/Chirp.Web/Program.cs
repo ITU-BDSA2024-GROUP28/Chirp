@@ -42,6 +42,7 @@ builder.Services.AddAuthentication(options =>
         o.ClientSecret = builder.Configuration["authentication:github:clientSecret"] 
                          ?? Environment.GetEnvironmentVariable("GITHUB_PROVIDER_AUTHENTICATION_SECRET")
                          ?? throw new InvalidOperationException("You must provide an authentication client Secret.");
+        //get GitHub email here
         o.CallbackPath = "/signin-github";
     });
 
