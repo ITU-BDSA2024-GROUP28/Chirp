@@ -54,7 +54,8 @@ public class FollowServiceUnitTest
             Assert.Contains("Second cheep from Helge", resultCheep);
         }
     }
-
+    
+    //Testing that if you follow another user we can retrieve the list of the users we are following
     [Fact]
     public void GetFollowingTest()
     {
@@ -75,7 +76,8 @@ public class FollowServiceUnitTest
             Assert.Equal("Adrian", followingAdrian.Name);
         }
     }
-
+    
+    //Testing that following and unfollwing works
     [Fact]
     public void UnfollowFollowTest()
     {
@@ -100,7 +102,8 @@ public class FollowServiceUnitTest
             Assert.Equal("Helge", followingHelge.Name);
         }
     }
-
+    
+    //Testing that we can retrieve the list of the users that are following us
     [Fact]
     public void GetFollowersTest()
     {
@@ -125,6 +128,7 @@ public class FollowServiceUnitTest
         }
     }
     
+    //The testing inputs
     public void AddTestCheep(ICheepService cheepService)
     {
         
@@ -212,6 +216,7 @@ public class FollowServiceUnitTest
         cheepService.AddCheep(cheep4);
     }
     
+    //Setting up a mockUser for the tests
     private static UserManager<Author> MockUser()
     {
         var store = new Mock<IUserStore<Author>>();
