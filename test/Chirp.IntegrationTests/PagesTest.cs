@@ -11,6 +11,7 @@ public class PagesTest : IntegrationTest
     {
     }
     
+    [Fact]
     public async Task publicTimeline()
     {
         var response = await _client.GetAsync("/");
@@ -22,6 +23,7 @@ public class PagesTest : IntegrationTest
         Assert.Contains("Public Timeline", cont);
     }
     
+    [Fact]
     public async void userTimeline()
     {
         var response = await _client.GetAsync("/EmmaTest");

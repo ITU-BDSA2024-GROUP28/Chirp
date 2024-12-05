@@ -2,6 +2,7 @@
 @using Chirp.Infrastructure.Services
 @using Chirp.Web.Pages
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.IdentityModel.Tokens
 @model Chirp.Web.Pages.Following
 
 @{
@@ -18,16 +19,28 @@
 </head>
 <body>
 <div>
-    <ul>
-        @foreach (var follower in Model.ListOfFollowing)
-        {
-            <li>
-                <a href="/@(follower.Name)">
-                    @follower.Name
-                </a>
-            </li>
-        }
-    </ul>
+    @if (Model.ListOfFollowing.Any())
+    {
+        <ul>
+            <div>
+                <h1>
+                    Following List
+                </h1>
+            </div>
+            @foreach (var follower in Model.ListOfFollowing)
+            {
+                <li>
+                    <a href="/@(follower.Name)">
+                        @follower.Name
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <em> You aren't following anyone yet </em>
+    }
 </div>
 </body>
 </html>
