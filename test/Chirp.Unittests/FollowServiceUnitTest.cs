@@ -31,6 +31,7 @@ public class FollowServiceUnitTest
         _serviceProvider = services.BuildServiceProvider();
     }
     
+    //Testing that we can retrieve the Cheeps from an author
     [Fact]
     public void GetCheepsFromAuthorTest()
     {
@@ -45,8 +46,12 @@ public class FollowServiceUnitTest
             AddTestCheep(cheepService);
 
             var result = followService.GetCheepsFromAuthor("Helge");
+            var resultCheep = followService.GetCheepsFromAuthor("Helge")[0];
+            
             
             Assert.NotEmpty(result);
+            Assert.Equal(1, result.Count());
+            Assert.Equal();
         }
     }
 
@@ -95,6 +100,27 @@ public class FollowServiceUnitTest
             Assert.Equal("Helge", followingHelge.Name);
         }
     }
+
+    [Fact]
+    public void GetFollowersTest()
+    {
+        using var scope = _serviceProvider.CreateScope();
+        {
+            var scopedServices = scope.ServiceProvider;
+            var cheepService = scopedServices.GetRequiredService<ICheepService>();
+            var followService = scopedServices.GetRequiredService<IFollowService>();
+            
+            AddTestCheep(cheepService);
+            followService.Follow("Adrian", "Helge");
+            followService.Follow("Birdy", "Helge");
+            
+            var result = followService.GetFollowers("Helge");
+            var resultAdrian = followService.GetFollowers("Helge")[0];
+            var resultBirdy = followService.GetFollowers("Helge")[1];
+            
+            
+        }
+    }
     
     public void AddTestCheep(ICheepService cheepService)
     {
@@ -116,6 +142,15 @@ public class FollowServiceUnitTest
             TimeStamp = new DateTime(2000, 1, 1, 15, 50, 40)
         };
 
+        var cheep2Helge = new Cheep()
+        {
+            CheepId = 5,
+            Author = author,
+            AuthorId = 1,
+            Text = "Second cheep from Helge",
+            TimeStamp = DateTime.Now
+        };
+
         var author2 = new Author()
         {
             Id = 2,
@@ -132,10 +167,46 @@ public class FollowServiceUnitTest
             Text = "Cheep Test Adrian",
             TimeStamp = DateTime.Now
         };
+
+        var author3 = new Author()
+        {
+            Id = 3,
+            UserName = "Birdy",
+            Email = "birdy@itu.dk",
+            Cheeps = new List<Cheep>()
+        };
+
+        var cheep3 = new Cheep()
+        {
+            CheepId = 3,
+            Author = author3,
+            AuthorId = 3,
+            Text = "Cheep Test Birdy",
+            TimeStamp = DateTime.Now
+        };
+
+        var author4 = new Author()
+        {
+            Id = 4,
+            UserName = "Tweety",
+            Email = "tweety@itu.dk",
+            Cheeps = new List<Cheep>()
+        };
+
+        var cheep4 = new Cheep()
+        {
+            CheepId = 4,
+            Author = author4,
+            AuthorId = 4,
+            Text = "Cheep Test Tweety",
+            TimeStamp = DateTime.Now
+        };
         
         cheepService.AddCheep(cheep);
+        cheepService.AddCheep(cheep2Helge);
         cheepService.AddCheep(cheep2);
-        
+        cheepService.AddCheep(cheep3);
+        cheepService.AddCheep(cheep4);
     }
     
     private static UserManager<Author> MockUser()
