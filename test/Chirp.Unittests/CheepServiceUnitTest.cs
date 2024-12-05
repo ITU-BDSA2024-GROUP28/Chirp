@@ -11,13 +11,13 @@ using SQLitePCL;
 
 namespace Chirp.Infrastructure.Unittests;
 
-public class CheapServiceUnitTest
+public class CheepServiceUnitTest
 {
     
     private ServiceProvider _serviceProvider;
     
     //Setting up the different aspects for testing, it is what happens before each test
-    public CheapServiceUnitTest()
+    public CheepServiceUnitTest()
     {
         var services = new ServiceCollection();
         
