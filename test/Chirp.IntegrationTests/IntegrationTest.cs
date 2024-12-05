@@ -49,6 +49,7 @@ public class IntegrationTest : IClassFixture<WebApplicationFactory<Program>>
                     var scopedServices = scope.ServiceProvider;
                     
                     var datab = scopedServices.GetRequiredService<ChirpDbContext>();
+                    datab.Database.EnsureDeleted();
                     datab.Database.OpenConnection();
                     datab.Database.EnsureCreated();
                     datab.Database.Migrate();
