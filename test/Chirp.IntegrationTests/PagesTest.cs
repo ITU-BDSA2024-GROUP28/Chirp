@@ -4,11 +4,19 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace Chirp.IntegrationTests;
 
-public class PagesTest : IntegrationTest
+public class PagesTest : IClassFixture<CustomWebApplication<Program>>
 {
-    
-    public PagesTest(WebApplicationFactory<Program> Factory) : base(Factory)
+    //Used code from one of the links from lecture https://github.com/dotnet/AspNetCore.Docs.Samples/tree/main/test/integration-tests/7.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests
+    private readonly HttpClient _client;
+    private readonly CustomWebApplication<Program> _factory;
+    public PagesTest(CustomWebApplication<Program> factory)
     {
+        _factory = factory;
+        _client = factory.CreateClient(new WebApplicationFactoryClientOptions
+        {
+            AllowAutoRedirect = false,
+        });
+        
     }
     
     [Fact]
