@@ -45,14 +45,7 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
         }
-
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
-        [BindProperty]
-        public InputModel Input { get; set; }
-
+        
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -76,19 +69,6 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-        public class InputModel
-        {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
-            [EmailAddress]
-            public string Email { get; set; }
-            
-            [Required]
-            [DataType(DataType.Text)]
-            public string Username { get; set; }
-        }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
 
@@ -127,21 +107,13 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
             {
                 return RedirectToPage("./Lockout");
             }
-            else
-            {
-                // If the user does not have an account, then ask the user to create an account.
-                ReturnUrl = returnUrl;
-                ProviderDisplayName = info.ProviderDisplayName;
-                if (info.Principal.HasClaim(c => c.Type == ClaimTypes.Name))
-                {
-                    Input = new InputModel
-                    {
-                        Username = info.Principal.FindFirstValue(ClaimTypes.Name)
-                    };
-                }
-                //ClaimTypes.Email
-                return Page();
-            }
+
+            // If the user does not have an account, then ask the user to create an account.
+            ReturnUrl = returnUrl;
+            ProviderDisplayName = info.ProviderDisplayName;
+            return Page();
+            // If the user does not have an account, then ask the user to create an account.
+            
         }
 
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
@@ -158,9 +130,12 @@ namespace Chirp.Web.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
+                // Credit to group 25, who showed us how to get the username and email using claims
+                // https://github.com/ITU-BDSA2024-GROUP25/Chirp/blob/main/src/Chirp.Web/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs
+                await _userStore.SetUserNameAsync(user, info.Principal.FindFirstValue(ClaimTypes.Name), CancellationToken.None);
+                await _emailStore.SetEmailAsync(user, info.Principal.FindFirstValue(ClaimTypes.Email), CancellationToken.None);
+                
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
