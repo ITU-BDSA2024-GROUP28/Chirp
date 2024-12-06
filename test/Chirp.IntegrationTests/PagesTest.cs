@@ -88,22 +88,16 @@ public class PagesTest : IClassFixture<CustomWebApplication<Program>>
     }
     
     //Testing that the About me page displays things about the right user does not work
-    
-    public async void UserProfile()
+
+    [Fact]
+    public async void test()
     {
         var user = "Adrian";
         
         var response = await _client.GetAsync($"/{user}/MyAccount");
         
-        
-        
-        var cont = await response.Content.ReadAsStringAsync();
-        
-        Assert.NotEmpty(cont);
-        Assert.Contains("Personal Information", cont);
-        Assert.DoesNotContain("ropf@itu.dk", cont);
-        Assert.Contains("adrian@itu.dk", cont);
+        Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        Assert.StartsWith($"http://localhost/", response.Headers.Location.ToString());
     }
-    
-
+ 
 }

@@ -41,6 +41,11 @@ public class CustomWebApplication<TProgram> : WebApplicationFactory<TProgram> wh
                 var connection = container.GetRequiredService<DbConnection>();
                 options.UseSqlite(connection);
             });
+            
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizePage("/UserProfile");
+            });
                 
             builder.UseEnvironment("Testing");
         });
