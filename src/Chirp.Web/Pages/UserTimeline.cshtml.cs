@@ -32,6 +32,12 @@ public class UserTimelineModel : PageModel
     
     public ActionResult OnGet([FromQuery] int ? page, string author)
     {
+        var authorName = _userManager.Users.FirstOrDefault(u => u.UserName == author);
+        if (authorName == null)
+        {
+            TempData["Error"] = $"No user found with the username '{author}'";
+            return LocalRedirect("/");
+        }
         List<string> follows = [];
         if (User.Identity.IsAuthenticated)
         {

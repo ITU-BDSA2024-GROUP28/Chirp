@@ -18,12 +18,15 @@
     .page-number {
         margin: 2%;
     }
+    
 
 </style>
 
 <div>
+    
     <h2> @routeName's Timeline
-        @if (User.Identity!.IsAuthenticated && User.Identity.Name != routeName.ToString()){
+        @if (User.Identity!.IsAuthenticated && User.Identity.Name != routeName.ToString())
+        {
             @if (!Model.CheckIfFollowing(@routeName.ToString()))
             {
                 <form method="post" asp-page-handler="Follow">
@@ -40,8 +43,8 @@
             }
         }
         <partial name="Shared/_CheepBoxPartial" model="Model.CheepBoxPartialModel"/>
-        </h2>
-    
+    </h2>
+
     @if (Model.Cheeps.Any())
     {
         <ul id="messagelist" class="cheeps">
@@ -64,8 +67,8 @@
     else
     {
         <em>There are no cheeps so far.</em>
-    }  
-    
+    }
+
     <div class="pages">
         @if (Model.PageNr > 0) //To make sure the user doesn't go beyond the first page
         {
@@ -84,3 +87,4 @@
         }
     </div>
 </div>
+
