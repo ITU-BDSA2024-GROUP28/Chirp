@@ -46,8 +46,14 @@ public class CustomWebApplication<TProgram> : WebApplicationFactory<TProgram> wh
         });
     }
     
-    public void TestCheeps(ICheepService cheepService)
+    public void TestCheeps(IServiceProvider serviceProvider)
     {
+        using var scope = serviceProvider.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<ChirpDbContext>();
+        
+        context.Database.EnsureDeleted();
+        context.Database.EnsureCreated();
+        
         var author = new Author
         {
             Id = 1,
@@ -115,20 +121,17 @@ public class CustomWebApplication<TProgram> : WebApplicationFactory<TProgram> wh
             Email = "tweety@itu.dk",
             Cheeps = new List<Cheep>()
         };
-
-        var cheep4 = new Cheep()
-        {
-            CheepId = 4,
-            Author = author4,
-            AuthorId = 4,
-            Text = "Cheep Test Tweety",
-            TimeStamp = DateTime.Now
-        };
         
-        cheepService.AddCheep(cheep);
-        cheepService.AddCheep(cheep2Helge);
-        cheepService.AddCheep(cheep2);
-        cheepService.AddCheep(cheep3);
-        cheepService.AddCheep(cheep4);
+        context.Authors.Add(author);
+        context.Authors.Add(author2);
+        context.Authors.Add(author3);
+        context.Authors.Add(author4);
+        
+        context.Cheeps.Add(cheep);
+        context.Cheeps.Add(cheep2);
+        context.Cheeps.Add(cheep3);
+        context.Cheeps.Add(cheep2Helge);
+        
+        context.SaveChanges();
     }
 }

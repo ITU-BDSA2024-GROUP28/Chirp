@@ -1,5 +1,9 @@
 ﻿using System.Net;
+using System.Net.Http.Json;
+using Chirp.Infrastructure;
+using Chirp.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace Chirp.IntegrationTests;
@@ -15,10 +19,13 @@ public class PagesTest : IClassFixture<CustomWebApplication<Program>>
         _client = factory.CreateClient(new WebApplicationFactoryClientOptions
         {
             AllowAutoRedirect = false,
+            
         });
         
+        _factory.TestCheeps(_factory.Services);
     }
     
+    //Test that it displays the public timeline
     [Fact]
     public async Task publicTimeline()
     {
@@ -29,18 +36,74 @@ public class PagesTest : IClassFixture<CustomWebApplication<Program>>
         
         Assert.NotEmpty(cont);
         Assert.Contains("Public Timeline", cont);
+        Assert.Contains("Cheep Test Helge", cont);
+        Assert.DoesNotContain("Cheep Test Suite", cont);
+        Assert.Contains("Cheep Test Birdy", cont);
     }
     
+    //Test that if you manually put a user in the url it will redirect to public timeline
+    [Fact]
+    public async void userTimelineManuallyPutInNotAUser()
+    {
+        var notAUser = "NotAUser";
+        var response = await _client.GetAsync($"/{notAUser}");
+        
+        Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        
+        var afterRedirect = await _client.GetAsync("/");
+        var cont = await afterRedirect.Content.ReadAsStringAsync();
+        
+        Assert.NotEmpty(cont);
+        Assert.Contains("Public Timeline", cont);
+    }
+    
+    //Test the usertimeline that a user can be found and that their cheep is displayed
     [Fact]
     public async void userTimeline()
     {
-        var response = await _client.GetAsync("/EmmaTest");
+        var user  = "Helge";
+        var response = await _client.GetAsync($"/{user}");
         response.EnsureSuccessStatusCode();
         
-        var cheep = await response.Content.ReadAsStringAsync();
-        Assert.Contains("EmmaTest's Timeline", cheep);
-        Assert.DoesNotContain("JoseTest's Timeline", cheep);
+        var cont = await response.Content.ReadAsStringAsync();
+        
+        Assert.NotEmpty(cont);
+        Assert.Contains("Helge's Timeline", cont);
+        Assert.Contains("Cheep Test Helge", cont);
     }
     
+    //Test the usertimeline that a user can be found and that the message no cheep is displayed
+    [Fact]
+    public async void noCheepsUserTimeline()
+    {
+        var user = "Tweety";
+        var response = await _client.GetAsync($"/{user}");
+        response.EnsureSuccessStatusCode();
+        
+        var cont = await response.Content.ReadAsStringAsync();
+        
+        Assert.NotEmpty(cont);
+        Assert.DoesNotContain("Cheep Test Helge", cont);
+        Assert.Contains("There are no cheeps so far.", cont);
+    }
     
+    //Testing that the About me page displays things about the right user does not work
+    
+    public async void UserProfile()
+    {
+        var user = "Adrian";
+        
+        var response = await _client.GetAsync($"/{user}/MyAccount");
+        
+        
+        
+        var cont = await response.Content.ReadAsStringAsync();
+        
+        Assert.NotEmpty(cont);
+        Assert.Contains("Personal Information", cont);
+        Assert.DoesNotContain("ropf@itu.dk", cont);
+        Assert.Contains("adrian@itu.dk", cont);
+    }
+    
+
 }
