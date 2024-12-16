@@ -32,6 +32,8 @@ Here comes a description of our domain model.
 Our program is automatically built, tested and run through the following three Github Actions Workflows
 
 ### Build and Test Workflow
+![](./diagrams/workflow1.png)
+
 
 ### Description
 Describe the illustration briefly, i.e., how your application is built, tested, released, and deployed.
