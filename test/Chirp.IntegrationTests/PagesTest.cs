@@ -87,8 +87,6 @@ public class PagesTest : IClassFixture<CustomWebApplication<Program>>
         Assert.Contains("There are no cheeps so far.", cont);
     }
     
-    //Testing that the About me page displays things about the right user does not work
-
     [Fact]
     public async void test()
     {
