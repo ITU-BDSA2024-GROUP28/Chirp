@@ -34,9 +34,16 @@ Our program is automatically built, tested and run through the following three G
 ### Build and Test Workflow
 ![](./diagrams/workflow1.png)
 
+This workflow shows how we automatically test our program on all branches whenever we push our commits or create a pull request. This helps keep us on track with testing.
 
-### Description
-Describe the illustration briefly, i.e., how your application is built, tested, released, and deployed.
+### Release Workflow
+![](./diagrams/workflow2.png)
+
+The details of buidling and testing have been removed here, as they are shownb in the build and test workflow.
+### Deployment Workflow
+![](./diagrams/workflow3.png)
+
+THe details of building and testing the program have also been removed here, as they are shown in the build and test workflow.
 
 ## Team work
 ![](./images/project_board.png)
