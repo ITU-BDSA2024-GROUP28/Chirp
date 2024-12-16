@@ -2,7 +2,7 @@
 using Microsoft.Playwright;
 using Microsoft.Playwright.MSTest;
 
-namespace PlaywrightTests;
+//namespace PlaywrightTests;
 
 //This has been made with the help from the website https://playwright.dev/docs/writing-tests
 //This class is to test the Pages on our program Chirp that is launched on azure
