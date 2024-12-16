@@ -32,7 +32,7 @@ Here comes a description of our domain model.
 Our program is automatically built, tested and run through the following three Github Actions Workflows
 
 ### Build and Test Workflow
-![](./diagrams/workflow1.png)
+![](./diagrams/workflow1real.png)
 
 This workflow shows how we automatically test our program on all branches whenever we push our commits or create a pull request. This helps keep us on track with testing.
 
