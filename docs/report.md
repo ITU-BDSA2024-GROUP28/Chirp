@@ -37,7 +37,7 @@ The flow of activities in your respective GitHub Actions workflows.
 Describe the illustration briefly, i.e., how your application is built, tested, released, and deployed.
 
 ## Team work
-![](./images/project_board)
+![](./images/project_board.png)
 Our project board has changed throughout this course, due to our needs varying from week to week. In the beginning of the course we were still learning to structure our time correctly, so we had columns for previous weeks that included issues we had not managed to finish before the beginning of a new week. However, with a bit of extra effort we caught up and for the last half of the course we have only had work for the current week to complete. This can be seen in the image above. As can also be seen above, somme issues have not yet been completed. This is due to us constantly improving our project these last few days, so occassionally new warnings pop up, and tests need to be adjusted. These issues have therefore been ongoing for longer periods of time, and have been moved back and forth between the working-on and completed columns. There are also some issues on the board which reflect the status of our report at the moment of us writing this section. 
 
 ## How to make _Chirp!_ work locally
