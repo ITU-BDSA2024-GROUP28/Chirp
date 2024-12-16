@@ -29,9 +29,9 @@ Here comes a description of our domain model.
 # Process
 
 ## Build, test, release, and deployment
-### UML activity Diagram
-How your Chirp! is buildt, tested, released, and deployed. 
-The flow of activities in your respective GitHub Actions workflows.
+Our program is automatically built, tested and run through the following three Github Actions Workflows
+
+### Build and Test Workflow
 
 ### Description
 Describe the illustration briefly, i.e., how your application is built, tested, released, and deployed.
