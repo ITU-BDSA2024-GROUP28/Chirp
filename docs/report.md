@@ -159,6 +159,20 @@ dotnet run --project src/Chirp.Web.
 ```
 
 ## How to run test suite locally
+To run test locally go through these steps
+1. Clone the Chirp project repository (see above)
+
+2. Open your terminal
+
+3. Find the Chirp directory using the command
+```
+cd [directory-name]
+```
+4. Type in the command
+```
+dotnet test
+```
+This should run unit tests, integration tests and playwright test
 
 # Ethics
 
