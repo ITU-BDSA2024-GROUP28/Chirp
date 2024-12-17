@@ -96,7 +96,7 @@ namespace PlaywrightTests
             await page.GetByPlaceholder("Share your thoughts...").FillAsync("Hello this is my Cheep!!!");
             await page.GetByRole(AriaRole.Button, new() { Name = "Share" }).ClickAsync();
             
-            await page.Locator("li").Filter(new() { HasText = "EndUser Hello this is my" }).GetByRole(AriaRole.Link).ClickAsync();
+            await page.Locator("li").Filter(new() { HasText = "EndUser Hello this is my"}).GetByRole(AriaRole.Link).ClickAsync();
         }
 
         [TestMethod]

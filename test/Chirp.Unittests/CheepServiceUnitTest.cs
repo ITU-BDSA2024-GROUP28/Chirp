@@ -159,7 +159,7 @@ public class CheepServiceUnitTest
             var Cheep = cheepService.GetCheeps(0)[2].Timestamp;
             var result = Time.ConvertToString(Cheep);
             
-            Assert.Equal("2000-01-01 15:50:40", result);
+            Assert.Equal("2000-01-01 16.50.40", result);
         }
     }
     
