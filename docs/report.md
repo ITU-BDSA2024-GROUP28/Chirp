@@ -71,7 +71,7 @@ We also enjoyed showing eachother our work by conducting scrum-style code run-th
 
 #### For Windows
 
-1. Go to our GitHub repo. 
+1. Go to our [GitHub repo](https://github.com/ITU-BDSA2024-GROUP28/Chirp).
 2. Click on the newest release of Chirp! found under Releases
 3. Download the zip file for Windows OS
 4. After the downloaded completes, right click the zip file and extract the files.
@@ -80,11 +80,11 @@ We also enjoyed showing eachother our work by conducting scrum-style code run-th
 7. Click the link or type this URL into your web browser and press enter to open the Chirp! web app.
 8. You should be able to see the "Public timeline" with several cheeps displayed.
 9. Press the reigster button in the navigation bar and register using Github or use your private email and username, and create a password.
-12. You should now be able to freely explore Chirp!
+10. You should now be able to freely explore Chirp!
 
 #### For MacOS X
 
-1. Go to our GitHub repo. 
+1. Go to our [GitHub repo](https://github.com/ITU-BDSA2024-GROUP28/Chirp). 
 2. Click on the newest release of Chirp! found under Releases.
 3. Download the zip file for MacOS.
 4. After the downloaded completes, double click the zip file and extract the folder.
