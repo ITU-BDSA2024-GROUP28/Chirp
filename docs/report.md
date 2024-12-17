@@ -89,7 +89,10 @@ We also enjoyed showing eachother our work by conducting scrum-style code run-th
 3. Download the zip file for MacOS.
 4. After the downloaded completes, double click the zip file and extract the folder.
 5. After the folder have beem extracted, right click the folder and select "New terminal at folder".
-6. Type the following command into the terminal: $ sudo ./Chirp.Web
+6. Type the following command into the terminal:
+```
+sudo ./Chirp.Web
+```
 7. Enter the password for your device when prompted, and press enter.
 8. If you receive the warning "'Chirp.Web' cannot be opened because the developer cannot be verified" follow these steps to bypass it.
 
@@ -105,18 +108,55 @@ We also enjoyed showing eachother our work by conducting scrum-style code run-th
 
    f. Click on the "Allow Anyway" next to it.
 
-   g. Go back to the terminal and type the same command into the terminal: $ sudo ./Chirp.Web
-
+   g. Go back to the terminal and type the same command into the terminal:
+   ```
+   sudo ./Chirp.Web
+   ```
+   
    h. Enter the password for your device when prompted, and press enter.
    
-10. If a new warning shows up saying: "macOS cannot verify the developer of “Chirp.Web”. Are you sure you want to open it?" Press "Open".
-11. The terminal should now show a lot of text. Find the sentence "Now listening on: http​﻿://localhost:XXXX" and note the port number.
-12. Click the link or type this URL into your web browser and press enter to open the Chirp! web app.
-13. You should be able to see the "Public timeline" with several cheeps displayed.
-14. Press the reigster button in the navigation bar and register using Github or use your private email and username, and create a password.
-15. You should now be able to freely explore Chirp!
+9. If a new warning shows up saying: "macOS cannot verify the developer of “Chirp.Web”. Are you sure you want to open it?" Press "Open".
+10. The terminal should now show a lot of text. Find the sentence "Now listening on: http​﻿://localhost:XXXX" and note the port number.
+11. Click the link or type this URL into your web browser and press enter to open the Chirp! web app.
+12. You should be able to see the "Public timeline" with several cheeps displayed.
+13. Press the reigster button in the navigation bar and register using Github or use your private email and username, and create a password.
+14. You should now be able to freely explore Chirp!
 
 ### Using github cloning
+
+In the **Terminal**:
+
+1. Open a new terminal/command prompt in the folder you would like to contain Chirp, enter:
+
+```
+git clone https://github.com/ITU-BDSA23-GROUP16/Chirp.git
+```
+
+2. After the cloning process has completed, navigate into the project directory using:
+
+```
+cd Chirp
+```
+
+3. You may need to set the correct clientId and clientSecret before running. Use the following commands:
+
+```
+dotnet user-secrets init --project src/Chirp.Infrastructure
+```
+
+```
+dotnet user-secrets set "authentication_github_clientId" "<clientId" --project src/Chirp.Infrastructure
+```
+
+```
+dotnet user-secrets set "authentication_github_clientSecret" "<clientSecret>" --project src/Chirp.Infrastructure
+```
+
+4. Run the project by entering:
+
+```
+dotnet run --project src/Chirp.Web.
+```
 
 ## How to run test suite locally
 
