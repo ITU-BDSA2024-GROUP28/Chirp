@@ -56,6 +56,7 @@ namespace PlaywrightTests
         [TestMethod]
         public async Task CanRegister()
         {
+            await page.GotoAsync("https://bdsagroup28chirpremotedb.azurewebsites.net/");
             //Filling the fields in the register form
             await page.GetByRole(AriaRole.Link, new() { Name = "Register" }).ClickAsync();
             await page.GetByPlaceholder("username").ClickAsync();
@@ -76,6 +77,8 @@ namespace PlaywrightTests
         [TestMethod]
         public async Task AboutMePage()
         {
+            logIn();
+            
             await page.GetByRole(AriaRole.Link, new() { Name = "About me" }).ClickAsync();
             await page.GetByRole(AriaRole.Heading, new() { Name = "Personal Information" }).IsVisibleAsync();
             await page.GetByText("Username: EndUser").IsVisibleAsync();
@@ -86,6 +89,8 @@ namespace PlaywrightTests
         [TestMethod]
         public async Task CanCheep()
         {
+            logIn();
+            
             await page.GetByRole(AriaRole.Link, new() { Name = "Public timeline" }).ClickAsync();
             await page.GetByPlaceholder("Share your thoughts...").ClickAsync();
             await page.GetByPlaceholder("Share your thoughts...").FillAsync("Hello this is my Cheep!!!");
@@ -97,6 +102,7 @@ namespace PlaywrightTests
         [TestMethod]
         public async Task CanFollowAndSeeList()
         {
+            logIn();
             //Not following anyone yet
             await page.GetByRole(AriaRole.Link, new() { Name = "About me" }).ClickAsync();
             await page.GetByRole(AriaRole.Button, new() { Name = "Following" }).ClickAsync();
@@ -121,8 +127,11 @@ namespace PlaywrightTests
         [TestMethod]
         public async Task Unfollow()
         {
+            logIn();
+            
             await page.GetByRole(AriaRole.Link, new() { Name = "My timeline" }).ClickAsync();
-            await page.Locator("li").Filter(new() { HasText = "Mellie Yost But what was" }).GetByRole(AriaRole.Link).IsVisibleAsync();
+            await page.Locator("li").Filter(new() { HasText = "Mellie Yost But what was" }).GetByRole(AriaRole.Link).ClickAsync();
+            
             await page.GetByRole(AriaRole.Button, new() { Name = "Unfollow" }).ClickAsync();
             await page.GetByRole(AriaRole.Link, new() { Name = "About me" }).ClickAsync();
             await page.GetByRole(AriaRole.Button, new() { Name = "Following" }).ClickAsync();
@@ -132,6 +141,8 @@ namespace PlaywrightTests
         [TestMethod]
         public async Task Logout()
         {
+            logIn();
+            
             await page.GetByRole(AriaRole.Link, new() { Name = "Logout" }).ClickAsync();
             await page.GetByRole(AriaRole.Button, new() { Name = "Click here to Logout" }).ClickAsync();
             
@@ -142,6 +153,7 @@ namespace PlaywrightTests
         [TestMethod]
         public async Task CanLogin()
         {
+            await page.GotoAsync("https://bdsagroup28chirpremotedb.azurewebsites.net/");
             await page.GetByRole(AriaRole.Link, new() { Name = "Login" }).ClickAsync();
             
             //Fill in login form
@@ -151,7 +163,6 @@ namespace PlaywrightTests
             await page.GetByPlaceholder("password").FillAsync("Password1.");
             await page.GetByRole(AriaRole.Button, new() { Name = "Log in" }).ClickAsync();
             
-            await page.GetByRole(AriaRole.Button, new() { Name = "Register" }).ClickAsync();
             await page.GetByRole(AriaRole.Heading, new() { Name = "Public Timeline What's on" }).IsVisibleAsync();
             await page.GetByRole(AriaRole.Heading, new() { Name = "What's on your mind EndUser?", Exact = true }).IsVisibleAsync();
         }
@@ -159,6 +170,8 @@ namespace PlaywrightTests
         [TestMethod]
         public async Task DeleteCheeep()
         {
+            logIn();
+            
             await page.GetByRole(AriaRole.Link, new() { Name = "About me" }).ClickAsync();
             void page_Dialog_EventHandler(object sender, IDialog dialog)
             {
@@ -173,15 +186,23 @@ namespace PlaywrightTests
         [TestMethod]
         public async Task ForgetMe()
         {
+            logIn();
+            
             await page.GetByRole(AriaRole.Link, new() { Name = "About me" }).ClickAsync();
-            void page_Dialog2_EventHandler(object sender, IDialog dialog)
+            void page_Dialog_EventHandler(object sender, IDialog dialog)
             {
                 Console.WriteLine($"Dialog message: {dialog.Message}");
                 dialog.DismissAsync();
-                page.Dialog -= page_Dialog2_EventHandler;
+                page.Dialog -= page_Dialog_EventHandler;
             }
-            page.Dialog += page_Dialog2_EventHandler;
+            page.Dialog += page_Dialog_EventHandler;
             await page.GetByRole(AriaRole.Button, new() { Name = "Forget Me" }).ClickAsync();
+        }
+
+        [TestMethod]
+        public async Task LogInAfterForgetMe()
+        {
+            await page.GotoAsync("https://bdsagroup28chirpremotedb.azurewebsites.net/");
             await page.GetByRole(AriaRole.Link, new() { Name = "Login" }).ClickAsync();
             await page.GetByPlaceholder("username").ClickAsync();
             await page.GetByPlaceholder("username").FillAsync("EndUser");
@@ -190,7 +211,20 @@ namespace PlaywrightTests
             await page.GetByRole(AriaRole.Button, new() { Name = "Log in" }).ClickAsync();
             await page.GetByText("Invalid login attempt.").IsVisibleAsync();
         }
-        
+
+        public async Task logIn()
+        {
+            await page.GotoAsync("https://bdsagroup28chirpremotedb.azurewebsites.net/");
+            
+            await page.GetByRole(AriaRole.Link, new() { Name = "Login" }).ClickAsync();
+            
+            //Fill in login form
+            await page.GetByPlaceholder("username").ClickAsync();
+            await page.GetByPlaceholder("username").FillAsync("EndUser");
+            await page.GetByPlaceholder("password").ClickAsync();
+            await page.GetByPlaceholder("password").FillAsync("Password1.");
+            await page.GetByRole(AriaRole.Button, new() { Name = "Log in" }).ClickAsync();
+        }
         
     }
     
