@@ -52,12 +52,14 @@ THe details of building and testing the program have also been left out here, as
 
 ## Team work
 ![](./images/project_board.png)
+
 Our project board columns have been adjusted throughout this course, due to our needs varying from week to week. In the beginning of the course we were still learning to structure our time correctly, so we had columns for previous weeks that included issues we had not managed to finish before the beginning of a new week. However, with a bit of extra effort we caught up and for the last half of the course we have only had work for the current week to complete. This can be seen in the image above. 
 
 As can also be seen above, some issues have not yet been completed. This is due to us constantly improving our project these last few days, so occassionally new warnings pop up, and tests need to be adjusted. These issues have therefore been ongoing for longer periods of time, and have been moved back and forth between the in progress and completed columns. There are also some issues on the board which reflect the status of our report at the moment of us writing this section. 
 
 ![](./diagrams/groupworkflowblue.png)
-This is how our group tackled our weekly project work. As can be seen from the diagram, the flow in the blue box was used repeatedly throughout the week, as this is how we structured our work in smaller groups when working directly on the project.
+
+This is how our group tackled the weekly project work. As can be seen from the diagram, the flow in the blue box was used repeatedly throughout the week, as this is how we structured our work in smaller groups when working directly on the project.
 
 We followed the standard pair programming strategies well throughout the weeks, and enjoyed how efficient we found this to be. As can also be seen in many of our initial commits, we did sometimes spend the days working all of us together on the project work. This was often due to certain tasks needing to be performed sequentially, otherwise the project would not be cohesive. Additionally, we enjoyed the productive discussions that sprung from this team-working style. 
 
@@ -66,6 +68,53 @@ We also enjoyed showing eachother our work by conducting scrum-style code run-th
 ## How to make _Chirp!_ work locally
 
 ### Using a release
+
+#### For Windows
+
+1. Go to our GitHub repo. 
+2. Click on the newest release of Chirp! found under Releases
+3. Download the zip file for Windows OS
+4. After the downloaded completes, right click the zip file and extract the files.
+5. After the files have beem extracted, run the "Chirp.Web.exe"
+6. The terminal should now show a lot of text. Find the sentence "Now listening on: http​﻿://localhost:XXXX" and note the port number.
+7. Click the link or type this URL into your web browser and press enter to open the Chirp! web app.
+8. You should be able to see the "Public timeline" with several cheeps displayed.
+9. Press the reigster button in the navigation bar and register using Github or use your private email and username, and create a password.
+12. You should now be able to freely explore Chirp!
+
+#### For MacOS X
+
+1. Go to our GitHub repo. 
+2. Click on the newest release of Chirp! found under Releases.
+3. Download the zip file for MacOS.
+4. After the downloaded completes, double click the zip file and extract the folder.
+5. After the folder have beem extracted, right click the folder and select "New terminal at folder".
+6. Type the following command into the terminal: $ sudo ./Chirp.Web
+7. Enter the password for your device when prompted, and press enter.
+8. If you receive the warning "'Chirp.Web' cannot be opened because the developer cannot be verified" follow these steps to bypass it.
+
+   a. Close the warning by pressing "Cancel".
+
+   b. Go to "System Preferences" on your Mac.
+
+   c. Click on "Privacy and Security".
+
+   d. Scroll to "Security".
+
+   e. You should see a message saying "Chirp.Web was blocked from opening because it is not from an identified developer."
+
+   f. Click on the "Allow Anyway" next to it.
+
+   g. Go back to the terminal and type the same command into the terminal: $ sudo ./Chirp.Web
+
+   h. Enter the password for your device when prompted, and press enter.
+   
+10. If a new warning shows up saying: "macOS cannot verify the developer of “Chirp.Web”. Are you sure you want to open it?" Press "Open".
+11. The terminal should now show a lot of text. Find the sentence "Now listening on: http​﻿://localhost:XXXX" and note the port number.
+12. Click the link or type this URL into your web browser and press enter to open the Chirp! web app.
+13. You should be able to see the "Public timeline" with several cheeps displayed.
+14. Press the reigster button in the navigation bar and register using Github or use your private email and username, and create a password.
+15. You should now be able to freely explore Chirp!
 
 ### Using github cloning
 
@@ -79,5 +128,5 @@ For this project our group chose to use the MIT license. Due to most of the pack
 [source] our license is chosen from [choosealicense.com](https://choosealicense.com/licenses/mit/), see file [LICENSE.md](https://github.com/ITU-BDSA2024-GROUP28/Chirp/blob/Ethics/LICENSE.MD)
 
 ## LLMs, ChatGPT, CoPilot, and others
-We have used the LLM ‘ChatGPT’ in a few cases. We have made sure to mention this in our commits whenever we have done so. In all cases the purpose was to give a new perspective on a problem that had us stumped.  However, it has almost always been more helpful and beneficial to ask classmates or TAs, we only resorted to the LLM when they were not available to assist. Whenever we did ask the LLM for help, it would only speed up our work approximately 50% of the time. The remaining 50% of the responses it gave to our prompts were mostly, if not entirely, useless.
+We have used the LLM ‘ChatGPT’ in a few cases. We have made sure to mention this in our commits whenever we have done so. In all cases the purpose was to give a new perspective on a problem that had us stumped. However, it has almost always been more helpful and beneficial to ask classmates or TAs, we only resorted to the LLM when they were not available to assist. Whenever we did ask the LLM for help, it would only speed up our work approximately 50% of the time. The remaining 50% of the responses it gave to our prompts were mostly, if not entirely, useless.
 
