@@ -45,26 +45,26 @@ _Chirp!_ Project Report
 
 ![](./diagrams/DomainModel.drawio.png)
 
-The Domain Model for the Chirp application is implemented in the Chirp.Core package, which is the innermost layer in our Onion Model. This model consists of two main classes/entities: Author and Cheep, which define the essential components, core behavior and structure of the application. 
+The Domain Model for the _Chirp!_ application is implemented in the Chirp.Core package, which is the innermost layer in our Onion Model. This model consists of two main classes/entities: Author and Cheep.
 
-Author represents a user and extends from the IdentityUser class from Asp.Net.Core Identity, allowing functionality such as authenticating a user. As seen above in the diagram, an Author automatically inherits an Id (int), an Email (string) and a username (string). Furthermore, an Author has a relation to Cheep by storing a Collection of cheeps the user has written. This ensures that every Cheep is written by only one Author, but an Author can write many Cheeps, making it a one-to-many relationship. Finally, the Author class stores two Lists, which contain the other Authors which the user is either following or followed by.
+The Author class represents a user of _Chirp_!. The class extends from the IdentityUser class from Asp.Net.Core Identity, allowing functionality such as authenticating a user. As seen in the above diagram, an Author automatically inherits an Id (int), an Email (string) and a username (string). Furthermore, an Author has a relation to Cheep by storing a Collection of cheeps the user has written. This ensures that every Cheep is written by only one Author, but an Author can write many Cheeps, making it a one-to-many relationship. Finally, the Author class stores two Lists, which contain the other Authors which the user is either following or followed by.
 
-The Cheep object represents the structure for individual posts created by an authorizeded user. It contains a unique identifier CheepId (int), a foreign key AuthorId (int) and an Author of type Author, associated with an existing user. It also contains Text (string), which is the content of the post with a maximum length of 160 characters. Lastly, it contains a Timestamp (DateTime), which is the registered time and date of when the cheep was posted.
+The Cheep class represents the structure for individual posts created by an authenticated user. It contains a unique identifier CheepId (int), a foreign key AuthorId (int) and an Author of type Author, associated with an existing user. It also contains the field Text (string), which is the content of the post with a maximum length of 160 characters. Lastly, it contains a Timestamp (DateTime), which is the registered time and date of when the cheep was posted.
 
 <a id="architecture-small"></a>
 ## Architecture — In the small
 
 ![](./diagrams/OnionModel.drawio.png)
 
-The Chirp Application is designed following The Onion Architecture, which to some extent ensured separation of concerns and testability in our project. The architecture is implemented across three solutions:
+The Chirp Application attempts to follow The Onion Architecture, which ensures separation of concerns and testability in our project. The architecture is implemented across three solutions:
 
-1.	Chirp.Core (Domain Layer):
+1.	#### Chirp.Core (Domain Layer):
 As the innermost layer, this solution is responsible for defining the entities (Cheep, Author). This layer is seen in detail in the domain model. Being the core of the layer makes it completely independent of external dependencies, only providing the foundation upon which all other layers build.
 
-2.	Chirp.Infrastructure (Repository and Services Layers): 
+2. ####	Chirp.Infrastructure (Repository and Services Layers): 
 This solution has two important layers. The Repository Layer implements the methods of the entities, making them dependent on the Domain Layer. The Services Layer primarily interacts with the repositories and thereby also the Domain Layer. Furthermore, the Infrastructure solution also consists of our ChirpDbContext, which acts as a bridge, integrating the Domain Model with the actual database (chirp.db) in the UI Layer.
  
-3.	Chirp.Web (UI Layer):
+3.	#### Chirp.Web (UI Layer):
 The outermost layer of the Onion Architecture is implemented in the Chirp.Web solution and handles all user interaction through Razor Pages while interacting with the DTOs and Services. Located here is also the application’s Program.cs, that sets up dependency injection and serves as the entry point for HTTP requests. 
 
 <a id="architecture"></a>
