@@ -21,6 +21,8 @@ Here comes a description of our domain model.
 ## Architecture — In the small
 
 ## Architecture of deployed application
+![](./diagrams/architecture_deployed.drawio.png) <br>
+When the application gets deployed, the browser sends a request to the azure server. Azure then sends the request on to our system. The Chirp system requests the needed information from the database, using SQLite queries. The database then returns the requested data, which the application turns into HTML and C#. This makes the HTTP response that is sent to the browser.
 
 ## User activities
 There are a number of actions a user can take on Chirp. Below are diagrams to show the processes.
