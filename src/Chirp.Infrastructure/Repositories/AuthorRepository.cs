@@ -73,6 +73,10 @@ public class AuthorRepository : IAuthorRepository
         
         await _context.SaveChangesAsync();
     }
+    /*
+     * A function to delete a user
+     * @param name
+     */
 
     public async Task Follow(string user, string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
     {
@@ -84,6 +88,11 @@ public class AuthorRepository : IAuthorRepository
         
         await _context.SaveChangesAsync();
     }
+    /*
+     * A function that adds the userToFollow to list of following
+     * The user will also appear in the list of following for the userToFollow
+     * @param user, userToFollow
+     */
 
     public async Task Unfollow(string user, string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
     {
@@ -98,6 +107,11 @@ public class AuthorRepository : IAuthorRepository
         
         await _context.SaveChangesAsync();
     }
+    /*
+     * A function that removes the userToFollow from list of following
+     * The user will also disappear in the list of following for the userToFollow
+     * @param user, userToFollow
+     */
 
     public async Task<IEnumerable<AuthorDTO>> GetUserFollowers(string user) //Co-authored-by: Mathias <mlao@itu.dk>
     {
@@ -108,6 +122,11 @@ public class AuthorRepository : IAuthorRepository
         var authorDTO = author.Result.Following.Select(a => ReadAuthor(a));
         return authorDTO;
     }
+    /*
+     * Function to retrieve a users list of followers
+     * @param user
+     * @return IEnumerable<AuthorDTO> following
+     */
     
     public async Task<IEnumerable<AuthorDTO>> GetFollowersOfUser(string user) //Co-authored-by: Mathias <mlao@itu.dk>
     {
@@ -118,4 +137,9 @@ public class AuthorRepository : IAuthorRepository
         var authorDTO = author.Result.Followers.Select(a => ReadAuthor(a));
         return authorDTO;
     }
+    /*
+     * Function to retrieve a users list of following users
+     * @param user
+     * @return IEnumerable<AuthorDTO> followers
+     */
 }

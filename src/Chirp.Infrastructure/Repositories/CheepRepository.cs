@@ -29,6 +29,7 @@ public class CheepRepository : ICheepRepository
      * @param a CheepDTO
      * @return Cheep object
      */
+    
     public void CreateCheep(AuthorDTO author, CheepDTO cheepdto)
     {
         // Converts info to cheep
@@ -41,6 +42,10 @@ public class CheepRepository : ICheepRepository
         _context.Cheeps.Add(cheep);
         _context.SaveChanges();  // Saves the Cheep to the database
     }
+    /*
+     * Method to create a cheep and store it in the database
+     * @param author, cheepdto
+     */
 
     public void DeleteCheep(int cheepId)
     {
@@ -48,6 +53,10 @@ public class CheepRepository : ICheepRepository
         _context.Cheeps.Remove(cheep);
         _context.SaveChanges();
     }
+    /*
+     * Method to delete a cheep
+     * @param cheepId
+     */
 
     public async Task<IEnumerable<CheepDTO>> GetCheepsFromAuthors(IEnumerable<string> authors, int page, int pageSize)
     {
@@ -64,4 +73,8 @@ public class CheepRepository : ICheepRepository
         
         return cheeps;
     }
+    /*
+     * A method to retrieve a chunk of cheeps made by a specific author
+     * @param author, pagenr, pagesize
+     */
 }
