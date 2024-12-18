@@ -67,35 +67,40 @@ The **Cheep** class represents the structure for individual posts created by an 
 
 The Chirp Application attempts to follow The Onion Architecture, which ensures the separation of concerns and testability in our project. The architecture is implemented across three solutions:
 
-1.	#### Chirp.Core (Domain Layer):
+#### 1. Chirp.Core (Domain Layer):
 As the innermost layer, this solution is responsible for defining the entities (Cheep, Author). This layer is seen in detail in the **Domain model** above. Being the core of the project makes it completely independent of external dependencies, only providing the foundation upon which all other layers build.
 
-2. ####	Chirp.Infrastructure (Repository and Services Layers): 
+#### 2. Chirp.Infrastructure (Repository and Services Layers): 
 This solution has two important layers. The Repository Layer implements the methods of the entities, making them dependent on the Domain Layer. The Services Layer primarily interacts with the repositories and thereby the Domain Layer. Furthermore, the Infrastructure solution also consists of the ChirpDbContext, which acts as a bridge, integrating the Domain Model with the actual database (chirp.db) in the UI Layer.
  
-3.	#### Chirp.Web (UI Layer):
+#### 3. Chirp.Web (UI Layer):
 The outermost layer of the Onion Architecture is implemented in the Chirp.Web solution and handles all user interaction through Razor Pages while interacting with the DTOs and Services. Located here is also the application’s Program.cs file, which serves as the entry point for _Chirp!_. The Program.cs file is responsible for configuring and registering essential components, such as the application's services, database context, authentication providers, and middleware pipeline.
 
 ## Architecture of deployed application
-![](./diagrams/arch_of_deployed.drawio.png) <br>
+![](./diagrams/arch_of_deployed.drawio.png) 
 When the application gets deployed, the browser sends a request to the Azure server. Azure forwards the request to our application. The _Chirp!_ application queries the database for the needed data. The database then returns the requested data, which the application turns into HTML and C# code. This results in the HTTP response that is visible to the users.
 
 ## User activities
 There are a number of actions a user can take on _Chirp!_. Below are diagrams to show the processes.
 
-![](./diagrams/user_activity_unauthorised.drawio.png) <br>
+![](./diagrams/user_activity_unauthorised.drawio.png)
+
 The diagram above shows the process of a user logging in.
 
-![](./diagrams/user_activity_post_cheep.drawio.png) <br>
+![](./diagrams/user_activity_post_cheep.drawio.png)
+
 The diagram above shows the process of a user logging in and posting a cheep.
 
-![](./diagrams/user_activity_follow_unfollow.drawio.png) <br>
+![](./diagrams/user_activity_follow_unfollow.drawio.png)
+
 The diagram above shows the process of a user logging in and following another user.
 
-![](./diagrams/user_activity_forget_me.drawio.png) <br>
+![](./diagrams/user_activity_forget_me.drawio.png)
+
 The diagram above shows a user logging in to delete their account, by clicking the “Forget me” button on the User Profile page. This action results in the deletion of the user's cheeps, along with being deleted from all its followers' lists of following.
 
-![](./diagrams/user_activity_total_overview.drawio.png) <br>
+![](./diagrams/user_activity_total_overview.drawio.png)
+
 The diagram above shows a full diagram of the actions a user can take on the website. A user can end the application at any time by closing the window.
 
 ## Sequence of functionality/calls through _Chirp!_
@@ -239,11 +244,13 @@ dotnet user-secrets init --project src/Chirp.Infrastructure
 ```
 
 ```
-dotnet user-secrets set "authentication_github_clientId" "<clientId" --project src/Chirp.Infrastructure
+dotnet user-secrets set "authentication_github_clientId" "<clientId"
+--project src/Chirp.Infrastructure
 ```
 
 ```
-dotnet user-secrets set "authentication_github_clientSecret" "<clientSecret>" --project src/Chirp.Infrastructure
+dotnet user-secrets set "authentication_github_clientSecret" "<clientSecret>"
+--project src/Chirp.Infrastructure
 ```
 
 4. Run the project by entering:
