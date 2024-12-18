@@ -20,17 +20,22 @@ numbersections: true
 - [Architecture of deployed application](#architecture)
 - [User activities](#user-activities)
 - [Sequence of functionality/calls trough _Chirp!_](#functionality-calls)
+  - [Public timeline sequence](#public-timeline)
+  - [Following/unfollowing sequence](#follow)
+  - [Forget me sequence](#forget-me)
 - [Process](#Process)
 - [Build, test, release, and deployment](#btrd)
+  - [Build and test workflow](test-workflow)
+  - [Release workflow](release-workflow)
+  - [Deployment workflow](deployment-workflow)
 - [Team Work](#team-work)
   - [Description of the group’s workflow](#group-workflow)
 - [How to make _Chirp!_ work locally](#work-locally)
-- [Releases](#releases)
+- [Releases](#release)
   - [For Windows](#for-windows)
   - [For MacOS X](#for-mac)
 - [Git Cloning](#git-cloning)
-  - [In the Terminal/Command Prompt](#terminal)
-- [How to run test suite locally](#run-tets)
+- [How to run test suite locally](#run-tests)
 - [Ethics](#ethics)
   - [License](#license)
   - [LLMs, ChatGPT, CoPilot, and others](#llms)
@@ -72,7 +77,7 @@ The outermost layer of the Onion Architecture is implemented in the Chirp.Web so
 
 <a id="functionality-calls"></a>
 ## Sequence of functionality/calls through _Chirp!_
-In the following section, a selection of the implemented functionality will be presented with the aid of sub-system sequence diagrams. The diagrams show the roles of the different components and languages in the project, while also providing a more in-depth look into the "onion" architecture.
+In the following section, a selection of the implemented functionality will be presented with the aid of sub-system sequence diagrams. The diagrams show the roles of the different components and languages in the project.
 
 <a id="public-timeline"></a>
 ### Accessing the Public Timeline
@@ -133,6 +138,8 @@ Our project board columns have been adjusted throughout this course, due to our 
 
 As can also be seen above, some issues have not yet been completed. This is due to us constantly improving our project these last few days, so occassionally new warnings pop up, and tests need to be adjusted. These issues have therefore been ongoing for longer periods of time, and have been moved back and forth between the in progress and completed columns. There are also some issues on the board which reflect the status of our report at the moment of us writing this section. 
 
+<a id="group-workflow"></a>
+### Group Workflow
 ![](./diagrams/groupworkflowblue.png)
 
 This is how our group tackled the weekly project work. As can be seen from the diagram, the flow in the blue box was used repeatedly throughout the week, as this is how we structured our work in smaller groups when working directly on the project.
@@ -144,7 +151,7 @@ We also enjoyed showing eachother our work by conducting scrum-style code run-th
 <a id="work-locally"></a>
 ## How to make _Chirp!_ work locally
 
-<a id="using-release"></a>
+<a id="release"></a>
 ### Using a release
 
 <a id="for-windows"></a>
