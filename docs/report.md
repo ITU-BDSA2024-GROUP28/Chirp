@@ -43,7 +43,7 @@ _Chirp!_ Project Report
 <a id="domain-model"></a>
 ## Domain model
 
-![](./images/DomainModel.drawio.png)
+![](./diagrams/DomainModel.drawio.png)
 
 The Domain Model for the Chirp application is implemented in the Chirp.Core package, which is the innermost layer in our Onion Model. This model consists of two main classes/entities: Author and Cheep, which define the essential components, core behavior and structure of the application. 
 
@@ -54,7 +54,7 @@ The Cheep object represents the structure for individual posts created by an aut
 <a id="architecture-small"></a>
 ## Architecture — In the small
 
-![](./images/OnionModel.drawio.png)
+![](./diagrams/OnionModel.drawio.png)
 
 The Chirp Application is designed following The Onion Architecture, which to some extent ensured separation of concerns and testability in our project. The architecture is implemented across three solutions:
 
