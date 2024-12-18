@@ -28,7 +28,8 @@ Here comes a description of our domain model.
 ![](./diagrams/ForgetMe.drawio.png)
 And
 ![](./diagrams/PublicTimeline.drawio.png)
-
+and
+![](./diagrams/Follow.drawio.png)
 # Process
 
 ## Build, test, release, and deployment
