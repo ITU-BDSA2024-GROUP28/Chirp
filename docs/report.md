@@ -5,17 +5,21 @@ header-includes:
 ---
 
 # _Chirp!_ Project Report
+>
+
+![](./images/ChirpFrontPage.png)
 
 ## ***ITU BDSA 2024 Group 28***
+>
 Analysis, Design and Software Architecture - BSANDSA1KU
-
+>
 - Amira Maria Ayoub <aayo@itu.dk>
 - Emma Andrea Ravn Krause-Kjær <ekra@itu.dk>
 - Josefine Kamp Nielsen <kajn@itu.dk>
 - Stine Helena Hallberg Sørensen <sths@itu.dk>
 - Um-Kulsum Abusheva <umab@itu.dk>
 
-
+\pagebreak
 
 ## Table of contents
 - [Design and Architecture](#design)
@@ -57,7 +61,6 @@ The **Author** class represents a user of _Chirp_!. The class extends from the I
 
 The **Cheep** class represents the structure for individual posts created by an authenticated user. It contains a unique identifier CheepId (int), a foreign key AuthorId (int) and an Author of type Author, associated with an existing user. It also contains the field Text (string), which is the content of the post with a maximum length of 160 characters. Lastly, it contains a Timestamp (DateTime), which is the registered time and date of when the cheep was posted.
 
-<a id="architecture-small"></a>
 ## Architecture — In the small
 
 ![](./diagrams/OnionModel.drawio.png)
@@ -72,13 +75,11 @@ This solution has two important layers. The Repository Layer implements the meth
  
 3.	#### Chirp.Web (UI Layer):
 The outermost layer of the Onion Architecture is implemented in the Chirp.Web solution and handles all user interaction through Razor Pages while interacting with the DTOs and Services. Located here is also the application’s Program.cs file, which serves as the entry point for _Chirp!_. The Program.cs file is responsible for configuring and registering essential components, such as the application's services, database context, authentication providers, and middleware pipeline.
-<br>
-<a id="architecture"></a>
+
 ## Architecture of deployed application
 ![](./diagrams/arch_of_deployed.drawio.png) <br>
 When the application gets deployed, the browser sends a request to the Azure server. Azure forwards the request to our application. The _Chirp!_ application queries the database for the needed data. The database then returns the requested data, which the application turns into HTML and C# code. This results in the HTTP response that is visible to the users.
 
-<a id="user-activities"></a>
 ## User activities
 There are a number of actions a user can take on _Chirp!_. Below are diagrams to show the processes.
 
@@ -97,21 +98,17 @@ The diagram above shows a user logging in to delete their account, by clicking t
 ![](./diagrams/user_activity_total_overview.drawio.png) <br>
 The diagram above shows a full diagram of the actions a user can take on the website. A user can end the application at any time by closing the window.
 
-<a id="functionality-calls"></a>
 ## Sequence of functionality/calls through _Chirp!_
 In the following section, a selection of the implemented functionality will be presented with the aid of sub-system sequence diagrams. The diagrams show the roles of the different components and programming languages in the project.
 
-<a id="public-timeline"></a>
 ### Accessing the Public Timeline
 ![](./diagrams/PublicTimeline.drawio.png)
 The entry point to _Chirp!_ is the public timeline. The diagram shows the sequence of calls required to display the cheeps in the database to an unauthenticated user. 
 
-<a id="follow"></a>
 ### Follow (and unfollow)
 ![](./diagrams/Follow.drawio.png)
 This diagram illustrates the call sequence to follow another user. The blue and red containers represent longer functionality sequences, much like the one shown in **"Accessing the Public Timeline"** above. Unfollowing a user requires access to the same components, differing only in a few methods.
 
-<a id="forget-me"></a>
 ### Forget me
 ![](./diagrams/ForgetMe.drawio.png)
 Lastly, the above diagram illustrates the sequence of calls required to delete a user from _Chirp!_. Our implementation of the "Forget Me" feature attempts to be GDPR compliant by:
@@ -121,22 +118,17 @@ Lastly, the above diagram illustrates the sequence of calls required to delete a
 4. Executing the DELETE operation on the row in the database with the user's information
 5. Signing the user out after the above operations
 6. Executing all above operations without any unnecessary delays
-<br>
 
-<a id="process"></a>
 # Process
 
-<a id="btrd"></a>
 ## Build, test, release, and deployment
 Our program is automatically built, tested, and run through the following three Github Actions Workflows:
 
-<a id="test-workflow"></a>
 ### Build and Test Workflow
 ![](./diagrams/workflow1.png)
 
 This workflow shows how we automatically build and test our program on all branches whenever we push our commits or accept a pull request. This helps keep us on track with testing.
 
-<a id="release-workflow"></a>
 ### Release Workflow
 ![](./diagrams/workflow2.png)
 
@@ -144,7 +136,6 @@ This workflow shows how we automatically create releases for the three major ope
 
 The details of building the program are elaborated on in the **"Build and Test Workflow"** above.
 
-<a id="deployment-workflow"></a>
 ### Deployment Workflow
 ![](./diagrams/workflow3.png)
 
@@ -152,8 +143,6 @@ This workflow illustrates how we deploy our program to Azure. This workflow is a
 
 In this diagram too, the details of building and testing the program have been omitted, as they are elaborated on in the **"Build and Test Workflow"** above.
 
-
-<a id="team-work"></a>
 ## Team work
 ![](./images/project_board.png)
 
@@ -161,7 +150,6 @@ Our project board columns have been adjusted throughout this course, due to our 
 
 Likewise seen above, some issues have not yet been completed. This is due to us constantly improving our project these last few days, so occassionally new warnings appear, and tests need to be adjusted. These issues have therefore been ongoing for longer periods of time, and have been moved back and forth between the "This week in progress" and "Done" columns. There are also some issues on the board which reflect the status of our report at the moment of us writing this section. 
 
-<a id="group-workflow"></a>
 ### Group Workflow
 ![](./diagrams/groupworkflowblue.png)
 
@@ -171,13 +159,10 @@ We followed the standard pair programming strategies well throughout the weeks, 
 
 We also enjoyed showing each other our work by conducting SCRUM-style code run-throughs when meeting up, as this helped us all stay up to date on the code, even the parts we had not written ourselves. This also allowed for inputs on how to improve certain parts of the code in terms of efficiency, better readability or to follow the correct architectural design models.
 
-<a id="work-locally"></a>
 ## How to make _Chirp!_ work locally
 
-<a id="release"></a>
 ### Using a release
 
-<a id="for-windows"></a>
 #### For Windows
 
 1. Go to our [GitHub repo](https://github.com/ITU-BDSA2024-GROUP28/Chirp).
@@ -191,7 +176,6 @@ We also enjoyed showing each other our work by conducting SCRUM-style code run-t
 9. Press the reigster button in the navigation bar and register using Github or use your private email and username, and create a password.
 10. You should now be able to freely explore Chirp!
 
-<a id="for-mac"></a>
 #### For MacOS X
 
 1. Go to our [GitHub repo](https://github.com/ITU-BDSA2024-GROUP28/Chirp). 
@@ -232,7 +216,6 @@ sudo ./Chirp.Web
 13. Press the reigster button in the navigation bar and register using Github or use your private email and username, and create a password.
 14. You should now be able to freely explore Chirp!
 
-<a id="git-cloning"></a>
 ### Using git cloning
 
 In the **Terminal**:
@@ -268,7 +251,7 @@ dotnet user-secrets set "authentication_github_clientSecret" "<clientSecret>" --
 ```
 dotnet run --project src/Chirp.Web.
 ```
-<a id="run-tests"></a>
+
 ## How to run test suite locally
 If you do not have playwright installed, please follow these steps first:
 
@@ -314,15 +297,12 @@ dotnet test
 
 _Please note that the formatting of time stamps on different OS may cause the test "" to fail. Also that first time you run the tests publictimeline may timeout._
 
-<a id="ethics"></a>
 # Ethics
 
-<a id="license"></a>
 ## License
 For this project our group chose to use the MIT license. Due to most of the packages we use being licensed under MIT, this was the most logical choice. Moreover, we value the simplicity of the license, as we are not experienced in using licenses, and as developers we appreciate the flexibility and freedom this allows. The license gives any person “without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software”[source] under the condition that the copyright notice and the permission of MIT license is included in all copies.
 
 [source] Our license is chosen from [choosealicense.com](https://choosealicense.com/licenses/mit/), see file [LICENSE.md](https://github.com/ITU-BDSA2024-GROUP28/Chirp/blob/Ethics/LICENSE.MD)
 
-<a id="llms"></a>
 ## LLMs, ChatGPT, CoPilot, and others
 We have used the LLM ‘ChatGPT’ a couple of times. We have made sure to mention this in our commits whenever we have done so. Each time the purpose was to gain a new perspective on a problem that had us stumped. However, it has almost always been more helpful and beneficial to ask classmates or TAs, we only resorted to the LLM when they were not available to assist. Whenever we did ask the LLM for help, it would only speed up our work approximately 50% of the time. The remaining 50% of the responses it gave to our prompts were mostly, if not entirely, useless.
