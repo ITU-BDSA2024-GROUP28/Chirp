@@ -249,7 +249,9 @@ dotnet run --project src/Chirp.Web.
 ## How to run test suite locally
 If you do not have playwright installed, please follow these steps first:
 
-1. From our Chirp repo, go to playwright testing directory
+1. Clone the Chirp project repository (see [git cloning](#git-cloning))
+
+3. From our Chirp repo, go to playwright testing directory
 ```
 cd test
 cd PlaywrightTests
@@ -258,9 +260,17 @@ cd PlaywrightTests
 ```
 dotnet build
 ```
-5. Install playwright using this command
+4. Add package
 ```
-pwsh bin/Debug/net8.0/playwright.ps1 install
+dotnet add package microsoft.playwright.MSTest
+```
+5. Restore
+```
+dotnet tool restore
+```
+6.Install playwright
+```
+dotnet playwright install
 ```
 
 Then, to run test locally, follow these steps. 
@@ -279,7 +289,7 @@ dotnet test
 ```
 5. This should run unit tests, integration tests and playwright test
 
-_Please note that the formatting of time stamps on different OS may cause the test "" to fail._
+_Please note that the formatting of time stamps on different OS may cause the test "" to fail. Also that first time you run the tests publictimeline may timeout._
 
 <a id="ethics"></a>
 # Ethics
