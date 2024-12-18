@@ -66,7 +66,7 @@ This solution has two important layers. The Repository Layer implements the meth
  
 3.	#### Chirp.Web (UI Layer):
 The outermost layer of the Onion Architecture is implemented in the Chirp.Web solution and handles all user interaction through Razor Pages while interacting with the DTOs and Services. Located here is also the application’s Program.cs file, which serves as the entry point for _Chirp!_. The Program.cs file is responsible for configuring and registering essential components, such as the application's services, database context, authentication providers, and middleware pipeline.
-
+<br>
 <a id="architecture"></a>
 ## Architecture of deployed application
 ![](./diagrams/architecture_of_deployed.drawio.png) <br>
