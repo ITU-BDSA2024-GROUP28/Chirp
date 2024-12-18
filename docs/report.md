@@ -44,10 +44,9 @@ Analysis, Design and Software Architecture - BSANDSA1KU
   - [License](#license)
   - [LLMs, ChatGPT, CoPilot, and others](#llms)
  
-<a id="design"></a>
+
 # Design and Architecture
 
-<a id="domain-model"></a>
 ## Domain model
 
 ![](./diagrams/DomainModel.drawio.png)
