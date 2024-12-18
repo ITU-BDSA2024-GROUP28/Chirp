@@ -22,16 +22,5 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --no-restore
-
-      - name: Install Node.js (for Playwright)
-        uses: actions/setup-node@v3
-        with:
-            node-version: 18
-      - name: Install Playwright
-        run: npm install
-      - name: Install dependencies
-        run: npx playwright install-deps
-      - name: Install playwright env
-        run: npx playwright install
       - name: Run test
         run: dotnet test --no-build --verbosity normal
