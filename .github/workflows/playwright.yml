@@ -12,7 +12,7 @@ jobs:
           node-version: lts/*
       - name: Install dependencies
         run: |
-          cd ../../test/PlaywrightTests
+          cd /test/PlaywrightTests
           npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
