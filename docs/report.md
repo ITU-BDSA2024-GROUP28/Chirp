@@ -14,9 +14,13 @@ numbersections: true
 
 ## Domain model
 
-Here comes a description of our domain model.
+![](./images/DomainModel.drawio.png)
 
-![Illustration of the _Chirp!_ data model as UML class diagram.](docs/images/domain_model.png)
+The Domain Model for the Chirp application is implemented in the Chirp.Core package, which is the innermost layer in our Onion Model. This model consists of two main classes/entities: Author and Cheep, which define the essential components, core behavior and structure of the application. 
+
+Author represents a user and extends from the IdentityUser class from Asp.Net.Core Identity, allowing functionality such as authenticating a user. As seen above in the diagram, an Author automatically inherits an Id (int), an Email (string) and a username (string). Furthermore, an Author has a relation to Cheep by storing a Collection of cheeps the user has written. This ensures that every Cheep is written by only one Author, but an Author can write many Cheeps, making it a one-to-many relationship. Finally, the Author class stores two Lists, which contain the other Authors which the user is either following or followed by.
+
+The Cheep object represents the structure for individual posts created by an authorizeded user. It contains a unique identifier CheepId (int), a foreign key AuthorId (int) and an Author of type Author, associated with an existing user. It also contains Text (string), which is the content of the post with a maximum length of 160 characters. Lastly, it contains a Timestamp (DateTime), which is the registered time and date of when the cheep was posted.
 
 ## Architecture — In the small
 
