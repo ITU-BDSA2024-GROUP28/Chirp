@@ -1,46 +1,44 @@
----
-title: _Chirp!_ Project Report
-subtitle: ITU BDSA 2024 Group 28
-author:
-- "Amira Maria Ayoub <aayo@itu.dk>"
-- "Emma Andrea Ravn Krause-Kjær <ekra@itu.dk>"
-- "Josefine Kamp Nielsen <kajn@itu.dk>"
-- "Stine Helena Hallberg Sørensen <sths@itu.dk>"
-- "Um-Kulsum Abusheva <umab@itu.dk>"
-numbersections: true
----
+_Chirp!_ Project Report
+==============
+***ITU BDSA 2024 Group 28***
+- Amira Maria Ayoub <aayo@itu.dk>
+- Emma Andrea Ravn Krause-Kjær <ekra@itu.dk>
+- Josefine Kamp Nielsen <kajn@itu.dk>
+- Stine Helena Hallberg Sørensen <sths@itu.dk>
+- Um-Kulsum Abusheva <umab@itu.dk>
+<div style="page-break-after: always;"></div>
 
-<a id="design"></a>
-# Design and Architecture of _Chirp!_
 
-## Table of contents:
 
-- [Domain model](#domain-model)
-- [Architecture - In the small](#architecture-small)
-- [Architecture of deployed application](#architecture)
-- [User activities](#user-activities)
-- [Sequence of functionality/calls trough _Chirp!_](#functionality-calls)
-  - [Public timeline sequence](#public-timeline)
-  - [Following/unfollowing sequence](#follow)
-  - [Forget me sequence](#forget-me)
+## Table of contents
+- [Design and Architecture](#design)
+  - [Domain model](#domain-model)
+  - [Architecture - In the small](#architecture-small)
+  - [Architecture of deployed application](#architecture)
+  - [User activities](#user-activities)
+  - [Sequence of functionality/calls trough _Chirp!_](#functionality-calls)
+    - [Public timeline sequence](#public-timeline)
+    - [Following/unfollowing sequence](#follow)
+    - [Forget me sequence](#forget-me)
 - [Process](#Process)
-- [Build, test, release, and deployment](#btrd)
-  - [Build and test workflow](test-workflow)
-  - [Release workflow](release-workflow)
-  - [Deployment workflow](deployment-workflow)
-- [Team Work](#team-work)
-  - [Description of the group’s workflow](#group-workflow)
-- [How to make _Chirp!_ work locally](#work-locally)
-- [Releases](#release)
-  - [For Windows](#for-windows)
-  - [For MacOS X](#for-mac)
-- [Git Cloning](#git-cloning)
-- [How to run test suite locally](#run-tests)
+  - [Build, test, release, and deployment](#btrd)
+    - [Build and test workflow](test-workflow)
+    - [Release workflow](release-workflow)
+    - [Deployment workflow](deployment-workflow)
+  - [Team Work](#team-work)
+    - [Description of the group’s workflow](#group-workflow)
+  - [How to make _Chirp!_ work locally](#work-locally)
+    - [Using a release](#release)
+      - [For Windows](#for-windows)
+      - [For MacOS X](#for-mac)
+    - [Git Cloning](#git-cloning)
+  - [How to run test suite locally](#run-tests)
 - [Ethics](#ethics)
   - [License](#license)
   - [LLMs, ChatGPT, CoPilot, and others](#llms)
  
-
+<a id="design"></a>
+# Design and Architecture
 
 <a id="domain-model"></a>
 ## Domain model
@@ -314,9 +312,9 @@ _Please note that the formatting of time stamps on different OS may cause the te
 
 <a id="license"></a>
 ## License
-For this project our group chose to use the MIT license. Due to most of the packages we use being licensed under MIT, this was the most logical choice. Moreover, we value the simplicity of the license, as we are not experienced in using licenses, and as developers we appreciate the flexibility and freedom this allows. The license gives any person “without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software” under the condition that the copyright notice and the permission of MIT license is included in all copies. [source]
+For this project our group chose to use the MIT license. Due to most of the packages we use being licensed under MIT, this was the most logical choice. Moreover, we value the simplicity of the license, as we are not experienced in using licenses, and as developers we appreciate the flexibility and freedom this allows. The license gives any person “without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software”[source] under the condition that the copyright notice and the permission of MIT license is included in all copies.
 
-[source] our license is chosen from [choosealicense.com](https://choosealicense.com/licenses/mit/), see file [LICENSE.md](https://github.com/ITU-BDSA2024-GROUP28/Chirp/blob/Ethics/LICENSE.MD)
+[source] Our license is chosen from [choosealicense.com](https://choosealicense.com/licenses/mit/), see file [LICENSE.md](https://github.com/ITU-BDSA2024-GROUP28/Chirp/blob/Ethics/LICENSE.MD)
 
 <a id="llms"></a>
 ## LLMs, ChatGPT, CoPilot, and others
