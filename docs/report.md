@@ -1,46 +1,44 @@
----
-title: _Chirp!_ Project Report
-subtitle: ITU BDSA 2024 Group 28
-author:
-- "Amira Maria Ayoub <aayo@itu.dk>"
-- "Emma Andrea Ravn Krause-Kjær <ekra@itu.dk>"
-- "Josefine Kamp Nielsen <kajn@itu.dk>"
-- "Stine Helena Hallberg Sørensen <sths@itu.dk>"
-- "Um-Kulsum Abusheva <umab@itu.dk>"
-numbersections: true
----
+_Chirp!_ Project Report
+==============
+***ITU BDSA 2024 Group 28***
+- Amira Maria Ayoub <aayo@itu.dk>
+- Emma Andrea Ravn Krause-Kjær <ekra@itu.dk>
+- Josefine Kamp Nielsen <kajn@itu.dk>
+- Stine Helena Hallberg Sørensen <sths@itu.dk>
+- Um-Kulsum Abusheva <umab@itu.dk>
+<div style="page-break-after: always;"></div>
 
-<a id="design"></a>
-# Design and Architecture of _Chirp!_
 
-## Table of contents:
 
-- [Domain model](#domain-model)
-- [Architecture - In the small](#architecture-small)
-- [Architecture of deployed application](#architecture)
-- [User activities](#user-activities)
-- [Sequence of functionality/calls trough _Chirp!_](#functionality-calls)
-  - [Public timeline sequence](#public-timeline)
-  - [Following/unfollowing sequence](#follow)
-  - [Forget me sequence](#forget-me)
+## Table of contents
+- [Design and Architecture](#design)
+  - [Domain model](#domain-model)
+  - [Architecture - In the small](#architecture-small)
+  - [Architecture of deployed application](#architecture)
+  - [User activities](#user-activities)
+  - [Sequence of functionality/calls trough _Chirp!_](#functionality-calls)
+    - [Public timeline sequence](#public-timeline)
+    - [Following/unfollowing sequence](#follow)
+    - [Forget me sequence](#forget-me)
 - [Process](#Process)
-- [Build, test, release, and deployment](#btrd)
-  - [Build and test workflow](test-workflow)
-  - [Release workflow](release-workflow)
-  - [Deployment workflow](deployment-workflow)
-- [Team Work](#team-work)
-  - [Description of the group’s workflow](#group-workflow)
-- [How to make _Chirp!_ work locally](#work-locally)
-- [Releases](#release)
-  - [For Windows](#for-windows)
-  - [For MacOS X](#for-mac)
-- [Git Cloning](#git-cloning)
-- [How to run test suite locally](#run-tests)
+  - [Build, test, release, and deployment](#btrd)
+    - [Build and test workflow](test-workflow)
+    - [Release workflow](release-workflow)
+    - [Deployment workflow](deployment-workflow)
+  - [Team Work](#team-work)
+    - [Description of the group’s workflow](#group-workflow)
+  - [How to make _Chirp!_ work locally](#work-locally)
+    - [Using a release](#release)
+      - [For Windows](#for-windows)
+      - [For MacOS X](#for-mac)
+    - [Git Cloning](#git-cloning)
+  - [How to run test suite locally](#run-tests)
 - [Ethics](#ethics)
   - [License](#license)
   - [LLMs, ChatGPT, CoPilot, and others](#llms)
  
-
+<a id="design"></a>
+# Design and Architecture
 
 <a id="domain-model"></a>
 ## Domain model
