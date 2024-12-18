@@ -23,4 +23,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Run test
-      run: dotnet test --no-build --verbosity normal
+      run: |
+        pwsh bin/Debug/netX/playwright.ps1 install 
+        dotnet test --no-build --verbosity normal
