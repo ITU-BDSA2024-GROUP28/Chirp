@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="25.0.3">
   <diagram name="Page-1" id="avL5XU8RPakeBhmfCsOL">
-    <mxGraphModel dx="750" dy="373" grid="1" gridSize="5" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="120" math="0" shadow="0">
+    <mxGraphModel dx="840" dy="418" grid="1" gridSize="5" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="120" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -47,28 +47,28 @@
         <mxCell id="mieYaTjhHKv_YwPCSe6w-49" value="HTTP Response" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" parent="mieYaTjhHKv_YwPCSe6w-48" connectable="0" vertex="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="u5BKJnAgpcsJiWSKu-V1-11" value="Chirp&lt;div&gt;Application&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="u5BKJnAgpcsJiWSKu-V1-11" value="Chirp&lt;div&gt;Application&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="500" y="17.5" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="u5BKJnAgpcsJiWSKu-V1-20" value="chirp.db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=9.333346896701386;" vertex="1" parent="1">
+        <mxCell id="u5BKJnAgpcsJiWSKu-V1-20" value="chirp.db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=9.333346896701386;" parent="1" vertex="1">
           <mxGeometry x="720" y="15" width="60" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="u5BKJnAgpcsJiWSKu-V1-36" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=25.916673448350693;entryPerimeter=0;" edge="1" parent="1" source="u5BKJnAgpcsJiWSKu-V1-11" target="u5BKJnAgpcsJiWSKu-V1-20">
+        <mxCell id="u5BKJnAgpcsJiWSKu-V1-36" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=25.916673448350693;entryPerimeter=0;" parent="1" source="u5BKJnAgpcsJiWSKu-V1-11" target="u5BKJnAgpcsJiWSKu-V1-20" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="610" y="57.5" as="sourcePoint" />
             <mxPoint x="710" y="57.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="u5BKJnAgpcsJiWSKu-V1-37" value="SQLite querie" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="u5BKJnAgpcsJiWSKu-V1-36">
+        <mxCell id="u5BKJnAgpcsJiWSKu-V1-37" value="SQL queries" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" parent="u5BKJnAgpcsJiWSKu-V1-36" connectable="0" vertex="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="u5BKJnAgpcsJiWSKu-V1-38" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=59.08332655164931;exitPerimeter=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="u5BKJnAgpcsJiWSKu-V1-20" target="u5BKJnAgpcsJiWSKu-V1-11">
+        <mxCell id="u5BKJnAgpcsJiWSKu-V1-38" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=59.08332655164931;exitPerimeter=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="u5BKJnAgpcsJiWSKu-V1-20" target="u5BKJnAgpcsJiWSKu-V1-11" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="610" y="57.5" as="sourcePoint" />
             <mxPoint x="710" y="57.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="u5BKJnAgpcsJiWSKu-V1-39" value="Requested data" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="u5BKJnAgpcsJiWSKu-V1-38">
+        <mxCell id="u5BKJnAgpcsJiWSKu-V1-39" value="Requested data" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" parent="u5BKJnAgpcsJiWSKu-V1-38" connectable="0" vertex="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
