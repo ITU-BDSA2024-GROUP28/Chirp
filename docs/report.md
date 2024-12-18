@@ -1,12 +1,19 @@
-_Chirp!_ Project Report
-==============
-***ITU BDSA 2024 Group 28***
+---
+header-includes:
+  - \usepackage{listings}
+  - \lstset{breaklines=true, breakatwhitespace=true}
+---
+
+# _Chirp!_ Project Report
+
+## ***ITU BDSA 2024 Group 28***
+Analysis, Design and Software Architecture - BSANDSA1KU
+
 - Amira Maria Ayoub <aayo@itu.dk>
 - Emma Andrea Ravn Krause-Kjær <ekra@itu.dk>
 - Josefine Kamp Nielsen <kajn@itu.dk>
 - Stine Helena Hallberg Sørensen <sths@itu.dk>
 - Um-Kulsum Abusheva <umab@itu.dk>
-<div style="page-break-after: always;"></div>
 
 
 
