@@ -56,44 +56,44 @@ The Cheep class represents the structure for individual posts created by an auth
 
 ![](./diagrams/OnionModel.drawio.png)
 
-The Chirp Application attempts to follow The Onion Architecture, which ensures separation of concerns and testability in our project. The architecture is implemented across three solutions:
+The Chirp Application attempts to follow The Onion Architecture, which ensures the separation of concerns and testability in our project. The architecture is implemented across three solutions:
 
 1.	#### Chirp.Core (Domain Layer):
-As the innermost layer, this solution is responsible for defining the entities (Cheep, Author). This layer is seen in detail in the domain model. Being the core of the layer makes it completely independent of external dependencies, only providing the foundation upon which all other layers build.
+As the innermost layer, this solution is responsible for defining the entities (Cheep, Author). This layer is seen in detail in the **Domain model** above. Being the core of the project makes it completely independent of external dependencies, only providing the foundation upon which all other layers build.
 
 2. ####	Chirp.Infrastructure (Repository and Services Layers): 
-This solution has two important layers. The Repository Layer implements the methods of the entities, making them dependent on the Domain Layer. The Services Layer primarily interacts with the repositories and thereby also the Domain Layer. Furthermore, the Infrastructure solution also consists of our ChirpDbContext, which acts as a bridge, integrating the Domain Model with the actual database (chirp.db) in the UI Layer.
+This solution has two important layers. The Repository Layer implements the methods of the entities, making them dependent on the Domain Layer. The Services Layer primarily interacts with the repositories and thereby the Domain Layer. Furthermore, the Infrastructure solution also consists of the ChirpDbContext, which acts as a bridge, integrating the Domain Model with the actual database (chirp.db) in the UI Layer.
  
 3.	#### Chirp.Web (UI Layer):
-The outermost layer of the Onion Architecture is implemented in the Chirp.Web solution and handles all user interaction through Razor Pages while interacting with the DTOs and Services. Located here is also the application’s Program.cs, that sets up dependency injection and serves as the entry point for HTTP requests. 
+The outermost layer of the Onion Architecture is implemented in the Chirp.Web solution and handles all user interaction through Razor Pages while interacting with the DTOs and Services. Located here is also the application’s Program.cs file, which serves as the entry point for _Chirp!_. The Program.cs file is responsible for configuring and registering essential components, such as the application's services, database context, authentication providers, and middleware pipeline.
 
 <a id="architecture"></a>
 ## Architecture of deployed application
 ![](./diagrams/architecture_of_deployed.drawio.png) <br>
-When the application gets deployed, the browser sends a request to the azure server. Azure then sends the request on to our system. The Chirp system requests the needed information from the database, using SQLite queries. The database then returns the requested data, which the application turns into HTML and C#. This makes the HTTP response that is sent to the browser.
+When the application gets deployed, the browser sends a request to the Azure server. Azure forwards the request to our application. The _Chirp!_ application queries the database for the needed data. The database then returns the requested data, which the application turns into HTML and C# code. This results in the HTTP response that is visible to the users.
 
 <a id="user-activities"></a>
 ## User activities
-There are a number of actions a user can take on Chirp. Below are diagrams to show the processes.
+There are a number of actions a user can take on _Chirp!_. Below are diagrams to show the processes.
 
 ![](./diagrams/user_activity_unauthorised.drawio.png) <br>
 The diagram above shows the process of a user logging in.
 
 ![](./diagrams/user_activity_post_cheep.drawio.png) <br>
-The diagram above shows the process of a user logging in and posting a cheep
+The diagram above shows the process of a user logging in and posting a cheep.
 
 ![](./diagrams/user_activity_follow_unfollow.drawio.png) <br>
-The diagram above shows the process of a user logging in and following another user
+The diagram above shows the process of a user logging in and following another user.
 
 ![](./diagrams/user_activity_forget_me.drawio.png) <br>
-The diagram above shows a user logging in to delete their account, by clicking on the “Forget me” button. By clicking this, the user will also delete the cheeps, list of followers, along with being deleted from all lists of followers that they may have been on.
+The diagram above shows a user logging in to delete their account, by clicking the “Forget me” button on the User Profile page. This action results in the deletion of the user's cheeps, along with being deleted from all its followers' lists of following.
 
 ![](./diagrams/user_activity_total_overview.drawio.png) <br>
-The diagram above shows a full diagram of the actions a user can take on the website. A user can end the application at any time by closing the window, but here is an overview of how Chirp works.
+The diagram above shows a full diagram of the actions a user can take on the website. A user can end the application at any time by closing the window.
 
 <a id="functionality-calls"></a>
 ## Sequence of functionality/calls through _Chirp!_
-In the following section, a selection of the implemented functionality will be presented with the aid of sub-system sequence diagrams. The diagrams show the roles of the different components and languages in the project.
+In the following section, a selection of the implemented functionality will be presented with the aid of sub-system sequence diagrams. The diagrams show the roles of the different components and programming languages in the project.
 
 <a id="public-timeline"></a>
 ### Accessing the Public Timeline
@@ -114,7 +114,7 @@ Lastly, the above diagram illustrates the sequence of calls required to delete a
 3. Removing all cheeps authored by the user
 4. Executing the DELETE operation on the row in the database with the user's information
 5. Signing the user out after the above operations
-6. All the above operations happen without any unnecessary delays
+6. Executing all above operations without any unnecessary delays
 <br>
 
 <a id="process"></a>
@@ -136,7 +136,7 @@ This workflow shows how we automatically build and test our program on all branc
 
 This workflow shows how we automatically create releases for the three major operating systems. These releases allow a user to download and run the program locally from their own computer. The workflow is triggered by the creation and push of a new tag of the form “v*.*.*” (RegEx: the asterisks represents any number/character). The entire project is compressed into single file executables for each OS, and then further compressed together with the static files into zip files. These, together with the source code in zip and tar.gz files are released to GitHub under the version number.
 
-The details of building the program have been left out here, as they are shown in the build and test workflow.
+The details of building the program are elaborated on in the **"Build and Test Workflow"** above.
 
 <a id="deployment-workflow"></a>
 ### Deployment Workflow
@@ -144,7 +144,8 @@ The details of building the program have been left out here, as they are shown i
 
 This workflow illustrates how we deploy our program to Azure. This workflow is almost entirely built by Azure, we have simply modified it to suit the specifics of our program. The workflow is triggered by either a push or pull to the primary branch.
 
-THe details of building and testing the program have also been left out here, as they are shown in the build and test workflow.
+In this diagram too, the details of building and testing the program have been omitted, as they are elaborated on in the **"Build and Test Workflow"** above.
+
 
 <a id="team-work"></a>
 ## Team work
@@ -152,17 +153,17 @@ THe details of building and testing the program have also been left out here, as
 
 Our project board columns have been adjusted throughout this course, due to our needs varying from week to week. In the beginning of the course we were still learning to structure our time correctly, so we had columns for previous weeks that included issues we had not managed to finish before the beginning of a new week. However, with a bit of extra effort we caught up and for the last half of the course we have only had work for the current week to complete. This can be seen in the image above. 
 
-As can also be seen above, some issues have not yet been completed. This is due to us constantly improving our project these last few days, so occassionally new warnings pop up, and tests need to be adjusted. These issues have therefore been ongoing for longer periods of time, and have been moved back and forth between the in progress and completed columns. There are also some issues on the board which reflect the status of our report at the moment of us writing this section. 
+Likewise seen above, some issues have not yet been completed. This is due to us constantly improving our project these last few days, so occassionally new warnings appear, and tests need to be adjusted. These issues have therefore been ongoing for longer periods of time, and have been moved back and forth between the "This week in progress" and "Done" columns. There are also some issues on the board which reflect the status of our report at the moment of us writing this section. 
 
 <a id="group-workflow"></a>
 ### Group Workflow
 ![](./diagrams/groupworkflowblue.png)
 
-This is how our group tackled the weekly project work. As can be seen from the diagram, the flow in the blue box was used repeatedly throughout the week, as this is how we structured our work in smaller groups when working directly on the project.
+This is how our group tackled the weekly project work. As can be seen from the diagram, the flow in the blue box repeated throughout the week, as this is how we structured our work in smaller groups when working directly on the project.
 
-We followed the standard pair programming strategies well throughout the weeks, and enjoyed how efficient we found this to be. As can also be seen in many of our initial commits, we did sometimes spend the days working all of us together on the project work. This was often due to certain tasks needing to be performed sequentially, otherwise the project would not be cohesive. Additionally, we enjoyed the productive discussions that sprung from this team-working style. 
+We followed the standard pair programming strategies well throughout the weeks, and enjoyed how efficient we found this to be. As can also be seen in many of our initial commits, where all the memebers are creditted as co-authors, we did lean towards mob programming in the beginning of the project work. This was often due to certain tasks needing to be performed sequentially, otherwise the project would not be cohesive. Additionally, we enjoyed the productive discussions that sprung from this team-working style. 
 
-We also enjoyed showing eachother our work by conducting scrum-style code run-throughs when meeting up  all together, as this helped us all stay up to date on the code, even the parts we had not written ourselves. This also allowed for inputs on how to improve certain parts of the code in terms of efficiency, better readability or to follow the correct architectural design models.
+We also enjoyed showing each other our work by conducting SCRUM-style code run-throughs when meeting up, as this helped us all stay up to date on the code, even the parts we had not written ourselves. This also allowed for inputs on how to improve certain parts of the code in terms of efficiency, better readability or to follow the correct architectural design models.
 
 <a id="work-locally"></a>
 ## How to make _Chirp!_ work locally
