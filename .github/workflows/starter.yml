@@ -25,9 +25,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Restore ci
-      run: |
-        npm init playwright@latest
-        npm ci
+      run: npm ci
     - name: Build
       run: dotnet build --no-restore
     - name: Install Playwright Browsers
