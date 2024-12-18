@@ -71,9 +71,27 @@ The outermost layer of the Onion Architecture is implemented in the Chirp.Web so
 
 <a id="architecture"></a>
 ## Architecture of deployed application
+![](./diagrams/architecture_deployed.drawio.png) <br>
+When the application gets deployed, the browser sends a request to the azure server. Azure then sends the request on to our system. The Chirp system requests the needed information from the database, using SQLite queries. The database then returns the requested data, which the application turns into HTML and C#. This makes the HTTP response that is sent to the browser.
 
 <a id="user-activities"></a>
 ## User activities
+There are a number of actions a user can take on Chirp. Below are diagrams to show the processes.
+
+![](./diagrams/user_activity_unauthorised.drawio.png) <br>
+The diagram above shows the process of a user logging in.
+
+![](./diagrams/user_activity_post_cheep.drawio.png) <br>
+The diagram above shows the process of a user logging in and posting a cheep
+
+![](./diagrams/user_activity_follow_unfollow.drawio.png) <br>
+The diagram above shows the process of a user logging in and following another user
+
+![](./diagrams/user_activity_forget_me.drawio.png) <br>
+The diagram above shows a user logging in to delete their account, by clicking on the “Forget me” button. By clicking this, the user will also delete the cheeps, list of followers, along with being deleted from all lists of followers that they may have been on.
+
+![](./diagrams/user_activity_total_overview.drawio.png) <br>
+The diagram above shows a full diagram of the actions a user can take on the website. A user can end the application at any time by closing the window, but here is an overview of how Chirp works.
 
 <a id="functionality-calls"></a>
 ## Sequence of functionality/calls through _Chirp!_
