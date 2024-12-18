@@ -71,7 +71,7 @@ The outermost layer of the Onion Architecture is implemented in the Chirp.Web so
 
 <a id="architecture"></a>
 ## Architecture of deployed application
-![](./diagrams/architecture_deployed.drawio.png) <br>
+![](./diagrams/architecture_of_deployed.drawio.png) <br>
 When the application gets deployed, the browser sends a request to the azure server. Azure then sends the request on to our system. The Chirp system requests the needed information from the database, using SQLite queries. The database then returns the requested data, which the application turns into HTML and C#. This makes the HTTP response that is sent to the browser.
 
 <a id="user-activities"></a>
