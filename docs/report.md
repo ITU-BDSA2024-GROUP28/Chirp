@@ -14,27 +14,64 @@ numbersections: true
 
 ## Domain model
 
-Here comes a description of our domain model.
+![](./images/DomainModel.drawio.png)
 
-![Illustration of the _Chirp!_ data model as UML class diagram.](docs/images/domain_model.png)
+The Domain Model for the Chirp application is implemented in the Chirp.Core package, which is the innermost layer in our Onion Model. This model consists of two main classes/entities: Author and Cheep, which define the essential components, core behavior and structure of the application. 
+
+Author represents a user and extends from the IdentityUser class from Asp.Net.Core Identity, allowing functionality such as authenticating a user. As seen above in the diagram, an Author automatically inherits an Id (int), an Email (string) and a username (string). Furthermore, an Author has a relation to Cheep by storing a Collection of cheeps the user has written. This ensures that every Cheep is written by only one Author, but an Author can write many Cheeps, making it a one-to-many relationship. Finally, the Author class stores two Lists, which contain the other Authors which the user is either following or followed by.
+
+The Cheep object represents the structure for individual posts created by an authorizeded user. It contains a unique identifier CheepId (int), a foreign key AuthorId (int) and an Author of type Author, associated with an existing user. It also contains Text (string), which is the content of the post with a maximum length of 160 characters. Lastly, it contains a Timestamp (DateTime), which is the registered time and date of when the cheep was posted.
 
 ## Architecture — In the small
+
+![](./images/OnionModel.drawio.png)
+
+The Chirp Application is designed following The Onion Architecture, which to some extent ensured separation of concerns and testability in our project. The architecture is implemented across three solutions:
+
+1.	Chirp.Core (Domain Layer):
+As the innermost layer, this solution is responsible for defining the entities (Cheep, Author). This layer is seen in detail in the domain model. Being the core of the layer makes it completely independent of external dependencies, only providing the foundation upon which all other layers build.
+
+2.	Chirp.Infrastructure (Repository and Services Layers): 
+This solution has two important layers. The Repository Layer implements the methods of the entities, making them dependent on the Domain Layer. The Services Layer primarily interacts with the repositories and thereby also the Domain Layer. Furthermore, the Infrastructure solution also consists of our ChirpDbContext, which acts as a bridge, integrating the Domain Model with the actual database (chirp.db) in the UI Layer.
+ 
+3.	Chirp.Web (UI Layer):
+The outermost layer of the Onion Architecture is implemented in the Chirp.Web solution and handles all user interaction through Razor Pages while interacting with the DTOs and Services. Located here is also the application’s Program.cs, that sets up dependency injection and serves as the entry point for HTTP requests. 
+
 
 ## Architecture of deployed application
 
 ## User activities
 
-## Sequence of functionality/calls trough _Chirp!_
+## Sequence of functionality/calls through _Chirp!_
+In the following section, a selection of the implemented functionality will be presented with the aid of sub-system sequence diagrams. The diagrams show the roles of the different components and languages in the project, while also providing a more in-depth look into the "onion" architecture.
+### Accessing the Public Timeline
+![](./diagrams/PublicTimeline.drawio.png)
+The entry point to _Chirp!_ is the public timeline. The diagram shows the sequence of calls required to display the cheeps in the database to an unauthenticated user. 
+
+### Follow (and unfollow)
+![](./diagrams/Follow.drawio.png)
+This diagram illustrates the call sequence to follow another user. The blue and red containers represent longer functionality sequences, much like the one shown in **"Accessing the Public Timeline"** above. Unfollowing a user requires access to the same components, differing only in a few methods.
+
+### Forget me
+![](./diagrams/ForgetMe.drawio.png)
+Lastly, the above diagram illustrates the sequence of calls required to delete a user from _Chirp!_. Our implementation of the "Forget Me" feature attempts to be GDPR compliant by:
+1. Deleting the user from the UserManager
+2. Removing the user from the followers lists of its followers
+3. Removing all cheeps authored by the user
+4. Executing the DELETE operation on the row in the database with the user's information
+5. Signing the user out after the above operations
+6. All the above operations happen without any unnecessary delays
+<br>
 
 # Process
 
 ## Build, test, release, and deployment
-Our program is automatically built, tested and run through the following three Github Actions Workflows
+Our program is automatically built, tested, and run through the following three Github Actions Workflows:
 
 ### Build and Test Workflow
 ![](./diagrams/workflow1.png)
 
-This workflow shows how we automatically build and then test our program on all branches whenever we push our commits or accept a pull request. This helps keep us on track with testing.
+This workflow shows how we automatically build and test our program on all branches whenever we push our commits or accept a pull request. This helps keep us on track with testing.
 
 ### Release Workflow
 ![](./diagrams/workflow2.png)
