@@ -159,6 +159,7 @@ sudo ./Chirp.Web
 13. Press the reigster button in the navigation bar and register using Github or use your private email and username, and create a password.
 14. You should now be able to freely explore Chirp!
 
+<a id="github-cloning"></a>
 ### Using github cloning
 
 In the **Terminal**:
@@ -196,28 +197,14 @@ dotnet run --project src/Chirp.Web.
 ```
 
 ## How to run test suite locally
-To run test locally go through these steps if you have playwright installed
-1. Clone the Chirp project repository (see above)
+If you do not have playwright installed, please follow these steps first:
 
-2. Open your terminal
-
-3. Find the Chirp directory using the command
-```
-cd [directory-name]
-```
-4. Type in the command
-```
-dotnet test
-```
-5. This should run unit tests, integration tests and playwright test
-
-No playwright installed go through these steps may differ depending on pc
-1. Go to playwrighttest directory
+1. From our Chirp repo, go to playwright testing directory
 ```
 cd test
 cd PlaywrightTests
 ```
-3. Build project
+3. Build the project
 ```
 dotnet build
 ```
@@ -225,7 +212,23 @@ dotnet build
 ```
 pwsh bin/Debug/net8.0/playwright.ps1 install
 ```
-6. Then run tests see above
+
+Then, to run test locally, follow these steps. 
+
+1. Clone the Chirp project repository (see [github cloning](#github-cloning))
+
+2. Open your terminal
+
+3. Find the Chirp directory using the command
+```
+cd <path to chirp>/Chirp/
+```
+4. Type in the command
+```
+dotnet test
+```
+5. This should run unit tests, integration tests and playwright test
+
 
 # Ethics
 
