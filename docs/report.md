@@ -319,4 +319,3 @@ For this project our group chose to use the MIT license. Due to most of the pack
 <a id="llms"></a>
 ## LLMs, ChatGPT, CoPilot, and others
 We have used the LLM ‘ChatGPT’ a couple of times. We have made sure to mention this in our commits whenever we have done so. Each time the purpose was to gain a new perspective on a problem that had us stumped. However, it has almost always been more helpful and beneficial to ask classmates or TAs, we only resorted to the LLM when they were not available to assist. Whenever we did ask the LLM for help, it would only speed up our work approximately 50% of the time. The remaining 50% of the responses it gave to our prompts were mostly, if not entirely, useless.
-
