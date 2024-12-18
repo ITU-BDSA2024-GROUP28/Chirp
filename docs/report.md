@@ -25,20 +25,35 @@ Here comes a description of our domain model.
 ## User activities
 
 ## Sequence of functionality/calls through _Chirp!_
-![](./diagrams/ForgetMe.drawio.png)
-And
+In the following section, a selection of the implemented functionality will be presented with the aid of sub-system sequence diagrams. The diagrams show the roles of the different components and languages in the project, while also providing a more in-depth look into the "onion" architecture.
+### Accessing the Public Timeline
 ![](./diagrams/PublicTimeline.drawio.png)
-and
+The entry point to _Chirp!_ is the public timeline. The diagram shows the sequence of calls required to display the cheeps in the database to an unauthenticated user. 
+
+### Follow (and unfollow)
 ![](./diagrams/Follow.drawio.png)
+This diagram illustrates the call sequence to follow another user. The blue and red containers represent longer functionality sequences, much like the one shown in **"Accessing the Public Timeline"** above. Unfollowing a user requires access to the same components, differing only in a few methods.
+
+### Forget me
+![](./diagrams/ForgetMe.drawio.png)
+Lastly, the above diagram illustrates the sequence of calls required to delete a user from _Chirp!_. Our implementation of the "Forget Me" feature attempts to be GDPR compliant by:
+1. Deleting the user from the UserManager
+2. Removing the user from the followers lists of its followers
+3. Removing all cheeps authored by the user
+4. Executing the DELETE operation on the row in the database with the user's information
+5. Signing the user out after the above operations
+6. All the above operations happen without any unnecessary delays
+<br>
+
 # Process
 
 ## Build, test, release, and deployment
-Our program is automatically built, tested and run through the following three Github Actions Workflows
+Our program is automatically built, tested, and run through the following three Github Actions Workflows:
 
 ### Build and Test Workflow
 ![](./diagrams/workflow1.png)
 
-This workflow shows how we automatically build and then test our program on all branches whenever we push our commits or accept a pull request. This helps keep us on track with testing.
+This workflow shows how we automatically build and test our program on all branches whenever we push our commits or accept a pull request. This helps keep us on track with testing.
 
 ### Release Workflow
 ![](./diagrams/workflow2.png)
