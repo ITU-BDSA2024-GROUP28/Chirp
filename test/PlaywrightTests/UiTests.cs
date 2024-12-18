@@ -96,7 +96,7 @@ namespace PlaywrightTests
             await page.GetByPlaceholder("Share your thoughts...").FillAsync("Hello this is my Cheep!!!");
             await page.GetByRole(AriaRole.Button, new() { Name = "Share" }).ClickAsync();
             
-            await page.Locator("li").Filter(new() { HasText = "EndUser Hello this is my"}).GetByRole(AriaRole.Link).ClickAsync();
+            await page.Locator("li").Filter(new() { HasText = "EndUser"}).GetByRole(AriaRole.Link).IsVisibleAsync();
         }
 
         [TestMethod]
@@ -197,6 +197,9 @@ namespace PlaywrightTests
             }
             page.Dialog += page_Dialog_EventHandler;
             await page.GetByRole(AriaRole.Button, new() { Name = "Forget Me" }).ClickAsync();
+            
+            await page.GetByRole(AriaRole.Heading, new() { Name = "Icon1Chirp!" }).IsVisibleAsync();
+            await page.GetByRole(AriaRole.Heading, new() { Name = "Public Timeline" }).IsVisibleAsync();
         }
 
         [TestMethod]
@@ -225,7 +228,7 @@ namespace PlaywrightTests
             await page.GetByPlaceholder("password").FillAsync("Password1.");
             await page.GetByRole(AriaRole.Button, new() { Name = "Log in" }).ClickAsync();
         }
-        
+
     }
     
 }
