@@ -10,8 +10,34 @@ author:
 numbersections: true
 ---
 
+<a id="design"></a>
 # Design and Architecture of _Chirp!_
 
+## Table of contents:
+
+- [Domain model](#domain-model)
+- [Architecture - In the small](#architecture-small)
+- [Architecture of deployed application](#architecture)
+- [User activities](#user-activities)
+- [Sequence of functionality/calls trough _Chirp!_](#functionality-calls)
+- [Process](#Process)
+- [Build, test, release, and deployment](#btrd)
+- [Team Work](#team-work)
+  - [Description of the group’s workflow](#group-workflow)
+- [How to make _Chirp!_ work locally](#work-locally)
+- [Releases](#releases)
+  - [For Windows](#for-windows)
+  - [For MacOS X](#for-mac)
+- [Git Cloning](#git-cloning)
+  - [In the Terminal/Command Prompt](#terminal)
+- [How to run test suite locally](#run-tets)
+- [Ethics](#ethics)
+  - [License](#license)
+  - [LLMs, ChatGPT, CoPilot, and others](#llms)
+ 
+
+
+<a id="domain-model"></a>
 ## Domain model
 
 ![](./images/DomainModel.drawio.png)
@@ -22,6 +48,7 @@ Author represents a user and extends from the IdentityUser class from Asp.Net.Co
 
 The Cheep object represents the structure for individual posts created by an authorizeded user. It contains a unique identifier CheepId (int), a foreign key AuthorId (int) and an Author of type Author, associated with an existing user. It also contains Text (string), which is the content of the post with a maximum length of 160 characters. Lastly, it contains a Timestamp (DateTime), which is the registered time and date of when the cheep was posted.
 
+<a id="architecture-small"></a>
 ## Architecture — In the small
 
 ![](./images/OnionModel.drawio.png)
@@ -37,21 +64,27 @@ This solution has two important layers. The Repository Layer implements the meth
 3.	Chirp.Web (UI Layer):
 The outermost layer of the Onion Architecture is implemented in the Chirp.Web solution and handles all user interaction through Razor Pages while interacting with the DTOs and Services. Located here is also the application’s Program.cs, that sets up dependency injection and serves as the entry point for HTTP requests. 
 
-
+<a id="architecture"></a>
 ## Architecture of deployed application
 
+<a id="user-activities"></a>
 ## User activities
 
+<a id="functionality-calls"></a>
 ## Sequence of functionality/calls through _Chirp!_
 In the following section, a selection of the implemented functionality will be presented with the aid of sub-system sequence diagrams. The diagrams show the roles of the different components and languages in the project, while also providing a more in-depth look into the "onion" architecture.
+
+<a id="public-timeline"></a>
 ### Accessing the Public Timeline
 ![](./diagrams/PublicTimeline.drawio.png)
 The entry point to _Chirp!_ is the public timeline. The diagram shows the sequence of calls required to display the cheeps in the database to an unauthenticated user. 
 
+<a id="follow"></a>
 ### Follow (and unfollow)
 ![](./diagrams/Follow.drawio.png)
 This diagram illustrates the call sequence to follow another user. The blue and red containers represent longer functionality sequences, much like the one shown in **"Accessing the Public Timeline"** above. Unfollowing a user requires access to the same components, differing only in a few methods.
 
+<a id="forget-me"></a>
 ### Forget me
 ![](./diagrams/ForgetMe.drawio.png)
 Lastly, the above diagram illustrates the sequence of calls required to delete a user from _Chirp!_. Our implementation of the "Forget Me" feature attempts to be GDPR compliant by:
@@ -63,16 +96,20 @@ Lastly, the above diagram illustrates the sequence of calls required to delete a
 6. All the above operations happen without any unnecessary delays
 <br>
 
+<a id="process"></a>
 # Process
 
+<a id="btrd"></a>
 ## Build, test, release, and deployment
 Our program is automatically built, tested, and run through the following three Github Actions Workflows:
 
+<a id="test-workflow"></a>
 ### Build and Test Workflow
 ![](./diagrams/workflow1.png)
 
 This workflow shows how we automatically build and test our program on all branches whenever we push our commits or accept a pull request. This helps keep us on track with testing.
 
+<a id="release-workflow"></a>
 ### Release Workflow
 ![](./diagrams/workflow2.png)
 
@@ -80,6 +117,7 @@ This workflow shows how we automatically create releases for the three major ope
 
 The details of building the program have been left out here, as they are shown in the build and test workflow.
 
+<a id="deployment-workflow"></a>
 ### Deployment Workflow
 ![](./diagrams/workflow3.png)
 
@@ -87,6 +125,7 @@ This workflow illustrates how we deploy our program to Azure. This workflow is a
 
 THe details of building and testing the program have also been left out here, as they are shown in the build and test workflow.
 
+<a id="team-work"></a>
 ## Team work
 ![](./images/project_board.png)
 
@@ -102,10 +141,13 @@ We followed the standard pair programming strategies well throughout the weeks, 
 
 We also enjoyed showing eachother our work by conducting scrum-style code run-throughs when meeting up  all together, as this helped us all stay up to date on the code, even the parts we had not written ourselves. This also allowed for inputs on how to improve certain parts of the code in terms of efficiency, better readability or to follow the correct architectural design models.
 
+<a id="work-locally"></a>
 ## How to make _Chirp!_ work locally
 
+<a id="using-release"></a>
 ### Using a release
 
+<a id="for-windows"></a>
 #### For Windows
 
 1. Go to our [GitHub repo](https://github.com/ITU-BDSA2024-GROUP28/Chirp).
@@ -119,6 +161,7 @@ We also enjoyed showing eachother our work by conducting scrum-style code run-th
 9. Press the reigster button in the navigation bar and register using Github or use your private email and username, and create a password.
 10. You should now be able to freely explore Chirp!
 
+<a id="for-mac"></a>
 #### For MacOS X
 
 1. Go to our [GitHub repo](https://github.com/ITU-BDSA2024-GROUP28/Chirp). 
@@ -159,8 +202,8 @@ sudo ./Chirp.Web
 13. Press the reigster button in the navigation bar and register using Github or use your private email and username, and create a password.
 14. You should now be able to freely explore Chirp!
 
-<a id="github-cloning"></a>
-### Using github cloning
+<a id="git-cloning"></a>
+### Using git cloning
 
 In the **Terminal**:
 
@@ -195,7 +238,7 @@ dotnet user-secrets set "authentication_github_clientSecret" "<clientSecret>" --
 ```
 dotnet run --project src/Chirp.Web.
 ```
-
+<a id="run-tests"></a>
 ## How to run test suite locally
 If you do not have playwright installed, please follow these steps first:
 
@@ -215,7 +258,7 @@ pwsh bin/Debug/net8.0/playwright.ps1 install
 
 Then, to run test locally, follow these steps. 
 
-1. Clone the Chirp project repository (see [github cloning](#github-cloning))
+1. Clone the Chirp project repository (see [git cloning](#git-cloning))
 
 2. Open your terminal
 
@@ -229,14 +272,18 @@ dotnet test
 ```
 5. This should run unit tests, integration tests and playwright test
 
+_Please note that the formatting of time stamps on different OS may cause the test "" to fail._
 
+<a id="ethics"></a>
 # Ethics
 
+<a id="license"></a>
 ## License
 For this project our group chose to use the MIT license. Due to most of the packages we use being licensed under MIT, this was the most logical choice. Moreover, we value the simplicity of the license, as we are not experienced in using licenses, and as developers we appreciate the flexibility and freedom this allows. The license gives any person “without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software” under the condition that the copyright notice and the permission of MIT license is included in all copies. [source]
 
 [source] our license is chosen from [choosealicense.com](https://choosealicense.com/licenses/mit/), see file [LICENSE.md](https://github.com/ITU-BDSA2024-GROUP28/Chirp/blob/Ethics/LICENSE.MD)
 
+<a id="llms"></a>
 ## LLMs, ChatGPT, CoPilot, and others
 We have used the LLM ‘ChatGPT’ a couple of times. We have made sure to mention this in our commits whenever we have done so. Each time the purpose was to gain a new perspective on a problem that had us stumped. However, it has almost always been more helpful and beneficial to ask classmates or TAs, we only resorted to the LLM when they were not available to assist. Whenever we did ask the LLM for help, it would only speed up our work approximately 50% of the time. The remaining 50% of the responses it gave to our prompts were mostly, if not entirely, useless.
 
