@@ -24,6 +24,18 @@ The Cheep object represents the structure for individual posts created by an aut
 
 ## Architecture — In the small
 
+![](./images/OnionModel.drawio.png)
+
+The Chirp Application is designed following The Onion Architecture, which to some extent ensured our project separation of concerns and testability. The architecture is implemented across three solutions:
+
+1.	Chirp.Core (Domain Layer):
+As the innermost layer, this solution is responsible for defining the entities (Cheep, Author). Being the core of the layer makes it completely independent of external dependencies, only providing the foundation upon which all other layers interact with. 
+2.	Chirp.Infrastructure (Repository and Services Layers): 
+This solution has two important layers. The Repository Layer implements the methods of the entities, making them dependent on the Domain Layer. The Services Layer primarily interacts with the repositories and therefore also the Domain Layer. Furthermore, the Infrastructure solution also consists of ChirpDbContext, which acts as a bridge, integrating the Domain Model with the actual database (chirp.db) in the UI Layer. 
+3.	Chirp.Web (UI Layer):
+The outermost layer of the Onion Architecture is implemented in the Chirp.Web solution and handles all user interaction through Razor Pages while interacting with the DTOs and Services. Located here is also the application’s Program.cs, that sets up dependency injection and serves as the entry point for HTTP requests. 
+
+
 ## Architecture of deployed application
 
 ## User activities
