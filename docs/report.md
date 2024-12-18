@@ -23,8 +23,22 @@ Here comes a description of our domain model.
 ## Architecture of deployed application
 
 ## User activities
-Below are diagrams showing what a user can do on Chirp.
+There are a number of actions a user can take on Chirp. Below are diagrams to show the processes.
 
+![](./diagrams/user_activity_unauthorised.drawio.png) <br>
+The diagram above shows the process of a user logging in.
+
+![](./diagrams/user_activity_post_cheep.drawio.png) <br>
+The diagram above shows the process of a user logging in and posting a cheep
+
+![](./diagrams/user_activity_follow_unfollow.drawio.png) <br>
+The diagram above shows the process of a user logging in and following another user
+
+![](./diagrams/user_activity_forget_me.drawio.png) <br>
+The diagram above shows a user logging in to delete their account, by clicking on the “Forget me” button. By clicking this, the user will also delete the cheeps, list of followers, along with being deleted from all lists of followers that they may have been on.
+
+![](./diagrams/user_activity_total_overview.drawio.png) <br>
+The diagram above shows a full diagram of the actions a user can take on the website. A user can end the application at any time by closing the window, but here is an overview of how Chirp works.
 
 ## Sequence of functionality/calls trough _Chirp!_
 
