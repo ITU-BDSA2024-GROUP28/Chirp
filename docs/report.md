@@ -23,6 +23,8 @@ Here comes a description of our domain model.
 ## Architecture of deployed application
 
 ## User activities
+Below are diagrams showing what a user can do on Chirp.
+
 
 ## Sequence of functionality/calls trough _Chirp!_
 
