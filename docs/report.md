@@ -24,7 +24,7 @@ Here comes a description of our domain model.
 
 ## User activities
 
-## Sequence of functionality/calls trough _Chirp!_
+## Sequence of functionality/calls through _Chirp!_
 ![](./diagrams/ForgetMe.drawio.png)
 And
 ![](./diagrams/PublicTimeline.drawio.png)
