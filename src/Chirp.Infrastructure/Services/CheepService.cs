@@ -59,24 +59,20 @@ public class CheepService : ICheepService
     {
         int page = PageNumber(pageNr);
 
-        var query = (from cheep in _context.Cheeps
-                orderby cheep.TimeStamp descending
-                select cheep)
-            .Include(c => c.Author);
+        var query =  from author in _context.Authors
+                where author.UserName == authorName
+                select author;
         var result = query.ToList();
         
         // convert the cheep object list to cheepDTO objects
         _cheeps = new List<CheepDTO>();
-        var counter = 0;
         
-        foreach (Cheep cheep in result)
+        foreach (Author author in result)
         {
-            if (cheep.Author.UserName == authorName)
-            {
-                _cheeps.Add(_repo.ReadCheep(cheep));
-                counter++;
-            }
+           _cheeps = author.Cheeps.Select(c => _repo.ReadCheep(c)).ToList();
         }
+        
+        var counter = _cheeps.Count;
 
         List<CheepDTO> cheepsOnPage; 
         if (counter > 32)
