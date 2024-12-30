@@ -40,12 +40,12 @@ builder.Services.AddAuthentication()
 
 
 // Add services to the dependency container.
-builder.Services.AddRazorPages();
-
+builder.Services.AddRazorPages(); 
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<ICheepRepository, CheepRepository>();
-builder.Services.AddScoped<ICheepService, CheepService>();
 builder.Services.AddScoped<IFollowService, FollowService>();
+builder.Services.AddScoped<ICheepService, CheepService>();
+
 
 var app = builder.Build();
 
@@ -53,8 +53,7 @@ var app = builder.Build();
 // Seed the database
 using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<ChirpDbContext>();
+    var context = scope.ServiceProvider.GetRequiredService<ChirpDbContext>();
     context.Database.Migrate();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<Author>>();
     DbInitializer.SeedDatabase(context, userManager);
