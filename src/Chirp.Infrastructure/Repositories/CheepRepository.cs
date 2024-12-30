@@ -65,7 +65,7 @@ public class CheepRepository : ICheepRepository
             .Take(pageSize);
 
         var cheeps = await query
-            .Select(cheep => new CheepDTO(){Text = cheep.Text, Timestamp = Time.ConvertToLong(cheep.TimeStamp), Author = cheep.UserName, CheepId = cheep.CheepId,}).ToListAsync();
+            .Select(cheep => new CheepDTO(){Text = cheep.Text, Timestamp = Time.ConvertToLong(cheep.TimeStamp), Author = cheep.UserName ?? string.Empty, CheepId = cheep.CheepId,}).ToListAsync();
         
         return cheeps;
     }
@@ -85,7 +85,7 @@ public class CheepRepository : ICheepRepository
         {
             Text = cheep.Text,
             Timestamp = Time.ConvertToLong(cheep.TimeStamp),
-            Author = cheep.Author.UserName,
+            Author = cheep.Author.UserName ?? string.Empty,
             CheepId = cheep.CheepId,
         };
     }
