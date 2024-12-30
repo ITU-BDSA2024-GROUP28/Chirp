@@ -2,7 +2,6 @@ using Chirp.Core;
 using Chirp.Infrastructure;
 using Chirp.Infrastructure.Repositories;
 using Chirp.Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
@@ -26,13 +25,7 @@ builder.Services.AddDefaultIdentity<Author>(options =>
 builder.Configuration.AddEnvironmentVariables();
 // Github 
 
-builder.Services.AddAuthentication(options =>
-    {
-        //options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        //options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        //options.DefaultChallengeScheme = "GitHub";
-        //options.RequireAuthenticatedSignIn = true;
-    })
+builder.Services.AddAuthentication()
     .AddCookie()
     .AddGitHub(o =>
     {
@@ -66,8 +59,8 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ChirpDbContext>();
     context.Database.Migrate();
-    var usermanager = scope.ServiceProvider.GetRequiredService<UserManager<Author>>();
-    DbInitializer.SeedDatabase(context, usermanager);
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<Author>>();
+    DbInitializer.SeedDatabase(context, userManager);
 }
 
 // Configure the HTTP request pipeline.
