@@ -1,72 +1,26 @@
 using Chirp.Core;
 using Chirp.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace Chirp.Infrastructure.Services;
 
 public class FollowService : IFollowService
 {
-	ChirpDbContext _context;
-	ICheepRepository _repo;
-	IAuthorRepository _repoAuthor;
-	private List<CheepDTO> _cheeps;
-	private List<AuthorDTO> _following;
-	public List<CheepDTO> _cheepsFromFollowing;
-
-	public FollowService(ChirpDbContext context, ICheepRepository repo, IAuthorRepository repoAuthor)
-    {
-        _context = context;
-        _repo = repo;
-        _repoAuthor = repoAuthor;
-    }
-
-
-	public List<CheepDTO> GetCheepsFromAuthor(string author)
+	// Dependency injection of author repository
+	readonly IAuthorRepository _repoAuthor;
+	
+	public FollowService(IAuthorRepository repoAuthor)
 	{
-		var query = (from cheep in _context.Cheeps
-				orderby cheep.TimeStamp descending
-				select cheep)
-			.Include(c => c.Author);
-		var result = query.ToList();
-        
-		// convert the cheep object list to cheepDTO objects
-		_cheeps = new List<CheepDTO>();
-		var counter = 0;
-		
-		foreach (Cheep cheep in result)
-		{
-			if (cheep.Author.UserName == author)
-			{
-				_cheeps.Add(_repo.ReadCheep(cheep));
-				counter++;
-			}
-		}
-		
-		return _cheeps;
+		_repoAuthor = repoAuthor;
 	}
 
 	public List<AuthorDTO> GetFollowing(string username) //Co-authored-by: Mathias <mlao@itu.dk>
 	{
-		return _repoAuthor.GetUserFollowers(username).Result.ToList();
+		return (_repoAuthor.GetUserFollowers(username) ?? Array.Empty<AuthorDTO>()).ToList();
 	}
 	
 	public List<AuthorDTO> GetFollowers(string username)
 	{
-		return _repoAuthor.GetFollowersOfUser(username).Result.ToList();
-	}
-
-	public AuthorDTO GetAuthorByName(string name) //Co-authored-by: Mathias <mlao@itu.dk>
-	{
-		var author = _context.Authors.FirstOrDefault(a => a.UserName == name);
-		if (author == null)
-		{
-			throw new ApplicationException("Author not found");
-		}
-		else
-		{
-			AuthorDTO authorDto = _repoAuthor.ReadAuthor(author);
-			return authorDto;
-		}
+		return (_repoAuthor.GetFollowersOfUser(username) ?? Array.Empty<AuthorDTO>()).ToList();
 	}
 
 	public void Follow(string user,string followUsername) //Co-authored-by: Mathias <mlao@itu.dk>
@@ -77,23 +31,6 @@ public class FollowService : IFollowService
 	public void Unfollow(string user,string followUsername) //Co-authored-by: Mathias <mlao@itu.dk>
 	{
 		_repoAuthor.Unfollow(user, followUsername);
-	}
-
-	public List<CheepDTO> GetCheepsFromFollowing(List<AuthorDTO> following) //Co-authored-by: Mathias <mlao@itu.dk>
-	{
-		_following = following;
-		
-		foreach (var author in _following)
-		{
-			string authorName = author.Name;
-			List<CheepDTO> temp = GetCheepsFromAuthor(authorName);
-			foreach (var cheep in temp)
-			{
-				_cheepsFromFollowing.Add(cheep);
-			}
-		}
-
-		return _cheepsFromFollowing;
 	}
 
 }
