@@ -5,26 +5,25 @@ using Chirp.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
-// Latest Release: v2.0.0 13/11/24 :))
+// Latest Release: v3.0.1 19/12/24 :))
 
-// add a web app builder
+// This is our web application builder
 var builder = WebApplication.CreateBuilder(args);
 
-// Load database connection via configuration
+// Provide database connection to allow communication between db and context
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ChirpDbContext>(options => options.UseSqlite(connectionString));
 
-// Identity 
+// Add identity for local login
 builder.Services.AddDefaultIdentity<Author>(options =>
     options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ChirpDbContext>()
     .AddDefaultTokenProviders();
 
-        
 
 builder.Configuration.AddEnvironmentVariables();
-// Github 
-
+ 
+// Provide secrets for authentication of users
 builder.Services.AddAuthentication()
     .AddCookie()
     .AddGitHub(o =>
@@ -39,7 +38,6 @@ builder.Services.AddAuthentication()
         o.CallbackPath = "/signin-github";
     });
 
-    
 
 // Add services to the dependency container.
 builder.Services.AddRazorPages();
@@ -48,7 +46,6 @@ builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<ICheepRepository, CheepRepository>();
 builder.Services.AddScoped<ICheepService, CheepService>();
 builder.Services.AddScoped<IFollowService, FollowService>();
-
 
 var app = builder.Build();
 
@@ -67,10 +64,11 @@ using (var scope = app.Services.CreateScope())
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    // This is the default hsts lasting 30 days per session
     app.UseHsts();
 }
 
+// For security
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -78,7 +76,6 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-//app.UseSession();
 
 app.MapRazorPages();
 
