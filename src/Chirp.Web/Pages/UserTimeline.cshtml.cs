@@ -70,20 +70,25 @@ public class UserTimelineModel : PageModel
         // get author email
         var author = await _userManager.GetUserAsync(User);
 
-        // get the author dto
-        var authorDto = _service.GetAuthorDTOByEmail(author?.Email ?? string.Empty);
-    
-        // get the text
+        if (author == null)
+        {
+            return LocalRedirect("/");
+        }
+
+        if (author.Email == null)
+        {
+            return LocalRedirect("/");
+        }
+
+        var authorDto = _service.GetAuthorDTOByEmail(author.Email);
         var text = CheepBoxPartialModel.Text;
         
         // make the CheepId
         var guid = Guid.NewGuid();
         var cheepId = BitConverter.ToInt32(guid.ToByteArray(), 0);
-
         if (text != null) _service.CreateCheep(authorDto, text, cheepId);
-
+            
         return await Task.FromResult<IActionResult>(LocalRedirect("/" + authorDto.Name)); // it is good practice to redirect the user after a post request
-        
     }
     
     public Task<IActionResult> OnPostFollow(string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>

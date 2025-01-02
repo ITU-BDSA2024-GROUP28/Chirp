@@ -48,9 +48,17 @@ public class PublicModel : PageModel
         Debug.Assert(User.Identity != null, "User.Identity != null");
         // get author email
         var author = await _userManager.GetUserAsync(User);
-
+        
+        if (author == null)
+        {
+            return LocalRedirect("/");
+        }
+        if (author.Email == null)
+        {
+            return LocalRedirect("/");
+        }
         // get the author dto
-        var authorDto = _service.GetAuthorDTOByEmail(author?.Email ?? string.Empty);
+        var authorDto = _service.GetAuthorDTOByEmail(author.Email);
     
         // get the text
         var text = CheepBoxPartialModel.Text;
