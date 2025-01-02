@@ -47,29 +47,21 @@ public class PublicModel : PageModel
         //get author
         Debug.Assert(User.Identity != null, "User.Identity != null");
         // get author email
-        var author = await _userManager.GetUserAsync(User);
+        Author author = await _userManager.GetUserAsync(User) ?? throw new InvalidOperationException();
         
-        if (author == null)
-        {
-            return LocalRedirect("/");
-        }
-        if (author.Email == null)
-        {
-            return LocalRedirect("/");
-        }
-        // get the author dto
-        var authorDto = _service.GetAuthorDTOByEmail(author.Email);
+        var authorName = author.UserName;
+        
+        if (authorName == null) throw new InvalidOperationException();
+            
+        var authorDto = _service.GetAuthorByName(authorName);
     
-        // get the text
         var text = CheepBoxPartialModel.Text;
-        
-        // create CheepId
+    
+        // make the CheepId
         var guid = Guid.NewGuid();
         var cheepId = BitConverter.ToInt32(guid.ToByteArray(), 0);
-        
-        // add the Cheep to the context
         if (text != null) _service.CreateCheep(authorDto, text, cheepId);
-
+        
         return await Task.FromResult<IActionResult>(LocalRedirect("/" + authorDto.Name)); // it is good practice to redirect the user after a post request
     }
 }
