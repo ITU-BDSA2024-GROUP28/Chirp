@@ -63,27 +63,25 @@ public class UserTimelineModel : PageModel
         {
             ModelState.AddModelError("_cheepBoxPartialModel.Text", "The message can't be longer than 160 characters");
         }
-
-        //get author
-        Debug.Assert(User.Identity != null, "User.Identity != null");
         
         // get author email
-        var author = await _userManager.GetUserAsync(User);
+        Author author = await _userManager.GetUserAsync(User) ?? throw new InvalidOperationException();
 
-        // get the author dto
-        var authorDto = _service.GetAuthorDTOByEmail(author?.Email ?? string.Empty);
-    
-        // get the text
-        var text = CheepBoxPartialModel.Text;
+        var authorName = author.UserName;
         
+        if (authorName == null) throw new InvalidOperationException();
+            
+        var authorDto = _service.GetAuthorByName(authorName);
+    
+        var text = CheepBoxPartialModel.Text;
+    
         // make the CheepId
         var guid = Guid.NewGuid();
         var cheepId = BitConverter.ToInt32(guid.ToByteArray(), 0);
-
         if (text != null) _service.CreateCheep(authorDto, text, cheepId);
-
-        return await Task.FromResult<IActionResult>(LocalRedirect("/" + authorDto.Name)); // it is good practice to redirect the user after a post request
         
+        return await Task.FromResult<IActionResult>(LocalRedirect("/" + authorDto.Name)); // it is good practice to redirect the user after a post request
+    
     }
     
     public Task<IActionResult> OnPostFollow(string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
