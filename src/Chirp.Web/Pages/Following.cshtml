@@ -1,19 +1,14 @@
 ﻿@page "/{author}/Following"
-@using Chirp.Infrastructure.Services
-@using Chirp.Web.Pages
-@using Microsoft.AspNetCore.Identity
-@using Microsoft.IdentityModel.Tokens
 @model Chirp.Web.Pages.Following
 
 @{
     ViewData["Title"] = "Following";
     Layout = "Shared/_Layout";
-    var author = HttpContext.GetRouteValue("author");
 }
 
 <!DOCTYPE html>
 
-<html>
+
 <head>
     <title></title>
 </head>
@@ -43,4 +38,3 @@
     }
 </div>
 </body>
-</html>
