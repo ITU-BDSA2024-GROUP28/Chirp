@@ -29,31 +29,28 @@
     </h2>
 
 
-    @if (Model.Cheeps != null)
+    @if (Model.Cheeps.Any())
     {
-        @if (Model.Cheeps.Any())
-        {
-            <ul id="messagelist" class="cheeps">
-                @foreach (var cheep in Model.Cheeps)
-                {
-                    <li>
-                        <p>
-                            <strong>
-                                <a href="/@cheep.Author">@cheep.Author</a>
-                            </strong>
-                            <div>
-                                @cheep.Text
-                            </div>
-                            <small>&mdash; @Time.ConvertToString(@cheep.Timestamp)</small>
-                        </p>
-                    </li>
-                }
-            </ul>
-        }
-        else
-        {
-            <em>There are no cheeps so far.</em>
-        }
+        <ul id="messagelist" class="cheeps">
+            @foreach (var cheep in Model.Cheeps)
+            {
+                <li>
+                    <p>
+                        <strong>
+                            <a href="/@cheep.Author">@cheep.Author</a>
+                        </strong>
+                        <div>
+                            @cheep.Text
+                        </div>
+                        <small>&mdash; @Time.ConvertToString(@cheep.Timestamp)</small>
+                    </p>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <em>There are no cheeps so far.</em>
     }
     <div class="pages">
     @if (Model.PageNr > 0) //To make sure the user doesn't go beyond the first page

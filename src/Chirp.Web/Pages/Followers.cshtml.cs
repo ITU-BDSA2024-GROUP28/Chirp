@@ -7,7 +7,7 @@ namespace Chirp.Web.Pages;
 public class Followers : PageModel
 {
     private readonly IFollowService _followService;
-    public List<AuthorDTO> ListOfFollowers;
+    public required List<AuthorDTO> ListOfFollowers;
     
     public Followers(IFollowService followService)
     {
@@ -15,6 +15,8 @@ public class Followers : PageModel
     }
     public void OnGet()
     {
-        ListOfFollowers = _followService.GetFollowers(User.Identity.Name);
+        if (User.Identity != null)
+            if (User.Identity.Name != null)
+                ListOfFollowers = _followService.GetFollowers(User.Identity.Name);
     }
 }

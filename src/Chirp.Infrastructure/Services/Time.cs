@@ -1,15 +1,15 @@
 namespace Chirp.Infrastructure.Services;
 
-public class Time
+/// <summary>
+/// This class provides the methods we use repeatedly to convert the various types of time units
+/// Storing the methods here ensures consistency
+/// </summary>
+
+public static class Time
 {
-    /*
-     * Methods to convert the various types of time units
-     * @param Datetime
-     * @return a long
-     */
     public static DateTime ConvertToDateTime(long timestamp)
     {
-        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         return dateTime.AddSeconds(timestamp).ToLocalTime();
     }
     
@@ -20,7 +20,7 @@ public class Time
     
     public static string ConvertToString(long timestamp)
     {
-        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         return dateTime.AddSeconds(timestamp).ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
     }
 }

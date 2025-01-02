@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Runtime.InteropServices.JavaScript;
 using Chirp.Core;
 using Chirp.Infrastructure.Services;
 using Chirp.Web.Pages.Shared;
@@ -39,11 +38,12 @@ public class UserTimelineModel : PageModel
             return LocalRedirect("/");
         }
         List<string> follows = [];
-        if (User.Identity.IsAuthenticated)
+        if (User.Identity != null && User.Identity.IsAuthenticated)
         {
-            follows = _followservice
-                .GetFollowing(User.Identity.Name) //Gets list of followed authors
-                .Select(a => a.Name).ToList(); //Remaps the AuthorDTOs to their names
+            if (User.Identity.Name != null)
+                follows = _followservice
+                    .GetFollowing(User.Identity.Name) //Gets list of followed authors
+                    .Select(a => a.Name).ToList(); //Remaps the AuthorDTOs to their names
         }
         
         follows.Add(author); //Adding the user, so the user can see their own cheeps
@@ -71,7 +71,7 @@ public class UserTimelineModel : PageModel
         var author = await _userManager.GetUserAsync(User);
 
         // get the author dto
-        var authorDto = _service.GetAuthorDTOByEmail(author.Email);
+        var authorDto = _service.GetAuthorDTOByEmail(author?.Email ?? string.Empty);
     
         // get the text
         var text = CheepBoxPartialModel.Text;
@@ -79,33 +79,43 @@ public class UserTimelineModel : PageModel
         // make the CheepId
         var guid = Guid.NewGuid();
         var cheepId = BitConverter.ToInt32(guid.ToByteArray(), 0);
-        
-        _service.CreateCheep(authorDto, text, cheepId);
-    
+
+        if (text != null) _service.CreateCheep(authorDto, text, cheepId);
+
         return await Task.FromResult<IActionResult>(LocalRedirect("/" + authorDto.Name)); // it is good practice to redirect the user after a post request
         
     }
     
-    public async Task<IActionResult> OnPostFollow(string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
+    public Task<IActionResult> OnPostFollow(string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
     {
-        _followservice.Follow(User.Identity.Name, userToFollow);
-        return RedirectToPage(null);
+        if (User.Identity != null)
+            if (User.Identity.Name != null)
+                _followservice.Follow(User.Identity.Name, userToFollow);
+        return Task.FromResult<IActionResult>(RedirectToPage(null));
     }
     
-    public async Task<IActionResult> OnPostUnfollow(string userToUnfollow) //Co-authored-by: Mathias <mlao@itu.dk>
+    public Task<IActionResult> OnPostUnfollow(string userToUnfollow) //Co-authored-by: Mathias <mlao@itu.dk>
     {
-        _followservice.Unfollow(User.Identity.Name, userToUnfollow);
-        return RedirectToPage(null);
+        if (User.Identity != null)
+            if (User.Identity.Name != null)
+                _followservice.Unfollow(User.Identity.Name, userToUnfollow);
+        return Task.FromResult<IActionResult>(RedirectToPage(null));
     }
 
     
     public bool CheckIfFollowing(string userToFollow) //Co-authored-by: Mathias <mlao@itu.dk>
     {
-        if (userToFollow == null || User.Identity.Name == null) throw new ArgumentNullException();
-        var follows = _followservice
-            .GetFollowing(User.Identity.Name) //Gets list of followed authors
-            .Select(a => a.Name).ToList(); //Remaps the AuthorDTOs to their names
+        if (User.Identity != null && (userToFollow == null || User.Identity.Name == null)) throw new ArgumentNullException();
+        
+        if (User.Identity != null)
+        {
+            var follows = _followservice
+                .GetFollowing(User.Identity.Name ?? string.Empty) //Gets list of followed authors
+                .Select(a => a.Name).ToList(); //Remaps the AuthorDTOs to their names
             
-        return follows.Contains(userToFollow); //Checks if the desired author is in the list
+            return follows.Contains(userToFollow); //Checks if the desired author is in the list
+        }
+
+        return false;
     }
 }

@@ -30,31 +30,7 @@ public class FollowServiceUnitTest
         
         _serviceProvider = services.BuildServiceProvider();
     }
-    
-    //Testing that we can retrieve the Cheeps from an author
-    [Fact]
-    public void GetCheepsFromAuthorTest()
-    {
-        // Arrange
-        using var scope = _serviceProvider.CreateScope();
-        {
-            // Arrange
-            var scopedServices = scope.ServiceProvider;
-            var cheepService = scopedServices.GetRequiredService<ICheepService>();
-            var followService = scopedServices.GetRequiredService<IFollowService>();
-
-            AddTestCheep(cheepService);
-
-            var result = followService.GetCheepsFromAuthor("Helge");
-            var resultCheep = followService.GetCheepsFromAuthor("Helge")[0].Text;
-            
-            
-            Assert.NotEmpty(result);
-            Assert.Equal(2, result.Count());
-            Assert.Contains("Second cheep from Helge", resultCheep);
-        }
-    }
-    
+     
     //Testing that if you follow another user we can retrieve the list of the users we are following
     [Fact]
     public void GetFollowingTest()

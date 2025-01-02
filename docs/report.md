@@ -23,31 +23,31 @@ Analysis, Design and Software Architecture - BSANDSA1KU
 
 ## Table of contents
 - [Design and Architecture](#design)
-  - [Domain model](#domain-model)
-  - [Architecture - In the small](#architecture-small)
-  - [Architecture of deployed application](#architecture)
-  - [User activities](#user-activities)
-  - [Sequence of functionality/calls trough _Chirp!_](#functionality-calls)
-    - [Public timeline sequence](#public-timeline)
-    - [Following/unfollowing sequence](#follow)
-    - [Forget me sequence](#forget-me)
+    - [Domain model](#domain-model)
+    - [Architecture - In the small](#architecture-small)
+    - [Architecture of deployed application](#architecture)
+    - [User activities](#user-activities)
+    - [Sequence of functionality/calls trough _Chirp!_](#functionality-calls)
+        - [Public timeline sequence](#public-timeline)
+        - [Following/unfollowing sequence](#follow)
+        - [Forget me sequence](#forget-me)
 - [Process](#Process)
-  - [Build, test, release, and deployment](#btrd)
-    - [Build and test workflow](test-workflow)
-    - [Release workflow](release-workflow)
-    - [Deployment workflow](deployment-workflow)
-  - [Team Work](#team-work)
-    - [Description of the group’s workflow](#group-workflow)
-  - [How to make _Chirp!_ work locally](#work-locally)
-    - [Using a release](#release)
-      - [For Windows](#for-windows)
-      - [For MacOS X](#for-mac)
-    - [Git Cloning](#git-cloning)
-  - [How to run test suite locally](#run-tests)
+    - [Build, test, release, and deployment](#btrd)
+        - [Build and test workflow](test-workflow)
+        - [Release workflow](release-workflow)
+        - [Deployment workflow](deployment-workflow)
+    - [Team Work](#team-work)
+        - [Description of the group’s workflow](#group-workflow)
+    - [How to make _Chirp!_ work locally](#work-locally)
+        - [Using a release](#release)
+            - [For Windows](#for-windows)
+            - [For MacOS X](#for-mac)
+        - [Git Cloning](#git-cloning)
+    - [How to run test suite locally](#run-tests)
 - [Ethics](#ethics)
-  - [License](#license)
-  - [LLMs, ChatGPT, CoPilot, and others](#llms)
- 
+    - [License](#license)
+    - [LLMs, ChatGPT, CoPilot, and others](#llms)
+
 
 # Design and Architecture
 
@@ -70,14 +70,14 @@ The Chirp Application attempts to follow The Onion Architecture, which ensures t
 #### 1. Chirp.Core (Domain Layer):
 As the innermost layer, this solution is responsible for defining the entities (Cheep, Author). This layer is seen in detail in the **Domain model** above. Being the core of the project makes it completely independent of external dependencies, only providing the foundation upon which all other layers build.
 
-#### 2. Chirp.Infrastructure (Repository and Services Layers): 
+#### 2. Chirp.Infrastructure (Repository and Services Layers):
 This solution has two important layers. The Repository Layer implements the methods of the entities, making them dependent on the Domain Layer. The Services Layer primarily interacts with the repositories and thereby the Domain Layer. Furthermore, the Infrastructure solution also consists of the ChirpDbContext, which acts as a bridge, integrating the Domain Model with the actual database (chirp.db) in the UI Layer.
- 
+
 #### 3. Chirp.Web (UI Layer):
 The outermost layer of the Onion Architecture is implemented in the Chirp.Web solution and handles all user interaction through Razor Pages while interacting with the DTOs and Services. Located here is also the application’s Program.cs file, which serves as the entry point for _Chirp!_. The Program.cs file is responsible for configuring and registering essential components, such as the application's services, database context, authentication providers, and middleware pipeline.
 
 ## Architecture of deployed application
-![](./diagrams/arch_of_deployed.drawio.png) 
+![](./diagrams/arch_of_deployed.drawio.png)
 When the application gets deployed, the browser sends a request to the Azure server. Azure forwards the request to our application. The _Chirp!_ application queries the database for the needed data. The database then returns the requested data, which the application turns into HTML and C# code. This results in the HTTP response that is visible to the users.
 
 ## User activities
@@ -108,7 +108,7 @@ In the following section, a selection of the implemented functionality will be p
 
 ### Accessing the Public Timeline
 ![](./diagrams/PublicTimeline.drawio.png)
-The entry point to _Chirp!_ is the public timeline. The diagram shows the sequence of calls required to display the cheeps in the database to an unauthenticated user. 
+The entry point to _Chirp!_ is the public timeline. The diagram shows the sequence of calls required to display the cheeps in the database to an unauthenticated user.
 
 ### Follow (and unfollow)
 ![](./diagrams/Follow.drawio.png)
@@ -151,16 +151,16 @@ In this diagram too, the details of building and testing the program have been o
 ## Team work
 ![](./images/project_board.png)
 
-Our project board columns have been adjusted throughout this course, due to our needs varying from week to week. In the beginning of the course we were still learning to structure our time correctly, so we had columns for previous weeks that included issues we had not managed to finish before the beginning of a new week. However, with a bit of extra effort we caught up and for the last half of the course we have only had work for the current week to complete. This can be seen in the image above. 
+Our project board columns have been adjusted throughout this course, due to our needs varying from week to week. In the beginning of the course we were still learning to structure our time correctly, so we had columns for previous weeks that included issues we had not managed to finish before the beginning of a new week. However, with a bit of extra effort we caught up and for the last half of the course we have only had work for the current week to complete. This can be seen in the image above.
 
-Likewise seen above, some issues have not yet been completed. This is due to us constantly improving our project these last few days, so occassionally new warnings appear, and tests need to be adjusted. These issues have therefore been ongoing for longer periods of time, and have been moved back and forth between the "This week in progress" and "Done" columns. There are also some issues on the board which reflect the status of our report at the moment of us writing this section. 
+Likewise seen above, some issues have not yet been completed. This is due to us constantly improving our project these last few days, so occassionally new warnings appear, and tests need to be adjusted. These issues have therefore been ongoing for longer periods of time, and have been moved back and forth between the "This week in progress" and "Done" columns. There are also some issues on the board which reflect the status of our report at the moment of us writing this section.
 
 ### Group Workflow
 ![](./diagrams/groupworkflowblue.png)
 
 This is how our group tackled the weekly project work. As can be seen from the diagram, the flow in the blue box repeated throughout the week, as this is how we structured our work in smaller groups when working directly on the project.
 
-We followed the standard pair programming strategies well throughout the weeks, and enjoyed how efficient we found this to be. As can also be seen in many of our initial commits, where all the memebers are creditted as co-authors, we did lean towards mob programming in the beginning of the project work. This was often due to certain tasks needing to be performed sequentially, otherwise the project would not be cohesive. Additionally, we enjoyed the productive discussions that sprung from this team-working style. 
+We followed the standard pair programming strategies well throughout the weeks, and enjoyed how efficient we found this to be. As can also be seen in many of our initial commits, where all the memebers are creditted as co-authors, we did lean towards mob programming in the beginning of the project work. This was often due to certain tasks needing to be performed sequentially, otherwise the project would not be cohesive. Additionally, we enjoyed the productive discussions that sprung from this team-working style.
 
 We also enjoyed showing each other our work by conducting SCRUM-style code run-throughs when meeting up, as this helped us all stay up to date on the code, even the parts we had not written ourselves. This also allowed for inputs on how to improve certain parts of the code in terms of efficiency, better readability or to follow the correct architectural design models.
 
@@ -183,7 +183,7 @@ We also enjoyed showing each other our work by conducting SCRUM-style code run-t
 
 #### For MacOS X
 
-1. Go to our [GitHub repo](https://github.com/ITU-BDSA2024-GROUP28/Chirp). 
+1. Go to our [GitHub repo](https://github.com/ITU-BDSA2024-GROUP28/Chirp).
 2. Click on the newest release of Chirp! found under Releases.
 3. Download the zip file for MacOS.
 4. After the downloaded completes, double click the zip file and extract the folder.
@@ -211,9 +211,9 @@ sudo ./Chirp.Web
    ```
    sudo ./Chirp.Web
    ```
-   
+
    h. Enter the password for your device when prompted, and press enter.
-   
+
 9. If a new warning shows up saying: "macOS cannot verify the developer of “Chirp.Web”. Are you sure you want to open it?" Press "Open".
 10. The terminal should now show a lot of text. Find the sentence "Now listening on: http​﻿://localhost:XXXX" and note the port number.
 11. Click the link or type this URL into your web browser and press enter to open the Chirp! web app.
@@ -286,7 +286,7 @@ dotnet tool restore
 dotnet playwright install
 ```
 
-Then, to run test locally, follow these steps. 
+Then, to run test locally, follow these steps.
 
 1. Clone the Chirp project repository (see [git cloning](#git-cloning))
 

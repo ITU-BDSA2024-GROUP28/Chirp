@@ -18,10 +18,12 @@ public class AuthorRepository : IAuthorRepository
     
     public AuthorDTO ReadAuthor(Author author)
     {
+        var username = author.UserName ?? string.Empty;
+        var email = author.Email ?? string.Empty;
         return new AuthorDTO
         {
-            Name = author.UserName,
-            Email = author.Email,
+            Name = username,
+            Email = email,
             Id = author.Id
         };
     }
@@ -31,10 +33,11 @@ public class AuthorRepository : IAuthorRepository
      * @return AuthorDTO
      */
 
-    public Author ReadAuthor(AuthorDTO authorDTO)
+    public Author ReadAuthor(string authorName)
     {
-        throw new NotImplementedException();
+        return _context.Authors.FirstOrDefault(a => a.UserName == authorName)!;
     }
+
     /*
      * Method that creates Author from existing AuthorDTO that EF Core uses to update database.
      * @param AuthorDTO
@@ -43,7 +46,7 @@ public class AuthorRepository : IAuthorRepository
 
     public async Task DeleteAuthor(string name)
     {
-        var author = await _context.Authors.FirstOrDefaultAsync(a => a.UserName == name);
+        var author = await _context.Authors.Include(author => author.Followers).FirstOrDefaultAsync(a => a.UserName == name);
         var user = await _userManager.FindByNameAsync(name);
         
         if (user != null)
@@ -84,8 +87,10 @@ public class AuthorRepository : IAuthorRepository
             .Where(c => c.UserName == user)
             .FirstOrDefaultAsync();
         var authorToFollow = await _context.Authors.Where(c => c.UserName == userToFollow).FirstOrDefaultAsync();
-        author.Result.Following.Add(authorToFollow);
-        
+        if (author.Result != null)
+            if (authorToFollow != null)
+                author.Result.Following.Add(authorToFollow);
+
         await _context.SaveChangesAsync();
     }
     /*
@@ -103,8 +108,10 @@ public class AuthorRepository : IAuthorRepository
         var authorToFollow = await _context.Authors
             .Where(c => c.UserName == userToFollow)
             .FirstOrDefaultAsync();
-        author.Result.Following.Remove(authorToFollow);
-        
+        if (author.Result != null)
+            if (authorToFollow != null)
+                author.Result.Following.Remove(authorToFollow);
+
         await _context.SaveChangesAsync();
     }
     /*
@@ -113,14 +120,14 @@ public class AuthorRepository : IAuthorRepository
      * @param user, userToFollow
      */
 
-    public async Task<IEnumerable<AuthorDTO>> GetUserFollowers(string user) //Co-authored-by: Mathias <mlao@itu.dk>
+    public IEnumerable<AuthorDTO>? GetUserFollowers(string user) //Co-authored-by: Mathias <mlao@itu.dk>
     {
         var author = _context.Authors
             .Include(a => a.Following)//Include data from the list of following. Join ish, but not join
             .Where(c => c.UserName == user)//Author turns to a name(string) that can be compares to the string
             .FirstOrDefaultAsync();//Runs the IQueryable from .Where and fetches the first. Only returns 1 entry
-        var authorDTO = author.Result.Following.Select(a => ReadAuthor(a));
-        return authorDTO;
+        var authorDto = author.Result?.Following.Select(a => ReadAuthor(a));
+        return authorDto;
     }
     /*
      * Function to retrieve a users list of followers
@@ -128,14 +135,14 @@ public class AuthorRepository : IAuthorRepository
      * @return IEnumerable<AuthorDTO> following
      */
     
-    public async Task<IEnumerable<AuthorDTO>> GetFollowersOfUser(string user) //Co-authored-by: Mathias <mlao@itu.dk>
+    public IEnumerable<AuthorDTO>? GetFollowersOfUser(string user) //Co-authored-by: Mathias <mlao@itu.dk>
     {
         var author = _context.Authors
             .Include(a => a.Followers)//Include data from the list of following. Join ish, but not join
             .Where(c => c.UserName == user)//Author turns to a name(string) that can be compares to the string
             .FirstOrDefaultAsync();//Runs the IQueryable from .Where and fetches the first. Only returns 1 entry
-        var authorDTO = author.Result.Followers.Select(a => ReadAuthor(a));
-        return authorDTO;
+        var authorDto = author.Result?.Followers.Select(a => ReadAuthor(a));
+        return authorDto;
     }
     /*
      * Function to retrieve a users list of following users

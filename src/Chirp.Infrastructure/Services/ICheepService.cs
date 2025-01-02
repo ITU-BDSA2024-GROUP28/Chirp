@@ -1,6 +1,4 @@
-using System.Runtime.InteropServices.JavaScript;
 using Chirp.Core;
-using Chirp.Infrastructure;
 
 namespace Chirp.Infrastructure.Services;
 
@@ -34,21 +32,8 @@ public interface ICheepService
      * @param string
      * @return AuthorDTO
      */
-    
-    public Author GetAuthorByEmail(string email);
-    /* From the interface
-     * Method to find an author by their email
-     * @param string
-     * @return Author
-     */
-    
-    public void CreateAuthor(AuthorDTO author);
-    /* From the interface
-     * Method to create an author
-     * @param AuthorDTO
-     */
 
-    public void CreateCheep(AuthorDTO author, String text, int CheepId);
+    public void CreateCheep(AuthorDTO author, String text, int cheepId);
     /* From the interface
      * Method to create a cheep
      * @param CheepDTO
@@ -62,4 +47,5 @@ public interface ICheepService
     
     public void DeleteCheep(int cheepId);
     public List<CheepDTO> GetCheepsFromAuthors(IEnumerable<string> authors, int page, int pageSize); //Co-authored-by: Mathias <mlao@itu.dk>
+    
 }

@@ -25,9 +25,9 @@
 <div>
     
     <h2> @routeName's Timeline
-        @if (User.Identity!.IsAuthenticated && User.Identity.Name != routeName.ToString())
+        @if (User.Identity!.IsAuthenticated && User.Identity.Name != routeName?.ToString())
         {
-            @if (!Model.CheckIfFollowing(@routeName.ToString()))
+            @if (@routeName != null && !Model.CheckIfFollowing(@routeName.ToString() ?? string.Empty))
             {
                 <form method="post" asp-page-handler="Follow">
                     <input type="hidden" name="userToFollow" value="@routeName">
@@ -59,7 +59,7 @@
                             @cheep.Text
                         </div>
                         <small>&mdash; @Time.ConvertToString(@cheep.Timestamp)</small>
-                    </p>
+                   
                 </li>
             }
         </ul>
