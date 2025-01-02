@@ -1,6 +1,4 @@
-using System.Runtime.InteropServices.JavaScript;
 using Chirp.Core;
-using Chirp.Infrastructure;
 
 namespace Chirp.Infrastructure.Services;
 
@@ -35,7 +33,7 @@ public interface ICheepService
      * @return AuthorDTO
      */
 
-    public void CreateCheep(AuthorDTO author, String text, int CheepId);
+    public void CreateCheep(AuthorDTO author, String text, int cheepId);
     /* From the interface
      * Method to create a cheep
      * @param CheepDTO
