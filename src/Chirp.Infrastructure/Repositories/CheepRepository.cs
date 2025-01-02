@@ -33,6 +33,7 @@ public class CheepRepository : ICheepRepository
                 AuthorId = author.Id
             };
             _context.Cheeps.Add(cheep);
+            author.Cheeps.Add(cheep);
         }
 
         _context.SaveChanges();  // Saves the Cheep to the database
@@ -75,7 +76,14 @@ public class CheepRepository : ICheepRepository
 
     public List<CheepDTO> GetCheepsFromAuthor(Author author)
     {
-        return author.Cheeps.Select(ReadCheep).ToList();
+        var query = _context.Cheeps
+            .Where(cheep => author.UserName == cheep.Author.UserName)
+            .Select(cheep => new { cheep.Author.UserName, cheep.CheepId, cheep.TimeStamp, cheep.Text })
+            .OrderByDescending(cheep => cheep.TimeStamp);
+        var cheeps = query
+            .Select(cheep => new CheepDTO(){Text = cheep.Text, Timestamp = Time.ConvertToLong(cheep.TimeStamp), Author = cheep.UserName ?? string.Empty, CheepId = cheep.CheepId,}).ToList();
+        
+        return cheeps;
     }
     
     private CheepDTO ReadCheep(Cheep cheep)
