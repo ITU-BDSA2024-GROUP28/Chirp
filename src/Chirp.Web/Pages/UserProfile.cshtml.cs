@@ -1,6 +1,4 @@
 using Chirp.Core;
-using Chirp.Infrastructure;
-using Chirp.Infrastructure.Repositories;
 using Chirp.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,40 +9,30 @@ namespace Chirp.Web.Pages;
 public class UserProfile : PageModel
 {
     private readonly ICheepService _cheepService;
-    private readonly IAuthorRepository _authorRepository;
-    private readonly IFollowService _followService;
     private readonly SignInManager<Author> _signInManager;
     private readonly UserManager<Author> _userManager;
-    private readonly ChirpDbContext _dbContext;
     public required List<CheepDTO> CheepList;
-    public List<AuthorDTO> ListOfFollowing;
-    public List<AuthorDTO> ListOfFollowers;
     
     
     [BindProperty]
-    public string Email { get; set; }
+    public required string Email { get; set; }
 
-    public UserProfile(ICheepService cheepService, IAuthorRepository authorRepository, SignInManager<Author> signInManager, UserManager<Author> userManager, ChirpDbContext context, IFollowService followService)
+    public UserProfile(ICheepService cheepService, SignInManager<Author> signInManager, UserManager<Author> userManager)
     {
         _signInManager = signInManager;
         _userManager = userManager;
-        _followService = followService;
-        _dbContext = context;
         _cheepService = cheepService;
-        _authorRepository = authorRepository;
     }
     public async Task<IActionResult> OnGet([FromQuery] int? pageNumber)
     {
-        Author author = await _userManager.GetUserAsync(User);
-        
-        Email = author.Email;
-        ListOfFollowing = _followService.GetFollowing(author.UserName);
-        ListOfFollowers = _followService.GetFollowers(author.UserName);
+        Author author = (await _userManager.GetUserAsync(User) ?? null) ?? throw new InvalidOperationException();
+
+        if (author.Email != null) Email = author.Email;
 
         var authorName = author.UserName;
-        
-        CheepList = _cheepService.GetCheepsFromAuthor(authorName, pageNumber);
-        
+
+        if (authorName != null) CheepList = _cheepService.GetCheepsFromAuthor(authorName, pageNumber);
+
         return Page();
     }
 
