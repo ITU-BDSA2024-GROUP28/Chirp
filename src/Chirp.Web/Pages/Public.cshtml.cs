@@ -50,7 +50,7 @@ public class PublicModel : PageModel
         var author = await _userManager.GetUserAsync(User);
 
         // get the author dto
-        var authorDto = _service.GetAuthorDTOByEmail(author.Email);
+        var authorDto = _service.GetAuthorDTOByEmail(author?.Email ?? string.Empty);
     
         // get the text
         var text = CheepBoxPartialModel.Text;
@@ -60,8 +60,8 @@ public class PublicModel : PageModel
         var cheepId = BitConverter.ToInt32(guid.ToByteArray(), 0);
         
         // add the Cheep to the context
-        _service.CreateCheep(authorDto, text, cheepId);
-    
+        if (text != null) _service.CreateCheep(authorDto, text, cheepId);
+
         return await Task.FromResult<IActionResult>(LocalRedirect("/" + authorDto.Name)); // it is good practice to redirect the user after a post request
     }
 }
