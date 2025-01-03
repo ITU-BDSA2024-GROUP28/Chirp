@@ -25,14 +25,22 @@ public class UserProfile : PageModel
     }
     public async Task<IActionResult> OnGet([FromQuery] int? pageNumber)
     {
-        Author author = (await _userManager.GetUserAsync(User) ?? null) ?? throw new InvalidOperationException();
+        Author author = (await _userManager.GetUserAsync(User) ?? throw new InvalidOperationException());
 
-        if (author.Email != null) Email = author.Email;
-
+        if (author.Email != null)
+        {
+            Email = author.Email;
+            
+        }
+        else
+        {
+            Email = "No email provided";
+        }
+        
         var authorName = author.UserName;
-
+        
         if (authorName != null) CheepList = _cheepService.GetCheepsFromAuthor(authorName, pageNumber);
-
+        
         return Page();
     }
 
