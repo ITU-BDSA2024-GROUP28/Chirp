@@ -38,7 +38,7 @@ public class UserProfile : PageModel
 
     public async Task<IActionResult> OnPostDelete(string name)
     {
-        //use DeleteAuthor method in cheepService to delete author (and maybe cheeps (not necessarily))
+        //use DeleteAuthor method in cheepService to delete author 
         _cheepService.DeleteAuthor(name);
         //sign out 
         await _signInManager.SignOutAsync();
